@@ -3,11 +3,15 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { PruebaComponent } from './prueba/prueba.component';
+import { GestionClienteComponent } from './gestion-cliente/gestion-cliente.component';
+import { LogInComponent } from './log-in/log-in.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PruebaComponent
+    PruebaComponent,
+    GestionClienteComponent,
+    LogInComponent
   ],
   imports: [
     BrowserModule
