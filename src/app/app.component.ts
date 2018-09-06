@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-  title = 'laura lo chupa super mamaguevo';
+  title = 'kevin es lo mejor de ingemieria pape';
 
 }
