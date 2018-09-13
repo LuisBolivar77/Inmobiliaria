@@ -12,6 +12,8 @@ var path = require('path');
 var customers = require('./routes/customers'); 
 //load usuarios route
 var usuarios = require('./routes/usuarios');
+//servicios finales
+var usuario = require('./servicios/UsuarioServicio')
 
 var app = express();
 
@@ -46,9 +48,9 @@ app.use(
         
         host: 'localhost', //'localhost',
         user: 'root',
-        password : '1234',
+        password : 'root',
         port : 3306, //port mysql
-        database:'prueba'
+        database:'Inmobiliaria'
 
     },'pool') //or single
 
@@ -57,6 +59,9 @@ app.use(
 
 
 app.get('/', routes.index);
+
+// ------- Servicios de Usuario -------- //
+app.get('/usuarios/login', usuario.login);
 
 // ------- Servicios de customer ------- //
 app.get('/customers', customers.list);
