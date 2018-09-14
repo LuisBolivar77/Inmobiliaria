@@ -10,15 +10,21 @@ import 'rxjs/add/operator/map';
 
 export class UsuarioService {
 
+    // Ruta raiz donde se encuentran los servicios
     domain = 'http://localhost:4200/';
 
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient) {
 
+    }
+    
+    /**
+     * Iniciar sesion
+     * @param usrname nombre de usuario
+     * @param pass contraseña del usuario
+     */
     LogIn (usrname: string, pass: string) {
-
         return this.http.get<any>('${this.domain}//usuarios/login/${username}/${pass}').pipe(map(res => {
             return res.data;
         }));
-
     }
 }

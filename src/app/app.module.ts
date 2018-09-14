@@ -14,7 +14,7 @@ import { IndexComponent } from './Paginas/index/index.component';
     AppComponent,
     LogInComponent,
     LoginComponent,
-    IndexComponent
+    IndexComponent,
   ],
   imports: [
     BrowserModule,

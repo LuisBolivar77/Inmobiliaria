@@ -1,4 +1,6 @@
+import { Usuario } from '../../Modelo/Usuario';
 import { Component, OnInit } from '@angular/core';
+import { UsuarioService } from '../../Servicios/usuarioServ.service';
 
 @Component({
   selector: 'app-login',
@@ -7,12 +9,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  // Titulo de la ventana
-  title = 'Iniciar Sesion';
-
-  constructor() { }
-
-  ngOnInit() {
-  }
+    // Nombre de usuario
+    nomUser: string;
+    // Clave del usuario
+    contraUser: string;
+  
+    user: Usuario;
+  
+    // variable de clase que permite el uso de los servicios
+    servicios: UsuarioService;
+  
+    constructor() { }
+  
+    ngOnInit() {
+    }
+     
+    /**
+     * Iniciar Sesion en la aplicacion
+     */
+    LogIng() {
+      this.servicios.LogIn(this.nomUser, this.contraUser)
+      .subscribe(res => this.user = res);
+  
+    }
 
 }
