@@ -2,17 +2,18 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
-import { LogInComponent } from './log-in/log-in.component';
+import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
-import { LoginComponent } from './Paginas/login/login.component';
-import { IndexComponent } from './Paginas/index/index.component';
+import { LoginComponent } from './Paginas/publico/login/login.component';
+import { IndexComponent } from './Paginas/publico/index/index.component';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    LogInComponent,
     LoginComponent,
     IndexComponent,
   ],
@@ -25,6 +26,8 @@ import { IndexComponent } from './Paginas/index/index.component';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
+    HttpClientModule,
+    FormsModule,
     RouterModule.forRoot([
       {
         path: '', 

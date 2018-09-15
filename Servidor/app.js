@@ -4,21 +4,36 @@
  */
 
 var express = require('express');
-var routes = require('./routes');
+var servicios = require('./servicios');
 var http = require('http');
 var path = require('path');
 
-//load customers route
-var customers = require('./routes/customers'); 
-//load usuarios route
-var usuarios = require('./routes/usuarios');
-//servicios finales
-var usuario = require('./servicios/UsuarioServicio')
+// --------- SERVICIOS ------------ //
+
+// servicios de usuario
+var usuarioServicio = require('./servicios/UsuarioServicio')
+
+// -------------END --------------- //
 
 var app = express();
 
 var connection  = require('express-myconnection'); 
 var mysql = require('mysql');
+
+// Add headers
+app.use(function (req, res, next) {
+    // Website you wish to allow to connect
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+    // Request methods you wish to allow
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    // Request headers you wish to allow
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    // Set to true if you need the website to include cookies in the requests sent
+    // to the API (e.g. in case you use sessions)
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    // Pass to next layer of middleware
+    next();
+});
 
 // all environments
 app.set('port', process.env.PORT || 4300);
@@ -29,7 +44,6 @@ app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
-
 app.use(express.static(path.join(__dirname, 'public')));
 
 // development only
@@ -43,46 +57,25 @@ if ('development' == app.get('env')) {
 -------------------------------------------*/
 
 app.use(
-    
     connection(mysql,{
         
         host: 'localhost', //'localhost',
         user: 'root',
-        password : 'root',
+        password : '',
         port : 3306, //port mysql
-        database:'Inmobiliaria'
+        database:'inmobiliaria'
 
     },'pool') //or single
-
 );
 
+app.get('/', servicios.index);
 
-
-app.get('/', routes.index);
-
-// ------- Servicios de Usuario -------- //
-app.get('/usuarios/login', usuario.login);
-
-// ------- Servicios de customer ------- //
-app.get('/customers', customers.list);
-app.post('/customers/add', customers.save);
-app.post('/customers/addlogin', customers.savelogin);
-app.get('/customers/delete/:id', customers.delete_customer);
-app.get('/customers/search/:id', customers.search);
-app.post('/customers/edit/',customers.save_edit);
-
-// ------- Servicios de usuario ------- //
-app.get('/usuarios', usuarios.list);
-app.get('/usuarios/search/:id', usuarios.search);
-app.post('/usuarios/edit/',usuarios.edit);
-app.get('/usuarios/delete/:id', usuarios.delete_usuario);
-app.post('/usuarios/addlogin', usuarios.savelogin);
-
-
-
+// ------- Ruta para los Servicios de Usuario -------- //
+app.get('/usuarios/login/:username/:password', usuarioServicio.login);
+app.get('/usuarios/listar', usuarioServicio.listar);
+// ------------ END -----------------------------------//
 
 app.use(app.router);
-
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
