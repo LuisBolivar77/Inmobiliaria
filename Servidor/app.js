@@ -73,38 +73,12 @@ app.use(
 );
 
 app.get('/', servicios.index);
-
-<<<<<<< HEAD
-
-app.get('/', routes.index);
-
-// ------- Servicios de Usuario -------- //
-app.get('/usuarios/login', usuario.login);
 app.get('/usuarios/regitrarUsu', usuario.registrarUsu);
 
-// ------- Servicios de customer ------- //
-app.get('/customers', customers.list);
-app.post('/customers/add', customers.save);
-app.post('/customers/addlogin', customers.savelogin);
-app.get('/customers/delete/:id', customers.delete_customer);
-app.get('/customers/search/:id', customers.search);
-app.post('/customers/edit/',customers.save_edit);
-
-// ------- Servicios de usuario ------- //
-app.get('/usuarios', usuarios.list);
-app.get('/usuarios/search/:id', usuarios.search);
-app.post('/usuarios/edit/',usuarios.edit);
-app.get('/usuarios/delete/:id', usuarios.delete_usuario);
-app.post('/usuarios/addlogin', usuarios.savelogin);
-
-
-
-=======
 // ------- Ruta para los Servicios de Usuario -------- //
 app.get('/usuarios/login/:username/:password', usuarioServicio.login);
 app.get('/usuarios/listar', usuarioServicio.listar);
 // ------------ END -----------------------------------//
->>>>>>> cc5a55c6779f827d70eeb6d796f5473c09eea8fa
 
 app.use(app.router);
 http.createServer(app).listen(app.get('port'), function(){
