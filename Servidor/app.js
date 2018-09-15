@@ -4,16 +4,16 @@
  */
 
 var express = require('express');
-var routes = require('./routes');
+var servicios = require('./servicios');
 var http = require('http');
 var path = require('path');
 
-//load customers route
-var customers = require('./routes/customers'); 
-//load usuarios route
-var usuarios = require('./routes/usuarios');
-//servicios finales
-var usuario = require('./servicios/UsuarioServicio')
+// --------- SERVICIOS ------------ //
+
+// servicios de usuario
+var usuarioServicio = require('./servicios/UsuarioServicio')
+
+// -------------END --------------- //
 
 var app = express();
 
@@ -29,7 +29,6 @@ app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
-
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(function (req, res, next) {
@@ -62,20 +61,20 @@ if ('development' == app.get('env')) {
 -------------------------------------------*/
 
 app.use(
-    
     connection(mysql,{
         
         host: 'localhost', //'localhost',
         user: 'root',
-        password : 'root',
+        password : '',
         port : 3306, //port mysql
-        database:'Inmobiliaria'
+        database:'inmobiliaria'
 
     },'pool') //or single
-
 );
 
+app.get('/', servicios.index);
 
+<<<<<<< HEAD
 
 app.get('/', routes.index);
 
@@ -100,9 +99,14 @@ app.post('/usuarios/addlogin', usuarios.savelogin);
 
 
 
+=======
+// ------- Ruta para los Servicios de Usuario -------- //
+app.get('/usuarios/login/:username/:password', usuarioServicio.login);
+app.get('/usuarios/listar', usuarioServicio.listar);
+// ------------ END -----------------------------------//
+>>>>>>> cc5a55c6779f827d70eeb6d796f5473c09eea8fa
 
 app.use(app.router);
-
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });

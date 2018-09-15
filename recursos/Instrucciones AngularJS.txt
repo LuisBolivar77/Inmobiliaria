@@ -1,0 +1,20 @@
+-- Para acceder a una carpeta
+  cd src/app/Paginas
+
+-- Para crear un nuevo componente
+  ng generate component login
+  ng g c login
+
+-- Para crear un servicio
+  ng generate service nombreServicio
+
+-- Instrucciones Git
+
+  git config --global user.email "inf.carlosmartinez@gmail.com"
+  git config --global user.name "CarlosM4rtinez"
+
+  git add -A
+
+  git commit -m "first commit"
+
+  git push https://github.com/LuisBolivar77/Inmobiliaria

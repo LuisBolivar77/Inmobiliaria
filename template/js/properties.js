@@ -13,6 +13,11 @@
 
 $(document).ready(function()
 {
+
+	$("body").on("click", "#close", function(e){
+		$(this).parents("div.aviso").remove();
+	});
+
 	"use strict";
 
 	/* 
