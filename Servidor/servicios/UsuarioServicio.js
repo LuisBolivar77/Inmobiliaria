@@ -17,3 +17,36 @@ exports.login = function(req, res){
          });
     });
 };
+
+exports.registrarUsu = function(req,res){
+    
+    var input = JSON.parse(JSON.stringify(req.body));
+    
+    req.getConnection(function (err, connection) {
+        
+        var data = {
+            
+            cedula  : input.cedula,
+            name    : input.nombre,
+            apellido: input.apellido,
+            telefono: input.telefono,
+            direccion: input.direccion,
+            fecha: input.fecha,
+            rol: input.rol 
+        
+        };
+        
+        var query = connection.query("INSERT INTO customer set ? ",data, function(err, rows)
+        {
+  
+          if (err)
+              console.log("Error inserting : %s ",err );
+         
+          res.send('{"id": 505,"msj": "Se registro correctamente"}');
+          
+        });
+        
+        console.log(query.sql); //get raw query
+    
+    });
+};

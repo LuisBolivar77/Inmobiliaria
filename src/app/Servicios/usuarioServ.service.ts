@@ -2,6 +2,7 @@ import { map } from 'rxjs/operators';
 import { Usuario } from '../Modelo/Usuario';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Persona } from '../Modelo/Persona';
 import 'rxjs/add/operator/map';
 
 @Injectable({
@@ -16,7 +17,13 @@ export class UsuarioService {
     constructor(private http: HttpClient) {
 
     }
-    
+
+
+    Registrar(persona: Persona) {
+
+    }
+
+
     /**
      * Iniciar sesion
      * @param usrname nombre de usuario
