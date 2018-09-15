@@ -1,6 +1,7 @@
 import { Usuario } from '../../../Modelo/Usuario';
 import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from '../../../Servicios/usuarioServ.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,7 @@ export class LoginComponent implements OnInit {
 
     // variable de clase que permite el uso de los servicios
   
-    constructor(private servicios: UsuarioService) { }
+    constructor(private servicios: UsuarioService,private router: Router) { }
   
     ngOnInit() {
     }
@@ -31,12 +32,11 @@ export class LoginComponent implements OnInit {
       // enviamos al servicio
       this.servicios.Login(this.usuario).subscribe(rta => {
         if(rta.data == null){
-          this.msj = "Datos incorrectos";
+          this.msj = "A ingresado datos incorrectos";
           this.show = 1;
         }else{
           // Redirigimos el usuario al panel de administracion
-          this.msj = 'Bienvenido '+this.usuario.username;
-          this.show = 2;
+          this.router.navigate(['/']);
         }
       });
     }

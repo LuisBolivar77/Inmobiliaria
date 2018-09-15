@@ -13,6 +13,9 @@ var path = require('path');
 // servicios de usuario
 var usuarioServicio = require('./servicios/UsuarioServicio')
 
+// servicios de rol y acessos
+var rolServicio = require('./servicios/RolServicio')
+
 // -------------END --------------- //
 
 var app = express();
@@ -73,6 +76,11 @@ app.get('/', servicios.index);
 // ------- Ruta para los Servicios de Usuario -------- //
 app.get('/usuarios/login/:username/:password', usuarioServicio.login);
 app.get('/usuarios/listar', usuarioServicio.listar);
+// ------- Ruta para los Servicios de Rol y Accesos -------- //
+app.get('/rol/listar', rolServicio.listar);
+app.get('/acceso/listar', rolServicio.listarAccesos);
+app.get('/rol-accesos/listar', rolServicio.ListarRolAccesos);
+app.get('/acceso/por-rol/:rol', rolServicio.accesosPorRol);
 // ------------ END -----------------------------------//
 
 app.use(app.router);
