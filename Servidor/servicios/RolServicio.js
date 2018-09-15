@@ -13,6 +13,20 @@ exports.listar = function(req, res){
 };
 
 /**
+ * Buscar rol por id
+ */
+exports.rolById = function(req, res){
+      var id = req.params.id;
+      req.getConnection(function(err,connection){
+          var query = connection.query('SELECT * FROM roles WHERE id = ?',[id],function(err,rows){
+              if(err)
+                  console.log("Error Selecting : %s ",err );
+                  res.send({data:rows[0]});
+           });
+      });
+  };
+
+/**
  * Lista de Accesos
  */
 exports.listarAccesos = function(req, res){
