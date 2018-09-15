@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Persona } from '../Modelo/Persona';
-import { Date } from '../Modelo/date';
+import { Persona } from '../../../Modelo/Persona';
+import { Date } from '../../../Modelo/date';
 
 @Component({
   selector: 'app-registro-usuario',
@@ -30,7 +30,7 @@ export class RegistroUsuarioComponent implements OnInit {
   registrar() {
 
     console.log(this.fecha + ' ------ ' );
-    
+
 
     this.cedula = '';
     this.nombre = '';

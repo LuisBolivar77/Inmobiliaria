@@ -3,7 +3,7 @@ import { Usuario } from '../Modelo/Usuario';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Persona } from '../Modelo/Persona';
-import 'rxjs/add/operator/map';
+// import 'rxjs/add/operator/map';
 
 @Injectable({
     providedIn: 'root'
@@ -30,7 +30,7 @@ export class UsuarioService {
      * @param pass contraseña del usuario
      */
     Login (usuario: Usuario) {
-        return this.http.get<any>(this.domain+'usuarios/login/'+usuario.username+'/'+usuario.password)
+        return this.http.get<any>(this.domain + 'usuarios/login/' + usuario.username + '/' + usuario.password)
         .pipe(
             map(res => {
                 return res;
