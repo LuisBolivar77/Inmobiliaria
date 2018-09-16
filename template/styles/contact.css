@@ -555,7 +555,7 @@ section
 .home
 {
 	width: 100%;
-	height:441px;
+	height:240px;
 }
 .home_container
 {
@@ -710,8 +710,8 @@ section
 {
 	width: 100%;
 	background: #FFFFFF;
-	padding-top: 119px;
-	padding-bottom: 105px;
+    padding-top: 60px;
+    padding-bottom: 50px;
 }
 .contact .section_title
 {

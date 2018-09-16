@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
+import { RegistroUsuarioComponent } from './Paginas/publico/registro-usuario/registro-usuario.component';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutModule } from '@angular/cdk/layout';
@@ -9,13 +10,15 @@ import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, Mat
 import { LoginComponent } from './Paginas/publico/login/login.component';
 import { IndexComponent } from './Paginas/publico/index/index.component';
 import { HttpClientModule } from '@angular/common/http';
-
+import { HeaderComponent } from './Paginas/publico/header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     IndexComponent,
+    RegistroUsuarioComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -30,12 +33,16 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     RouterModule.forRoot([
       {
-        path: '', 
-        component: IndexComponent
+        path: 'registrousuario',
+        component: RegistroUsuarioComponent
       },
       {
         path: 'login', // http://localhost:4200/login
         component: LoginComponent
+      },
+      {
+        path: '',
+        component: IndexComponent
       }
     ])
   ],

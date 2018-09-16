@@ -23,7 +23,17 @@ var app = express();
 var connection  = require('express-myconnection'); 
 var mysql = require('mysql');
 
-// Add headers
+// all environments
+app.set('port', process.env.PORT || 4300);
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+//app.use(express.favicon());
+app.use(express.logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded());
+app.use(express.methodOverride());
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.use(function (req, res, next) {
     // Website you wish to allow to connect
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
@@ -37,17 +47,6 @@ app.use(function (req, res, next) {
     // Pass to next layer of middleware
     next();
 });
-
-// all environments
-app.set('port', process.env.PORT || 4300);
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-//app.use(express.favicon());
-app.use(express.logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded());
-app.use(express.methodOverride());
-app.use(express.static(path.join(__dirname, 'public')));
 
 // development only
 if ('development' == app.get('env')) {
@@ -72,6 +71,7 @@ app.use(
 );
 
 app.get('/', servicios.index);
+app.get('/usuarios/regitrarUsu', usuarioServicio.registrarUsu);
 
 // ------- Rutas para los Servicios de Usuario -------- //
 app.get('/usuarios/login/:username/:password', usuarioServicio.login);

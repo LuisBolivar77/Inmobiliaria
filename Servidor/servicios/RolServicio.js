@@ -61,7 +61,7 @@ exports.accesosPorRol = function(req, res){
     // Obtenemos los parametro
     var rol = req.params.rol;
     req.getConnection(function(err,connection){
-          var query = connection.query('SELECT a.* FROM rol_accesos ra JOIN accesos a ON a.id = ra.rol WHERE rol = ?',[rol],function(err,rows){
+          var query = connection.query('SELECT a.* FROM rol_accesos ra JOIN accesos a ON a.id = ra.acceso WHERE rol = ?',[rol],function(err,rows){
               if(err)
                     console.log("Error Selecting : %s ",err );
                     res.send({data:rows});  
