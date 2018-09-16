@@ -1,26 +1,24 @@
-<div style="margin: 0 auto">
-  <br>
-  <div class="section_title"> Registro de Usuarios </div>  
-  <br>
-  <div class="section_subtitle"> Ingrese los datos para el registro </div>
-  <br>
-  <div class="contact_form_container">
-    <form>
-      <div><input type="text" [(ngModel)]="cedula" name="cedula" class="contact_input" placeholder="Cedula" required="required"></div>
-      <br>
-      <div><input type="text" [(ngModel)]="nombre" name="nombre" class="contact_input" placeholder="Nombre" required="required"></div>
-      <br>
-      <div><input type="text" [(ngModel)]="apellido" name="apellido" class="contact_input" placeholder="Apellido" required="required"></div>
-      <br>
-      <div><input type="text" [(ngModel)]="telefono" name="telefono" class="contact_input" placeholder="Telefono" required="required"></div>
-      <br>
-      <div><input type="text" [(ngModel)]="direccion" name="direccion" class="contact_input" placeholder="Direccion" required="required"></div>
-      <br>
-      <div><input type="date" [(ngModel)]="fecha" name="fecha" class="contact_input" placeholder="Fecha de nacimiento" required="required"></div>
-      <br> 
-      <button class="contact_button button" (click)="registrar()" >Registrar</button>
-      <br>  
-    </form>
-    <br>
-  </div>
+<div class="contact">
+  <div class="container">
+    <div class="row">
+      <!-- Contact Form -->
+      <div class="col-lg-12">
+      <div class="col-lg-6" style="margin:0 auto">
+        <div class="section_title"> Registrate, es gratis. </div>  
+        <div class="section_subtitle"> Ingrese los datos para crear su cuenta </div><br>
+        <div class="contact_form_container">
+          <form  class="contact_form" id="contact_form">
+            <div><input type="text" [(ngModel)]="cedula" name="cedula" class="contact_input" placeholder="Cedula" required="required"></div>
+            <div><input type="text" [(ngModel)]="nombre" name="nombre" class="contact_input" placeholder="Nombre" required="required"></div>
+            <div><input type="text" [(ngModel)]="apellido" name="apellido" class="contact_input" placeholder="Apellido" required="required"></div>
+            <div><input type="text" [(ngModel)]="telefono" name="telefono" class="contact_input" placeholder="Telefono" required="required"></div>
+            <div><input type="text" [(ngModel)]="direccion" name="direccion" class="contact_input" placeholder="Direccion" required="required"></div>
+            <div><input type="date" [(ngModel)]="fecha" name="fecha" class="contact_input" placeholder="Fecha de nacimiento" required="required"></div>
+            <button class="contact_button button" (click)="registrar()" >Registrarme</button>
+          </form>
+        </div>
+        </div>
+       </div>
+     </div>
+   </div>
 </div>

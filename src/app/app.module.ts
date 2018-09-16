@@ -10,13 +10,15 @@ import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, Mat
 import { LoginComponent } from './Paginas/publico/login/login.component';
 import { IndexComponent } from './Paginas/publico/index/index.component';
 import { HttpClientModule } from '@angular/common/http';
+import { HeaderComponent } from './Paginas/publico/header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     IndexComponent,
-    RegistroUsuarioComponent
+    RegistroUsuarioComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

@@ -13,6 +13,9 @@ var path = require('path');
 // servicios de usuario
 var usuarioServicio = require('./servicios/UsuarioServicio')
 
+// servicios de rol y acessos
+var rolServicio = require('./servicios/RolServicio')
+
 // -------------END --------------- //
 
 var app = express();
@@ -32,20 +35,15 @@ app.use(express.methodOverride());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(function (req, res, next) {
-
     // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3306');
-
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
     // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-
     // Request headers you wish to allow
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-
     // Set to true if you need the website to include cookies in the requests sent
     // to the API (e.g. in case you use sessions)
     res.setHeader('Access-Control-Allow-Credentials', true);
-
     // Pass to next layer of middleware
     next();
 });
@@ -73,11 +71,22 @@ app.use(
 );
 
 app.get('/', servicios.index);
-app.get('/usuarios/regitrarUsu', usuario.registrarUsu);
+app.get('/usuarios/regitrarUsu', usuarioServicio.registrarUsu);
 
-// ------- Ruta para los Servicios de Usuario -------- //
+// ------- Rutas para los Servicios de Usuario -------- //
 app.get('/usuarios/login/:username/:password', usuarioServicio.login);
+app.get('/usuarios/usuario-by-persona/:persona', usuarioServicio.usuarioByPersona);
 app.get('/usuarios/listar', usuarioServicio.listar);
+// ------- Rutas para los Servicios de persona -------- //
+app.get('/personas/persona-by-id/:id', usuarioServicio.personaById);
+app.get('/personas/persona-by-cedula/:cedula', usuarioServicio.personaByCedula);
+app.get('/personas/listar', usuarioServicio.listarPersonas);
+// ------- Rutas para los Servicios de Rol y Accesos -------- //
+app.get('/rol/listar', rolServicio.listar);
+app.get('/rol-accesos/listar', rolServicio.ListarRolAccesos);
+app.get('/rol/rol-by-id/:id', rolServicio.rolById);
+app.get('/acceso/listar', rolServicio.listarAccesos);
+app.get('/acceso/por-rol/:rol', rolServicio.accesosPorRol);
 // ------------ END -----------------------------------//
 
 app.use(app.router);
