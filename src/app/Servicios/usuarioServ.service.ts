@@ -12,7 +12,7 @@ import { Persona } from '../Modelo/Persona';
 export class UsuarioService {
 
     // Ruta raiz donde se encuentran los servicios
-    domain = 'http://localhost:4300/';
+    domain = 'http://localhost:4200/';
 
     constructor(private http: HttpClient) {
 
@@ -20,6 +20,9 @@ export class UsuarioService {
 
 
     Registrar(persona: Persona) {
+
+        return this.http.post<any>(`${this.domain}/usuarios/regitrarUsu`, persona)
+        .pipe(map(res => res));
 
     }
 
