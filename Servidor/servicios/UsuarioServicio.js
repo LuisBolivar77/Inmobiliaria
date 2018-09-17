@@ -101,8 +101,44 @@ exports.listarPersonas = function(req, res){
                 if(err)
                     console.log("Error Selecting : %s ",err );
                     res.send({data:rows});  
-                    console.log(rows);
            });
       });
 };
   
+/**
+ * Registrar una persona
+ */
+exports.registrarPersona = function(req, res){
+    var data = JSON.parse(JSON.stringify(req.body));
+    req.getConnection(function(err,connection){
+
+        // Construimos el objeto persona que se va a registrar
+        var persona = {
+            cedula: data.persona.cedula,
+            nombre: data.persona.nombre,
+            apellido: data.persona.apellido,
+            fecha_nacimiento: data.persona.fecha_nacimiento,
+            telefono: data.persona.telefono,
+            direccion: data.persona.direccion,
+            rol: data.persona.rol,
+        };
+        // Construimos el objeto usuario para registrarlo en la bd
+        var usuario = {
+            username: data.username,
+            password: data.password,
+        };
+        
+        var query = connection.query("INSERT INTO personas set ? ",persona, function(err, rows){
+            if (err)
+                console.log("Error Selecting : %s ",err );
+                res.send({data:"Se registro correctamente"});
+        });
+    });
+};
+
+/**
+ * editar una persona
+ */
+exports.editarPersona = function(req, res){
+    
+};

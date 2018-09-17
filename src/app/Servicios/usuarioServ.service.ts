@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Persona } from '../Modelo/Persona';
 import { Rol } from '../Modelo/Rol';
+import { Router } from '@angular/router';
+import { Acceso } from '../Modelo/Acceso';
 // import 'rxjs/add/operator/map';
 
 @Injectable({
@@ -18,7 +20,7 @@ export class UsuarioService {
     // Ruta raiz donde se encuentran los servicios
     domain = 'http://localhost:4200/';
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private router: Router) {
     }
     /**
      * Asignamos el usuario que inicio sesion y el estado a logeado
@@ -35,6 +37,43 @@ export class UsuarioService {
     getUsuario() {
         return JSON.parse(localStorage.getItem('usuario'));
     }
+
+    /**
+     * Validamos si el usuario puede ingresar a una pagina
+     * @param page pagina a la que intenta ingresar el usuario
+     * retorna true dado el caso en que no pueda ingresar
+     * retorna false cuando si puede ingresar
+     */
+    esAccesible(page: string){
+        this.usuario = this.getUsuario();
+        // Validamos si el usuario inicio sesion
+        if(this.usuario == null){
+            // Como no ha iniciado sesion, lo redirigimos al login
+            this.router.navigate(['/login']);
+        }else{
+            // Validamos si el usuario tiene acceso a la pagina
+            if(this.pageInArray(page, this.usuario.persona.rol.accesos)){
+                // Como no tiene acceso, lo redirigimos al inicio
+                this.router.navigate(['/']);
+            }
+        }
+    }
+
+    /**
+     * Valida si una pagina esta en el array de accesos
+     * retorna true si no esta, de lo contrario false
+     */
+    pageInArray(page: string, accesos: Array<Acceso>){
+        for(let acceso of accesos){
+            if(acceso.url == "/"+page){
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+
 
     Registrar(persona: Persona) {
 

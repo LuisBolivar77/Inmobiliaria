@@ -1,0 +1,75 @@
+<div class="contact">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+      <div class="row">
+      <!-- Form -->
+      <div class="col-lg-4">
+        <div class="section_title"> Gestion Personas </div>
+        <div class="section_subtitle"> Ingrese los datos para Buscar, crear y/o editar </div><br>
+        <div class="aviso alert alert-danger" style="margin: 15px 0 0 0;" *ngIf="show == 1"><div id="close" title="Cerrar">×</div>{{msj}}</div>
+        <div class="aviso alert alert-success" style="margin: 15px 0 0 0;" *ngIf="show == 2"><div id="close" title="Cerrar">×</div>{{msj}}</div>
+        <div class="contact_form_container">
+            <div class="section_subtitle"> Buscar persona </div><br>
+            <form (ngSubmit)="fbuscar($event)" class="contact_form" id="contact_form">
+              <div class="row">
+                <div class="col-lg-8">
+                    <div><input [(ngModel)]="persona.cedula" name="cedula" type="text" class="contact_input" placeholder="Cedula" required></div>
+                </div>
+                <div class="col-lg-4" style="padding-left: 0">
+                    <button style="height: 48px;margin: 0;width: 100%" class="contact_button button">Buscar</button>
+                </div>
+              </div>
+            </form>
+        </div>
+        <div class="contact_form_container">
+          <form #datosForm="ngForm" class="contact_form" id="contact_form">
+            <div class="section_subtitle"> Rol de la persona </div>
+            <div><select [(ngModel)]="persona.rol" name="rol"><option *ngFor="let rol of roles" value="{{rol.id}}">{{rol.nombre}}</option></select></div>
+            <div class="section_subtitle"> Datos Persona </div>
+            <div><input type="text" [(ngModel)]="persona.cedula" name="cedula" class="contact_input" placeholder="Cedula" required="required"></div>
+            <div><input type="text" [(ngModel)]="persona.nombre" name="nombre" class="contact_input" placeholder="Nombre" required="required"></div>
+            <div><input type="text" [(ngModel)]="persona.apellido" name="apellido" class="contact_input" placeholder="Apellido" required="required"></div>
+            <div><input type="date" [(ngModel)]="persona.fecha_nacimiento" name="fecha" class="contact_input" placeholder="Fecha de nacimiento" required="required" max="2000-01-01" ></div>
+            <div><input type="tel"  [(ngModel)]="persona.telefono" name="telefono" class="contact_input" placeholder="Telefono (123-456-7890)" required="required" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"></div>
+            <div><input type="text" [(ngModel)]="persona.direccion" name="direccion" class="contact_input" placeholder="Direccion" required="required"></div>
+            <div class="section_subtitle"> Datos usurio </div>
+            <div><input type="tel"  [(ngModel)]="usuario.username" name="username" class="contact_input" placeholder="Nombre de usuario" required="required"></div>
+            <div><input type="text" [(ngModel)]="usuario.password" name="password" class="contact_input" placeholder="Contraseña" required="required"></div>
+            <button (click)="registrar(datosForm)" style="width: 100%" class="contact_button button">Registrar Persona</button>
+            <button (click)="editar(datosForm)" style="width: 100%" class="contact_button button">Editar Persona</button>
+          </form>
+        </div>
+      </div>
+      <!-- End Form -->
+      <div class="col-lg-8">
+          <br>
+          <div class="section_subtitle"> Lista de Personas </div><br>
+          <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">cedula</th>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Apellido</th>
+                  <th scope="col">Telefono</th>
+                  <th scope="col">Rol</th>
+                  <th scope="col">Accion</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let p of personas">
+                  <th scope="row">{{p.cedula}}</th>
+                  <td>{{p.nombre}}</td>
+                  <td>{{p.apellido}}</td>
+                  <td>{{p.telefono}}</td>
+                  <td>{{p.rol.nombre}}</td>
+                  <td><button class="btn" (click)="eliminar(p)">Eliminar</button><button style="margin-left: 10px" class="btn" (click)="ver(p)">ver</button></td>
+                </tr>
+              </tbody>
+            </table>
+      </div>
+      </div>
+      </div>
+     </div>
+   </div>
+</div>

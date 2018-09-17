@@ -81,10 +81,13 @@ app.get('/usuarios/listar', usuarioServicio.listar);
 app.get('/personas/persona-by-id/:id', usuarioServicio.personaById);
 app.get('/personas/persona-by-cedula/:cedula', usuarioServicio.personaByCedula);
 app.get('/personas/listar', usuarioServicio.listarPersonas);
+app.post('/personas/registrar', usuarioServicio.registrarPersona);
+app.post('/personas/editar', usuarioServicio.editarPersona);
 // ------- Rutas para los Servicios de Rol y Accesos -------- //
 app.get('/rol/listar', rolServicio.listar);
 app.get('/rol-accesos/listar', rolServicio.ListarRolAccesos);
 app.get('/rol/rol-by-id/:id', rolServicio.rolById);
+app.get('/rol/rol-by-persona/:id', rolServicio.rolByPersona);
 app.get('/acceso/listar', rolServicio.listarAccesos);
 app.get('/acceso/por-rol/:rol', rolServicio.accesosPorRol);
 // ------------ END -----------------------------------//

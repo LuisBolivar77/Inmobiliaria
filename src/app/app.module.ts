@@ -11,6 +11,7 @@ import { LoginComponent } from './Paginas/publico/login/login.component';
 import { IndexComponent } from './Paginas/publico/index/index.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './Paginas/publico/header/header.component';
+import { GestionarPersonasComponent } from './Paginas/seguro/gestionar-personas/gestionar-personas.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { HeaderComponent } from './Paginas/publico/header/header.component';
     LoginComponent,
     IndexComponent,
     RegistroUsuarioComponent,
-    HeaderComponent
+    HeaderComponent,
+    GestionarPersonasComponent
   ],
   imports: [
     BrowserModule,
@@ -32,6 +34,10 @@ import { HeaderComponent } from './Paginas/publico/header/header.component';
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
+      {
+        path: 'administracion/gestionar-personas',
+        component: GestionarPersonasComponent
+      },
       {
         path: 'registrousuario',
         component: RegistroUsuarioComponent

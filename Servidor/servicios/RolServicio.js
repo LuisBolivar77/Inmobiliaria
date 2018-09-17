@@ -27,6 +27,20 @@ exports.rolById = function(req, res){
   };
 
 /**
+ * Buscar el rol de una persona por el id de la persona
+ */
+exports.rolByPersona = function(req, res){
+      var id = req.params.id;
+      req.getConnection(function(err,connection){
+          var query = connection.query('SELECT r.* FROM roles r JOIN personas p ON p.rol = r.id WHERE p.id = ?',[id],function(err,rows){
+              if(err)
+                  console.log("Error Selecting : %s ",err );
+                  res.send({data:rows[0]});
+           });
+      });
+};
+
+/**
  * Lista de Accesos
  */
 exports.listarAccesos = function(req, res){
