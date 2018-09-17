@@ -44,15 +44,15 @@ export class UsuarioService {
      * retorna true dado el caso en que no pueda ingresar
      * retorna false cuando si puede ingresar
      */
-    esAccesible(page: string){
+    esAccesible(page: string) {
         this.usuario = this.getUsuario();
         // Validamos si el usuario inicio sesion
-        if(this.usuario == null){
+        if (this.usuario == null) {
             // Como no ha iniciado sesion, lo redirigimos al login
             this.router.navigate(['/login']);
-        }else{
+        } else {
             // Validamos si el usuario tiene acceso a la pagina
-            if(this.pageInArray(page, this.usuario.persona.rol.accesos)){
+            if (this.pageInArray(page, this.usuario.persona.rol.accesos)) {
                 // Como no tiene acceso, lo redirigimos al inicio
                 this.router.navigate(['/']);
             }
@@ -63,25 +63,24 @@ export class UsuarioService {
      * Valida si una pagina esta en el array de accesos
      * retorna true si no esta, de lo contrario false
      */
-    pageInArray(page: string, accesos: Array<Acceso>){
-        for(let acceso of accesos){
-            if(acceso.url == "/"+page){
+    pageInArray(page: string, accesos: Array<Acceso>) {
+        for (let acceso of accesos) {
+            if (acceso.url === '/' + page) {
                 return false;
             }
         }
         return true;
     }
 
-
-
-
+    /**
+     * registra un cliente
+     * @param persona cliente que se desea registrar
+     */
     Registrar(persona: Persona) {
-
         return this.http.post<any>(`${this.domain}/usuarios/regitrarUsu`, persona)
         .pipe(map(res => {
             return res;
         }));
-
     }
 
 

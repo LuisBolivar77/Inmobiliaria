@@ -32,7 +32,7 @@ app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '../public')));
 
 app.use(function (req, res, next) {
     // Website you wish to allow to connect
@@ -71,13 +71,12 @@ app.use(
 );
 
 app.get('/', servicios.index);
-app.get('/usuarios/regitrarUsu', usuarioServicio.registrarUsu);
-
 // ------- Rutas para los Servicios de Usuario -------- //
 app.get('/usuarios/login/:username/:password', usuarioServicio.login);
 app.get('/usuarios/usuario-by-persona/:persona', usuarioServicio.usuarioByPersona);
 app.get('/usuarios/listar', usuarioServicio.listar);
 // ------- Rutas para los Servicios de persona -------- //
+app.get('/usuarios/regitrarUsu', usuarioServicio.registrarUsu);
 app.get('/personas/persona-by-id/:id', usuarioServicio.personaById);
 app.get('/personas/persona-by-cedula/:cedula', usuarioServicio.personaByCedula);
 app.get('/personas/listar', usuarioServicio.listarPersonas);

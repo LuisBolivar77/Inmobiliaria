@@ -1,3 +1,5 @@
+import { PersonaService } from './../../../Servicios/personaServ.servide';
+import { Usuario } from './../../../Modelo/Usuario';
 import { Rol } from './../../../Modelo/Rol';
 import { Component, OnInit } from '@angular/core';
 import { Persona } from '../../../Modelo/Persona';
@@ -19,10 +21,14 @@ export class RegistroUsuarioComponent implements OnInit {
   telefono: string;
   direccion: string;
   fecha: string;
-  rol = '1';
 
   // variable crear Persona
-  persona: Persona;
+  persona: Persona = new Persona();
+  rol: Rol = new Rol();
+  usu: Usuario = new Usuario();
+
+  // variables de servicio
+  servicioPer: PersonaService;
 
   constructor(private servicios: UsuarioService, private router: Router) { }
 
@@ -37,6 +43,10 @@ export class RegistroUsuarioComponent implements OnInit {
 
   registrar() {
 
+    this.rol.id = 1;
+    this.rol.nombre = 'Cliente';
+    this.rol.descripcion = 'cliente';
+
     this.persona.nombre = this.nombre;
     this.persona.apellido = this.apellido;
     this.persona.cedula = this.cedula;
@@ -44,6 +54,26 @@ export class RegistroUsuarioComponent implements OnInit {
     this.persona.direccion = this.direccion;
     this.persona.fecha_nacimiento = this.fecha;
     this.persona.rol = this.rol;
+
+    this.usu.username = this.nombre + '.' + this.apellido;
+    this.usu.password = this.cedula;
+    this.usu.persona = this.persona;
+
+    window.alert('su nombre de usuario es ' + this.usu.username + ' y la contraseña es ' + this.usu.password);
+
+    this.servicioPer.registrar(this.usu).subscribe(rta => {
+      window.alert(rta.data);
+      // limpiamos los campos
+      this.limpiarCampos();
+    });
+
+  }
+
+
+  /**
+   * metodo se encarga de limpiar los campos
+   */
+  limpiarCampos() {
 
     this.cedula = '';
     this.nombre = '';

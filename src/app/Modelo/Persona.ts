@@ -11,6 +11,6 @@ export class Persona {
     fecha_nacimiento: string;
     telefono: string;
     direccion: string;
-    rol: string;
+    rol: Rol;
 
 }
