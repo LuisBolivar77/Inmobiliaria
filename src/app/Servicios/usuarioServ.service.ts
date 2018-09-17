@@ -21,7 +21,7 @@ export class UsuarioService {
     constructor(private http: HttpClient) {
     }
     /**
-     * Asignamos el usuario que inicio sesion y el estado a logeado 
+     * Asignamos el usuario que inicio sesion y el estado a logeado
      * @param logeado el usuario que se conecto
      */
     setUsuario(logeado: Usuario) {
@@ -39,7 +39,9 @@ export class UsuarioService {
     Registrar(persona: Persona) {
 
         return this.http.post<any>(`${this.domain}/usuarios/regitrarUsu`, persona)
-        .pipe(map(res => res));
+        .pipe(map(res => {
+            return res;
+        }));
 
     }
 
@@ -60,7 +62,7 @@ export class UsuarioService {
     /**
      * Cerrar Sesion
      */
-    logout (){
+    logout () {
         this.usuario = null;
         // Limpiamos el storage
         localStorage.clear();

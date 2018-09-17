@@ -1,4 +1,4 @@
-import { Acceso } from "./Acceso";
+import { Acceso } from './Acceso';
 
 export class Rol {
 
@@ -6,5 +6,5 @@ export class Rol {
     nombre: string;
     descripcion: string;
     // Lista de Accesos del rol
-    accesos: Array<Acceso> = []; 
+    accesos: Array<Acceso> = [];
 }
