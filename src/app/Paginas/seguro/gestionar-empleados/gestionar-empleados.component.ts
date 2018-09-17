@@ -8,11 +8,11 @@ import { UsuarioService } from '../../../Servicios/usuarioServ.service';
 import { NgForm } from '@angular/forms';
 
 @Component({
-  selector: 'app-gestionar-personas',
-  templateUrl: './gestionar-personas.component.html',
-  styleUrls: ['./gestionar-personas.component.css']
+  selector: 'app-gestionar-empleados',
+  templateUrl: './gestionar-empleados.component.html',
+  styleUrls: ['./gestionar-empleados.component.css']
 })
-export class GestionarPersonasComponent implements OnInit {
+export class GestionarEmpleadosComponent implements OnInit {
 
   // Listado de roles
   roles: Array<Rol> = [];

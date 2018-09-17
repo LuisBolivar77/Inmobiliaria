@@ -12,6 +12,9 @@ import { IndexComponent } from './Paginas/publico/index/index.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './Paginas/publico/header/header.component';
 import { GestionarPersonasComponent } from './Paginas/seguro/gestionar-personas/gestionar-personas.component';
+import { GestionarEmpleadosComponent } from './Paginas/seguro/gestionar-empleados/gestionar-empleados.component';
+import { GestionarClientesComponent } from './Paginas/seguro/gestionar-clientes/gestionar-clientes.component';
+import { GestionarAdministradoresComponent } from './Paginas/seguro/gestionar-administradores/gestionar-administradores.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,10 @@ import { GestionarPersonasComponent } from './Paginas/seguro/gestionar-personas/
     IndexComponent,
     RegistroUsuarioComponent,
     HeaderComponent,
-    GestionarPersonasComponent
+    GestionarPersonasComponent,
+    GestionarEmpleadosComponent,
+    GestionarClientesComponent,
+    GestionarAdministradoresComponent
   ],
   imports: [
     BrowserModule,
@@ -37,6 +43,18 @@ import { GestionarPersonasComponent } from './Paginas/seguro/gestionar-personas/
       {
         path: 'administracion/gestionar-personas',
         component: GestionarPersonasComponent
+      },
+      {
+        path: 'administracion/gestionar-empleados',
+        component: GestionarEmpleadosComponent
+      },
+      {
+        path: 'administracion/gestionar-clientes',
+        component: GestionarClientesComponent
+      },     
+      {
+        path: 'administracion/gestionar-administradores',
+        component: GestionarAdministradoresComponent
       },
       {
         path: 'registrousuario',

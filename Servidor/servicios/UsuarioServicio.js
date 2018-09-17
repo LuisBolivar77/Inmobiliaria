@@ -106,12 +106,11 @@ exports.listarPersonas = function(req, res){
 };
   
 /**
- * Registrar una persona
+ * Registrar una persona y su usuario
  */
 exports.registrarPersona = function(req, res){
     var data = JSON.parse(JSON.stringify(req.body));
     req.getConnection(function(err,connection){
-
         // Construimos el objeto persona que se va a registrar
         var persona = {
             cedula: data.persona.cedula,
@@ -122,28 +121,140 @@ exports.registrarPersona = function(req, res){
             direccion: data.persona.direccion,
             rol: data.persona.rol,
         };
-        // Construimos el objeto usuario para registrarlo en la bd
-        var usuario = {
-            username: data.username,
-            password: data.password,
-        };
-        // Guardamos la persona
-        var queryPersona = connection.query("INSERT INTO personas set ? ",persona, function(err, rows){
-            if (err)
-                console.log("Error Selecting : %s ",err );
-        });
-        // Guardamos el usuario de la persona
-        var queryUsuario = connection.query("INSERT INTO usuarios set ? ",usuario, function(err, rows){
-            if (err)
-                console.log("Error Selecting : %s ",err );
-                res.send({data:"Se registro correctamente"});
+        // Validamos si ya existe una persona con el numero de cedula o telefono
+        var sql = "SELECT * FROM personas WHERE cedula = ? OR telefono = ?";
+        var validaPersona = connection.query(sql,[persona.cedula, persona.telefono], function(err, rows){
+            // validamos si se presento error
+            if(err){
+                res.send({data:"Error al validar la persona"});
+                return;
+            }
+            // validamos si se encuentro algun registro de persona
+            if(rows.length > 0){
+                res.send({data:"Ya hay una persona registrada con esta cedula y/o telefono"});
+                return;
+            }
+            // Validamos si el usuario ya existe
+            var sql2 = "SELECT * FROM usuarios WHERE username = ?";
+            var validaUsuario = connection.query(sql2,[data.username], function(err, rows){
+                // validamos si se presento error
+                if(err){
+                    res.send({data:"Error al validar el usuario"});
+                    return;
+                }
+                // validamos si se encuentro algun registro de usuario
+                if(rows.length > 0){
+                    res.send({data:"El username '"+data.username+"' ya esta en uso"});
+                    return;
+                }
+                // Guardamos la persona
+                var queryPersona = connection.query("INSERT INTO personas set ? ",persona, function(err, rows){
+                    if (err){
+                        res.send({data:"Error al guardar la persona"});
+                        return;
+                    }
+                    // Buscamos la persona que se guardo
+                    var buscarPersona = connection.query('SELECT * FROM personas WHERE cedula = ?',[persona.cedula],function(err,rows){
+                        if(err){
+                            res.send({data:"Error al buscar la persona guardada"});
+                            return;
+                        }
+                        if(rows.length == 0){
+                            res.send({data:"La persona guardada no se encontro"});
+                            return;
+                        }
+                        // Obtenemos el id de la persona creada
+                        var idPersonaBuscada = rows[0].id;
+                        // Construimos el objeto usuario para registrarlo en la bd
+                        var usuario = {
+                            persona: idPersonaBuscada,
+                            username: data.username,
+                            password: data.password,
+                        };
+                        // Guardamos el usuario de la persona
+                        var queryUsuario = connection.query("INSERT INTO usuarios set ? ",usuario, function(err, rows){
+                            if (err){
+                                res.send({data:"Error al guardar el usuario"});
+                                return;    
+                            }else{
+                                res.send({data:"exito"});
+                                return;    
+                            }
+                        });
+                    });
+                });
+            });     
         });
     });
 };
 
 /**
- * editar una persona
+ * editar una persona y su usuario
  */
 exports.editarPersona = function(req, res){
-    
+    var data = JSON.parse(JSON.stringify(req.body));
+    req.getConnection(function(err,connection){
+        // Construimos el objeto persona que se va a editar
+        var persona = {
+            cedula: data.persona.cedula,
+            nombre: data.persona.nombre,
+            apellido: data.persona.apellido,
+            fecha_nacimiento: data.persona.fecha_nacimiento,
+            telefono: data.persona.telefono,
+            direccion: data.persona.direccion,
+            rol: data.persona.rol,
+        };
+        // Construimos el objeto usuario para editar en la bd
+        var usuario = {
+            persona: data.persona.id,
+            username: data.username,
+            password: data.password,
+        };
+        // Validamos si ya existe una persona con el numero de cedula o telefono
+        //  y que no sea la persona que se esta editando
+        var sql = "SELECT * FROM personas WHERE (cedula = ? OR telefono = ?) AND id <> ?";
+        var validaPersona = connection.query(sql,[persona.cedula, persona.telefono, usuario.persona], function(err, rows){
+            // validamos si se presento error
+            if(err){
+                res.send({data:"Error al validar la persona"});
+                return;
+            }
+            // validamos si se encuentro algun registro de persona
+            if(rows.length > 0){
+                res.send({data:"Otra persona tiene esta cedula y/o celular"});
+                return;
+            }
+            // Validamos si el usuario ya existe, en caso de que vaya a cambiar de  username
+            var sql2 = "SELECT * FROM usuarios WHERE username = ? AND persona <> ?";
+            var validaUsuario = connection.query(sql2,[data.username,usuario.persona], function(err, rows){
+                // validamos si se presento error
+                if(err){
+                    res.send({data:"Error al validar el usuario"});
+                    return;
+                }
+                // validamos si se encuentro algun registro de usuario
+                if(rows.length > 0){
+                    res.send({data:"El username '"+data.username+"' ya esta en uso"});
+                    return;
+                }
+                // Editamos la persona
+                var queryPersona = connection.query("UPDATE personas set ? WHERE id = ?",[persona,usuario.persona], function(err, rows){
+                    if (err){
+                        res.send({data:"Error al editar la persona"});
+                        return;
+                    }
+                    // Editamos el usuario de la persona
+                    var queryUsuario = connection.query("UPDATE usuarios set ? WHERE persona = ?",[usuario,usuario.persona], function(err, rows){
+                        if (err){
+                            res.send({data:"Error al editar el usuario"});
+                            return;    
+                        }else{
+                            res.send({data:"exito"});
+                            return;    
+                        }
+                    });
+                });
+            });     
+        });
+    });
 };

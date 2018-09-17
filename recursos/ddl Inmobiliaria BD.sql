@@ -6,141 +6,127 @@
 
 
 CREATE TABLE accesos (
-    id       INTEGER NOT NULL,
+    id       INT(11) NOT NULL AUTO_INCREMENT,
     nombre   VARCHAR(60) NOT NULL,
-    url      VARCHAR(200) NOT NULL
+    url      VARCHAR(200) NOT NULL,
+    PRIMARY KEY ( id )
 );
-
-ALTER TABLE accesos ADD CONSTRAINT accesos_pk PRIMARY KEY ( id );
 
 CREATE TABLE arriendo (
-    id         INTEGER NOT NULL,
+    id         INTEGER NOT NULL AUTO_INCREMENT,
     contrato   INTEGER NOT NULL,
-    empleado   INTEGER NOT NULL
+    empleado   INTEGER NOT NULL,
+    PRIMARY KEY ( id )
 );
-
-ALTER TABLE arriendo ADD CONSTRAINT arriendo_pk PRIMARY KEY ( id );
 
 CREATE TABLE caucion (
-    id            INTEGER NOT NULL,
+    id            INTEGER NOT NULL AUTO_INCREMENT,
     descripcion   VARCHAR(1000) NOT NULL,
-    arriendo      INTEGER NOT NULL
+    arriendo      INTEGER NOT NULL,
+    PRIMARY KEY ( id )
 );
-
-ALTER TABLE caucion ADD CONSTRAINT caucion_pk PRIMARY KEY ( id );
 
 CREATE TABLE cita_desalojo (
-    id         INTEGER NOT NULL,
+    id         INTEGER NOT NULL AUTO_INCREMENT,
     fecha      DATE NOT NULL,
     arriendo   INTEGER NOT NULL,
-    empleado   INTEGER NOT NULL
+    empleado   INTEGER NOT NULL,
+    PRIMARY KEY ( id )
 );
 
-ALTER TABLE cita_desalojo ADD CONSTRAINT cita_desalojo_pk PRIMARY KEY ( id );
-
 CREATE TABLE contrato (
-    id            INTEGER NOT NULL,
+    id            INTEGER NOT NULL AUTO_INCREMENT,
     descripcion   VARCHAR(1000),
     empleado      INTEGER NOT NULL,
     cliente       INTEGER NOT NULL,
-    visita        INTEGER NOT NULL
+    visita        INTEGER NOT NULL,
+    PRIMARY KEY ( id )
 );
 
-ALTER TABLE contrato ADD CONSTRAINT contrato_pk PRIMARY KEY ( id );
-
 CREATE TABLE factura (
-    id         INTEGER NOT NULL,
+    id         INTEGER NOT NULL AUTO_INCREMENT,
     fecha      DATE NOT NULL,
     tipo       VARCHAR(50) NOT NULL,
     empleado   INTEGER NOT NULL,
     arriendo   INTEGER NOT NULL,
-    venta      INTEGER NOT NULL
+    venta      INTEGER NOT NULL,
+    PRIMARY KEY ( id )
 );
-
-ALTER TABLE factura ADD CONSTRAINT factura_pk PRIMARY KEY ( id );
 
 CREATE TABLE formato_ventas (
-    id         INTEGER NOT NULL,
+    id         INTEGER NOT NULL AUTO_INCREMENT,
     fecha      DATE NOT NULL,
     inmueble   INTEGER NOT NULL,
-    empleado   INTEGER NOT NULL
+    empleado   INTEGER NOT NULL,
+    PRIMARY KEY ( id )
 );
-
-ALTER TABLE formato_ventas ADD CONSTRAINT formato_ventas_pk PRIMARY KEY ( id );
 
 CREATE TABLE informe (
-    id            INTEGER NOT NULL,
+    id            INTEGER NOT NULL AUTO_INCREMENT,
     fecha         DATE NOT NULL,
     descripcion   VARCHAR(1000) NOT NULL,
-    arriendo_id   INTEGER NOT NULL
+    arriendo_id   INTEGER NOT NULL,
+    PRIMARY KEY ( id )
 );
 
-ALTER TABLE informe ADD CONSTRAINT informe_pk PRIMARY KEY ( id );
-
 CREATE TABLE inmueble (
-    id                 INTEGER NOT NULL,
+    id                 INTEGER NOT NULL AUTO_INCREMENT,
     direccion          VARCHAR(100) NOT NULL,
     area               VARCHAR(100) NOT NULL,
     valor              INTEGER NOT NULL,
     estado             INTEGER,
     tipoventaarrendo   INTEGER,
     tipo               INTEGER NOT NULL,
-    promocion          INTEGER NOT NULL
+    promocion          INTEGER NOT NULL,
+    PRIMARY KEY ( id )
 );
 
-ALTER TABLE inmueble ADD CONSTRAINT inmueble_pk PRIMARY KEY ( id );
-
 CREATE TABLE personas (
-    id                 INTEGER NOT NULL,
+    id                 INTEGER NOT NULL AUTO_INCREMENT,
     cedula             VARCHAR(20) NOT NULL,
     nombre             VARCHAR(40) NOT NULL,
     apellido           VARCHAR(40) NOT NULL,
     fecha_nacimiento   DATE NOT NULL,
     telefono           VARCHAR(10) NOT NULL,
     direccion          VARCHAR(50) NOT NULL,
-    rol                INTEGER NOT NULL
+    rol                INTEGER NOT NULL,
+    PRIMARY KEY ( id )
 );
-
-ALTER TABLE personas ADD CONSTRAINT personas_pk PRIMARY KEY ( id );
 
 ALTER TABLE personas ADD CONSTRAINT personas__un UNIQUE ( cedula );
 
 CREATE TABLE promocion (
-    id            INTEGER NOT NULL,
+    id            INTEGER NOT NULL AUTO_INCREMENT,
     descripcion   VARCHAR(100) NOT NULL,
     porcentaje    INTEGER NOT NULL,
-    fecha         DATE NOT NULL
+    fecha         DATE NOT NULL,
+    PRIMARY KEY ( id )
 );
-
-ALTER TABLE promocion ADD CONSTRAINT promocion_pk PRIMARY KEY ( id );
 
 CREATE TABLE reportes_visitas (
-    id         INTEGER NOT NULL,
+    id         INTEGER NOT NULL AUTO_INCREMENT,
     fecha      DATE NOT NULL,
     inmueble   INTEGER NOT NULL,
-    usuario    INTEGER NOT NULL
+    usuario    INTEGER NOT NULL,
+    PRIMARY KEY ( id )
 );
 
-ALTER TABLE reportes_visitas ADD CONSTRAINT reportes_visitas_pk PRIMARY KEY ( id );
-
 CREATE TABLE reservar_visita (
-    id         INTEGER NOT NULL,
+    id         INTEGER NOT NULL AUTO_INCREMENT,
     fecha      DATE,
     inmueble   INTEGER NOT NULL,
     empleado   INTEGER NOT NULL,
-    cliente    INTEGER NOT NULL
+    cliente    INTEGER NOT NULL,
+    PRIMARY KEY ( id )
 );
-
-ALTER TABLE reservar_visita ADD CONSTRAINT reservar_visita_pk PRIMARY KEY ( id );
 
 CREATE TABLE reunion (
-    id            INTEGER NOT NULL,
+    id            INTEGER NOT NULL AUTO_INCREMENT,
     fecha         DATE NOT NULL,
     descripcion   VARCHAR(1000) NOT NULL,
-    persona       INTEGER NOT NULL
+    persona       INTEGER NOT NULL,
+    PRIMARY KEY ( id )
 );
-
-ALTER TABLE reunion ADD CONSTRAINT reunion_pk PRIMARY KEY ( id );
 
 CREATE TABLE rol_accesos (
     rol      INTEGER NOT NULL,
@@ -150,20 +136,18 @@ CREATE TABLE rol_accesos (
 ALTER TABLE rol_accesos ADD CONSTRAINT rol_accesos_pk PRIMARY KEY ( rol,acceso );
 
 CREATE TABLE roles (
-    id            INTEGER NOT NULL,
+    id            INTEGER NOT NULL AUTO_INCREMENT,
     nombre        VARCHAR(30) NOT NULL,
-    descripcion   VARCHAR(200) NOT NULL
+    descripcion   VARCHAR(200) NOT NULL,
+    PRIMARY KEY ( id )
 );
-
-ALTER TABLE roles ADD CONSTRAINT tipo_personal_pk PRIMARY KEY ( id );
 
 CREATE TABLE tipo_inmueble (
-    id            INTEGER NOT NULL,
+    id            INTEGER NOT NULL AUTO_INCREMENT,
     nombre        VARCHAR(50) NOT NULL,
-    descripcion   VARCHAR(300) NOT NULL
+    descripcion   VARCHAR(300) NOT NULL,
+    PRIMARY KEY ( id )
 );
-
-ALTER TABLE tipo_inmueble ADD CONSTRAINT tipo_inmueble_pk PRIMARY KEY ( id );
 
 CREATE TABLE usuarios (
     persona    INTEGER NOT NULL,
@@ -176,12 +160,11 @@ ALTER TABLE usuarios ADD CONSTRAINT usuario_pk PRIMARY KEY ( persona );
 ALTER TABLE usuarios ADD CONSTRAINT usuario__un UNIQUE ( persona );
 
 CREATE TABLE venta (
-    id         INTEGER NOT NULL,
+    id         INTEGER NOT NULL AUTO_INCREMENT,
     contrato   INTEGER NOT NULL,
-    empleado   INTEGER NOT NULL
+    empleado   INTEGER NOT NULL,
+    PRIMARY KEY ( id )
 );
-
-ALTER TABLE venta ADD CONSTRAINT venta_pk PRIMARY KEY ( id );
 
 ALTER TABLE rol_accesos ADD CONSTRAINT acceso FOREIGN KEY ( acceso )
     REFERENCES accesos ( id );

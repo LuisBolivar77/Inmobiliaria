@@ -65,7 +65,7 @@ export class UsuarioService {
      */
     pageInArray(page: string, accesos: Array<Acceso>) {
         for (let acceso of accesos) {
-            if (acceso.url === '/' + page) {
+            if (acceso.url == page) { 
                 return false;
             }
         }
