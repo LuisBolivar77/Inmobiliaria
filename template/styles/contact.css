@@ -702,6 +702,14 @@ section
 	background: linear-gradient(to right, #487fee, #32fa95);
 }
 
+.table td {
+    vertical-align: middle!important
+}
+.table td button{
+    cursor: pointer;
+    font-size: 12px!important;
+}
+
 /*********************************
 7. Contact
 *********************************/
@@ -754,8 +762,7 @@ section
 {
 	margin-bottom: 17px;
 }
-.contact_input
-{
+.contact_input, .contact select{
 	width: 100%;
 	height: 48px;
 	background: #f1f6f9;
