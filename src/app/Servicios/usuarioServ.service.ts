@@ -18,7 +18,7 @@ export class UsuarioService {
     public usuario: Usuario;
 
     // Ruta raiz donde se encuentran los servicios
-    domain = 'http://localhost:4300/';
+    domain = 'http://localhost:4200/';
 
     constructor(private http: HttpClient, private router: Router) {
     }
@@ -26,11 +26,11 @@ export class UsuarioService {
      * Asignamos el usuario que inicio sesion y el estado a logeado 
      * @param logeado el usuario que se conecto
      */
-    setUsuario(logeado:Usuario) {
+    setUsuario(logeado: Usuario) {
         this.usuario = logeado;
         localStorage.setItem('usuario', JSON.stringify(logeado));
       }
-    
+
     /**
      * Accedemos al usuario que se conecto
      */
@@ -76,6 +76,9 @@ export class UsuarioService {
 
 
     Registrar(persona: Persona) {
+
+        return this.http.post<any>(`${this.domain}/usuarios/regitrarUsu`, persona)
+        .pipe(map(res => res));
 
     }
 
