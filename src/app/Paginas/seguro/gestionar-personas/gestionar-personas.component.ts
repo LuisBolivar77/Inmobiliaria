@@ -50,6 +50,8 @@ export class GestionarPersonasComponent implements OnInit {
       window.alert(rta.data);
       // limpiamos los campos
       form.reset();
+      // Actualizamos la lista de personas
+      this.listar();
     });
   }
 
@@ -62,6 +64,8 @@ export class GestionarPersonasComponent implements OnInit {
       window.alert(rta.data);
       // limpiamos los campos
       form.reset();
+      // Actualizamos la lista de personas
+      this.listar();
     });
   }
 

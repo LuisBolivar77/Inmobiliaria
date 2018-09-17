@@ -18,3 +18,5 @@
   git commit -m "first commit"
 
   git push https://github.com/LuisBolivar77/Inmobiliaria
+
+  Git pull origin master

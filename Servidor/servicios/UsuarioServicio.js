@@ -127,8 +127,13 @@ exports.registrarPersona = function(req, res){
             username: data.username,
             password: data.password,
         };
-        
-        var query = connection.query("INSERT INTO personas set ? ",persona, function(err, rows){
+        // Guardamos la persona
+        var queryPersona = connection.query("INSERT INTO personas set ? ",persona, function(err, rows){
+            if (err)
+                console.log("Error Selecting : %s ",err );
+        });
+        // Guardamos el usuario de la persona
+        var queryUsuario = connection.query("INSERT INTO usuarios set ? ",usuario, function(err, rows){
             if (err)
                 console.log("Error Selecting : %s ",err );
                 res.send({data:"Se registro correctamente"});
