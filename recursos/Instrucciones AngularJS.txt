@@ -19,4 +19,4 @@
 
   git push https://github.com/LuisBolivar77/Inmobiliaria
 
-  Git pull origin master
+  git pull origin master

@@ -18,7 +18,7 @@ export class UsuarioService {
     public usuario: Usuario;
 
     // Ruta raiz donde se encuentran los servicios
-    domain = 'http://localhost:4200/';
+    domain = 'http://localhost:4300/';
 
     constructor(private http: HttpClient, private router: Router) {
     }
