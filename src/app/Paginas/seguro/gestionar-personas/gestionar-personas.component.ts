@@ -13,17 +13,17 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./gestionar-personas.component.css']
 })
 export class GestionarPersonasComponent implements OnInit {
-  
+
   // Listado de roles
-  roles: Array<Rol> = []; 
+  roles: Array<Rol> = [];
   // Listado de personas
   personas: Array<Persona> = [];
-  
+
   // Usuario que vamos a registrar
   usuario: Usuario = new Usuario;
   // La persona asignada al usuario que vamos a registrar
   persona: Persona = new Persona();
-  
+
   // Variables para los mensajes en la pagina
   show: number;
   msj: string;
@@ -44,7 +44,7 @@ export class GestionarPersonasComponent implements OnInit {
   /**
    * Registra una persona con su usuario
    */
-  registrar(form: NgForm){
+  registrar(form: NgForm) {
     this.usuario.persona = this.persona;
     this.personaServicio.registrar(this.usuario).subscribe(rta => {
       window.alert(rta.data);
@@ -58,7 +58,7 @@ export class GestionarPersonasComponent implements OnInit {
   /**
    * Registra una persona con su usuario
    */
-  editar(form: NgForm){
+  editar(form: NgForm) {
     this.usuario.persona = this.persona;
     this.personaServicio.editar(this.usuario).subscribe(rta => {
       window.alert(rta.data);
@@ -72,16 +72,16 @@ export class GestionarPersonasComponent implements OnInit {
   /**
    * Buscar persona
    */
-  buscar(){
-    this.personaServicio.personaByCedula(this.persona).subscribe(rta =>{
-      if(rta.data == null){
+  buscar() {
+    this.personaServicio.personaByCedula(this.persona).subscribe(rta => {
+      if (rta.data == null) {
         this.show = 1;
-        this.msj = "No existe una persona con cedula "+this.persona.cedula;
-      }else{
+        this.msj = 'No existe una persona con cedula ' + this.persona.cedula;
+      } else {
         this.show = 3;
-        this.persona = rta.data
+        this.persona = rta.data;
         // Buscamos el usuario asociado con la persona
-        this.personaServicio.usuarioByPersona(this.persona).subscribe(rta2 =>{
+        this.personaServicio.usuarioByPersona(this.persona).subscribe(rta2 => {
           this.usuario = rta2.data;
         });
       }
@@ -91,28 +91,28 @@ export class GestionarPersonasComponent implements OnInit {
   /**
    * Ver la inormacion de una persona de la tabla
    */
-  ver(p: Persona){
+  ver(p: Persona) {
     this.persona.cedula = p.cedula;
     this.buscar();
   }
   /**
    * Buscar desde el formulario html
    */
-  fbuscar(event){
+  fbuscar(event) {
     event.preventDefault();
-    if(this.persona.cedula != null){
+    if (this.persona.cedula != null) {
       this.buscar();
     }
   }
   /**
    * Lista todas las personas registradas
    */
-  listar(){
+  listar() {
     // Obtenemos la lista de personas
     this.personaServicio.listar().subscribe(rta => {
       this.personas = rta.data;
       // obtenemos la informacion del rol de cada persona
-      for (let p of this.personas){
+      for (let p of this.personas) {
         this.rolServicio.buscarRolPersona(p).subscribe(rta2 => {
           p.rol = rta2.data;
         });
@@ -123,7 +123,7 @@ export class GestionarPersonasComponent implements OnInit {
   /**
    * Eliminar persona con su usuario de la base de datos
    */
-  eliminar(persona: Persona){
+  eliminar(persona: Persona) {
     window.alert(persona.nombre);
   }
 }

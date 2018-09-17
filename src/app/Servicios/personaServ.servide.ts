@@ -58,7 +58,7 @@ export class PersonaService {
     /**
      * Registrar una persona y su usuario
      */
-    registrar(usuario: Usuario){
+    registrar(usuario: Usuario) {
         console.log(usuario);
         return this.http.post<any>(this.domain + 'personas/registrar', usuario)
         .pipe(
@@ -71,7 +71,7 @@ export class PersonaService {
     /**
      * editar una persona y su usuario
      */
-    editar(usuario: Usuario){
+    editar(usuario: Usuario) {
         console.log(usuario);
         return this.http.post<any>(this.domain + 'personas/editar', usuario)
         .pipe(
