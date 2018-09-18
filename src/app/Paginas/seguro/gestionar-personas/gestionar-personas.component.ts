@@ -23,6 +23,8 @@ export class GestionarPersonasComponent implements OnInit {
   usuario: Usuario = new Usuario;
   // La persona asignada al usuario que vamos a registrar
   persona: Persona = new Persona();
+  // el rol de la persona
+  rol: Rol = new Rol();
 
   // Variables para los mensajes en la pagina
   show: number;
@@ -45,7 +47,10 @@ export class GestionarPersonasComponent implements OnInit {
    * Registra una persona con su usuario
    */
   registrar(form: NgForm) {
+    this.rol.id = this.persona.rol.id;
+    this.persona.rol = this.rol;
     this.usuario.persona = this.persona;
+    console.log(this.usuario);
     this.personaServicio.registrar(this.usuario).subscribe(rta => {
       if(rta.data == 'exito'){
         this.msj = "Se ha registrado correctamente";
@@ -53,13 +58,13 @@ export class GestionarPersonasComponent implements OnInit {
         window.alert(this.msj);
         // limpiamos los campos
         form.reset();
+        // Actualizamos la lista de personas
+        this.listar();
       }else{
         this.msj = rta.data;
         this.show = 1;
         window.alert(rta.data);
       }
-      // Actualizamos la lista de personas
-      this.listar();
     });
   }
 
@@ -68,7 +73,9 @@ export class GestionarPersonasComponent implements OnInit {
    */
   editar(form: NgForm) {
     if(this.usuario.persona != null && this.persona != null){
-    this.usuario.persona = this.persona;
+      this.rol.id = this.persona.rol.id;
+      this.persona.rol = this.rol;
+      this.usuario.persona = this.persona;
     this.personaServicio.editar(this.usuario).subscribe(rta => {
       if(rta.data == 'exito'){
         this.msj = "Se ha editado correctamente";
@@ -76,13 +83,13 @@ export class GestionarPersonasComponent implements OnInit {
         window.alert(this.msj);
         // limpiamos los campos
         form.reset();
+        // Actualizamos la lista de personas
+        this.listar();
       }else{
         this.msj = rta.data;
         this.show = 1;
         window.alert(rta.data);
       }
-      // Actualizamos la lista de personas
-      this.listar();
     });
     }else{
       this.msj = "Primero busque la persona que va a editar";
@@ -102,6 +109,8 @@ export class GestionarPersonasComponent implements OnInit {
       } else {
         this.show = 3;
         this.persona = rta.data;
+        this.rol.id = this.persona.id;
+        this.persona.rol = this.rol;
         // Buscamos el usuario asociado con la persona
         this.personaServicio.usuarioByPersona(this.persona).subscribe(rta2 => {
           this.usuario = rta2.data;

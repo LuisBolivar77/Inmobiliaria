@@ -15,6 +15,8 @@ import { GestionarPersonasComponent } from './Paginas/seguro/gestionar-personas/
 import { GestionarEmpleadosComponent } from './Paginas/seguro/gestionar-empleados/gestionar-empleados.component';
 import { GestionarClientesComponent } from './Paginas/seguro/gestionar-clientes/gestionar-clientes.component';
 import { GestionarAdministradoresComponent } from './Paginas/seguro/gestionar-administradores/gestionar-administradores.component';
+import { PromocionesComponent } from './Paginas/publico/promociones/promociones.component';
+import { EditarCuentaComponent } from './Paginas/seguro/editar-cuenta/editar-cuenta.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { GestionarAdministradoresComponent } from './Paginas/seguro/gestionar-ad
     GestionarPersonasComponent,
     GestionarEmpleadosComponent,
     GestionarClientesComponent,
-    GestionarAdministradoresComponent
+    GestionarAdministradoresComponent,
+    PromocionesComponent,
+    EditarCuentaComponent
   ],
   imports: [
     BrowserModule,
@@ -40,6 +44,14 @@ import { GestionarAdministradoresComponent } from './Paginas/seguro/gestionar-ad
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
+      {
+        path: 'editar-cuenta',
+        component: EditarCuentaComponent
+      },
+      {
+        path: 'promociones',
+        component: PromocionesComponent
+      },
       {
         path: 'administracion/gestionar-personas',
         component: GestionarPersonasComponent

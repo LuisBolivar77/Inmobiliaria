@@ -39,6 +39,14 @@ export class UsuarioService {
     }
 
     /**
+     * redirecciona una pagina a otra determinada
+     * @param ruta la url a donde debe redireccionar
+     */
+    redireccionar(ruta: string){
+        this.router.navigate([ruta]);
+    }
+
+    /**
      * Validamos si el usuario puede ingresar a una pagina
      * @param page pagina a la que intenta ingresar el usuario
      * retorna true dado el caso en que no pueda ingresar
@@ -104,6 +112,7 @@ export class UsuarioService {
         this.usuario = null;
         // Limpiamos el storage
         localStorage.clear();
+        this.redireccionar('/login');
     }
 
     /**

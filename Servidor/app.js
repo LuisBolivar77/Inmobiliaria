@@ -79,7 +79,9 @@ app.get('/usuarios/listar', usuarioServicio.listar);
 app.get('/usuarios/regitrarUsu', usuarioServicio.registrarUsu);
 app.get('/personas/persona-by-id/:id', usuarioServicio.personaById);
 app.get('/personas/persona-by-cedula/:cedula', usuarioServicio.personaByCedula);
+app.get('/personas/persona-by-cedula-rol/:cedula/:rol', usuarioServicio.personaByCedulaRol);
 app.get('/personas/listar', usuarioServicio.listarPersonas);
+app.get('/personas/listar-by-rol/:rol', usuarioServicio.listarPersonasByRol);
 app.post('/personas/registrar', usuarioServicio.registrarPersona);
 app.post('/personas/editar', usuarioServicio.editarPersona);
 // ------- Rutas para los Servicios de Rol y Accesos -------- //

@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
       // Validamos si el usuario ya inicio sesion
       if (this.servicios.getUsuario() != null) {
         // como ya inicio sesion, lo redireccionamos al inicio
-        this.router.navigate(['/']);
+        this.servicios.redireccionar('/');
       }
     }
 

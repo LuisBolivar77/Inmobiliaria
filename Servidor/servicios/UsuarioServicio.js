@@ -93,11 +93,43 @@ exports.personaByCedula = function(req, res){
 };
 
 /**
+ * 
+ */
+/**
+ * Buscar persona por cedula con un determinado rol
+ */
+exports.personaByCedulaRol = function(req, res){
+    var cedula = req.params.cedula;
+    var rol = req.params.rol;
+    req.getConnection(function(err,connection){
+        var query = connection.query('SELECT * FROM personas WHERE cedula = ? AND rol = ?',[cedula, rol],function(err,rows){
+            if(err)
+                console.log("Error Selecting : %s ",err );
+                res.send({data:rows[0]});
+         });
+    });
+};
+
+/**
  * Lista de personas
  */
 exports.listarPersonas = function(req, res){
     req.getConnection(function(err,connection){
           var query = connection.query('SELECT * FROM personas',function(err,rows){
+                if(err)
+                    console.log("Error Selecting : %s ",err );
+                    res.send({data:rows});  
+           });
+      });
+};
+
+/**
+ * Lista de empleado
+ */
+exports.listarPersonasByRol = function(req, res){
+    var idRol = req.params.rol;
+    req.getConnection(function(err,connection){
+          var query = connection.query('SELECT * FROM personas WHERE rol = ?',[idRol],function(err,rows){
                 if(err)
                     console.log("Error Selecting : %s ",err );
                     res.send({data:rows});  
@@ -119,7 +151,7 @@ exports.registrarPersona = function(req, res){
             fecha_nacimiento: data.persona.fecha_nacimiento,
             telefono: data.persona.telefono,
             direccion: data.persona.direccion,
-            rol: data.persona.rol,
+            rol: data.persona.rol.id,
         };
         // Validamos si ya existe una persona con el numero de cedula o telefono
         var sql = "SELECT * FROM personas WHERE cedula = ? OR telefono = ?";
@@ -151,6 +183,8 @@ exports.registrarPersona = function(req, res){
                 var queryPersona = connection.query("INSERT INTO personas set ? ",persona, function(err, rows){
                     if (err){
                         res.send({data:"Error al guardar la persona"});
+                        console.log(persona);
+                        console.log(err);
                         return;
                     }
                     // Buscamos la persona que se guardo
@@ -202,7 +236,7 @@ exports.editarPersona = function(req, res){
             fecha_nacimiento: data.persona.fecha_nacimiento,
             telefono: data.persona.telefono,
             direccion: data.persona.direccion,
-            rol: data.persona.rol,
+            rol: data.persona.rol.id,
         };
         // Construimos el objeto usuario para editar en la bd
         var usuario = {

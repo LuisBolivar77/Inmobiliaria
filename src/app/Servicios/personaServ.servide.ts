@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Persona } from '../Modelo/Persona';
 import { Usuario } from '../Modelo/Usuario';
+import { Rol } from '../Modelo/Rol';
 // import 'rxjs/add/operator/map';
 
 @Injectable({
@@ -30,11 +31,36 @@ export class PersonaService {
     }
 
     /**
+     * Obtenemos la lista de personas por un Determinado Rol
+     */
+    listarPersonasByRol (rol: Rol) {
+        return this.http.get<any>(this.domain + 'personas/listar-by-rol/'+rol.id)
+        .pipe(
+            map(res => {
+                return res;
+            })
+        );
+    }
+
+    /**
      * buscamos una persona por su cedula
      * @param persona la persona a buscar
      */
     personaByCedula (persona: Persona) {
         return this.http.get<any>(this.domain + 'personas/persona-by-cedula/' + persona.cedula)
+        .pipe(
+            map(res => {
+                return res;
+            })
+        );
+    }
+
+    /**
+     * buscamos una persona por su cedula y un rol
+     * @param persona la persona a buscar
+     */
+    personaByCedulaRol (persona: Persona) {
+        return this.http.get<any>(this.domain + 'personas/persona-by-cedula-rol/'+persona.cedula+'/'+persona.rol.id)
         .pipe(
             map(res => {
                 return res;

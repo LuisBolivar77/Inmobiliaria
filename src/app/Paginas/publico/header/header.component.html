@@ -12,16 +12,20 @@
 							<!-- Menu visitante -->
 							<ul *ngIf="!usuario">
 								<li class="active"><a href="index.html">Inicio</a></li>
-								<li><a href="about.html">About us</a></li>
+								<li><a href="/promociones">Promociones</a></li>
 								<li><a href="properties.html">Properties</a></li>
 								<li><a href="news.html">News</a></li>
 								<li ><a href="/registrousuario">Registrarme</a></li>	
 							</ul>
 							<!-- Menu usuario logeado -->
-							<ul *ngIf="usuario">	
-								<li *ngFor="let acceso of accesos"><a href="{{acceso.url}}">{{acceso.nombre}}</a></li>	
-								<li><a (click)="logout($event)" href="">Salir</a></li>						
-							</ul>
+							<ul class="submenu" *ngIf="usuario">
+								<li>{{usuario.persona.rol.nombre}}
+							        <ul>
+								        <li *ngFor="let acceso of accesos"><a href="{{acceso.url}}">{{acceso.nombre}}</a></li>							
+								    </ul>
+							    </li>
+								<li><a (click)="logout($event)" href="">Salir</a></li>
+						    </ul>
 						</nav>
 						<!-- Iniciar Sesion -->
 						<div *ngIf="!usuario" class="phone_num ml-auto">
@@ -33,7 +37,7 @@
 						</div>
 						<!-- Cerrar Sesion -->
 						<div *ngIf="usuario" class="phone_num ml-auto">
-							<a href="/">
+							<a href="/editar-cuenta">
 							    <div class="phone_num_inner">
 								    <span>{{usuario.persona.nombre}} {{usuario.persona.apellido}}</span>
 							    </div>

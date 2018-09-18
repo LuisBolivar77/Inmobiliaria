@@ -14,10 +14,10 @@ import { NgForm } from '@angular/forms';
 })
 export class GestionarEmpleadosComponent implements OnInit {
 
-  // Listado de roles
-  roles: Array<Rol> = [];
   // Listado de personas
   personas: Array<Persona> = [];
+  // Rol: Empleado (3)
+  rol: Rol = new Rol();
 
   // Usuario que vamos a registrar
   usuario: Usuario = new Usuario;
@@ -31,18 +31,18 @@ export class GestionarEmpleadosComponent implements OnInit {
   constructor(private rolServicio: RolService, private personaServicio: PersonaService, private usuarioServicio: UsuarioService) { }
 
   ngOnInit() {
+    // Asignamos el rol empleado con id 3
+    this.rol.id = 3;
+    // Asignamos el rol a la persona
+    this.persona.rol = this.rol;
     // Validamos si el usuario tiene acceso a la pagina
-    this.usuarioServicio.esAccesible('administracion/gestionar-personas');
-    // Obtenemos la lista de roles
-    this.rolServicio.listar().subscribe(rta => {
-      this.roles = rta.data;
-    });
+    this.usuarioServicio.esAccesible('administracion/gestionar-empleados');
     // Actualizamos la tabla de personas
     this.listar();
   }
 
   /**
-   * Registra una persona con su usuario
+   * Registra un empleado con su usuario
    */
   registrar(form: NgForm) {
     this.usuario.persona = this.persona;
@@ -53,18 +53,18 @@ export class GestionarEmpleadosComponent implements OnInit {
         window.alert(this.msj);
         // limpiamos los campos
         form.reset();
+        // Actualizamos la lista de empleados
+        this.listar();
       }else{
         this.msj = rta.data;
         this.show = 1;
         window.alert(rta.data);
       }
-      // Actualizamos la lista de personas
-      this.listar();
     });
   }
 
   /**
-   * Registra una persona con su usuario
+   * Edita una empleado con su usuario
    */
   editar(form: NgForm) {
     if(this.usuario.persona != null && this.persona != null){
@@ -76,33 +76,34 @@ export class GestionarEmpleadosComponent implements OnInit {
         window.alert(this.msj);
         // limpiamos los campos
         form.reset();
+        // Actualizamos la lista de empleados
+        this.listar();
       }else{
         this.msj = rta.data;
         this.show = 1;
         window.alert(rta.data);
       }
-      // Actualizamos la lista de personas
-      this.listar();
     });
     }else{
-      this.msj = "Primero busque la persona que va a editar";
+      this.msj = "Primero busque el empleado que va a editar";
       this.show = 1
       window.alert(this.msj);
     }
   }
 
   /**
-   * Buscar persona
+   * Buscar empleado
    */
   buscar() {
-    this.personaServicio.personaByCedula(this.persona).subscribe(rta => {
+    this.personaServicio.personaByCedulaRol(this.persona).subscribe(rta => {
       if (rta.data == null) {
         this.show = 1;
-        this.msj = 'No existe una persona con cedula ' + this.persona.cedula;
+        this.msj = 'No existe un empleado con cedula ' + this.persona.cedula;
       } else {
         this.show = 3;
         this.persona = rta.data;
-        // Buscamos el usuario asociado con la persona
+        this.persona.rol = this.rol;
+        // Buscamos el usuario asociado con el empleado
         this.personaServicio.usuarioByPersona(this.persona).subscribe(rta2 => {
           this.usuario = rta2.data;
         });
@@ -111,7 +112,7 @@ export class GestionarEmpleadosComponent implements OnInit {
   }
 
   /**
-   * Ver la inormacion de una persona de la tabla
+   * Ver la inormacion de un empleado de la tabla
    */
   ver(p: Persona) {
     this.persona.cedula = p.cedula;
@@ -127,23 +128,17 @@ export class GestionarEmpleadosComponent implements OnInit {
     }
   }
   /**
-   * Lista todas las personas registradas
+   * Lista todas los empleados registradas
    */
   listar() {
-    // Obtenemos la lista de personas
-    this.personaServicio.listar().subscribe(rta => {
+    // Obtenemos la lista de empleado
+    this.personaServicio.listarPersonasByRol(this.rol).subscribe(rta => {
       this.personas = rta.data;
-      // obtenemos la informacion del rol de cada persona
-      for (let p of this.personas) {
-        this.rolServicio.buscarRolPersona(p).subscribe(rta2 => {
-          p.rol = rta2.data;
-        });
-      }
     });
   }
 
   /**
-   * Eliminar persona con su usuario de la base de datos
+   * Eliminar empleado con su usuario de la base de datos
    */
   eliminar(persona: Persona) {
     window.alert(persona.nombre);

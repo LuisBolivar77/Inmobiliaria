@@ -26,6 +26,28 @@
 
 @import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,400i,500,600,700,800,900');
 
+.submenu li{
+    font-size: 16px;
+    font-weight: 500;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: block;
+    position: relative;
+}
+.submenu li ul{
+	display: none;
+}
+.submenu li:hover ul{
+	display: block;
+    position: absolute;
+    width: 300px;
+    padding: 10px;
+    background: #3f6fcecc;
+    z-index: 200;
+    border-bottom: solid 1px transparent;
+    border-radius: 0 0 3px 3px;
+}
+
 /*********************************
 2. Body and some general stuff
 *********************************/

@@ -6,6 +6,8 @@ import { Persona } from '../../../Modelo/Persona';
 import { Date } from '../../../Modelo/date';
 import { Router } from '@angular/router';
 import { UsuarioService } from '../../../Servicios/usuarioServ.service';
+import { NgForm } from '@angular/forms';
+import { RolService } from '../../../Servicios/rolServ.service';
 
 @Component({
   selector: 'app-registro-usuario',
@@ -14,72 +16,52 @@ import { UsuarioService } from '../../../Servicios/usuarioServ.service';
 })
 export class RegistroUsuarioComponent implements OnInit {
 
-  // variables de entrada
-  cedula: string;
-  nombre: string;
-  apellido: string;
-  telefono: string;
-  direccion: string;
-  fecha: string;
-
-  // variable crear Persona
+  // Usuario que vamos a registrar
+  usuario: Usuario = new Usuario;
+  // La persona asignada al usuario que vamos a registrar
   persona: Persona = new Persona();
+  // Rol del cliente (2)
   rol: Rol = new Rol();
-  usu: Usuario = new Usuario();
 
-  // variables de servicio
-  servicioPer: PersonaService;
+  // Variables para los mensajes en la pagina
+  show: number;
+  msj: string;
 
-  constructor(private servicios: UsuarioService, private router: Router) { }
+  constructor(private rolServicio: RolService, private personaServicio: PersonaService, private servicios: UsuarioService, private router: Router) { }
 
   ngOnInit() {
-      // Validamos si el usuario ya inicio sesion
-      if (this.servicios.getUsuario() != null) {
-        // como ya inicio sesion, lo redireccionamos al inicio
-        this.router.navigate(['/']);
-      }
-  }
-
-
-  registrar() {
-
-    this.rol.id = 1;
-    this.rol.nombre = 'Cliente';
-    this.rol.descripcion = 'cliente';
-
-    this.persona.nombre = this.nombre;
-    this.persona.apellido = this.apellido;
-    this.persona.cedula = this.cedula;
-    this.persona.telefono = this.telefono;
-    this.persona.direccion = this.direccion;
-    this.persona.fecha_nacimiento = this.fecha;
-    this.persona.rol = this.rol;
-
-    this.usu.username = this.nombre + '.' + this.apellido;
-    this.usu.password = this.cedula;
-    this.usu.persona = this.persona;
-
-    window.alert('su nombre de usuario es ' + this.usu.username + ' y la contraseña es ' + this.usu.password);
-
-    this.servicioPer.registrar(this.usu).subscribe(rta => {
-      window.alert(rta.data);
-      // limpiamos los campos
-      this.limpiarCampos();
-    });
-
+    // Asignamos el rol Cliente con id 2
+    this.rol.id = 2;
+    // Validamos si el usuario ya inicio sesion
+    if (this.servicios.getUsuario() != null) {
+      // como ya inicio sesion, lo redireccionamos al inicio
+      this.servicios.redireccionar('/');
+    }
   }
 
 
   /**
-   * metodo se encarga de limpiar los campos
+   * Registra un cliente con su usuario
    */
-  limpiarCampos() {
-
-    this.cedula = '';
-    this.nombre = '';
-    this.apellido = '';
-    this.telefono = '';
-    this.direccion = '';
-
+  registrar(form: NgForm) {
+    // Asignamos el rol a la persona
+    this.persona.rol = this.rol;
+    // Asignamos la persona al usuario
+    this.usuario.persona = this.persona;
+    console.log(this.usuario);
+    this.personaServicio.registrar(this.usuario).subscribe(rta => {
+      if(rta.data == 'exito'){
+        this.msj = "Se ha registrado correctamente";
+        this.show = 2;
+        window.alert(this.msj);
+        // limpiamos los campos
+        form.reset();
+      }else{
+        this.msj = rta.data;
+        this.show = 1;
+        window.alert(rta.data);
+      }
+    });
   }
+  
 }
