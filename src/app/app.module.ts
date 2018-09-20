@@ -17,6 +17,7 @@ import { GestionarClientesComponent } from './Paginas/seguro/gestionar-clientes/
 import { GestionarAdministradoresComponent } from './Paginas/seguro/gestionar-administradores/gestionar-administradores.component';
 import { PromocionesComponent } from './Paginas/publico/promociones/promociones.component';
 import { EditarCuentaComponent } from './Paginas/seguro/editar-cuenta/editar-cuenta.component';
+import { InmueblesAdminComponent } from './inmuebles-admin/inmuebles-admin.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { EditarCuentaComponent } from './Paginas/seguro/editar-cuenta/editar-cue
     GestionarClientesComponent,
     GestionarAdministradoresComponent,
     PromocionesComponent,
-    EditarCuentaComponent
+    EditarCuentaComponent,
+    InmueblesAdminComponent
   ],
   imports: [
     BrowserModule,
