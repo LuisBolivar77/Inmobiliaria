@@ -1,0 +1,83 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="384385F8-B79E-8BD5-CEAC-0FAEFD6D575C" name="EMPLEADOS">
+<createdBy>krlox</createdBy>
+<createdTime>2018-09-18 22:43:56 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<ordsAlias>table_27</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="persona" id="B038A400-1751-C515-8A76-5127B35BBFAB">
+<createdBy>krlox</createdBy>
+<createdTime>2018-09-18 22:44:49 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="E596919B-DECF-E5CC-9112-028953D82C1B" referredColumn="040397FC-9801-FC64-FD85-0A7E17C74478"/>
+</associations>
+</Column>
+<Column name="salario" id="323B27E8-C806-48EE-2B1F-FAFC4F394837">
+<createdBy>krlox</createdBy>
+<createdTime>2018-09-18 22:47:22 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT020</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Cargo" id="73D59B97-AA0C-3304-EEEF-EBBFA44DF73B">
+<createdBy>krlox</createdBy>
+<createdTime>2018-09-18 22:47:48 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="429DA910-03A7-FD08-C8D4-F515239C5EAE" referredColumn="51643BE3-CD8D-52C1-93FB-D4F1EDB4E6A3"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="B53184BD-E594-C299-0B99-1D4899EF10E1" name="EMPLEADOS_PK">
+<createdBy>krlox</createdBy>
+<createdTime>2018-09-18 22:45:04 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="B038A400-1751-C515-8A76-5127B35BBFAB"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="D1DCAD30-02BE-B1A4-235A-6AE9861D7065" name="EMPLEADOS_PERSONAS_FK">
+<createdBy>krlox</createdBy>
+<createdTime>2018-09-18 22:44:49 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="B038A400-1751-C515-8A76-5127B35BBFAB"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="C478664D-CBAB-3B6F-9575-F0D1F9F07DDC" name="EMPLEADOS_CARGOS_FK">
+<createdBy>krlox</createdBy>
+<createdTime>2018-09-18 22:47:48 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="73D59B97-AA0C-3304-EEEF-EBBFA44DF73B"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

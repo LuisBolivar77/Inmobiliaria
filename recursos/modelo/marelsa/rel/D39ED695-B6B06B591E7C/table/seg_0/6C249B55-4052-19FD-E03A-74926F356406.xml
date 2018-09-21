@@ -1,0 +1,57 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="6C249B55-4052-19FD-E03A-74926F356406" name="CARGOS">
+<createdBy>krlox</createdBy>
+<createdTime>2018-09-18 22:40:02 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<ordsAlias>table_24</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="51643BE3-CD8D-52C1-93FB-D4F1EDB4E6A3">
+<createdBy>krlox</createdBy>
+<createdTime>2018-09-18 22:41:26 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="nombre" id="A113D277-138E-A7B5-B00B-25D8ED30E22D">
+<createdBy>krlox</createdBy>
+<createdTime>2018-09-18 22:41:26 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="descripcion" id="430C7881-F00A-8FEA-3FDA-29FAC7CB0867">
+<createdBy>krlox</createdBy>
+<createdTime>2018-09-18 22:42:39 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>300</dataTypeSize>
+<ownDataTypeParameters>300,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="F12173B2-AA57-CB14-5093-9B27B10887F9" name="CARGOS_PK">
+<createdBy>krlox</createdBy>
+<createdTime>2018-09-18 22:41:26 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="51643BE3-CD8D-52C1-93FB-D4F1EDB4E6A3"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

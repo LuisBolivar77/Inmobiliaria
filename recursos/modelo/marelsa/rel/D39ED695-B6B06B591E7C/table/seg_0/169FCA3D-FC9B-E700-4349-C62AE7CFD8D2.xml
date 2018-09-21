@@ -1,0 +1,70 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="169FCA3D-FC9B-E700-4349-C62AE7CFD8D2" name="CAUCION">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 17:05:23 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<ordsAlias>table_18</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="3AE26262-3F72-C4D4-F969-F0912CAF4E70">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 17:05:51 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="descripcion" id="F807FDB7-A97E-C08A-6FDD-978B5C0186A0">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 17:05:51 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>1000</dataTypeSize>
+<ownDataTypeParameters>1000,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Arriendo" id="147CB809-65E6-4AA9-BF1B-685E5EF83E2A">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 17:06:07 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="F30DFACE-239F-68F5-2C82-447853A0EB86" referredColumn="86509760-04C0-E11A-A181-10A28314C3D6"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="E2AC6E90-D436-A458-558C-14F5CAE4F6A1" name="CAUCION_PK">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 17:05:51 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="3AE26262-3F72-C4D4-F969-F0912CAF4E70"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="049C4493-091F-E5B8-C949-AB42BE62303D" name="Arriendo">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 17:06:07 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="147CB809-65E6-4AA9-BF1B-685E5EF83E2A"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

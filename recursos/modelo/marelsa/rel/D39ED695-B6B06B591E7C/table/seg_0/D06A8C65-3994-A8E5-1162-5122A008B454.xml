@@ -1,0 +1,469 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="D06A8C65-3994-A8E5-1162-5122A008B454" name="INMUEBLE">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 14:22:36 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<ordsAlias>table_7</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="BF5E66B9-8891-0EDE-E291-BB7B214A7899">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 14:25:02 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="direccion" id="16D73DB0-2855-004C-60E3-41223F93BE70">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 14:25:02 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="area" id="3F4467D5-79F0-6BEF-346E-4C8412C720BF">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 14:25:02 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT020</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="valor" id="ADB178FD-0C05-24D1-FCE7-9B348313907A">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 14:29:44 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT020</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="banios" id="74B336C5-FAB8-3E5D-8B40-D8E19CD751F1">
+<createdBy>krlox</createdBy>
+<createdTime>2018-09-18 21:38:19 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="estado" id="DDD4225F-C8E9-9EBF-5C4C-CB1A34A21C90">
+<createdBy>krlox</createdBy>
+<createdTime>2018-08-31 23:08:41 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="tipoVentaArrendo" id="AE5C653F-3676-6889-276A-5DC2F63F139A">
+<createdBy>krlox</createdBy>
+<createdTime>2018-08-31 23:10:01 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="garajes" id="8A5033A3-8DCC-9C65-F1CB-6B13DD895B4B">
+<createdBy>krlox</createdBy>
+<createdTime>2018-09-18 21:38:19 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="antiguedad" id="8D0B884E-1074-410C-C07E-00FBC46C71AE">
+<createdBy>krlox</createdBy>
+<createdTime>2018-09-18 21:41:31 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="detalles" id="B948B234-1E09-D48A-8897-AD3CE7EC05EB">
+<createdBy>krlox</createdBy>
+<createdTime>2018-09-19 00:46:29 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>400</dataTypeSize>
+<ownDataTypeParameters>400,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="añoConstruccion" id="A6923A10-4E2E-9E55-3FB0-B86DBB39CF4A">
+<createdBy>luchobolivar</createdBy>
+<createdTime>2018-09-20 16:30:34 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="ascensor" id="36DA6071-232E-8CA7-09EE-3AB6E35A0044">
+<createdBy>luchobolivar</createdBy>
+<createdTime>2018-09-20 16:47:08 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="canchas_deportivas" id="75669D38-DDF8-983D-BBDB-297622C51C5B">
+<createdBy>luchobolivar</createdBy>
+<createdTime>2018-09-20 16:46:31 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="zonas_humedas" id="B06C0970-A26A-A8E2-2703-AC36B895ACBC">
+<createdBy>luchobolivar</createdBy>
+<createdTime>2018-09-20 16:46:00 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="zona_infantil" id="3AC99768-561A-06E0-71BC-00E2D176E3E7">
+<createdBy>luchobolivar</createdBy>
+<createdTime>2018-09-20 16:47:46 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Jardines" id="4953FC12-44E7-BE31-8607-609134AA27C7">
+<createdBy>luchobolivar</createdBy>
+<createdTime>2018-09-20 16:45:08 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="transporte_publico_cercano" id="B671C7F0-20A7-32C9-A6E8-9666FC60C9EA">
+<createdBy>luchobolivar</createdBy>
+<createdTime>2018-09-20 16:44:31 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="precio_negociable" id="ADD4B6E1-E927-7886-5E59-6D3DD28EEDC1">
+<createdBy>luchobolivar</createdBy>
+<createdTime>2018-09-20 16:43:48 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="zona_ropas" id="74C1A5FE-8892-D25A-104C-A7931176CA5C">
+<createdBy>luchobolivar</createdBy>
+<createdTime>2018-09-20 16:41:23 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="parqueadero" id="009EB8F6-1CDB-691A-E992-C8CC9BA7BA8C">
+<createdBy>luchobolivar</createdBy>
+<createdTime>2018-09-20 16:40:56 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="deposito" id="5609F106-D54A-6284-657A-062036EBBF9F">
+<createdBy>luchobolivar</createdBy>
+<createdTime>2018-09-20 16:40:16 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="estudio" id="D127D560-FB36-B043-8101-94E12E3C6470">
+<createdBy>luchobolivar</createdBy>
+<createdTime>2018-09-20 16:39:24 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="tipo_cortinas" id="9832EC36-1317-4668-B77B-8BCB5D6D6A58">
+<createdBy>luchobolivar</createdBy>
+<createdTime>2018-09-20 16:37:58 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="cuarto_servicio" id="B894508E-0EE9-B95A-5F62-B85F6127B884">
+<createdBy>luchobolivar</createdBy>
+<createdTime>2018-09-20 16:38:20 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="chimenea" id="D0EA8F7A-412C-D5A9-8373-BC3BDF313EA5">
+<createdBy>luchobolivar</createdBy>
+<createdTime>2018-09-20 16:36:45 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="cocinaAbiertaCerrada" id="57D7F766-4AA4-BB4B-75B4-2C5486C3A1AD">
+<createdBy>luchobolivar</createdBy>
+<createdTime>2018-09-20 16:32:32 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="comedorIndependiente:" id="7267E64E-633D-7E4A-3176-FBCE88758BEC">
+<createdBy>luchobolivar</createdBy>
+<createdTime>2018-09-20 16:35:23 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="vista_exterior_interior" id="B501B636-1D1B-18BD-0FA7-B50E5877C1FE">
+<createdBy>luchobolivar</createdBy>
+<createdTime>2018-09-20 16:36:08 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="zona" id="82174337-09AB-EBD5-286C-EA383C2A3919">
+<createdBy>krlox</createdBy>
+<createdTime>2018-09-20 01:52:36 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="aprobacion_fecha" id="1391D382-89F1-A24E-88CE-84BAF9B8C804">
+<createdBy>krlox</createdBy>
+<createdTime>2018-09-20 02:26:35 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Tipo" id="D2CC5D0E-0E9A-F212-EBD0-C678F6916B98">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 14:26:03 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="66443DE6-6765-2C0A-5B81-B9676891E0DC" referredColumn="BE314E33-78FD-61A9-564D-16D13A374CE6"/>
+</associations>
+</Column>
+<Column name="Ciudad" id="AA5C585A-9F49-61B7-F09C-4B1E1B72F3F9">
+<createdBy>krlox</createdBy>
+<createdTime>2018-09-18 21:31:25 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="0C5DE798-F042-868E-18A3-236D62BCA0EB" referredColumn="F001399B-A58A-2C23-4689-06AF528745A2"/>
+</associations>
+</Column>
+<Column name="Usuario" id="7724ED12-B974-28B0-F621-71EFDEE542E5">
+<createdBy>krlox</createdBy>
+<createdTime>2018-09-18 22:04:25 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="69DE94DE-D157-96AC-EB37-B7924CE0A9A0" referredColumn="4E39A01B-FDF5-3A95-B80C-60F0F6A13C20"/>
+</associations>
+</Column>
+<Column name="Administrador" id="F181553C-8784-98B9-ACE6-B9F9CB4D96C0">
+<createdBy>krlox</createdBy>
+<createdTime>2018-09-20 02:28:15 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="D9A248C0-ABEF-E6B3-7B38-3E844963B761" referredColumn="4E39A01B-FDF5-3A95-B80C-60F0F6A13C20"/>
+</associations>
+</Column>
+<Column name="Promocion" id="DD24CE3B-48B8-2A2F-0110-C785991F2098">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 14:41:16 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="640B7955-BD75-24AD-EDCA-983B4B645212" referredColumn="DF57B739-D48F-73E5-59E2-67D58D1007D5"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="E7E0CB42-8117-02A2-EA40-F9BA6E67F26C" name="INMUEBLE_PK">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 14:25:02 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="BF5E66B9-8891-0EDE-E291-BB7B214A7899"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="162964F1-C072-2EE9-6F7A-52C6A0470B4D" name="TIPO_INMUEBLE_FK">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 14:26:03 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="D2CC5D0E-0E9A-F212-EBD0-C678F6916B98"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="D69A2B35-A3DD-BFA6-0C2D-34B36D4EE632" name="INMUEBLE_PROMOCION_FK">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 14:41:16 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="DD24CE3B-48B8-2A2F-0110-C785991F2098"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="F95E52AD-5514-0496-861E-3CED64A85FBD" name="INMUEBLE_CIUDADES_FK">
+<createdBy>krlox</createdBy>
+<createdTime>2018-09-18 21:31:25 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="AA5C585A-9F49-61B7-F09C-4B1E1B72F3F9"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="5112F86C-51C1-38AB-6934-BC1338418590" name="INMUEBLE_USUARIOS_FK">
+<createdBy>krlox</createdBy>
+<createdTime>2018-09-18 22:04:25 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="7724ED12-B974-28B0-F621-71EFDEE542E5"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="9B484DB3-6BD7-B7BD-7BB6-455AA3A8CEE6" name="INMUEBLE_USUARIOS_FKv2">
+<createdBy>krlox</createdBy>
+<createdTime>2018-09-20 02:28:15 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="F181553C-8784-98B9-ACE6-B9F9CB4D96C0"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

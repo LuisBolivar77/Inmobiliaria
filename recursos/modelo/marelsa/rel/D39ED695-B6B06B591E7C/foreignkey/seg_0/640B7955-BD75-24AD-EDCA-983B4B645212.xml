@@ -1,0 +1,16 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="640B7955-BD75-24AD-EDCA-983B4B645212" containerWithKeyObject="D06A8C65-3994-A8E5-1162-5122A008B454" localFKIndex="D69A2B35-A3DD-BFA6-0C2D-34B36D4EE632" name="INMUEBLE_PROMOCION_FK">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 14:41:16 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<referredTableLongName>PROMOCION</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>A23734EA-CA82-C00F-B27C-11EC3ADFD7BC</referredTableID>
+<keyObject>878974D6-6793-30C9-D929-7057BA3DF35E</keyObject>
+<referredKeyID>878974D6-6793-30C9-D929-7057BA3DF35E</referredKeyID>
+<mandatory>false</mandatory>
+<refColNames>id</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

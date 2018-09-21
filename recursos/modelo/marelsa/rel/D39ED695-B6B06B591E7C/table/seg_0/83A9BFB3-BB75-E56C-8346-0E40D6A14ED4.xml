@@ -1,0 +1,74 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="83A9BFB3-BB75-E56C-8346-0E40D6A14ED4" name="ROL_ACCESOS">
+<createdBy>krlox</createdBy>
+<createdTime>2018-08-31 21:59:29 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<ordsAlias>table_25</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="Rol" id="C8474968-EF76-F9E8-A684-94295D3D878D">
+<createdBy>krlox</createdBy>
+<createdTime>2018-08-31 22:04:25 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="BB553F9E-58F6-BBB1-6123-2FD5FBADE18D" referredColumn="A3AA3784-65E9-86C6-A066-E7D0E066184E"/>
+</associations>
+</Column>
+<Column name="Acceso" id="9369C85E-8C2F-632D-DBB5-22CC999EAD6E">
+<createdBy>krlox</createdBy>
+<createdTime>2018-08-31 22:04:47 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="D2BE8678-FF0B-5319-0F1B-1642B90C69C6" referredColumn="60D1F889-ACD6-C3FA-F63C-1A34083762B7"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="06C5FDD9-29A4-0AC8-2BFA-CD25C3F62D2F" name="ROL_ACCESOS_PK">
+<createdBy>krlox</createdBy>
+<createdTime>2018-08-31 22:06:22 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="C8474968-EF76-F9E8-A684-94295D3D878D"/>
+<colUsage columnID="9369C85E-8C2F-632D-DBB5-22CC999EAD6E"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="33AE445D-6753-64EA-325F-08DC2BA9D344" name="Rol">
+<createdBy>krlox</createdBy>
+<createdTime>2018-08-31 22:04:25 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="C8474968-EF76-F9E8-A684-94295D3D878D"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="5ED39A94-0981-5617-E32C-B6124767A57B" name="Acceso">
+<createdBy>krlox</createdBy>
+<createdTime>2018-08-31 22:04:47 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="9369C85E-8C2F-632D-DBB5-22CC999EAD6E"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

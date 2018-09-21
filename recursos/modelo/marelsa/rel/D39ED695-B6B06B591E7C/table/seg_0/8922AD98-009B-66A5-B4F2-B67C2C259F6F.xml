@@ -1,0 +1,69 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="8922AD98-009B-66A5-B4F2-B67C2C259F6F" name="CIUDADES">
+<createdBy>krlox</createdBy>
+<createdTime>2018-09-18 20:45:27 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<ordsAlias>table_20</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="F001399B-A58A-2C23-4689-06AF528745A2">
+<createdBy>krlox</createdBy>
+<createdTime>2018-09-18 20:52:35 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="nombre" id="51C998DC-A3AB-8D7F-8370-B31F8337F988">
+<createdBy>krlox</createdBy>
+<createdTime>2018-09-18 20:52:35 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="departamento" id="E119575C-8181-6412-0267-AE1772620FF9">
+<createdBy>krlox</createdBy>
+<createdTime>2018-09-18 20:57:36 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="DCA17480-9581-936C-CFB1-32A67AAFC112" referredColumn="9E02EFFE-B6E4-8978-7B04-87C6DFFF69BB"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="1A9C00F5-3B08-8BD6-FB9F-736E0DDBE590" name="CIUDADES_PK">
+<createdBy>krlox</createdBy>
+<createdTime>2018-09-18 20:52:35 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="F001399B-A58A-2C23-4689-06AF528745A2"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="8786664A-703C-1E14-847A-BCDC044DE0FB" name="CIUDADES_DEPARTAMENTOS_FK">
+<createdBy>krlox</createdBy>
+<createdTime>2018-09-18 20:57:36 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="E119575C-8181-6412-0267-AE1772620FF9"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

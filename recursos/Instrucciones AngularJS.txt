@@ -20,3 +20,8 @@
   git push https://github.com/LuisBolivar77/Inmobiliaria
 
   git pull origin master
+
+-- clonar proyecto git
+  git clone https://github.com/LuisBolivar77/Inmobiliaria
+  -- luego
+  npm install

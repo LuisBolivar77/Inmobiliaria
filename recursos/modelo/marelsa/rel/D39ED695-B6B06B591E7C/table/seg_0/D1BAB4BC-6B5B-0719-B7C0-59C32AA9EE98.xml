@@ -1,0 +1,81 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="D1BAB4BC-6B5B-0719-B7C0-59C32AA9EE98" name="USUARIOS">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 14:36:09 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<ordsAlias>table_11</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="Persona" id="4E39A01B-FDF5-3A95-B80C-60F0F6A13C20">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 14:37:17 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="2F29412A-1435-6D19-D699-78EF62BFA977" referredColumn="040397FC-9801-FC64-FD85-0A7E17C74478"/>
+</associations>
+</Column>
+<Column name="username" id="FBA7581D-0683-F520-B248-071E27B71F88">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 14:37:11 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="password" id="6A288FD2-49B9-52F1-A9CE-92C843973EAA">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 14:37:11 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="3D05591B-0438-AA74-7525-706DC09CF41F" name="USUARIO_PK">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 14:37:27 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="4E39A01B-FDF5-3A95-B80C-60F0F6A13C20"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="6BCBD7ED-D829-7705-5685-2CF732B1329C" name="USUARIO__UN">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 16:54:30 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<indexState>Unique Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="4E39A01B-FDF5-3A95-B80C-60F0F6A13C20"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="4C9BAA2C-C645-ED1A-7BCA-584DA59460FA" name="USUARIO_PERSONAS_FK">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 14:37:17 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="4E39A01B-FDF5-3A95-B80C-60F0F6A13C20"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

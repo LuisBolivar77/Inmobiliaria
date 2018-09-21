@@ -1,0 +1,92 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="9E16A2F4-D2C8-9AAB-8659-9C179465A0C5" name="FORMACIONES">
+<createdBy>krlox</createdBy>
+<createdTime>2018-09-19 00:23:53 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<ordsAlias>table_29</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="9FE6779A-9D40-7231-9D7B-66277561B6F9">
+<createdBy>krlox</createdBy>
+<createdTime>2018-09-19 22:01:05 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="institucion" id="4974F9EE-2D4B-5607-4C51-5100C6484474">
+<createdBy>krlox</createdBy>
+<createdTime>2018-09-19 22:01:05 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="titulo" id="C6F9B256-3136-DB37-A036-ABCD701FB75F">
+<createdBy>krlox</createdBy>
+<createdTime>2018-09-19 22:02:10 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="file_certificacion" id="1DE4AE9E-A8B7-DE3D-0EFF-2F479694F19E">
+<createdBy>krlox</createdBy>
+<createdTime>2018-09-19 22:01:05 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>300</dataTypeSize>
+<ownDataTypeParameters>300,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Empleado" id="979F40D6-11B9-7BD0-A798-8654CA827EB1">
+<createdBy>krlox</createdBy>
+<createdTime>2018-09-19 22:04:23 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="CA2A8B0E-B388-E86B-2128-AE01FE7A181E" referredColumn="B038A400-1751-C515-8A76-5127B35BBFAB"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="50174EF2-16B0-DA55-9146-779D9CB56864" name="FORMACIONES_PK">
+<createdBy>krlox</createdBy>
+<createdTime>2018-09-19 22:02:10 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="9FE6779A-9D40-7231-9D7B-66277561B6F9"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="CF4AA4B1-433C-5031-1228-65A050854610" name="FORMACIONES_EMPLEADOS_FK">
+<createdBy>krlox</createdBy>
+<createdTime>2018-09-19 22:04:23 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="979F40D6-11B9-7BD0-A798-8654CA827EB1"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

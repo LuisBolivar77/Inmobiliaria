@@ -1,0 +1,65 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="914C11A3-F544-2975-11A6-1C43BA77761B" name="REPORTES_VISITAS">
+<createdBy>krlox</createdBy>
+<createdTime>2018-08-31 23:02:30 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<ordsAlias>table_26</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="C4BA7C31-3600-08CB-06C0-AC4506FBBBC2">
+<createdBy>krlox</createdBy>
+<createdTime>2018-08-31 23:04:52 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="fecha" id="1E6F243B-6FD6-EF29-8556-070E01C9149F">
+<createdBy>krlox</createdBy>
+<createdTime>2018-08-31 23:04:52 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Inmueble" id="DECAB957-BBE2-9571-E700-C6C0A63C84C0">
+<createdBy>krlox</createdBy>
+<createdTime>2018-08-31 23:04:52 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Usuario" id="FFC171E9-71CE-1EC6-FA9F-1B1AF524FCCC">
+<createdBy>krlox</createdBy>
+<createdTime>2018-08-31 23:04:52 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="587CB351-9B04-50C6-4B0C-018BFCDD576D" name="REPORTES_VISITAS_PK">
+<createdBy>krlox</createdBy>
+<createdTime>2018-08-31 23:05:18 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="C4BA7C31-3600-08CB-06C0-AC4506FBBBC2"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
