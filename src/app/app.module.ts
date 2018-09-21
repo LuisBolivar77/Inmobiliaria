@@ -17,7 +17,7 @@ import { GestionarClientesComponent } from './Paginas/seguro/gestionar-clientes/
 import { GestionarAdministradoresComponent } from './Paginas/seguro/gestionar-administradores/gestionar-administradores.component';
 import { PromocionesComponent } from './Paginas/publico/promociones/promociones.component';
 import { EditarCuentaComponent } from './Paginas/seguro/editar-cuenta/editar-cuenta.component';
-import { InmueblesAdminComponent } from './inmuebles-admin/inmuebles-admin.component';
+import { InmueblesAdminComponent } from './Paginas/seguro/inmuebles-admin/inmuebles-admin.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +47,10 @@ import { InmueblesAdminComponent } from './inmuebles-admin/inmuebles-admin.compo
     FormsModule,
     RouterModule.forRoot([
       {
+        path: 'administracion/gestion-inmuebles',
+        component: InmueblesAdminComponent
+      },
+      {
         path: 'editar-cuenta',
         component: EditarCuentaComponent
       },
@@ -65,7 +69,7 @@ import { InmueblesAdminComponent } from './inmuebles-admin/inmuebles-admin.compo
       {
         path: 'administracion/gestionar-clientes',
         component: GestionarClientesComponent
-      },     
+      },
       {
         path: 'administracion/gestionar-administradores',
         component: GestionarAdministradoresComponent

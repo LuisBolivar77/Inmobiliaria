@@ -42,7 +42,7 @@ export class UsuarioService {
      * redirecciona una pagina a otra determinada
      * @param ruta la url a donde debe redireccionar
      */
-    redireccionar(ruta: string){
+    redireccionar(ruta: string) {
         this.router.navigate([ruta]);
     }
 
@@ -73,7 +73,7 @@ export class UsuarioService {
      */
     pageInArray(page: string, accesos: Array<Acceso>) {
         for (let acceso of accesos) {
-            if (acceso.url == page) { 
+            if (acceso.url === page) {
                 return false;
             }
         }

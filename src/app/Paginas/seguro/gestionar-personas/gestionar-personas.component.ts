@@ -52,15 +52,15 @@ export class GestionarPersonasComponent implements OnInit {
     this.usuario.persona = this.persona;
     console.log(this.usuario);
     this.personaServicio.registrar(this.usuario).subscribe(rta => {
-      if(rta.data == 'exito'){
-        this.msj = "Se ha registrado correctamente";
+      if (rta.data === 'exito') {
+        this.msj = 'Se ha registrado correctamente';
         this.show = 2;
         window.alert(this.msj);
         // limpiamos los campos
         form.reset();
         // Actualizamos la lista de personas
         this.listar();
-      }else{
+      } else {
         this.msj = rta.data;
         this.show = 1;
         window.alert(rta.data);
@@ -72,28 +72,28 @@ export class GestionarPersonasComponent implements OnInit {
    * Registra una persona con su usuario
    */
   editar(form: NgForm) {
-    if(this.usuario.persona != null && this.persona != null){
+    if (this.usuario.persona != null && this.persona != null) {
       this.rol.id = this.persona.rol.id;
       this.persona.rol = this.rol;
       this.usuario.persona = this.persona;
     this.personaServicio.editar(this.usuario).subscribe(rta => {
-      if(rta.data == 'exito'){
-        this.msj = "Se ha editado correctamente";
+      if (rta.data === 'exito') {
+        this.msj = 'Se ha editado correctamente';
         this.show = 2;
         window.alert(this.msj);
         // limpiamos los campos
         form.reset();
         // Actualizamos la lista de personas
         this.listar();
-      }else{
+      } else {
         this.msj = rta.data;
         this.show = 1;
         window.alert(rta.data);
       }
     });
-    }else{
-      this.msj = "Primero busque la persona que va a editar";
-      this.show = 1
+    } else {
+      this.msj = 'Primero busque la persona que va a editar';
+      this.show = 1;
       window.alert(this.msj);
     }
   }
