@@ -1,11 +1,11 @@
 /**
  * Registrar un inmueble
  */
-exports.registrarPersona = function(req, res){
+exports.registrarInmueble = function(req, res){
     var data = JSON.parse(JSON.stringify(req.body));
     req.getConnection(function(err,connection){
         // Construimos el objeto inmueble que se va a registrar
-        var persona = {
+        var inmueble = {
             cedula: data.persona.cedula,
             nombre: data.persona.nombre,
             apellido: data.persona.apellido,

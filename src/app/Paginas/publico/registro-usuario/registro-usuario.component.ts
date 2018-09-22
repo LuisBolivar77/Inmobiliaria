@@ -1,4 +1,5 @@
-import { PersonaService } from './../../../Servicios/personaServ.servide';
+import { Archivo } from './../../../Modelo/Archivo';
+import { PersonaService } from '../../../Servicios/personaServ.service';
 import { Usuario } from './../../../Modelo/Usuario';
 import { Rol } from './../../../Modelo/Rol';
 import { Component, OnInit } from '@angular/core';
@@ -23,11 +24,13 @@ export class RegistroUsuarioComponent implements OnInit {
   // Rol del cliente (2)
   rol: Rol = new Rol();
 
+  foto: Archivo;
+
   // Variables para los mensajes en la pagina
   show: number;
   msj: string;
 
-  constructor(private rolServicio: RolService, private personaServicio: PersonaService, private servicios: UsuarioService, private router: Router) { }
+  constructor(private rolServicio: RolService, private personaServicio: PersonaService, private servicios: UsuarioService) { }
 
   ngOnInit() {
     // Asignamos el rol Cliente con id 2
@@ -50,18 +53,18 @@ export class RegistroUsuarioComponent implements OnInit {
     this.usuario.persona = this.persona;
     console.log(this.usuario);
     this.personaServicio.registrar(this.usuario).subscribe(rta => {
-      if(rta.data == 'exito'){
-        this.msj = "Se ha registrado correctamente";
+      if (rta.data === 'exito') {
+        this.msj = 'Se ha registrado correctamente';
         this.show = 2;
         window.alert(this.msj);
         // limpiamos los campos
         form.reset();
-      }else{
+      } else {
         this.msj = rta.data;
         this.show = 1;
         window.alert(rta.data);
       }
     });
   }
-  
+
 }

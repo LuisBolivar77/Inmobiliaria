@@ -1,6 +1,6 @@
 import { HttpClient, HttpHandler } from '@angular/common/http';
 import { TestBed, ComponentFixture, async, inject } from '@angular/core/testing';
-import { PersonaService } from '../../../Servicios/personaServ.servide';
+import { PersonaService } from '../../../Servicios/personaServ.service';
 import { Rol } from '../../../Modelo/Rol';
 import { Persona } from '../../../Modelo/Persona';
 import { Usuario } from '../../../Modelo/Usuario';
@@ -16,6 +16,8 @@ fdescribe('GestionarPersonasComponent', () => {
   // tslint:disable-next-line:prefer-const
   let usuario = new Usuario();
 
+  let data = '';
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       providers:    [ PersonaService, HttpClient, HttpHandler ]
@@ -28,9 +30,7 @@ fdescribe('GestionarPersonasComponent', () => {
     rol.nombre = 'Administrador';
     rol.descripcion = 'administrador';
 
-    console.log(rol.id + ' ----- ' + rol.nombre + ' ---- ' + rol.descripcion);
     // datos de la persona
-    // persona.id = 3000;
     persona.cedula = '123';
     persona.nombre = 'gaga';
     persona.apellido = 'posada';
@@ -46,8 +46,9 @@ fdescribe('GestionarPersonasComponent', () => {
 
   it('debe registrar un usuario',
     inject([PersonaService], (service: PersonaService) => {
-    service.registrar(usuario).subscribe(dataEntra => expect(dataEntra).toEqual('exito'));
 
+    service.registrar(usuario).subscribe(dataEntra => data = dataEntra);
+    console.log(data);
   }));
 
 });

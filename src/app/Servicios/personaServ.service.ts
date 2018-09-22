@@ -34,7 +34,7 @@ export class PersonaService {
      * Obtenemos la lista de personas por un Determinado Rol
      */
     listarPersonasByRol (rol: Rol) {
-        return this.http.get<any>(this.domain + 'personas/listar-by-rol/'+rol.id)
+        return this.http.get<any>(this.domain + 'personas/listar-by-rol/' + rol.id)
         .pipe(
             map(res => {
                 return res;
@@ -60,7 +60,7 @@ export class PersonaService {
      * @param persona la persona a buscar
      */
     personaByCedulaRol (persona: Persona) {
-        return this.http.get<any>(this.domain + 'personas/persona-by-cedula-rol/'+persona.cedula+'/'+persona.rol.id)
+        return this.http.get<any>(this.domain + 'personas/persona-by-cedula-rol/' + persona.cedula + '/' + persona.rol.id)
         .pipe(
             map(res => {
                 return res;
