@@ -1,0 +1,93 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="F7572450-801D-2145-E068-13DA0B39A577" name="FORMATO_VENTAS">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 14:50:28 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<ordsAlias>table_13</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="8022B09C-B7E3-87EF-9950-C48FCE2029B7">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 15:03:58 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="fecha" id="9534A038-53FD-A804-D186-A6AC8275981F">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 15:03:58 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Inmueble" id="9297F86E-C620-0249-7C98-76B0A705D8EE">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 15:04:25 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="4365AF63-FF7F-F555-CF01-F96A931D73E3" referredColumn="BF5E66B9-8891-0EDE-E291-BB7B214A7899"/>
+</associations>
+</Column>
+<Column name="Empleado" id="79127653-AEB1-7B83-258D-9F5563FB54D2">
+<createdBy>krlox</createdBy>
+<createdTime>2018-08-31 22:38:46 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="F1278ECF-5EF2-EF15-3A8E-0B3AFA6C7BDE" referredColumn="040397FC-9801-FC64-FD85-0A7E17C74478"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="914FDC58-105F-9A3D-95D8-82B61C6380B8" name="FORMATO_VENTAS_PK">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 15:03:58 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="8022B09C-B7E3-87EF-9950-C48FCE2029B7"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="017C1C0F-36B6-5E4B-EE58-40406107AC2C" name="Inmueble">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 15:04:25 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="9297F86E-C620-0249-7C98-76B0A705D8EE"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="3E493BD3-E142-F49B-9E8F-A409CE4AA690" name="Empleadov6">
+<createdBy>krlox</createdBy>
+<createdTime>2018-08-31 22:38:46 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="79127653-AEB1-7B83-258D-9F5563FB54D2"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

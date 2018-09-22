@@ -1,0 +1,66 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="A23734EA-CA82-C00F-B27C-11EC3ADFD7BC" name="PROMOCION">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 14:28:40 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<ordsAlias>table_10</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="DF57B739-D48F-73E5-59E2-67D58D1007D5">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 14:29:25 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="descripcion" id="8AABD18B-62D6-42CF-DBF5-539B6605AC7A">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 14:29:25 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="porcentaje" id="2ECBF89A-F546-C53C-F177-A94A7C92FEA3">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 14:31:41 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="fecha" id="34FE6577-5D22-5B80-A188-599B89596901">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 14:32:08 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="878974D6-6793-30C9-D929-7057BA3DF35E" name="PROMOCION_PK">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 14:29:25 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="DF57B739-D48F-73E5-59E2-67D58D1007D5"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

@@ -1,0 +1,93 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="5C58E8E4-F570-EDBF-E86C-F201E00C54E1" name="CITA_DESALOJO">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 17:09:22 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<ordsAlias>table_19</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="30F17B3E-DF20-4504-D9E0-A293A3086A42">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 17:09:50 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="fecha" id="3BBBA3BF-F70A-7742-CED3-817F7E76A702">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 17:09:50 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Arriendo" id="36F8A110-5CC6-7341-CB2E-D980A33BFD48">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 17:10:11 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="1736E431-75F4-9EB2-7697-9B7812DA3D02" referredColumn="86509760-04C0-E11A-A181-10A28314C3D6"/>
+</associations>
+</Column>
+<Column name="Empleado" id="E02E9B9A-4863-684E-8B26-46F199812CDC">
+<createdBy>krlox</createdBy>
+<createdTime>2018-08-31 22:38:01 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="2CA6C7BE-88E6-5F3C-15C5-24A12AEF9AD3" referredColumn="040397FC-9801-FC64-FD85-0A7E17C74478"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="25CA38B7-6915-CAF1-2E03-A07A43A4C638" name="CITA_DESALOJO_PK">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 17:09:50 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="30F17B3E-DF20-4504-D9E0-A293A3086A42"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="C4B95E08-8AB6-4C26-BE82-E649B71FF674" name="CITA_DESALOJO_ARRIENDO_FK">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 17:10:11 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="36F8A110-5CC6-7341-CB2E-D980A33BFD48"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="1F7BD160-8FB0-556E-3176-8ACDCFCF18FC" name="Empleadov5">
+<createdBy>krlox</createdBy>
+<createdTime>2018-08-31 22:38:01 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="E02E9B9A-4863-684E-8B26-46F199812CDC"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

@@ -1,0 +1,139 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="0EA15552-0335-9354-1923-560976DE9214" name="RESERVAR_VISITA">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 14:42:37 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<ordsAlias>table_12</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="36364656-A0B3-4C9A-527D-D2A4A5D68CB7">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 14:43:15 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="mensaje" id="10020F35-EF2E-4599-D054-E0A79B933FE0">
+<createdBy>krlox</createdBy>
+<createdTime>2018-09-19 22:25:20 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>600</dataTypeSize>
+<ownDataTypeParameters>600,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="fecha" id="D417C58E-164D-115A-F8EF-AB84A1A3173A">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 14:43:15 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="estado" id="6565D4A8-DD0A-B994-31F3-D94F5340B407">
+<createdBy>krlox</createdBy>
+<createdTime>2018-09-19 22:32:50 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Inmueble" id="E975C815-8670-FDA0-5A2E-0430C52C9145">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 14:43:22 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="02DD20BC-4901-4BF6-5205-C9194B0E6954" referredColumn="BF5E66B9-8891-0EDE-E291-BB7B214A7899"/>
+</associations>
+</Column>
+<Column name="Cliente" id="40C3F75A-DAA2-5C5A-E04D-275712D9F70D">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 14:46:03 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="6F2ABF68-948A-91EB-E4CF-8323FA671F49" referredColumn="040397FC-9801-FC64-FD85-0A7E17C74478"/>
+</associations>
+</Column>
+<Column name="Empleado" id="3278C111-4DF2-1988-A4F6-F9D094A5F886">
+<createdBy>krlox</createdBy>
+<createdTime>2018-08-31 22:15:49 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="43B8EAB6-7E80-8BE0-8C50-509FEA199924" referredColumn="040397FC-9801-FC64-FD85-0A7E17C74478"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="86CBD0D4-4154-9BBA-63C1-647D930F00AC" name="RESERVAR_VISITA_PK">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 14:43:15 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="36364656-A0B3-4C9A-527D-D2A4A5D68CB7"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="A1389403-5341-A8F1-2706-1CC6621FBF51" name="RES_VISITA_INM_FK">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 14:43:22 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="E975C815-8670-FDA0-5A2E-0430C52C9145"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="D010E5FE-8095-1AD8-7ABD-F1D4D46F452D" name="VISITA_PERSONAS_FK">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 14:46:03 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="40C3F75A-DAA2-5C5A-E04D-275712D9F70D"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="B4884933-2911-2293-749B-80732A4944DA" name="Empleado">
+<createdBy>krlox</createdBy>
+<createdTime>2018-08-31 22:15:49 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="3278C111-4DF2-1988-A4F6-F9D094A5F886"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

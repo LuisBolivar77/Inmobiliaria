@@ -1,0 +1,83 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="96825955-4A35-FF41-6C8F-D4431CCAB1C8" name="VENTA">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 15:16:37 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<ordsAlias>table_15</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="411B7D05-E690-B007-C920-DF3D35103657">
+<createdBy>krlox</createdBy>
+<createdTime>2018-08-31 23:14:41 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Contrato" id="3F1EF410-9831-13B8-2BF0-64DBBAD14058">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 16:50:16 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="27AF7A46-C402-11D3-C89D-A013DE7C916F" referredColumn="17EFFD14-9154-3C5F-9874-BFD11C5BB717"/>
+</associations>
+</Column>
+<Column name="Empleado" id="6202EAC1-7B36-2651-6ACE-8CD4823B0017">
+<createdBy>krlox</createdBy>
+<createdTime>2018-08-31 22:18:07 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="A354B1E9-C79B-D285-C1F9-A2A81A621AA5" referredColumn="040397FC-9801-FC64-FD85-0A7E17C74478"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="3070720F-9800-9A50-F085-B5834A034B03" name="VENTA_PK">
+<createdBy>krlox</createdBy>
+<createdTime>2018-08-31 23:14:41 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="411B7D05-E690-B007-C920-DF3D35103657"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="65DD2E82-F810-8F3D-2AB7-9E0AEC376913" name="Contraro">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 16:50:16 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="3F1EF410-9831-13B8-2BF0-64DBBAD14058"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="B87C4EAD-9E0D-C58C-E4AF-A1EC091D7D71" name="Empleadov2">
+<createdBy>krlox</createdBy>
+<createdTime>2018-08-31 22:18:07 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="6202EAC1-7B36-2651-6ACE-8CD4823B0017"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

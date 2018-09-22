@@ -1,0 +1,16 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="1736E431-75F4-9EB2-7697-9B7812DA3D02" containerWithKeyObject="5C58E8E4-F570-EDBF-E86C-F201E00C54E1" localFKIndex="C4B95E08-8AB6-4C26-BE82-E649B71FF674" name="CITA_DESALOJO_ARRIENDO_FK">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 17:10:11 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<referredTableLongName>ARRIENDO</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>3E2C7318-3DF2-A28B-4B03-1E081494C4E1</referredTableID>
+<keyObject>C6B6A039-9D0F-F696-29FF-0505B1D8A55A</keyObject>
+<referredKeyID>C6B6A039-9D0F-F696-29FF-0505B1D8A55A</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>id</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

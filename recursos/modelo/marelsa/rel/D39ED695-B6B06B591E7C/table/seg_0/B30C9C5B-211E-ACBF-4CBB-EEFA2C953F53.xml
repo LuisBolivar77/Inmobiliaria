@@ -1,0 +1,80 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="B30C9C5B-211E-ACBF-4CBB-EEFA2C953F53" name="INFORME">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 17:03:05 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<ordsAlias>table_17</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="020C0C0B-51C7-F3AA-39A7-4A1936C9B639">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 17:03:53 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="fecha" id="4F8FF2FB-7807-EF3B-61B9-681D27EA3EF7">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 17:03:53 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="descripcion" id="05A661D7-E2DA-7F6A-CB48-DFC8BE14551A">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 17:03:53 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>1000</dataTypeSize>
+<ownDataTypeParameters>1000,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="ARRIENDO_id" id="37BACC6B-24FE-167C-549D-7C237360C8BF">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 17:04:24 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="F7132AB9-9F28-81AE-D7C1-0353B95386F1" referredColumn="86509760-04C0-E11A-A181-10A28314C3D6"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="71A10092-A7F0-2AF0-C56B-826D23F57288" name="INFORME_PK">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 17:03:53 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="020C0C0B-51C7-F3AA-39A7-4A1936C9B639"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="9C70624D-A51A-D14D-AE08-BE0F30A5211E" name="Arriendov2">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 17:04:24 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="37BACC6B-24FE-167C-549D-7C237360C8BF"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

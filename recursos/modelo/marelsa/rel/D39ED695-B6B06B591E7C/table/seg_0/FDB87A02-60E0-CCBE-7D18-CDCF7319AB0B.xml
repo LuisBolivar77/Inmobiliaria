@@ -1,0 +1,57 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="FDB87A02-60E0-CCBE-7D18-CDCF7319AB0B" name="TIPO_INMUEBLE">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 14:25:05 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<ordsAlias>table_8</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="BE314E33-78FD-61A9-564D-16D13A374CE6">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 14:25:58 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="nombre" id="6AFDBC50-5EFF-EAFF-075B-85E2F818BAAD">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 14:25:58 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="descripcion" id="B3740DD6-50B8-94E7-67B8-44AD7722FB48">
+<createdBy>krlox</createdBy>
+<createdTime>2018-08-31 22:13:14 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>300</dataTypeSize>
+<ownDataTypeParameters>300,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="AAB7D8E5-0BED-4495-019E-BE9D66634DB3" name="TIPO_INMUEBLE_PK">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-31 14:25:58 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="BE314E33-78FD-61A9-564D-16D13A374CE6"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

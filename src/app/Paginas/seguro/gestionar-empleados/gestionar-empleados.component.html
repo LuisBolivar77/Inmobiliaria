@@ -2,45 +2,243 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
+        <div class="row">
+          <div class="col-lg-6">
+              <div class="section_title"> Gestion Empleados </div>
+              <div class="section_subtitle">Gestione toda la informacion de los empleados</div><br>
+          </div>
+          <div class="col-lg-6">
+              <div class="contact_form_container">
+                  <form (ngSubmit)="fbuscar($event)" class="contact_form" id="contact_form">
+                    <div class="row">
+                      <div class="col-lg-8">
+                          <div><input [(ngModel)]="persona.cedula" name="cedula" type="text" class="contact_input" placeholder="Cedula" required></div>
+                      </div>
+                      <div class="col-lg-4" style="padding-left: 0">
+                          <button style="height: 48px;margin: 0;width: 100%" class="contact_button button">Buscar</button>
+                      </div>
+                    </div>
+                  </form>
+              </div>
+          </div>
+        </div>
       <div class="row">
+        <div class="elements_accordions">
+          <div class="accordions">
+            <div class="accordion_container">
+              <div class="accordion d-flex flex-row align-items-center"><div>Clic para registrar, editar o ver informacion empleado </div></div>
+              <div class="accordion_panel">
+                <!-- contenido del acordion -->
       <!-- Form -->
-      <div class="col-lg-4">
-        <div class="section_title"> Gestion Empleados </div>
-        <div class="section_subtitle"> Ingrese los datos para Buscar, crear y/o editar </div><br>
-        <div class="aviso alert alert-danger" style="margin: 15px 0 0 0;" *ngIf="show == 1"><div id="close" title="Cerrar">×</div>{{msj}}</div>
-        <div class="aviso alert alert-success" style="margin: 15px 0 0 0;" *ngIf="show == 2"><div id="close" title="Cerrar">×</div>{{msj}}</div>
-        <div class="contact_form_container">
-            <div class="section_subtitle"> Buscar empleado </div><br>
-            <form (ngSubmit)="fbuscar($event)" class="contact_form" id="contact_form">
-              <div class="row">
-                <div class="col-lg-8">
-                    <div><input [(ngModel)]="persona.cedula" name="cedula" type="text" class="contact_input" placeholder="Cedula" required></div>
-                </div>
-                <div class="col-lg-4" style="padding-left: 0">
-                    <button style="height: 48px;margin: 0;width: 100%" class="contact_button button">Buscar</button>
+      <div class="col-lg-12">    
+          <div class="aviso alert alert-danger" style="margin: 20px 0 20px 0;" *ngIf="show == 1"><div id="close" title="Cerrar">×</div>{{msj}}</div>
+          <div class="aviso alert alert-success" style="margin: 20px 0 20px 0;" *ngIf="show == 2"><div id="close" title="Cerrar">×</div>{{msj}}</div>  
+        <div class="tabs">
+          <div class="tabs_container">
+            <div class="tabs d-flex flex-row align-items-center justify-content-start flex-wrap">
+              <div class="tab active">1. Informacion basica</div>
+              <div class="tab">2. Formaciones Academicas</div>
+              <div class="tab">3. Experiencias Laborales</div>
+            </div>
+            <div class="tab_panels">
+              <div class="tab_panel active">
+                <div class="tab_panel_content">
+                  <div class="tab_text">
+                    <!-- Aqui va la Informacion basica -->
+                    <div class="col-lg-10" style="margin: 0 auto">
+                    <div class="contact_form_container">
+                        <form #datosForm="ngForm" class="contact_form" id="contact_form">
+                          <div class="section_subtitle"> Datos Empleado </div>
+                          <div class="row">
+                            <div class="col-lg-6">
+                              <input type="text" [(ngModel)]="persona.nombre" name="nombre" class="contact_input" placeholder="Nombre" required="required">
+                            </div>
+                            <div class="col-lg-6">
+                                <input type="text" [(ngModel)]="persona.apellido" name="apellido" class="contact_input" placeholder="Apellido" required="required">
+                            </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-lg-6">
+                                <input type="text" [(ngModel)]="persona.cedula" name="cedula" class="contact_input" placeholder="Cedula" required="required">
+                              </div>
+                              <div class="col-lg-6">
+                                  <input type="tel"  [(ngModel)]="persona.telefono" name="telefono" class="contact_input" placeholder="Telefono (123-456-7890)" required="required" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-lg-6">
+                                  <input type="date" [(ngModel)]="persona.fecha_nacimiento" name="fecha" class="contact_input" placeholder="Fecha de nacimiento" required="required" max="2000-01-01" >
+                              </div>
+                              <div class="col-lg-6">
+                                  <input type="text" [(ngModel)]="persona.direccion" name="direccion" class="contact_input" placeholder="Direccion" required="required">
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-lg-6">
+                                <input type="text" name="cargo" class="contact_input" placeholder="Cargo" required="required">
+                              </div>
+                              <div class="col-lg-6">
+                                <input type="number" name="salario" class="contact_input" placeholder="Salario" required="required">
+                              </div>
+                          </div>
+                          <div class="section_subtitle"> Datos usurio </div>
+                          <div class="row">
+                              <div class="col-lg-6">
+                                <input type="tel"  [(ngModel)]="usuario.username" name="username" class="contact_input" placeholder="Nombre de usuario" required="required">
+                              </div>
+                              <div class="col-lg-6">
+                                <input type="text" [(ngModel)]="usuario.password" name="password" class="contact_input" placeholder="Contraseña" required="required">
+                              </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-lg-6">
+                              <button (click)="registrar(datosForm)" style="width: 100%" class="contact_button button">Registrar Empleado</button>
+                            </div>
+                            <div class="col-lg-6">
+                                <button (click)="editar(datosForm)" style="width: 100%" class="contact_button button">Editar Empleado</button>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                      </div>
+                  </div>
                 </div>
               </div>
-            </form>
-        </div>
-        <div class="contact_form_container">
-          <form #datosForm="ngForm" class="contact_form" id="contact_form">
-            <div class="section_subtitle"> Datos Empleado </div>
-            <div><input type="text" [(ngModel)]="persona.cedula" name="cedula" class="contact_input" placeholder="Cedula" required="required"></div>
-            <div><input type="text" [(ngModel)]="persona.nombre" name="nombre" class="contact_input" placeholder="Nombre" required="required"></div>
-            <div><input type="text" [(ngModel)]="persona.apellido" name="apellido" class="contact_input" placeholder="Apellido" required="required"></div>
-            <div><input type="date" [(ngModel)]="persona.fecha_nacimiento" name="fecha" class="contact_input" placeholder="Fecha de nacimiento" required="required" max="2000-01-01" ></div>
-            <div><input type="tel"  [(ngModel)]="persona.telefono" name="telefono" class="contact_input" placeholder="Telefono (123-456-7890)" required="required" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"></div>
-            <div><input type="text" [(ngModel)]="persona.direccion" name="direccion" class="contact_input" placeholder="Direccion" required="required"></div>
-            <div class="section_subtitle"> Datos usurio </div>
-            <div><input type="tel"  [(ngModel)]="usuario.username" name="username" class="contact_input" placeholder="Nombre de usuario" required="required"></div>
-            <div><input type="text" [(ngModel)]="usuario.password" name="password" class="contact_input" placeholder="Contraseña" required="required"></div>
-            <button (click)="registrar(datosForm)" style="width: 100%" class="contact_button button">Registrar Empleado</button>
-            <button (click)="editar(datosForm)" style="width: 100%" class="contact_button button">Editar Empleado</button>
-          </form>
+              <div class="tab_panel">
+                <div class="tab_panel_content">
+                  <div class="tab_text">
+                    <!-- Aqui va la formaciones academicas -->
+                    <div class="col-lg-12">
+                      <div class="row">
+                      <div class="col-lg-5">
+                      <div class="contact_form_container">
+                          <form #formacionesForm="ngForm" class="contact_form">
+                            <div class="section_subtitle">Datos Formacion</div>
+                              <div>
+                                <label for="institucion">Institucion donde se Graduo:</label>
+                                <input type="text" name="institucion" id="institucion" class="contact_input" placeholder="Institucion" required="required">
+                              </div>
+                              <div>
+                                <label for="titulo">Titulo Obtenido:</label>
+                                <input type="text" name="titulo" id="titulo" class="contact_input" placeholder="Titulo Obtenido" required="required">
+                              </div>
+                              <div>
+                                <label for="certificacion">Certificacion:</label>
+                                <input type="file" name="certificacion" id="certificacion" class="contact_input" required="required" accept="application/pdf">
+                            </div>
+                            <button (click)="registrarFormacion(formacionesForm)" style="width: 100%" class="contact_button button">Registrar Formacion</button>
+                            <button (click)="editarFormacion(formacionesForm)" style="width: 100%" class="contact_button button">Editar Formacion</button>
+                          </form>
+                        </div>
+                        </div>
+                        <div class="col-lg-7">
+                        <div class="section_subtitle"> Formaciones del Empleado ({{personas.length}})</div><br>
+                        <table class="table">
+                            <thead>
+                              <tr>
+                                <th scope="col">Institucion Graduacion</th>
+                                <th scope="col">Titulo Obtenido</th>
+                                <th scope="col">Ver Certificacion</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let p of personas">
+                                <th scope="row">{{p.cedula}}</th>
+                                <td>{{p.nombre}}</td>
+                                <td><button (click)="verFormacion()" class="btn">Ver Certificacion</button></td>
+                              </tr>
+                            </tbody>
+                        </table>
+                        </div>
+                      </div>
+                  </div>
+                  <!-- Aqui termina la formaciones academicas -->
+                  </div>
+                </div>
+              </div>
+              <div class="tab_panel">
+                <div class="tab_panel_content">
+                  <div class="tab_text">
+                    <!-- Aqui va la experiencias laborales -->
+                    <div class="col-lg-12">
+                        <div class="row">
+                        <div class="col-lg-4">
+                        <div class="contact_form_container">
+                            <form #experienciaForm="ngForm" class="contact_form">
+                              <div class="section_subtitle">Datos Experiencia</div>
+                                <div>
+                                  <label for="l1">Empresa donde Laboro:</label>
+                                  <input type="text" name="empresa" id="l1" class="contact_input" placeholder="Ingrese el nombre de la empresa" required="required">
+                                </div>
+                                <div>
+                                  <label for="l2">Direccion  de la Empresa:</label>
+                                  <input type="text" name="empresa_direccion" id="l2" class="contact_input" placeholder="Ingrese la direccion de la empresa" required="required">
+                                </div>
+                                <div>
+                                    <label for="l3">Telefono  de la Empresa:</label>
+                                    <input type="phone" name="empresa_telefono" id="l3" class="contact_input" placeholder="Ingrese el telefono de la empresa" required="required">
+                                  </div>
+                                <div>
+                                  <label for="l4">Cargo dentro de la Empresa:</label>
+                                  <input type="text" name="cargo" id="l4" class="contact_input" placeholder="Ingrese el cargo dentro de la empresa" required="required">
+                                </div>
+                                <div>
+                                  <label for="l5">Fecha de inicio:</label>
+                                  <input type="date" name="fecha_inicio" id="l5" class="contact_input" placeholder="Ingrese la Fecha de inicio" required="required" max="2018-11-01">
+                                </div>
+                                <div>
+                                    <label for="l6">Fecha de fin:</label>
+                                    <input type="date" name="fecha_fin" id="l6" class="contact_input" placeholder="Ingrese la Fecha de fin" required="required" max="2018-11-01">
+                                  </div>
+                                <div>
+                                  <label for="certificacion">Certificacion:</label>
+                                  <input type="file" name="certificacion" id="certificacion" class="contact_input" required="required" accept="application/pdf">
+                              </div>
+                              <button (click)="registrarExperiencia(experienciaForm)" style="width: 100%" class="contact_button button">Registrar Experiencia</button>
+                              <button (click)="editarExperiencia(experienciaForm)" style="width: 100%" class="contact_button button">Editar Experiencia</button>
+                            </form>
+                          </div>
+                          </div>
+                          <div class="col-lg-8">
+                          <div class="section_subtitle"> Experiencias del Empleado ({{personas.length}})</div><br>
+                          <table class="table">
+                              <thead>
+                                <tr>
+                                  <th scope="col">Empresa</th>
+                                  <th scope="col">Telefono</th>
+                                  <th scope="col">Cargo</th>
+                                  <th scope="col">Ver Certificacion</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let p of personas">
+                                  <th scope="row">{{p.cedula}}</th>
+                                  <td>{{p.nombre}}</td>
+                                  <td>{{p.nombre}}</td>
+                                  <td><button (click)="verExperiencia()" class="btn">Ver Certificacion</button></td>
+                                </tr>
+                              </tbody>
+                          </table>
+                          </div>
+                        </div>
+                    </div>
+                    <!-- Aqui termina la experiencias laborales -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <!-- End Form -->
-      <div class="col-lg-8">
+                <!-- end contenido del acordion -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-12">
           <br>
           <div class="section_subtitle"> Lista de Empleados ({{personas.length}})</div><br>
           <table class="table">
@@ -50,6 +248,7 @@
                   <th scope="col">Nombre</th>
                   <th scope="col">Apellido</th>
                   <th scope="col">Telefono</th>
+                  <th scope="col">Nacimiento</th>
                   <th scope="col">Direccion</th>
                   <th scope="col">Accion</th>
                 </tr>
@@ -60,12 +259,12 @@
                   <td>{{p.nombre}}</td>
                   <td>{{p.apellido}}</td>
                   <td>{{p.telefono}}</td>
+                  <td>{{p.fecha_nacimiento}}</td>
                   <td>{{p.direccion}}</td>
                   <td><button class="btn" (click)="eliminar(p)">Eliminar</button><button style="margin-left: 10px" class="btn" (click)="ver(p)">ver</button></td>
                 </tr>
               </tbody>
             </table>
-      </div>
       </div>
       </div>
      </div>

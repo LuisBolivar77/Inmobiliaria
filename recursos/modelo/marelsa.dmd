@@ -1,0 +1,8 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<OSDM_Design class="oracle.dbtools.crest.model.design.Design" name="marelsa" id="FB383F62-2A2D-1788-90E7-1B621B2932C9" version="3.5">
+<createdBy>Laura Posada</createdBy>
+<createdTime>2018-08-30 14:35:22 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<capitalNames>false</capitalNames>
+<designId>FB383F62-2A2D-1788-90E7-1B621B2932C9</designId>
+</OSDM_Design>

@@ -1,0 +1,80 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="CD907C7F-6572-E088-243D-3F3F31FD70B8" name="ARCHIVO_INMUEBLE">
+<createdBy>krlox</createdBy>
+<createdTime>2018-09-18 21:50:54 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<ordsAlias>table_23</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="02B18D58-C026-3EB1-C7E5-013B9A341AD2">
+<createdBy>krlox</createdBy>
+<createdTime>2018-09-18 21:55:12 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="tipo" id="CFB514A8-D4F9-BC4D-68D8-4C74D2D82018">
+<createdBy>krlox</createdBy>
+<createdTime>2018-09-19 00:48:51 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="nombre" id="390672E7-DCB8-2A80-7ACB-0156B07D0AB1">
+<createdBy>krlox</createdBy>
+<createdTime>2018-09-18 21:55:12 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>300</dataTypeSize>
+<ownDataTypeParameters>300,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Inmueble" id="2CDA46CC-56DE-9DB0-2EA2-59ED3F5DCA09">
+<createdBy>krlox</createdBy>
+<createdTime>2018-09-18 21:55:45 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="3D693E72-EA7F-C568-DD08-E2A3949F5ABB" referredColumn="BF5E66B9-8891-0EDE-E291-BB7B214A7899"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="CDFBF87D-D2B8-3FC4-B001-425F30BEE4B9" name="FOTOS_INMUEBLE_PK">
+<createdBy>krlox</createdBy>
+<createdTime>2018-09-18 21:55:14 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="02B18D58-C026-3EB1-C7E5-013B9A341AD2"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="9046BA7B-96B6-DFE2-3C43-CBACDF0CFCC2" name="FOTOS_INMUEBLE_INMUEBLE_FK">
+<createdBy>krlox</createdBy>
+<createdTime>2018-09-18 21:55:45 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="2CDA46CC-56DE-9DB0-2EA2-59ED3F5DCA09"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

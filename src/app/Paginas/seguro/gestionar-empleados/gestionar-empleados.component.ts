@@ -16,13 +16,23 @@ export class GestionarEmpleadosComponent implements OnInit {
 
   // Listado de personas
   personas: Array<Persona> = [];
+
   // Rol: Empleado (3)
   rol: Rol = new Rol();
 
   // Usuario que vamos a registrar
   usuario: Usuario = new Usuario;
+
   // La persona asignada al usuario que vamos a registrar
   persona: Persona = new Persona();
+
+  // formaciones del empleado
+
+  // experiencias del empleado
+
+  // formacion del empleado
+
+  // experiencia del empleado
 
   // Variables para los mensajes en la pagina
   show: number;
@@ -45,22 +55,29 @@ export class GestionarEmpleadosComponent implements OnInit {
    * Registra un empleado con su usuario
    */
   registrar(form: NgForm) {
-    this.usuario.persona = this.persona;
-    this.personaServicio.registrar(this.usuario).subscribe(rta => {
-      if (rta.data === 'exito') {
-        this.msj = 'Se ha registrado correctamente';
-        this.show = 2;
-        window.alert(this.msj);
-        // limpiamos los campos
-        form.reset();
-        // Actualizamos la lista de empleados
-        this.listar();
-      } else {
-        this.msj = rta.data;
-        this.show = 1;
-        window.alert(rta.data);
-      }
-    });
+    console.log(this.usuario);
+    if (this.usuario.username != null && this.persona.apellido != null) {
+      this.usuario.persona = this.persona;
+      this.personaServicio.registrar(this.usuario).subscribe(rta => {
+        if (rta.data === 'exito') {
+          this.msj = 'Se ha registrado correctamente';
+          this.show = 2;
+          // limpiamos los campos
+          form.reset();
+          // Actualizamos la lista de empleados
+          this.listar();
+          window.alert(this.msj);
+        } else {
+          this.msj = rta.data;
+          this.show = 1;
+          window.alert(this.msj);
+        }
+      });
+    } else {
+      this.msj = 'Ingrese toda los datos';
+      this.show = 1;
+      window.alert(this.msj);
+    }
   }
 
   /**
@@ -143,4 +160,47 @@ export class GestionarEmpleadosComponent implements OnInit {
   eliminar(persona: Persona) {
     window.alert(persona.nombre);
   }
+
+  /**
+   * Registra la formacion del empleado
+   */
+  registrarFormacion(form: NgForm) {
+    window.alert('Formacion registrar');
+  }
+
+  /**
+   * Editar la formacion del empleado
+   */
+  editarFormacion(form: NgForm) {
+    window.alert('Formacion editar');
+  }
+
+  /**
+   * Muestra los datos de la certificacion en el formulario y abre el pdf
+   */
+  verFormacion() {
+    window.alert('ver');
+  }
+
+  /**
+   * Registra la experiencia del empleado
+   */
+  registrarExperiencia(form: NgForm) {
+    window.alert('Experiencia registrar');
+  }
+
+  /**
+   * Registra la experiencia del empleado
+   */
+  editarExperiencia(form: NgForm) {
+    window.alert('Experiencia editar');
+  }
+
+  /**
+   * Muestra los datos de la certificacion en el formulario y abre el pdf
+   */
+  verExperiencia() {
+    window.alert('ver');
+  }
+
 }
