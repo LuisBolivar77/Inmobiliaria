@@ -12,7 +12,7 @@
                   <form (ngSubmit)="fbuscar($event)" class="contact_form" id="contact_form">
                     <div class="row">
                       <div class="col-lg-8">
-                          <div><input [(ngModel)]="persona.cedula" name="cedula" type="text" class="contact_input" placeholder="Cedula" required></div>
+                          <div><input [(ngModel)]="empleado.usuario.persona.cedula" name="cedula" type="text" class="contact_input" placeholder="Cedula" required></div>
                       </div>
                       <div class="col-lg-4" style="padding-left: 0">
                           <button style="height: 48px;margin: 0;width: 100%" class="contact_button button">Buscar</button>
@@ -26,13 +26,13 @@
         <div class="elements_accordions">
           <div class="accordions">
             <div class="accordion_container">
+              <div class="aviso alert alert-danger" style="margin: 20px 0 20px 0;" *ngIf="show == 1"><div id="close" title="Cerrar">×</div>{{msj}}</div>
+              <div class="aviso alert alert-success" style="margin: 20px 0 20px 0;" *ngIf="show == 2"><div id="close" title="Cerrar">×</div>{{msj}}</div>  
               <div class="accordion d-flex flex-row align-items-center"><div>Clic para registrar, editar o ver informacion empleado </div></div>
               <div class="accordion_panel">
                 <!-- contenido del acordion -->
       <!-- Form -->
       <div class="col-lg-12">    
-          <div class="aviso alert alert-danger" style="margin: 20px 0 20px 0;" *ngIf="show == 1"><div id="close" title="Cerrar">×</div>{{msj}}</div>
-          <div class="aviso alert alert-success" style="margin: 20px 0 20px 0;" *ngIf="show == 2"><div id="close" title="Cerrar">×</div>{{msj}}</div>  
         <div class="tabs">
           <div class="tabs_container">
             <div class="tabs d-flex flex-row align-items-center justify-content-start flex-wrap">
@@ -47,52 +47,62 @@
                     <!-- Aqui va la Informacion basica -->
                     <div class="col-lg-10" style="margin: 0 auto">
                     <div class="contact_form_container">
-                        <form #datosForm="ngForm" class="contact_form" id="contact_form">
+                        <form #datosForm="ngForm" class="contact_form">
                           <div class="section_subtitle"> Datos Empleado </div>
                           <div class="row">
                             <div class="col-lg-6">
-                              <input type="text" [(ngModel)]="persona.nombre" name="nombre" class="contact_input" placeholder="Nombre" required="required">
+                              <label>Nombre:</label>
+                              <input type="text" [(ngModel)]="empleado.usuario.persona.nombre" name="nombre" class="contact_input" placeholder="Nombre" required="required">
                             </div>
                             <div class="col-lg-6">
-                                <input type="text" [(ngModel)]="persona.apellido" name="apellido" class="contact_input" placeholder="Apellido" required="required">
+                              <label>Apellido:</label>
+                              <input type="text" [(ngModel)]="empleado.usuario.persona.apellido" name="apellido" class="contact_input" placeholder="Apellido" required="required">
                             </div>
                           </div>
                           <div class="row">
                               <div class="col-lg-6">
-                                <input type="text" [(ngModel)]="persona.cedula" name="cedula" class="contact_input" placeholder="Cedula" required="required">
+                                <label>Cedula:</label>
+                                <input type="text" [(ngModel)]="empleado.usuario.persona.cedula" name="cedula" class="contact_input" placeholder="Cedula" required="required">
                               </div>
                               <div class="col-lg-6">
-                                  <input type="tel"  [(ngModel)]="persona.telefono" name="telefono" class="contact_input" placeholder="Telefono (123-456-7890)" required="required" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
-                              </div>
-                          </div>
-                          <div class="row">
-                              <div class="col-lg-6">
-                                  <input type="date" [(ngModel)]="persona.fecha_nacimiento" name="fecha" class="contact_input" placeholder="Fecha de nacimiento" required="required" max="2000-01-01" >
-                              </div>
-                              <div class="col-lg-6">
-                                  <input type="text" [(ngModel)]="persona.direccion" name="direccion" class="contact_input" placeholder="Direccion" required="required">
+                                <label>Telefono:</label>
+                                <input type="tel" [(ngModel)]="empleado.usuario.persona.telefono" name="telefono" class="contact_input" placeholder="Telefono (123-456-7890)" required="required" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
                               </div>
                           </div>
                           <div class="row">
                               <div class="col-lg-6">
-                                <input type="text" name="cargo" class="contact_input" placeholder="Cargo" required="required">
+                                <label>Fecha Nacimiento:</label>
+                                <input type="date" [(ngModel)]="empleado.usuario.persona.fecha_nacimiento" name="fecha" class="contact_input" placeholder="Fecha de nacimiento" required="required" max="2000-01-01" >
                               </div>
                               <div class="col-lg-6">
-                                <input type="number" name="salario" class="contact_input" placeholder="Salario" required="required">
+                                <label>Direccion:</label>
+                                <input type="text" [(ngModel)]="empleado.usuario.persona.direccion" name="direccion" class="contact_input" placeholder="Direccion" required="required">
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-lg-6">
+                                <label>Cargo:</label>
+                                <div><select [(ngModel)]="empleado.cargo.id" name="cargo"><option *ngFor="let c of cargos" value="{{c.id}}">{{c.nombre}}</option></select></div>
+                              </div>
+                              <div class="col-lg-6">
+                                <label>Salario:</label>
+                                <input type="number" [(ngModel)]="empleado.salario" name="salario" class="contact_input" placeholder="Salario" required="required" min="200000">
                               </div>
                           </div>
                           <div class="section_subtitle"> Datos usurio </div>
                           <div class="row">
                               <div class="col-lg-6">
-                                <input type="tel"  [(ngModel)]="usuario.username" name="username" class="contact_input" placeholder="Nombre de usuario" required="required">
+                                <label>Nombre de usuario:</label>
+                                <input type="text" [(ngModel)]="empleado.usuario.username" name="username" class="contact_input" placeholder="Nombre de usuario" required="required" autocomplete="off">
                               </div>
                               <div class="col-lg-6">
-                                <input type="text" [(ngModel)]="usuario.password" name="password" class="contact_input" placeholder="Contraseña" required="required">
+                                <label>Contraseña:</label>
+                                <input type="password" [(ngModel)]="empleado.usuario.password" name="password" class="contact_input" placeholder="Contraseña" required="required" autocomplete="off">
                               </div>
                           </div>
                           <div class="row">
                             <div class="col-lg-6">
-                              <button (click)="registrar(datosForm)" style="width: 100%" class="contact_button button">Registrar Empleado</button>
+                              <button type="submit" (click)="registrar(datosForm)" style="width: 100%" class="contact_button button">Registrar Empleado</button>
                             </div>
                             <div class="col-lg-6">
                                 <button (click)="editar(datosForm)" style="width: 100%" class="contact_button button">Editar Empleado</button>
@@ -116,15 +126,15 @@
                             <div class="section_subtitle">Datos Formacion</div>
                               <div>
                                 <label for="institucion">Institucion donde se Graduo:</label>
-                                <input type="text" name="institucion" id="institucion" class="contact_input" placeholder="Institucion" required="required">
+                                <input type="text" [(ngModel)]="formacion.institucion" name="institucion" id="institucion" class="contact_input" placeholder="Institucion" required="required">
                               </div>
                               <div>
                                 <label for="titulo">Titulo Obtenido:</label>
-                                <input type="text" name="titulo" id="titulo" class="contact_input" placeholder="Titulo Obtenido" required="required">
+                                <input type="text" [(ngModel)]="formacion.titulo" name="titulo" id="titulo" class="contact_input" placeholder="Titulo Obtenido" required="required">
                               </div>
                               <div>
                                 <label for="certificacion">Certificacion:</label>
-                                <input type="file" name="certificacion" id="certificacion" class="contact_input" required="required" accept="application/pdf">
+                                <input type="file" [(ngModel)]="formacion.file_certificacion" name="certificacion" class="contact_input" required="required" accept="application/pdf">
                             </div>
                             <button (click)="registrarFormacion(formacionesForm)" style="width: 100%" class="contact_button button">Registrar Formacion</button>
                             <button (click)="editarFormacion(formacionesForm)" style="width: 100%" class="contact_button button">Editar Formacion</button>
@@ -132,7 +142,7 @@
                         </div>
                         </div>
                         <div class="col-lg-7">
-                        <div class="section_subtitle"> Formaciones del Empleado ({{personas.length}})</div><br>
+                        <div class="section_subtitle">Formaciones del Empleado ({{formaciones.length}})</div><br>
                         <table class="table">
                             <thead>
                               <tr>
@@ -142,10 +152,10 @@
                               </tr>
                             </thead>
                             <tbody>
-                              <tr *ngFor="let p of personas">
-                                <th scope="row">{{p.cedula}}</th>
-                                <td>{{p.nombre}}</td>
-                                <td><button (click)="verFormacion()" class="btn">Ver Certificacion</button></td>
+                              <tr *ngFor="let f of formaciones">
+                                <th scope="row">{{f.institucion}}</th>
+                                <td>{{f.titulo}}</td>
+                                <td><button (click)="verFormacion(f)" class="btn">Ver Certificacion</button></td>
                               </tr>
                             </tbody>
                         </table>
@@ -168,31 +178,31 @@
                               <div class="section_subtitle">Datos Experiencia</div>
                                 <div>
                                   <label for="l1">Empresa donde Laboro:</label>
-                                  <input type="text" name="empresa" id="l1" class="contact_input" placeholder="Ingrese el nombre de la empresa" required="required">
+                                  <input type="text" [(ngModel)]="experiencia.empresa" name="empresa" id="l1" class="contact_input" placeholder="Ingrese el nombre de la empresa" required="required">
                                 </div>
                                 <div>
                                   <label for="l2">Direccion  de la Empresa:</label>
-                                  <input type="text" name="empresa_direccion" id="l2" class="contact_input" placeholder="Ingrese la direccion de la empresa" required="required">
+                                  <input type="text" [(ngModel)]="experiencia.empresa_direccion" name="empresa_direccion" id="l2" class="contact_input" placeholder="Ingrese la direccion de la empresa" required="required">
                                 </div>
                                 <div>
                                     <label for="l3">Telefono  de la Empresa:</label>
-                                    <input type="phone" name="empresa_telefono" id="l3" class="contact_input" placeholder="Ingrese el telefono de la empresa" required="required">
+                                    <input type="phone" [(ngModel)]="experiencia.empresa_telefono" name="empresa_telefono" id="l3" class="contact_input" placeholder="Ingrese el telefono de la empresa" required="required">
                                   </div>
                                 <div>
                                   <label for="l4">Cargo dentro de la Empresa:</label>
-                                  <input type="text" name="cargo" id="l4" class="contact_input" placeholder="Ingrese el cargo dentro de la empresa" required="required">
+                                  <input type="text" [(ngModel)]="experiencia.cargo" name="cargo" id="l4" class="contact_input" placeholder="Ingrese el cargo dentro de la empresa" required="required">
                                 </div>
                                 <div>
                                   <label for="l5">Fecha de inicio:</label>
-                                  <input type="date" name="fecha_inicio" id="l5" class="contact_input" placeholder="Ingrese la Fecha de inicio" required="required" max="2018-11-01">
+                                  <input type="date" [(ngModel)]="experiencia.fecha_inicio" name="fecha_inicio" id="l5" class="contact_input" placeholder="Ingrese la Fecha de inicio" required="required" max="2018-11-01">
                                 </div>
                                 <div>
                                     <label for="l6">Fecha de fin:</label>
-                                    <input type="date" name="fecha_fin" id="l6" class="contact_input" placeholder="Ingrese la Fecha de fin" required="required" max="2018-11-01">
+                                    <input type="date" [(ngModel)]="experiencia.fecha_fin" name="fecha_fin" id="l6" class="contact_input" placeholder="Ingrese la Fecha de fin" required="required" max="2018-11-01">
                                   </div>
                                 <div>
                                   <label for="certificacion">Certificacion:</label>
-                                  <input type="file" name="certificacion" id="certificacion" class="contact_input" required="required" accept="application/pdf">
+                                  <input type="file" [(ngModel)]="experiencia.file_certificacion" name="certificacion" class="contact_input" required="required" accept="application/pdf">
                               </div>
                               <button (click)="registrarExperiencia(experienciaForm)" style="width: 100%" class="contact_button button">Registrar Experiencia</button>
                               <button (click)="editarExperiencia(experienciaForm)" style="width: 100%" class="contact_button button">Editar Experiencia</button>
@@ -200,7 +210,7 @@
                           </div>
                           </div>
                           <div class="col-lg-8">
-                          <div class="section_subtitle"> Experiencias del Empleado ({{personas.length}})</div><br>
+                          <div class="section_subtitle"> Experiencias del Empleado ({{experiencias.length}})</div><br>
                           <table class="table">
                               <thead>
                                 <tr>
@@ -211,11 +221,11 @@
                                 </tr>
                               </thead>
                               <tbody>
-                                <tr *ngFor="let p of personas">
-                                  <th scope="row">{{p.cedula}}</th>
-                                  <td>{{p.nombre}}</td>
-                                  <td>{{p.nombre}}</td>
-                                  <td><button (click)="verExperiencia()" class="btn">Ver Certificacion</button></td>
+                                <tr *ngFor="let e of experiencias">
+                                  <th scope="row">{{e.empresa}}</th>
+                                  <td>{{e.empresa_telefono}}</td>
+                                  <td>{{e.cargo}}</td>
+                                  <td><button (click)="verExperiencia(e)" class="btn">Ver Certificacion</button></td>
                                 </tr>
                               </tbody>
                           </table>
@@ -240,7 +250,7 @@
 
       <div class="col-lg-12">
           <br>
-          <div class="section_subtitle"> Lista de Empleados ({{personas.length}})</div><br>
+          <div class="section_subtitle"> Lista de Empleados ({{empleados.length}})</div><br>
           <table class="table">
               <thead>
                 <tr>
@@ -248,20 +258,20 @@
                   <th scope="col">Nombre</th>
                   <th scope="col">Apellido</th>
                   <th scope="col">Telefono</th>
-                  <th scope="col">Nacimiento</th>
-                  <th scope="col">Direccion</th>
+                  <th scope="col">Cargo</th>
+                  <th scope="col">Salario</th>
                   <th scope="col">Accion</th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let p of personas">
-                  <th scope="row">{{p.cedula}}</th>
-                  <td>{{p.nombre}}</td>
-                  <td>{{p.apellido}}</td>
-                  <td>{{p.telefono}}</td>
-                  <td>{{p.fecha_nacimiento}}</td>
-                  <td>{{p.direccion}}</td>
-                  <td><button class="btn" (click)="eliminar(p)">Eliminar</button><button style="margin-left: 10px" class="btn" (click)="ver(p)">ver</button></td>
+                <tr *ngFor="let e of empleados">
+                  <th scope="row">{{e.usuario.persona.cedula}}</th>
+                  <td>{{e.usuario.persona.nombre}}</td>
+                  <td>{{e.usuario.persona.apellido}}</td>
+                  <td>{{e.usuario.persona.telefono}}</td>
+                  <td>{{e.cargo.nombre}}</td>
+                  <td>{{e.salario}}</td>
+                  <td><button class="btn" (click)="eliminar(e)">Eliminar</button><button style="margin-left: 10px" class="btn" (click)="ver(e)">ver</button></td>
                 </tr>
               </tbody>
             </table>

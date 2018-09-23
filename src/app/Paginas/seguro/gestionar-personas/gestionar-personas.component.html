@@ -25,7 +25,7 @@
         <div class="contact_form_container">
           <form #datosForm="ngForm" class="contact_form" id="contact_form">
             <div class="section_subtitle"> Rol de la persona </div>
-            <div><select [(ngModel)]="persona.rol" name="rol"><option *ngFor="let rol of roles" value="{{rol.id}}">{{rol.nombre}}</option></select></div>
+            <div><select [(ngModel)]="persona.rol.id" name="rol"><option *ngFor="let rol of roles" value="{{rol.id}}">{{rol.nombre}}</option></select></div>
             <div class="section_subtitle"> Datos Persona </div>
             <div><input type="text" [(ngModel)]="persona.cedula" name="cedula" class="contact_input" placeholder="Cedula" required="required"></div>
             <div><input type="text" [(ngModel)]="persona.nombre" name="nombre" class="contact_input" placeholder="Nombre" required="required"></div>

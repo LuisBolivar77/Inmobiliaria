@@ -16,6 +16,9 @@ var usuarioServicio = require('./servicios/UsuarioServicio')
 // servicios de rol y acessos
 var rolServicio = require('./servicios/RolServicio')
 
+// servicios genericos
+var genericoServicio = require('./servicios/genericoServicio')
+
 // -------------END --------------- //
 
 var app = express();
@@ -91,6 +94,11 @@ app.get('/rol/rol-by-id/:id', rolServicio.rolById);
 app.get('/rol/rol-by-persona/:id', rolServicio.rolByPersona);
 app.get('/acceso/listar', rolServicio.listarAccesos);
 app.get('/acceso/por-rol/:rol', rolServicio.accesosPorRol);
+//------------------ Servicios Genericos -------------------- //
+app.post('/generico/listar', genericoServicio.listar);
+app.post('/generico/guardar', genericoServicio.guardar);
+app.post('/generico/editar', genericoServicio.editar);
+app.post('/generico/buscar', genericoServicio.buscar);
 // ------------ END -----------------------------------//
 
 app.use(app.router);

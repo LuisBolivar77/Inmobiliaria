@@ -319,6 +319,17 @@
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
+<Column name="numero_matricula" id="4496F807-FA93-0B7F-2619-B3F690FB229B">
+<createdBy>krlox</createdBy>
+<createdTime>2018-09-22 14:08:06 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
 <Column name="aprobacion_fecha" id="1391D382-89F1-A24E-88CE-84BAF9B8C804">
 <createdBy>krlox</createdBy>
 <createdTime>2018-09-20 02:26:35 UTC</createdTime>
