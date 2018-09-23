@@ -3,7 +3,7 @@ import { Usuario } from '../../../Modelo/Usuario';
 import { Persona } from '../../../Modelo/Persona';
 import { Rol } from '../../../Modelo/Rol';
 import { RolService } from '../../../Servicios/rolServ.service';
-import { PersonaService } from '../../../Servicios/personaServ.servide';
+import { PersonaService } from '../../../Servicios/personaServ.service';
 import { UsuarioService } from '../../../Servicios/usuarioServ.service';
 import { NgForm } from '@angular/forms';
 
@@ -47,15 +47,15 @@ export class GestionarClientesComponent implements OnInit {
   registrar(form: NgForm) {
     this.usuario.persona = this.persona;
     this.personaServicio.registrar(this.usuario).subscribe(rta => {
-      if(rta.data == 'exito'){
-        this.msj = "Se ha registrado correctamente";
+      if (rta.data === 'exito') {
+        this.msj = 'Se ha registrado correctamente';
         this.show = 2;
         window.alert(this.msj);
         // limpiamos los campos
         form.reset();
         // Actualizamos la lista de clientes
         this.listar();
-      }else{
+      } else {
         this.msj = rta.data;
         this.show = 1;
         window.alert(rta.data);
@@ -67,26 +67,26 @@ export class GestionarClientesComponent implements OnInit {
    * Edita un cliente con su usuario
    */
   editar(form: NgForm) {
-    if(this.usuario.persona != null && this.persona != null){
+    if (this.usuario.persona != null && this.persona != null) {
     this.usuario.persona = this.persona;
     this.personaServicio.editar(this.usuario).subscribe(rta => {
-      if(rta.data == 'exito'){
-        this.msj = "Se ha editado correctamente";
+      if (rta.data === 'exito') {
+        this.msj = 'Se ha editado correctamente';
         this.show = 2;
         window.alert(this.msj);
         // limpiamos los campos
         form.reset();
         // Actualizamos la lista de clientes
         this.listar();
-      }else{
+      } else {
         this.msj = rta.data;
         this.show = 1;
         window.alert(rta.data);
       }
     });
-    }else{
-      this.msj = "Primero busque el cliente que va a editar";
-      this.show = 1
+    } else {
+      this.msj = 'Primero busque el cliente que va a editar';
+      this.show = 1;
       window.alert(this.msj);
     }
   }

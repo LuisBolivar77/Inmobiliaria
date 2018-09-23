@@ -3,7 +3,7 @@ import { Usuario } from '../../../Modelo/Usuario';
 import { Persona } from '../../../Modelo/Persona';
 import { Rol } from '../../../Modelo/Rol';
 import { RolService } from '../../../Servicios/rolServ.service';
-import { PersonaService } from '../../../Servicios/personaServ.servide';
+import { PersonaService } from '../../../Servicios/personaServ.service';
 import { UsuarioService } from '../../../Servicios/usuarioServ.service';
 import { NgForm } from '@angular/forms';
 
@@ -28,7 +28,7 @@ export class EditarCuentaComponent implements OnInit {
       if (this.usuarioServicio.getUsuario() == null) {
         // como no inicio sesion, lo redireccionamos al login
         this.usuarioServicio.redireccionar('/login');
-      }else{
+      } else {
         // Asignamos el usuario
         this.usuario = this.usuarioServicio.getUsuario();
       }
@@ -41,14 +41,14 @@ export class EditarCuentaComponent implements OnInit {
   editar(form: NgForm) {
     console.log(this.usuario);
     this.personaServicio.editar(this.usuario).subscribe(rta => {
-      if(rta.data == 'exito'){
+      if (rta.data === 'exito') {
         this.usuarioServicio.setUsuario(this.usuario);
-        this.msj = "Se ha actualizado tu cuenta";
+        this.msj = 'Se ha actualizado tu cuenta';
         this.show = 2;
         window.alert(this.msj);
         // Redirigimos el usuario al inicio
         window.location.reload();
-      }else{
+      } else {
         this.msj = rta.data;
         this.show = 1;
         window.alert(rta.data);

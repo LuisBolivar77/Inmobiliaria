@@ -3,7 +3,7 @@ import { Usuario } from '../../../Modelo/Usuario';
 import { Persona } from '../../../Modelo/Persona';
 import { Rol } from '../../../Modelo/Rol';
 import { RolService } from '../../../Servicios/rolServ.service';
-import { PersonaService } from '../../../Servicios/personaServ.servide';
+import { PersonaService } from '../../../Servicios/personaServ.service';
 import { UsuarioService } from '../../../Servicios/usuarioServ.service';
 import { NgForm } from '@angular/forms';
 import { Cargo } from '../../../Modelo/Cargo';
@@ -120,8 +120,8 @@ export class GestionarEmpleadosComponent implements OnInit {
           window.alert(this.msj);
         }
       });
-    }else{
-      this.msj = "Ingrese toda los datos";
+    } else {
+      this.msj = 'Ingrese toda los datos';
       this.show = 1;
       window.alert(this.msj);
     }
@@ -133,23 +133,23 @@ export class GestionarEmpleadosComponent implements OnInit {
   editar(form: NgForm) {
     if(this.empleado.usuario.persona != null && this.empleado.usuario.username != null){
     this.personaServicio.editar(this.usuario).subscribe(rta => {
-      if(rta.data == 'exito'){
-        this.msj = "Se ha editado correctamente";
+      if (rta.data === 'exito') {
+        this.msj = 'Se ha editado correctamente';
         this.show = 2;
         window.alert(this.msj);
         // limpiamos los campos
         form.reset();
         // Actualizamos la lista de empleados
         this.listar();
-      }else{
+      } else {
         this.msj = rta.data;
         this.show = 1;
         window.alert(rta.data);
       }
     });
-    }else{
-      this.msj = "Primero busque el empleado que va a editar";
-      this.show = 1
+    } else {
+      this.msj = 'Primero busque el empleado que va a editar';
+      this.show = 1;
       window.alert(this.msj);
     }
   }
@@ -262,14 +262,14 @@ export class GestionarEmpleadosComponent implements OnInit {
    * Registra la formacion del empleado
    */
   registrarFormacion(form: NgForm) {
-    window.alert("Formacion registrar");
+    window.alert('Formacion registrar');
   }
 
   /**
    * Editar la formacion del empleado
    */
   editarFormacion(form: NgForm) {
-    window.alert("Formacion editar");
+    window.alert('Formacion editar');
   }
 
   /**
@@ -283,14 +283,14 @@ export class GestionarEmpleadosComponent implements OnInit {
    * Registra la experiencia del empleado
    */
   registrarExperiencia(form: NgForm) {
-    window.alert("Experiencia registrar");
+    window.alert('Experiencia registrar');
   }
 
   /**
    * Registra la experiencia del empleado
    */
   editarExperiencia(form: NgForm) {
-    window.alert("Experiencia editar");
+    window.alert('Experiencia editar');
   }
 
   /**

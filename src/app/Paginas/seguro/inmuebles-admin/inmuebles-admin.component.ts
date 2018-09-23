@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InmueblesAdminComponent implements OnInit {
 
+  file: File[];
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onFileSelected(event) {
+    this.file = event.target.files;
   }
 
 }
