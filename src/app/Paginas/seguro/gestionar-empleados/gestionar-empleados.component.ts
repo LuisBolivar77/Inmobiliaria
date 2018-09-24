@@ -11,6 +11,7 @@ import { GenericoService } from '../../../Servicios/genericoServ.service';
 import { Formacion } from '../../../Modelo/formacion';
 import { Experiencia } from '../../../Modelo/Experiencia';
 import { Empleado } from '../../../Modelo/Empleado';
+import { AuxiliarObjeto } from '../../../Modelo/AuxiliarObjeto';
 
 @Component({
   selector: 'app-gestionar-empleados',
@@ -47,14 +48,13 @@ export class GestionarEmpleadosComponent implements OnInit {
   constructor(private genericoServicio: GenericoService, private rolServicio: RolService, private personaServicio: PersonaService, private usuarioServicio: UsuarioService) { }
 
   ngOnInit() {
+    // Validamos si el usuario tiene acceso a la pagina
+    this.usuarioServicio.esAccesible('administracion/gestionar-empleados');
     // Construimos el objeto Empleado, inicialmente vacio
     this.empleado.cargo = this.cargo;
     this.empleado.usuario = this.usuario;
     this.empleado.usuario.persona = this.persona;
-    this.rol.id = 3;
     this.empleado.usuario.persona.rol = this.rol;
-    // Validamos si el usuario tiene acceso a la pagina
-    this.usuarioServicio.esAccesible('administracion/gestionar-empleados');
     // Actualizamos la tabla de empleados
     this.listar();
     // Cargamos los cargos
@@ -85,8 +85,6 @@ export class GestionarEmpleadosComponent implements OnInit {
                         if(rta3.data == 'exito'){
                           this.msj = "Se ha registrado correctamente";
                           this.show = 2;
-                          // limpiamos los campos
-                          form.reset();
                           // Actualizamos la lista de empleados
                           this.listar();
                           window.alert(this.msj);
@@ -132,15 +130,21 @@ export class GestionarEmpleadosComponent implements OnInit {
    */
   editar(form: NgForm) {
     if(this.empleado.usuario.persona != null && this.empleado.usuario.username != null){
-    this.personaServicio.editar(this.usuario).subscribe(rta => {
+    // Editamos el usuario y la persona
+    this.personaServicio.editar(this.empleado.usuario).subscribe(rta => {
       if (rta.data === 'exito') {
-        this.msj = 'Se ha editado correctamente';
-        this.show = 2;
-        window.alert(this.msj);
-        // limpiamos los campos
-        form.reset();
-        // Actualizamos la lista de empleados
-        this.listar();
+        // Editamos el empleado
+        this.genericoServicio.editar("empleados", this.empleado, "usuario").subscribe(rta2 => {
+          if(rta.data === 'exito'){
+            this.msj = 'Se ha editado correctamente';
+            this.show = 2;
+            window.alert(this.msj);
+            // limpiamos los campos
+            form.reset();
+            // Actualizamos la lista de empleados
+            this.listar();
+          }
+        });
       } else {
         this.msj = rta.data;
         this.show = 1;
@@ -163,10 +167,14 @@ export class GestionarEmpleadosComponent implements OnInit {
       if (rta.data == null) {
         this.show = 1;
         this.msj = 'No existe un empleado con cedula ' + this.empleado.usuario.persona.cedula;
+        this.limpiar();
       } else {
         this.show = 3;
         // Guardamos el resultado en persona
         this.persona = rta.data;
+        // Asignamos el rol
+        this.rol.id = rta.data.rol;
+        this.persona.rol = this.rol;
         // Buscamos el empleado
         this.genericoServicio.buscar("empleados", {"usuario":this.persona.id}).subscribe(rta2 => {
           this.empleado = rta2.data;
@@ -177,27 +185,34 @@ export class GestionarEmpleadosComponent implements OnInit {
             // Obtenemos el usuario
             this.genericoServicio.buscar("usuarios", {"persona":this.persona.id}).subscribe(rta4 => {
               this.usuario = rta4.data;
-              // Obtenemos las ormaciones del empleado
-              this.genericoServicio.buscar("formaciones", {"empleado":this.empleado.usuario}).subscribe(rta5 => {
-                this.formaciones = rta5.data;
-                // Obtenemos las experiencias del empleado
-                this.genericoServicio.buscar("experiencias", {"empleado":this.empleado.usuario}).subscribe(rta6 =>{
-                  this.experiencias = rta6.data;
-                  // Setteamos los datos al empleado
-                  this.empleado.usuario = this.usuario;
-                  this.empleado.usuario.persona = this.persona;
-                  this.show = 2;
-                  this.msj = "Despliegue para ver la informacion del empleado "+this.persona.nombre+" "+this.persona.apellido+".";
-                });
-              });
+              // Setteamos los datos al empleado
+              this.empleado.usuario = this.usuario;
+              this.empleado.usuario.persona = this.persona;
+              this.show = 2;
+              this.msj = "Despliegue para ver la informacion del empleado "+this.persona.nombre+" "+this.persona.apellido+".";
+              this.listarFormaciones();
+              this.listarExperiencias();
             });
           });
         });
-
       }
     });
   }
 
+  /**
+   * Resetea los objetos
+   */
+  limpiar(){
+    this.usuario = new Usuario();
+    this.persona = new Persona();
+    this.empleado = new Empleado();
+    this.empleado.cargo = this.cargo;
+    this.empleado.usuario = this.usuario;
+    this.empleado.usuario.persona = this.persona;
+    this.empleado.usuario.persona.rol = this.rol;
+    this.experiencias = [];
+    this.formaciones = [];
+  }
   /**
    * Ver la inormacion de un empleado de la tabla
    */
@@ -222,6 +237,7 @@ export class GestionarEmpleadosComponent implements OnInit {
   listar() {
     // Obtenemos la lista de empleado
     this.genericoServicio.listar("empleados", null).subscribe(rta => {
+    if(rta.data != null){
       this.empleados = rta.data;
       // obtenemos el resto de informacion del empleado
       for (let e of this.empleados) {
@@ -238,6 +254,7 @@ export class GestionarEmpleadosComponent implements OnInit {
           });
         });
       }
+    }
     });
   }
 
@@ -262,42 +279,219 @@ export class GestionarEmpleadosComponent implements OnInit {
    * Registra la formacion del empleado
    */
   registrarFormacion(form: NgForm) {
-    window.alert('Formacion registrar');
+    // Limpiamos el id, en caso de que hayan buscado una formacion
+    this.formacion.id = null;
+    if(this.empleado.usuario.persona.id != null){
+      // Asignamos el empleado a la formacion
+      this.formacion.empleado = this.empleado;
+      if(this.formacion.institucion != null && this.formacion.titulo != null){
+        // Usamos AuxiliarObjeto para no mandar los objetos dentro, solo las foraneas
+        var auxiliar: AuxiliarObjeto = new AuxiliarObjeto();
+        auxiliar.objeto = this.formacion;
+        auxiliar.replaceValue("empleado", this.empleado.usuario.persona.id);
+        // Guardamos la formacion del empleado
+        this.genericoServicio.registrar("formaciones", auxiliar.objeto).subscribe(rta => {
+          if(rta.data == 'exito'){
+            this.msj = "Se ha registrado la formacion academica del empleado "+this.empleado.usuario.username;
+            this.show = 2;
+            this.listarFormaciones();
+            form.reset();
+          }else{
+            this.msj = rta.data;
+            this.show = 1;
+          }
+          window.alert(this.msj);
+        });
+      } else {
+        this.msj = 'Ingrese los datos para registrar la Formacion Academica';
+        this.show = 1;
+        window.alert(this.msj);
+      }
+    } else {
+      this.msj = 'Primero busque el empleado al que le va a registrar la Formacion Academica';
+      this.show = 1;
+      window.alert(this.msj);
+    }
+  }
+
+  /**
+   * lista las Formaciones academicas del empleado buscado o registrado
+   */
+  listarFormaciones(){
+    this.genericoServicio.listar("formaciones", {"empleado":this.empleado.usuario.persona.id}).subscribe(rta => {
+      if(rta.data != null){
+        this.formaciones = rta.data;
+      }
+    });
+  }
+
+  /**
+   * Lista de Experiencias del empleado buscado o registrado
+   */
+  listarExperiencias(){
+    this.genericoServicio.listar("experiencias", {"empleado":this.empleado.usuario.persona.id}).subscribe(rta =>{
+      if(rta.data != null){
+        this.experiencias = rta.data
+        console.log(rta.data);
+      }
+    });
   }
 
   /**
    * Editar la formacion del empleado
    */
   editarFormacion(form: NgForm) {
-    window.alert('Formacion editar');
+    if(this.formacion.id != null){
+      if(this.formacion.institucion != null && this.formacion.titulo != null){
+        // Usamos AuxiliarObjeto para no mandar los objetos dentro, solo las foraneas
+        var auxiliar: AuxiliarObjeto = new AuxiliarObjeto();
+        auxiliar.objeto = this.formacion;
+        auxiliar.replaceValue("empleado", this.empleado.usuario.persona.id);
+        // Guardamos la formacion del empleado
+        this.genericoServicio.editar("formaciones", auxiliar.objeto, "id").subscribe(rta => {
+          if(rta.data == 'exito'){
+            this.msj = "Se ha editado la formacion academica";
+            this.show = 2;
+            this.listarFormaciones();
+            form.reset();
+          }else{
+            this.msj = rta.data;
+            this.show = 1;
+          }
+          window.alert(this.msj);
+        });
+      } else {
+        this.msj = 'Ingrese los datos para editar la Formacion Academica';
+        this.show = 1;
+        window.alert(this.msj);
+      }
+    } else {
+      this.msj = 'Primero seleccione la formacion academica que va a editar';
+      this.show = 1;
+      window.alert(this.msj);
+    }
   }
 
   /**
    * Muestra los datos de la certificacion en el formulario y abre el pdf
    */
   verFormacion(f:Formacion){
-    window.alert(f);
+    this.formacion = f;
+  }
+
+  /**
+   * Elimina una Formacion
+   */
+  eliminarFormacion(f:Formacion){
+    this.genericoServicio.eliminar("formaciones", {"id":f.id}).subscribe(rta => {
+      if(rta.data == 'exito'){
+        this.msj = 'La formacion academica se ha eliminado correctamente';
+        this.show = 2;
+        this.listarFormaciones();
+      }else{
+        this.msj = 'No se ha podido eliminar la formacion academica: '+rta.data;
+        this.show = 1;
+      }
+      window.alert(this.msj);
+    });
   }
 
   /**
    * Registra la experiencia del empleado
    */
   registrarExperiencia(form: NgForm) {
-    window.alert('Experiencia registrar');
+    // Limpiamos el id, en caso de que hayan buscado una experiencia
+    this.experiencia.id = null;
+    if(this.empleado.usuario.persona.id != null){
+      // Asignamos el empleado a la experiencia
+      this.experiencia.empleado = this.empleado;
+      if(this.experiencia.empresa != null && this.experiencia.cargo != null){
+        // Usamos AuxiliarObjeto para no mandar los objetos dentro, solo las foraneas
+        var auxiliar: AuxiliarObjeto = new AuxiliarObjeto();
+        auxiliar.objeto = this.experiencia;
+        auxiliar.replaceValue("empleado", this.empleado.usuario.persona.id);
+        // Guardamos la experiencia del empleado
+        this.genericoServicio.registrar("experiencias", auxiliar.objeto).subscribe(rta => {
+          if(rta.data == 'exito'){
+            this.msj = "Se ha registrado la experiencia laboral del empleado "+this.empleado.usuario.username;
+            this.show = 2;
+            this.listarExperiencias();
+            form.reset();
+          }else{
+            this.msj = rta.data;
+            this.show = 1;
+          }
+          window.alert(this.msj);
+        });
+      } else {
+        this.msj = 'Ingrese los datos para registrar la experiencia laboral';
+        this.show = 1;
+        window.alert(this.msj);
+      }
+    } else {
+      this.msj = 'Primero busque el empleado al que le va a registrar la experiencia laboral';
+      this.show = 1;
+      window.alert(this.msj);
+    }
   }
 
   /**
    * Registra la experiencia del empleado
    */
   editarExperiencia(form: NgForm) {
-    window.alert('Experiencia editar');
+    if(this.experiencia.id != null){
+      if(this.experiencia.empresa != null && this.experiencia.cargo != null){
+        // Usamos AuxiliarObjeto para no mandar los objetos dentro, solo las foraneas
+        var auxiliar: AuxiliarObjeto = new AuxiliarObjeto();
+        auxiliar.objeto = this.experiencia;
+        auxiliar.replaceValue("empleado", this.empleado.usuario.persona.id);
+        // editamos la experiencia del empleado
+        this.genericoServicio.editar("experiencias", auxiliar.objeto, "id").subscribe(rta => {
+          if(rta.data == 'exito'){
+            this.msj = "Se ha editado la experiencia laboral del empleado";
+            this.show = 2;
+            this.listarExperiencias();
+            form.reset();
+          }else{
+            this.msj = rta.data;
+            this.show = 1;
+          }
+          window.alert(this.msj);
+        });
+      } else {
+        this.msj = 'Ingrese los datos para editar la Experiencia laboral';
+        this.show = 1;
+        window.alert(this.msj);
+      }
+    } else {
+      this.msj = 'Primero seleccione la Experiencia laboral que va a editar';
+      this.show = 1;
+      window.alert(this.msj);
+    }
   }
 
   /**
    * Muestra los datos de la certificacion en el formulario y abre el pdf
    */
   verExperiencia(e:Experiencia){
-    window.alert(e);
+    this.experiencia = e;
+  }
+
+  /**
+   * Elimina una Experiencia
+   */
+  eliminarExperiencia(e:Experiencia){
+    this.genericoServicio.eliminar("experiencias", {"id":e.id}).subscribe(rta => {
+      if(rta.data == 'exito'){
+        this.msj = 'La experiencia laboral se ha eliminado correctamente';
+        this.show = 2;
+        this.listarExperiencias();
+      }else{
+        this.msj = 'No se ha podido eliminar la experiencia laboral: '+rta.data;
+        this.show = 1;
+      }
+      window.alert(this.msj);
+    });
   }
 
 }

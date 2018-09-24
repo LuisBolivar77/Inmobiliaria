@@ -84,9 +84,9 @@ exports.personaById = function(req, res){
 exports.personaByCedula = function(req, res){
     var cedula = req.params.cedula;
     req.getConnection(function(err,connection){
-        var query = connection.query('SELECT * FROM personas WHERE cedula = ?',[cedula],function(err,rows){
+        var query = connection.query('SELECT * FROM personas WHERE cedula = ?',cedula,function(err,rows){
             if(err)
-                console.log("Error Selecting : %s ",err );
+                console.log("Error Selecting : %s ",err);
                 res.send({data:rows[0]});
          });
     });

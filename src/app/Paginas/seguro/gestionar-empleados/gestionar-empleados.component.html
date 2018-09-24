@@ -105,7 +105,7 @@
                               <button type="submit" (click)="registrar(datosForm)" style="width: 100%" class="contact_button button">Registrar Empleado</button>
                             </div>
                             <div class="col-lg-6">
-                                <button (click)="editar(datosForm)" style="width: 100%" class="contact_button button">Editar Empleado</button>
+                                <button *ngIf="empleado.cargo.id != null" (click)="editar(datosForm)" style="width: 100%" class="contact_button button">Editar Empleado</button>
                             </div>
                           </div>
                         </form>
@@ -120,7 +120,7 @@
                     <!-- Aqui va la formaciones academicas -->
                     <div class="col-lg-12">
                       <div class="row">
-                      <div class="col-lg-5">
+                      <div class="col-lg-4">
                       <div class="contact_form_container">
                           <form #formacionesForm="ngForm" class="contact_form">
                             <div class="section_subtitle">Datos Formacion</div>
@@ -137,25 +137,25 @@
                                 <input type="file" [(ngModel)]="formacion.file_certificacion" name="certificacion" class="contact_input" required="required" accept="application/pdf">
                             </div>
                             <button (click)="registrarFormacion(formacionesForm)" style="width: 100%" class="contact_button button">Registrar Formacion</button>
-                            <button (click)="editarFormacion(formacionesForm)" style="width: 100%" class="contact_button button">Editar Formacion</button>
+                            <button *ngIf="formacion.id" (click)="editarFormacion(formacionesForm)" style="width: 100%" class="contact_button button">Editar Formacion</button>
                           </form>
                         </div>
                         </div>
-                        <div class="col-lg-7">
+                        <div class="col-lg-8">
                         <div class="section_subtitle">Formaciones del Empleado ({{formaciones.length}})</div><br>
                         <table class="table">
                             <thead>
                               <tr>
                                 <th scope="col">Institucion Graduacion</th>
                                 <th scope="col">Titulo Obtenido</th>
-                                <th scope="col">Ver Certificacion</th>
+                                <th scope="col">Acciones</th>
                               </tr>
                             </thead>
                             <tbody>
                               <tr *ngFor="let f of formaciones">
-                                <th scope="row">{{f.institucion}}</th>
+                                <td>{{f.institucion}}</td>
                                 <td>{{f.titulo}}</td>
-                                <td><button (click)="verFormacion(f)" class="btn">Ver Certificacion</button></td>
+                                <td><button (click)="verFormacion(f)" class="btn">Ver</button><button (click)="eliminarFormacion(f)" class="btn" style="margin-left: 10px">Eliminar</button></td>
                               </tr>
                             </tbody>
                         </table>
@@ -205,7 +205,7 @@
                                   <input type="file" [(ngModel)]="experiencia.file_certificacion" name="certificacion" class="contact_input" required="required" accept="application/pdf">
                               </div>
                               <button (click)="registrarExperiencia(experienciaForm)" style="width: 100%" class="contact_button button">Registrar Experiencia</button>
-                              <button (click)="editarExperiencia(experienciaForm)" style="width: 100%" class="contact_button button">Editar Experiencia</button>
+                              <button *ngIf="experiencia.id" (click)="editarExperiencia(experienciaForm)" style="width: 100%" class="contact_button button">Editar Experiencia</button>
                             </form>
                           </div>
                           </div>
@@ -217,15 +217,15 @@
                                   <th scope="col">Empresa</th>
                                   <th scope="col">Telefono</th>
                                   <th scope="col">Cargo</th>
-                                  <th scope="col">Ver Certificacion</th>
+                                  <th scope="col">Acciones</th>
                                 </tr>
                               </thead>
                               <tbody>
                                 <tr *ngFor="let e of experiencias">
-                                  <th scope="row">{{e.empresa}}</th>
+                                  <th>{{e.empresa}}</th>
                                   <td>{{e.empresa_telefono}}</td>
                                   <td>{{e.cargo}}</td>
-                                  <td><button (click)="verExperiencia(e)" class="btn">Ver Certificacion</button></td>
+                                  <td><button (click)="verExperiencia(e)" class="btn">Ver </button><button (click)="eliminarExperiencia(e)" class="btn" style="margin-left: 10px">Eliminar</button></td>
                                 </tr>
                               </tbody>
                           </table>
@@ -271,7 +271,7 @@
                   <td>{{e.usuario.persona.telefono}}</td>
                   <td>{{e.cargo.nombre}}</td>
                   <td>{{e.salario}}</td>
-                  <td><button class="btn" (click)="eliminar(e)">Eliminar</button><button style="margin-left: 10px" class="btn" (click)="ver(e)">ver</button></td>
+                  <td><button class="btn" (click)="ver(e)">ver</button><button class="btn" (click)="eliminar(e)" style="margin-left: 10px">Eliminar</button></td>
                 </tr>
               </tbody>
             </table>

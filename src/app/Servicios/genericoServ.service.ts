@@ -49,8 +49,8 @@ export class GenericoService {
      * @param tabla la tabla de donde se traera los registros 
      * @param objeto el objeto a editar
      */
-    editar (table: string, object: object) {
-        var data = {"tabla" : table, "objeto" : object}
+    editar (table: string, object: object, pk: string) {
+        var data = {"tabla" : table, "objeto" : object, "pk" : pk}
         return this.http.post<any>(this.domain + 'generico/editar', data)
         .pipe(
             map(res => {
@@ -67,6 +67,21 @@ export class GenericoService {
     buscar (table: string, object: object) {
         var data = {"tabla" : table, "objeto" : object}
         return this.http.post<any>(this.domain + 'generico/buscar', data)
+        .pipe(
+            map(res => {
+                return res;
+            })
+        );
+    }
+
+    /**
+     * Elimina de una determinada tabla
+     * @param tabla la tabla de donde eliminara
+     * @param objeto los parametros para eliminar, el objeto tiene la pk y el valor
+     */
+    eliminar (table: string, object: object) {
+        var data = {"tabla" : table, "objeto" : object}
+        return this.http.post<any>(this.domain + 'generico/eliminar', data)
         .pipe(
             map(res => {
                 return res;

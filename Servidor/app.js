@@ -99,6 +99,7 @@ app.post('/generico/listar', genericoServicio.listar);
 app.post('/generico/guardar', genericoServicio.guardar);
 app.post('/generico/editar', genericoServicio.editar);
 app.post('/generico/buscar', genericoServicio.buscar);
+app.post('/generico/eliminar', genericoServicio.eliminar);
 // ------------ END -----------------------------------//
 
 app.use(app.router);

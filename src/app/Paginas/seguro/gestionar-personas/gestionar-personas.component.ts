@@ -33,9 +33,9 @@ export class GestionarPersonasComponent implements OnInit {
   constructor(private rolServicio: RolService, private personaServicio: PersonaService, private usuarioServicio: UsuarioService) { }
 
   ngOnInit() {
-    this.persona.rol = this.rol;
     // Validamos si el usuario tiene acceso a la pagina
     this.usuarioServicio.esAccesible('administracion/gestionar-personas');
+    this.persona.rol = this.rol;
     // Obtenemos la lista de roles
     this.rolServicio.listar().subscribe(rta => {
       this.roles = rta.data;
@@ -110,7 +110,7 @@ export class GestionarPersonasComponent implements OnInit {
       } else {
         this.show = 3;
         this.persona = rta.data;
-        this.rol.id = this.persona.id;
+        this.rol.id = rta.data.rol;
         this.persona.rol = this.rol;
         // Buscamos el usuario asociado con la persona
         this.personaServicio.usuarioByPersona(this.persona).subscribe(rta2 => {
