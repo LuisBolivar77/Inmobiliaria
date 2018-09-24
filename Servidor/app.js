@@ -16,6 +16,9 @@ var usuarioServicio = require('./servicios/UsuarioServicio')
 // servicios de rol y acessos
 var rolServicio = require('./servicios/RolServicio')
 
+// servicios de inmuebles
+var inmublesServicio = require('./servicios/InmublesServicio')
+
 // -------------END --------------- //
 
 var app = express();
@@ -24,7 +27,7 @@ var connection  = require('express-myconnection');
 var mysql = require('mysql');
 
 // all environments
-app.set('port', process.env.PORT || 4300);
+app.set('port', process.env.PORT || 4400);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 //app.use(express.favicon());
@@ -63,7 +66,7 @@ app.use(
         
         host: 'localhost', //'localhost',
         user: 'root',
-        password : '',
+        password : 'root',
         port : 3306, //port mysql
         database:'inmobiliaria'
 
@@ -76,7 +79,6 @@ app.get('/usuarios/login/:username/:password', usuarioServicio.login);
 app.get('/usuarios/usuario-by-persona/:persona', usuarioServicio.usuarioByPersona);
 app.get('/usuarios/listar', usuarioServicio.listar);
 // ------- Rutas para los Servicios de persona -------- //
-app.get('/usuarios/regitrarUsu', usuarioServicio.registrarUsu);
 app.get('/personas/persona-by-id/:id', usuarioServicio.personaById);
 app.get('/personas/persona-by-cedula/:cedula', usuarioServicio.personaByCedula);
 app.get('/personas/persona-by-cedula-rol/:cedula/:rol', usuarioServicio.personaByCedulaRol);
@@ -91,6 +93,12 @@ app.get('/rol/rol-by-id/:id', rolServicio.rolById);
 app.get('/rol/rol-by-persona/:id', rolServicio.rolByPersona);
 app.get('/acceso/listar', rolServicio.listarAccesos);
 app.get('/acceso/por-rol/:rol', rolServicio.accesosPorRol);
+// ------- Rutas para los Servicios de inmuebles -------- //
+app.post('/inmueble/registrar', inmublesServicio.registrarInmueble);
+app.get('/inmueble/buscar', inmublesServicio.buscarInmueble);
+app.post('/inmueble/editar', inmublesServicio.editarInmueble);
+app.get('/inmueble/listarCiudades', inmublesServicio.listarCiudades);
+app.get('/inmueble/listarTipos', inmublesServicio.listarTipoInmuebles);
 // ------------ END -----------------------------------//
 
 app.use(app.router);

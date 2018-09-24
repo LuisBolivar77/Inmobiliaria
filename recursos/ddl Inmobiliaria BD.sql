@@ -147,6 +147,7 @@ ALTER TABLE `INFORME` CHANGE COLUMN `id` `id` INT(11) NOT NULL AUTO_INCREMENT ;
 CREATE TABLE INMUEBLE
   (
     id                         INTEGER NOT NULL,
+    numero_matricula           VARCHAR (100) NOT NULL ,
     direccion                  VARCHAR (100) NOT NULL ,
     area                       INTEGER NOT NULL ,
     valor                      INTEGER NOT NULL ,
@@ -184,6 +185,7 @@ CREATE TABLE INMUEBLE
   ) ;
 ALTER TABLE INMUEBLE ADD CONSTRAINT INMUEBLE_PK PRIMARY KEY ( id ) ;
 ALTER TABLE `INMUEBLE` CHANGE COLUMN `id` `id` INT(11) NOT NULL AUTO_INCREMENT ;
+ALTER TABLE INMUEBLE ADD UNIQUE (numero_matricula);
 
 CREATE TABLE PERSONAS
   (

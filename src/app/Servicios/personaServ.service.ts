@@ -1,5 +1,5 @@
 import { map } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpInterceptor } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Persona } from '../Modelo/Persona';
 import { Usuario } from '../Modelo/Usuario';
@@ -13,7 +13,7 @@ import { Rol } from '../Modelo/Rol';
 export class PersonaService {
 
     // Ruta raiz donde se encuentran los servicios
-    domain = 'http://localhost:4300/';
+    domain = 'http://localhost:4400/';
 
     constructor(private http: HttpClient) {
     }
