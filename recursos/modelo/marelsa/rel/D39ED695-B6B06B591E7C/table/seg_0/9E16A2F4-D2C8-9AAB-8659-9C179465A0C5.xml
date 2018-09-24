@@ -51,9 +51,9 @@
 <ownDataTypeParameters>300,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="Empleado" id="979F40D6-11B9-7BD0-A798-8654CA827EB1">
+<Column name="Empleado" id="6ABA46CF-2C97-006B-0B33-F1BC0FDDF1FE">
 <createdBy>krlox</createdBy>
-<createdTime>2018-09-19 22:04:23 UTC</createdTime>
+<createdTime>2018-09-22 20:52:07 UTC</createdTime>
 <ownerDesignName>marelsa</ownerDesignName>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -62,7 +62,7 @@
 <previousColumn>false</previousColumn>
 <autoIncrementCycle>false</autoIncrementCycle>
 <associations>
-<colAssociation fkAssociation="CA2A8B0E-B388-E86B-2128-AE01FE7A181E" referredColumn="B038A400-1751-C515-8A76-5127B35BBFAB"/>
+<colAssociation fkAssociation="CA2A8B0E-B388-E86B-2128-AE01FE7A181E" referredColumn="A3635884-F3C7-57A2-1A59-AA48A041DB69"/>
 </associations>
 </Column>
 </columns>
@@ -85,7 +85,7 @@
 <indexState>Foreign Key</indexState>
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
-<colUsage columnID="979F40D6-11B9-7BD0-A798-8654CA827EB1"/>
+<colUsage columnID="6ABA46CF-2C97-006B-0B33-F1BC0FDDF1FE"/>
 </indexColumnUsage>
 </ind_PK_UK>
 </indexes>

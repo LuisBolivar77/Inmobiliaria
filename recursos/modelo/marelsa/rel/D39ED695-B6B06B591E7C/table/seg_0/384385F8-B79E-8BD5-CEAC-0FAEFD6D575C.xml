@@ -8,9 +8,9 @@
 <existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
 <parsed>true</parsed>
 <columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
-<Column name="persona" id="B038A400-1751-C515-8A76-5127B35BBFAB">
+<Column name="Usuario" id="A3635884-F3C7-57A2-1A59-AA48A041DB69">
 <createdBy>krlox</createdBy>
-<createdTime>2018-09-18 22:44:49 UTC</createdTime>
+<createdTime>2018-09-22 20:51:16 UTC</createdTime>
 <ownerDesignName>marelsa</ownerDesignName>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -19,7 +19,7 @@
 <previousColumn>false</previousColumn>
 <autoIncrementCycle>false</autoIncrementCycle>
 <associations>
-<colAssociation fkAssociation="E596919B-DECF-E5CC-9112-028953D82C1B" referredColumn="040397FC-9801-FC64-FD85-0A7E17C74478"/>
+<colAssociation fkAssociation="42093025-58F1-784C-4EE1-94E0C782402B" referredColumn="4E39A01B-FDF5-3A95-B80C-60F0F6A13C20"/>
 </associations>
 </Column>
 <Column name="salario" id="323B27E8-C806-48EE-2B1F-FAFC4F394837">
@@ -56,17 +56,7 @@
 <indexState>Primary Constraint</indexState>
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
-<colUsage columnID="B038A400-1751-C515-8A76-5127B35BBFAB"/>
-</indexColumnUsage>
-</ind_PK_UK>
-<ind_PK_UK id="D1DCAD30-02BE-B1A4-235A-6AE9861D7065" name="EMPLEADOS_PERSONAS_FK">
-<createdBy>krlox</createdBy>
-<createdTime>2018-09-18 22:44:49 UTC</createdTime>
-<ownerDesignName>marelsa</ownerDesignName>
-<indexState>Foreign Key</indexState>
-<isSurrogateKey>false</isSurrogateKey>
-<indexColumnUsage>
-<colUsage columnID="B038A400-1751-C515-8A76-5127B35BBFAB"/>
+<colUsage columnID="A3635884-F3C7-57A2-1A59-AA48A041DB69"/>
 </indexColumnUsage>
 </ind_PK_UK>
 <ind_PK_UK id="C478664D-CBAB-3B6F-9575-F0D1F9F07DDC" name="EMPLEADOS_CARGOS_FK">
@@ -77,6 +67,16 @@
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
 <colUsage columnID="73D59B97-AA0C-3304-EEEF-EBBFA44DF73B"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="B5745B94-E86E-A418-37B8-0BC448747A2D" name="EMPLEADOS_USUARIOS_FK">
+<createdBy>krlox</createdBy>
+<createdTime>2018-09-22 20:51:16 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="A3635884-F3C7-57A2-1A59-AA48A041DB69"/>
 </indexColumnUsage>
 </ind_PK_UK>
 </indexes>

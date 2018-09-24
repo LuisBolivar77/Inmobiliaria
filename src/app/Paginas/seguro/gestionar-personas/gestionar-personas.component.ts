@@ -33,6 +33,7 @@ export class GestionarPersonasComponent implements OnInit {
   constructor(private rolServicio: RolService, private personaServicio: PersonaService, private usuarioServicio: UsuarioService) { }
 
   ngOnInit() {
+    this.persona.rol = this.rol;
     // Validamos si el usuario tiene acceso a la pagina
     this.usuarioServicio.esAccesible('administracion/gestionar-personas');
     // Obtenemos la lista de roles

@@ -93,9 +93,9 @@
 <ownDataTypeParameters>200,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="Empleado" id="1351262A-7515-284B-85E8-129BEAA554A2">
+<Column name="Empleado" id="70D4CCD7-752B-EA93-104E-7F95593886DD">
 <createdBy>krlox</createdBy>
-<createdTime>2018-09-19 21:56:03 UTC</createdTime>
+<createdTime>2018-09-22 20:52:07 UTC</createdTime>
 <ownerDesignName>marelsa</ownerDesignName>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -104,7 +104,7 @@
 <previousColumn>false</previousColumn>
 <autoIncrementCycle>false</autoIncrementCycle>
 <associations>
-<colAssociation fkAssociation="88E13397-3F7F-8265-6FED-7A5699C3EA4C" referredColumn="B038A400-1751-C515-8A76-5127B35BBFAB"/>
+<colAssociation fkAssociation="88E13397-3F7F-8265-6FED-7A5699C3EA4C" referredColumn="A3635884-F3C7-57A2-1A59-AA48A041DB69"/>
 </associations>
 </Column>
 </columns>
@@ -127,7 +127,7 @@
 <indexState>Foreign Key</indexState>
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
-<colUsage columnID="1351262A-7515-284B-85E8-129BEAA554A2"/>
+<colUsage columnID="70D4CCD7-752B-EA93-104E-7F95593886DD"/>
 </indexColumnUsage>
 </ind_PK_UK>
 </indexes>
