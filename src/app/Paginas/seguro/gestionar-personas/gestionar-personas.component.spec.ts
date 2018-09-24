@@ -1,6 +1,6 @@
 import { HttpClient, HttpHandler } from '@angular/common/http';
-import { TestBed, ComponentFixture, async, inject } from '@angular/core/testing';
-import { PersonaService } from '../../../Servicios/personaServ.service';
+import { TestBed, async, inject } from '@angular/core/testing';
+import { GestionarPersonasComponent } from '../../seguro/gestionar-personas/gestionar-personas.component';
 import { Rol } from '../../../Modelo/Rol';
 import { Persona } from '../../../Modelo/Persona';
 import { Usuario } from '../../../Modelo/Usuario';
@@ -16,11 +16,9 @@ fdescribe('GestionarPersonasComponent', () => {
   // tslint:disable-next-line:prefer-const
   let usuario = new Usuario();
 
-  let data = '';
-
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      providers:    [ PersonaService, HttpClient, HttpHandler ]
+      providers:    [ GestionarPersonasComponent, HttpClient, HttpHandler]
     })
     .compileComponents();
   }));
@@ -45,10 +43,11 @@ fdescribe('GestionarPersonasComponent', () => {
   });
 
   it('debe registrar un usuario',
-    inject([PersonaService], (service: PersonaService) => {
-
-    service.registrar(usuario).subscribe(dataEntra => data = dataEntra);
-    console.log(data);
-  }));
+      inject([GestionarPersonasComponent],
+      (service: GestionarPersonasComponent) => {
+        const res = service.registrarTest(usuario);
+        expect<any>(res).toEqual('myValue');
+        // expect(res).toEqual('exito');
+      }));
 
 });
