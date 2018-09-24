@@ -13,7 +13,7 @@ import { Rol } from '../Modelo/Rol';
 export class PersonaService {
 
     // Ruta raiz donde se encuentran los servicios
-    domain = 'http://localhost:4400/';
+    domain = 'http://localhost:4300/';
 
     constructor(private http: HttpClient) {
     }
