@@ -20,7 +20,7 @@ exports.listar = function(req, res){
     req.getConnection(function(err,connection){
           var query = connection.query(sql,function(err,rows){
               if(err){
-                  res.send({err});
+                  res.send({data:err.code});
                   console.log("Error Selecting : %s ",err );
               }else{
                   res.send({data:rows});
@@ -59,6 +59,7 @@ exports.guardar = function(req, res){
                 if(err){
                   res.send({data:"no se pudo guardar, intente de nuevo. "+err.code});
                 }else{
+                  // Retornamos exito en la operacion y el id asignado al registro guardado
                   res.send({data:"exito", id:rows.insertId});
                 }
             });
@@ -66,48 +67,39 @@ exports.guardar = function(req, res){
 };
 
 /**
- * obtiene el id de un objeto foranea
- */
-function obtenerId(objeto){
-      // el id del objeto primario
-      var id;
-      for (var key in objeto) {
-            // Validamos si es un objeto
-            if(typeof objeto[key] === "object"){
-                  for (var key2 in objeto[key]) {
-                        if(key2 == "id"){
-                              id = objeto[key][key2];
-                        }
-                  }
-            }else{
-                  // Validamos si el atributo es un objeto
-                  if(key == "id"){
-                        id = objeto[key];
-                  }
-            }
-      }
-      return id;
-}
-
-/**
- * Editar de una tabla determinada
+ * Editar en una tabla determinada
  */
 exports.editar = function(req, res){
       // Objetenmos los datos enviados desde el cliente
       var data = JSON.parse(JSON.stringify(req.body));
-      // Tabla donde va a ir a guardar
+      // Tabla donde va a ir a editar
       var tabla = data.tabla;
-      // Objeto que se va a guardar
-      var objeto = data.objeto;
+      // nombre de la pk del registro a editar
+      var pk = data.pk;
+      // El Objeto enviado desde el cliente
+      var elObjeto = data.objeto;
+      // Construimos el objeto a editar
+      var objeto = {};
+      // Llenamos el objeto con los datos de elObjeto
+      for (var key in elObjeto) {
+            // Validamos si el atributo es un objeto
+            if(typeof elObjeto[key] === "object"){
+                  // Como es un objeto, solo obtenemos el id para la foranea
+                  objeto[key] = obtenerId(elObjeto[key]);
+            }else{
+                  objeto[key] = elObjeto[key];
+            }
+      }
       // La consulta a ejecutar
-      var sql = "UPDATE "+tabla+" set ? WHERE "+objeto.key(0)+" = ?";
+      var sql = "UPDATE "+tabla+" set ? WHERE "+pk+" = ?";
       // Ejecutamos la consulta y retornamos
       req.getConnection(function(err,connection){
-            var query = connection.query(sql,[objeto, objeto[0]],function(err,rows){
+            var query = connection.query(sql,[objeto,objeto[pk]],function(err,rows){
                 if(err){
                   res.send({data:"no se pudo editar, intente de nuevo. "+err.code});
                 }else{
-                  res.send({data:"exito"});
+                  // Devolvemos exito y el id del registro que se edito
+                  res.send({data:"exito", id:rows.insertId});
                 }
             });
       });
@@ -142,10 +134,60 @@ exports.buscar = function(req, res){
       req.getConnection(function(err,connection){
             var query = connection.query(sql,function(err,rows){
                   if(err){
-                        res.send({err});
+                        res.send({data:err.code});
                   }else{
                         res.send({data:rows[0]});
                   }
             });
         });
-  };
+};
+
+/**
+ * Eliminar registro de una tabla determinada
+ */
+exports.eliminar = function(req, res){
+      // Objetenmos los datos enviados desde el cliente
+      var data = JSON.parse(JSON.stringify(req.body));
+      // Tabla donde va a ir a consultar
+      var tabla = data.tabla;
+      // objeto que contiene el nombre del atributo y el valor del registro a eliminar
+      var objeto = data.objeto;
+      // la pk del registro
+      var pk = Object.keys(objeto)[0];
+      // La consulta a ejecutar
+      var sql = "DELETE FROM "+tabla+" WHERE "+pk+" = ?";
+      // Ejecutamos la consulta y retornamos
+      req.getConnection(function(err,connection){
+            var query = connection.query(sql,objeto[pk],function(err,rows){
+                  if(err){
+                        res.send({data:err.code});
+                  }else{
+                        res.send({data:"exito"});
+                  }
+            });
+      });
+};
+
+/**
+ * obtiene el id de un objeto foranea
+ */
+function obtenerId(objeto){
+      // el id del objeto primario
+      var id;
+      for (var key in objeto) {
+            // Validamos si es un objeto
+            if(typeof objeto[key] === "object"){
+                  for (var key2 in objeto[key]) {
+                        if(key2 == "id"){
+                              id = objeto[key][key2];
+                        }
+                  }
+            }else{
+                  // Validamos si el atributo es un objeto
+                  if(key == "id"){
+                        id = objeto[key];
+                  }
+            }
+      }
+      return id;
+}

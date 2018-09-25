@@ -100,7 +100,6 @@ export class PersonaService {
      * editar una persona y su usuario
      */
     editar(usuario: Usuario) {
-        console.log(usuario);
         return this.http.post<any>(this.domain + 'personas/editar', usuario)
         .pipe(
             map(res => {
