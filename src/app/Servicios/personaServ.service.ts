@@ -13,7 +13,7 @@ import { Rol } from '../Modelo/Rol';
 export class PersonaService {
 
     // Ruta raiz donde se encuentran los servicios
-    domain = 'http://localhost:4400/';
+    domain = 'http://localhost:4300/';
 
     constructor(private http: HttpClient) {
     }
@@ -47,9 +47,11 @@ export class PersonaService {
      * @param persona la persona a buscar
      */
     personaByCedula (persona: Persona) {
+        console.log('////////////////// 1');
         return this.http.get<any>(this.domain + 'personas/persona-by-cedula/' + persona.cedula)
         .pipe(
             map(res => {
+                console.log('////////////////// 2' + res.length);
                 return res;
             })
         );

@@ -1,4 +1,4 @@
-import { Empleado } from "./Empleado";
+import { Empleado } from './Empleado';
 
 /**
  * Formacion de un empleado

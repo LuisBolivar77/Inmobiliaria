@@ -1,4 +1,3 @@
-import { HttpInterceptorHandler } from '@angular/common/http/src/interceptor';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -46,7 +45,6 @@ import { InmueblesAdminComponent } from './Paginas/seguro/inmuebles-admin/inmueb
     MatListModule,
     HttpClientModule,
     FormsModule,
-    HttpInterceptorHandler,
     RouterModule.forRoot([
       {
         path: 'administracion/gestion-inmuebles',
@@ -90,7 +88,7 @@ import { InmueblesAdminComponent } from './Paginas/seguro/inmuebles-admin/inmueb
       }
     ])
   ],
-  providers: [HttpInterceptorHandler],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

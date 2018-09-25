@@ -118,6 +118,7 @@ CREATE TABLE informe (
 
 CREATE TABLE inmueble (
     id                           INTEGER NOT NULL AUTO_INCREMENT,
+    numero_matricula             VARCHAR(100) NOT NULL,
     direccion                    VARCHAR(100) NOT NULL,
     area                         INTEGER NOT NULL,
     valor                        INTEGER NOT NULL,
@@ -146,7 +147,6 @@ CREATE TABLE inmueble (
     comedorIndependiente         CHAR(1) NOT NULL,
     vista_exterior_interior      CHAR(1) NOT NULL,
     zona                         INTEGER NOT NULL,
-    numero_matricula             VARCHAR(100) NOT NULL,
     aprobacion_fecha             DATE,
     tipo                         INTEGER NOT NULL,
     ciudad                       INTEGER NOT NULL,

@@ -16,13 +16,10 @@ var usuarioServicio = require('./servicios/UsuarioServicio')
 // servicios de rol y acessos
 var rolServicio = require('./servicios/RolServicio')
 
-<<<<<<< HEAD
 // servicios de inmuebles
 var inmublesServicio = require('./servicios/InmublesServicio')
-=======
 // servicios genericos
 var genericoServicio = require('./servicios/genericoServicio')
->>>>>>> 4b67937789109a0c699714a0b6326315f7cdac52
 
 // -------------END --------------- //
 
@@ -32,7 +29,7 @@ var connection  = require('express-myconnection');
 var mysql = require('mysql');
 
 // all environments
-app.set('port', process.env.PORT || 4400);
+app.set('port', process.env.PORT || 4300);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 //app.use(express.favicon());
@@ -98,20 +95,17 @@ app.get('/rol/rol-by-id/:id', rolServicio.rolById);
 app.get('/rol/rol-by-persona/:id', rolServicio.rolByPersona);
 app.get('/acceso/listar', rolServicio.listarAccesos);
 app.get('/acceso/por-rol/:rol', rolServicio.accesosPorRol);
-<<<<<<< HEAD
 // ------- Rutas para los Servicios de inmuebles -------- //
 app.post('/inmueble/registrar', inmublesServicio.registrarInmueble);
 app.get('/inmueble/buscar', inmublesServicio.buscarInmueble);
 app.post('/inmueble/editar', inmublesServicio.editarInmueble);
 app.get('/inmueble/listarCiudades', inmublesServicio.listarCiudades);
 app.get('/inmueble/listarTipos', inmublesServicio.listarTipoInmuebles);
-=======
 //------------------ Servicios Genericos -------------------- //
 app.post('/generico/listar', genericoServicio.listar);
 app.post('/generico/guardar', genericoServicio.guardar);
 app.post('/generico/editar', genericoServicio.editar);
 app.post('/generico/buscar', genericoServicio.buscar);
->>>>>>> 4b67937789109a0c699714a0b6326315f7cdac52
 // ------------ END -----------------------------------//
 
 app.use(app.router);
