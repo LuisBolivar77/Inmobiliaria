@@ -12,10 +12,8 @@ var path = require('path');
 
 // servicios de usuario
 var usuarioServicio = require('./servicios/UsuarioServicio')
-
 // servicios de rol y acessos
 var rolServicio = require('./servicios/RolServicio')
-
 // servicios de inmuebles
 var inmublesServicio = require('./servicios/InmublesServicio')
 // servicios genericos
@@ -24,10 +22,8 @@ var genericoServicio = require('./servicios/genericoServicio')
 // -------------END --------------- //
 
 var app = express();
-
 var connection  = require('express-myconnection'); 
 var mysql = require('mysql');
-
 // all environments
 app.set('port', process.env.PORT || 4300);
 app.set('views', path.join(__dirname, 'views'));

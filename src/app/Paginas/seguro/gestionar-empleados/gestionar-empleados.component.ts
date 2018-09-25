@@ -2,16 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { Usuario } from '../../../Modelo/Usuario';
 import { Persona } from '../../../Modelo/Persona';
 import { Rol } from '../../../Modelo/Rol';
-import { RolService } from '../../../Servicios/rolServ.service';
 import { PersonaService } from '../../../Servicios/personaServ.service';
 import { UsuarioService } from '../../../Servicios/usuarioServ.service';
 import { NgForm } from '@angular/forms';
 import { Cargo } from '../../../Modelo/Cargo';
 import { GenericoService } from '../../../Servicios/genericoServ.service';
-import { Formacion } from '../../../Modelo/formacion';
 import { Experiencia } from '../../../Modelo/Experiencia';
 import { Empleado } from '../../../Modelo/Empleado';
-import { AuxiliarObjeto } from '../../../Modelo/AuxiliarObjeto';
+import { AuxiliarObjeto } from '../../../Modelo/AuxiliarObjeto';  
+import { Formacion } from '../../../Modelo/formacion';
 
 @Component({
   selector: 'app-gestionar-empleados',

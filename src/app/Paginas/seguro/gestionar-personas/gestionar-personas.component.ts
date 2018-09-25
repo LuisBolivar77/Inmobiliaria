@@ -70,20 +70,6 @@ export class GestionarPersonasComponent implements OnInit {
   }
 
   /**
-   * Registra una persona con su usuario (PruebaUnitaria)
-   */
-  registrarTest(usuarioTest: Usuario) {
-    console.log(usuarioTest);
-    this.personaServicio.registrar(usuarioTest).subscribe(rta => {
-      if (rta.data === 'exito') {
-        return 'exito';
-      } else {
-        return 'error';
-      }
-    });
-  }
-
-  /**
    * Registra una persona con su usuario
    */
   editar(form: NgForm) {
@@ -158,6 +144,7 @@ export class GestionarPersonasComponent implements OnInit {
     this.personaServicio.listar().subscribe(rta => {
       this.personas = rta.data;
       // obtenemos la informacion del rol de cada persona
+      // tslint:disable-next-line:prefer-const
       for (let p of this.personas) {
         this.rolServicio.buscarRolPersona(p).subscribe(rta2 => {
           p.rol = rta2.data;

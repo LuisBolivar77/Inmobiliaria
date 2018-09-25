@@ -53,9 +53,12 @@ exports.guardar = function(req, res){
       }
       // La consulta a ejecutar
       var sql = "INSERT INTO "+tabla+" set ? ";
+      console.log(data);
+      console.log(objeto);
+      console.log(sql);
       // Ejecutamos la consulta y retornamos
       req.getConnection(function(err,connection){
-            var query = connection.query(sql,objeto,function(err,rows){
+            connection.query(sql,objeto,function(err,rows){
                 if(err){
                   res.send({data:"no se pudo guardar, intente de nuevo. "+err.code});
                 }else{

@@ -1,9 +1,15 @@
-import { HttpClient, HttpHandler } from '@angular/common/http';
-import { TestBed, async, inject } from '@angular/core/testing';
-import { GestionarPersonasComponent } from '../../seguro/gestionar-personas/gestionar-personas.component';
+import { PersonaService } from './../../../Servicios/personaServ.service';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { TestBed } from '@angular/core/testing';
 import { Rol } from '../../../Modelo/Rol';
 import { Persona } from '../../../Modelo/Persona';
 import { Usuario } from '../../../Modelo/Usuario';
+import {
+  BaseRequestOptions,
+  Response,
+  ResponseOptions,
+  Http
+} from '@angular/http';
 
 fdescribe('GestionarPersonasComponent', () => {
   // Rol que tendra la persona
@@ -16,12 +22,19 @@ fdescribe('GestionarPersonasComponent', () => {
   // tslint:disable-next-line:prefer-const
   let usuario = new Usuario();
 
-  beforeEach(async(() => {
+  let service: PersonaService;
+  let httpMock: HttpTestingController;
+
+  beforeEach(() => {
     TestBed.configureTestingModule({
-      providers:    [ GestionarPersonasComponent, HttpClient, HttpHandler]
-    })
-    .compileComponents();
-  }));
+      providers:    [ PersonaService],
+      imports: [ HttpClientTestingModule ],
+    });
+
+    // Returns a service with the MockBackend so we can test with dummy responses
+    service = TestBed.get(PersonaService);
+    httpMock = TestBed.get(HttpTestingController);
+  });
 
   beforeEach(() => {
     rol.id = 1;
@@ -42,12 +55,27 @@ fdescribe('GestionarPersonasComponent', () => {
     usuario.password = '123';
   });
 
-  it('debe registrar un usuario',
-      inject([GestionarPersonasComponent],
-      (service: GestionarPersonasComponent) => {
-        const res = service.registrarTest(usuario);
-        expect<any>(res).toEqual('myValue');
-        // expect(res).toEqual('exito');
-      }));
+  it('buscar un cliente', () => {
+    // Perform a request and make sure we get the response we expect
 
+    const ced = '1094';
+    service.personaByCedula(persona).subscribe(res => {
+
+      expect<any>(res.length).toBe(1);
+    });
+
+    // const request = httpMock.expectOne('http://localhost:4300/personas/persona-by-cedula/' + ced);
+    // expect(request.request.method).toBe('GET');
+  });
+
+  /**
+  it('registrar un cliente', () => {
+    service.registrar(usuario).subscribe(res => {
+      expect<any>(res).toBe('exito');
+
+    });
+    const request = httpMock.expectOne('http://localhost:4400/personas/registrar' + persona.cedula);
+    expect(request.request.method).toBe('POST');
+  });
+   */
 });

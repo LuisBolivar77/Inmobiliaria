@@ -6,11 +6,12 @@ exports.registrarInmueble = function(req, res) {
     req.getConnection(function(err,connection){
         // Construimos el objeto inmueble que se va a registrar
         var usu = {
-            cedula: data.Usuario
+            cedula: data.Usuario.Persona.cedula
         };
         
         var sql = "SELECT * FROM personas WHERE cedula = ?";
         connection.query(sql,usu.cedula, function(err, rows) {
+            console.log(usu.cedula)
             if(err){
                 res.send({data:"Error al buscar la persona guardada"});
                 return;
@@ -82,6 +83,7 @@ exports.registrarInmueble = function(req, res) {
  */
 exports.buscarInmueble = function(req, res){
     var matricula = req.params.matricula;
+    console.log('LOG: ' + matricula);
     req.getConnection(function(err,connection){
         connection.query('SELECT * FROM inmueble WHERE numero_matricula = ?',[matricula],function(err,rows){
             if(err)
