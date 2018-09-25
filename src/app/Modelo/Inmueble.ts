@@ -4,11 +4,22 @@ import { Usuario } from './Usuario';
 import { Promocion } from './Promocion';
 export class Inmueble {
 
+    id: number;
     direccion: string;
     area: number;
     valor: number;
     banios: number;
-    estado: boolean;
+    /**
+     * 0 = pendiente de publicacion
+     * 1 = publicado
+     * 2 = Vendido o Arrendado
+     * 3 = Eliminado
+     */
+    estado: number;
+    /**
+     * 0 = Arriendo
+     * 1 = Venta
+     */
     tipoAV: number;
     garajes: number;
     antiguedad: number;
@@ -31,12 +42,80 @@ export class Inmueble {
     cocinaAC: boolean;
     comedorIndependiente: boolean;
     vistaExterios: boolean;
+    /**
+     * 0 = Norte
+     * 1 = Sur
+     * 2 = Oriente
+     * 3 = Occidente
+     */
     zona: number;
     fechaAprobacion: string;
-    tipoInmueble: TipoInmueble;
+    tipo: TipoInmueble;
     ciudad: Ciudad;
     usuario: Usuario;
     admin: Usuario;
     promo: Promocion;
 
+    /**
+     * retorna el valor texto de un estado
+     * @param estado el numero del indice a retornar
+     */
+    getEstado(estado: number){
+        var estados = [
+            "pendiente de publicacion",
+            "publicado",
+            "Vendido o Arrendado",
+            "Eliminado"
+        ]
+        return estados[estado];
+    }
+
+    /**
+     * retorna el valor texto de un tipo venta arrendo
+     * @param tipoAV el numero del indice a retornar
+     */
+    getTipoAV(tipoAV: number){
+        var tipos = [
+            "Arriendo",
+            "Venta"
+        ]
+        return tipos[tipoAV];
+    }
+
+    /**
+     * retorna el valor texto de una zona
+     * @param zona el numero del indice a retornar
+     */
+    getZona(zona: number){
+        var zonas = [
+            "Norte",
+            "Sur",
+            "Oriente",
+            "Occidente"
+        ]
+        return zonas[zona];
+    }
+
+    /**
+     * Agregamos comas a los miles
+     * @param numero el numero al que le agregaremos comas
+     */
+    addComa(num) {
+        var cents,sign;
+        if (!num || num == 'NaN') return '-';
+        if (num == 'Infinity') return '&#x221e;';
+        num = num.toString().replace(/\$|\,/g, '');
+        if (isNaN(num))
+            num = "0";
+        sign = (num == (num = Math.abs(num)));
+        num = Math.floor(num * 100 + 0.50000000001);
+        cents = num % 100;
+        num = Math.floor(num / 100).toString();
+        if (cents < 10)
+            cents = "0" + cents;
+        for (var i = 0; i < Math.floor((num.length - (1 + i)) / 3) ; i++)
+            num = num.substring(0, num.length - (4 * i + 3)) + '.' + num.substring(num.length - (4 * i + 3));
+        return (((sign) ? '' : '-') + num + ',' + cents);
+    }
+    
 }

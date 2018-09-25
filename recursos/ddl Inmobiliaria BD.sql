@@ -124,7 +124,7 @@ CREATE TABLE inmueble (
     valor                        INTEGER NOT NULL,
     banios                       INTEGER NOT NULL,
     estado                       INTEGER NOT NULL,
-    tipoventaarrendo             INTEGER NOT NULL,
+    tipoAV             INTEGER NOT NULL,
     garajes                      INTEGER NOT NULL,
     antiguedad                   INTEGER NOT NULL,
     detalles                     VARCHAR(400) NOT NULL,

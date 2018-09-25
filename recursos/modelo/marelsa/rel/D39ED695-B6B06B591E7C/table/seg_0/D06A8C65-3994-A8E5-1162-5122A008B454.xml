@@ -69,7 +69,7 @@
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="tipoVentaArrendo" id="AE5C653F-3676-6889-276A-5DC2F63F139A">
+<Column name="tipoAV" id="AE5C653F-3676-6889-276A-5DC2F63F139A">
 <createdBy>krlox</createdBy>
 <createdTime>2018-08-31 23:10:01 UTC</createdTime>
 <ownerDesignName>marelsa</ownerDesignName>
