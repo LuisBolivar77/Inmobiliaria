@@ -34,3 +34,27 @@ INSERT INTO `inmobiliaria`.`cargos` (`id`, `nombre`, `descripcion`) VALUES ('4',
 -- Empleados --
 INSERT INTO `inmobiliaria`.`empleados` (`usuario`, `salario`, `cargo`) VALUES ('2', '1200000', '2');
 
+-- Departamentos --
+INSERT INTO `inmobiliaria`.`departamentos` (`id`, `nombre`) VALUES ('1', 'Quindio');
+INSERT INTO `inmobiliaria`.`departamentos` (`id`, `nombre`) VALUES ('2', 'Antioquia');
+INSERT INTO `inmobiliaria`.`departamentos` (`id`, `nombre`) VALUES ('3', 'Atlantico');
+INSERT INTO `inmobiliaria`.`departamentos` (`id`, `nombre`) VALUES ('4', 'Tolima');
+INSERT INTO `inmobiliaria`.`departamentos` (`id`, `nombre`) VALUES ('5', 'Cundinamarca');
+
+-- Ciudades --
+INSERT INTO `inmobiliaria`.`ciudades` (`id`, `nombre`, `departamento`) VALUES ('1', 'Armenia', '1');
+INSERT INTO `inmobiliaria`.`ciudades` (`id`, `nombre`, `departamento`) VALUES ('2', 'Medellin', '2');
+INSERT INTO `inmobiliaria`.`ciudades` (`id`, `nombre`, `departamento`) VALUES ('3', 'Barranquilla', '3');
+INSERT INTO `inmobiliaria`.`ciudades` (`id`, `nombre`, `departamento`) VALUES ('4', 'Ibague', '4');
+INSERT INTO `inmobiliaria`.`ciudades` (`id`, `nombre`, `departamento`) VALUES ('5', 'Bogota', '5');
+
+-- Tipos de Inmueble --
+INSERT INTO `inmobiliaria`.`tipo_inmueble` (`id`, `nombre`, `descripcion`) VALUES ('1', 'Casa', 'casa');
+INSERT INTO `inmobiliaria`.`tipo_inmueble` (`id`, `nombre`, `descripcion`) VALUES ('2', 'Apartamento', 'apartamento');
+INSERT INTO `inmobiliaria`.`tipo_inmueble` (`id`, `nombre`, `descripcion`) VALUES ('3', 'Finca', 'Finca');
+INSERT INTO `inmobiliaria`.`tipo_inmueble` (`id`, `nombre`, `descripcion`) VALUES ('4', 'Oficina', 'Oficina');
+INSERT INTO `inmobiliaria`.`tipo_inmueble` (`id`, `nombre`, `descripcion`) VALUES ('5', 'Local comercial', 'Local comercial');
+INSERT INTO `inmobiliaria`.`tipo_inmueble` (`id`, `nombre`, `descripcion`) VALUES ('6', 'Bodega', 'Bodega');
+INSERT INTO `inmobiliaria`.`tipo_inmueble` (`id`, `nombre`, `descripcion`) VALUES ('7', 'Chalet', 'Chalet');
+
+
