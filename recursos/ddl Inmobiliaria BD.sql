@@ -128,7 +128,7 @@ CREATE TABLE inmueble (
     garajes                      INTEGER NOT NULL,
     antiguedad                   INTEGER NOT NULL,
     detalles                     VARCHAR(400) NOT NULL,
-    añoconstruccion              VARCHAR(20) NOT NULL,
+    anoconstruccion              VARCHAR(20) NOT NULL,
     ascensor                     CHAR(1) NOT NULL,
     canchas_deportivas           CHAR(1) NOT NULL,
     zonas_humedas                CHAR(1) NOT NULL,

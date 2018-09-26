@@ -24,7 +24,7 @@ export class Inmueble {
     garajes: number;
     antiguedad: number;
     detalles: string;
-    anioContruccion: string;
+    anoContruccion: string;
     ascensor: boolean;
     canchasDepor: boolean;
     zonasHumedas: boolean;
@@ -67,7 +67,12 @@ export class Inmueble {
             "Vendido o Arrendado",
             "Eliminado"
         ]
-        return estados[estado];
+        if(estado == null){
+            // Retornamos todo el listado de estados
+            return estados;
+        }else{
+            return estados[estado];
+        }
     }
 
     /**
@@ -79,7 +84,12 @@ export class Inmueble {
             "Arriendo",
             "Venta"
         ]
-        return tipos[tipoAV];
+        if(tipoAV == null){
+            // Retornamos todo el listado de tipos
+            return tipos;
+        }else{
+            return tipos[tipoAV];
+        }
     }
 
     /**
@@ -93,7 +103,12 @@ export class Inmueble {
             "Oriente",
             "Occidente"
         ]
-        return zonas[zona];
+        if(zona == null){
+            // Retornamos todo el listado de zonas
+            return zonas;
+        }else{
+            return zonas[zona];
+        }
     }
 
     /**

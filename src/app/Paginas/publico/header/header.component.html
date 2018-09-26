@@ -112,49 +112,34 @@
 							<form action="#" class="search_form d-flex flex-row align-items-start justfy-content-start">
 								<div class="search_form_content d-flex flex-row align-items-start justfy-content-start flex-wrap">
 									<div>
-										<select class="search_form_select">
-											<option disabled selected>For rent</option>
-											<option>Yes</option>
-											<option>No</option>
-										</select>
+										<!-- Tipo Arrendo o Venta -->
+										<select [(ngModel)]="inmueble.zona" name="zona" class="search_form_select"><option *ngFor="let av of inmueble.getTipoAV()" value="{{av}}">Inmueble en {{av}}</option></select>
+									</div>
+									<div>
+										<!-- tipos de inmueble -->
+										<select [(ngModel)]="inmueble.tipo" name="tipo" class="search_form_select"><option *ngFor="let t of tiposInmueble" value="{{t.id}}">{{t.nombre}}</option></select>
+									</div>
+									<div>
+										<!-- ciudades -->
+										<select [(ngModel)]="inmueble.ciudad" name="ciudad" class="search_form_select"><option *ngFor="let c of ciudades" value="{{c.id}}">{{c.nombre}}</option></select>
+									</div>
+									<div>
+										<!-- Sector -->
+										<select [(ngModel)]="inmueble.zona" name="zona" class="search_form_select"><option *ngFor="let z of inmueble.getZona()" value="{{z}}">Sector {{z}}</option></select>
 									</div>
 									<div>
 										<select class="search_form_select">
-											<option disabled selected>All types</option>
-											<option>Type 1</option>
-											<option>Type 2</option>
-											<option>Type 3</option>
-											<option>Type 4</option>
-										</select>
-									</div>
-									<div>
-										<select class="search_form_select">
-											<option disabled selected>City</option>
-											<option>New York</option>
-											<option>Paris</option>
-											<option>Amsterdam</option>
-											<option>Rome</option>
-										</select>
-									</div>
-									<div>
-										<select class="search_form_select">
-											<option disabled selected>Bedrooms</option>
-											<option>1</option>
-											<option>2</option>
-											<option>3</option>
-											<option>4</option>
-										</select>
-									</div>
-									<div>
-										<select class="search_form_select">
-											<option disabled selected>Bathrooms</option>
-											<option>1</option>
-											<option>2</option>
-											<option>3</option>
+											<option disabled selected>Garajes</option>
+											<option value="1">0</option>
+											<option value="1">1</option>
+											<option value="1">2</option>
+											<option value="1">3</option>
+											<option value="1">4</option>
+											<option value="1">5</option>
 										</select>
 									</div>
 								</div>
-								<button class="search_form_button ml-auto">search</button>
+								<button (click)="buscar()" class="search_form_button ml-auto">search</button>
 							</form>
 						</div>
 					</div>

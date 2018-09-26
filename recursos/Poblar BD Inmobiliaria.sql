@@ -69,12 +69,12 @@ INSERT INTO `inmobiliaria`.`inmueble` (`id`, `direccion`, `area`, `valor`, `bani
 INSERT INTO `inmobiliaria`.`inmueble` (`id`, `direccion`, `area`, `valor`, `banios`, `estado`, `tipoAV`, `garajes`, `antiguedad`, `detalles`, `añoconstruccion`, `ascensor`, `canchas_deportivas`, `zonas_humedas`, `zona_infantil`, `jardines`, `transporte_publico_cercano`, `precio_negociable`, `zona_ropas`, `parqueadero`, `deposito`, `estudio`, `tipo_cortinas`, `cuarto_servicio`, `chimenea`, `cocinaabiertacerrada`, `comedorIndependiente`, `vista_exterior_interior`, `zona`, `numero_matricula`, `aprobacion_fecha`, `tipo`, `ciudad`, `usuario`, `administrador`) VALUES ('9', 'Calle 21 #2323', '80', '22500000', '3', '1', '1', '3', '55', 'Casa una chimba', '2010', '0', '0', '0', '0', '1', '1', '0', '1', '1', '1', '1', 'una chimba', '1', '1', '1', '1', '1', '0', '20104511', '2018-02-02', '7', '1', '2', '1');
 
 -- Archivo inmueble --
-INSERT INTO `inmobiliaria`.`archivo_inmueble` (`tipo`, `nombre`, `inmueble`) VALUES ('0', 'property_1', '1');
-INSERT INTO `inmobiliaria`.`archivo_inmueble` (`tipo`, `nombre`, `inmueble`) VALUES ('0', 'property_2', '2');
-INSERT INTO `inmobiliaria`.`archivo_inmueble` (`tipo`, `nombre`, `inmueble`) VALUES ('0', 'property_3', '3');
-INSERT INTO `inmobiliaria`.`archivo_inmueble` (`tipo`, `nombre`, `inmueble`) VALUES ('0', 'property_4', '4');
-INSERT INTO `inmobiliaria`.`archivo_inmueble` (`tipo`, `nombre`, `inmueble`) VALUES ('0', 'property_5', '5');
-INSERT INTO `inmobiliaria`.`archivo_inmueble` (`tipo`, `nombre`, `inmueble`) VALUES ('0', 'property_6', '6');
-INSERT INTO `inmobiliaria`.`archivo_inmueble` (`tipo`, `nombre`, `inmueble`) VALUES ('0', 'property_7', '7');
-INSERT INTO `inmobiliaria`.`archivo_inmueble` (`tipo`, `nombre`, `inmueble`) VALUES ('0', 'property_8', '8');
-INSERT INTO `inmobiliaria`.`archivo_inmueble` (`tipo`, `nombre`, `inmueble`) VALUES ('0', 'property_9', '9');
+INSERT INTO `inmobiliaria`.`archivo_inmueble` (`tipo`, `nombre`, `inmueble`) VALUES ('0', 'property_1.jpg', '1');
+INSERT INTO `inmobiliaria`.`archivo_inmueble` (`tipo`, `nombre`, `inmueble`) VALUES ('0', 'property_2.jpg', '2');
+INSERT INTO `inmobiliaria`.`archivo_inmueble` (`tipo`, `nombre`, `inmueble`) VALUES ('0', 'property_3.jpg', '3');
+INSERT INTO `inmobiliaria`.`archivo_inmueble` (`tipo`, `nombre`, `inmueble`) VALUES ('0', 'property_4.jpg', '4');
+INSERT INTO `inmobiliaria`.`archivo_inmueble` (`tipo`, `nombre`, `inmueble`) VALUES ('0', 'property_5.jpg', '5');
+INSERT INTO `inmobiliaria`.`archivo_inmueble` (`tipo`, `nombre`, `inmueble`) VALUES ('0', 'property_6.jpg', '6');
+INSERT INTO `inmobiliaria`.`archivo_inmueble` (`tipo`, `nombre`, `inmueble`) VALUES ('0', 'property_7.jpg', '7');
+INSERT INTO `inmobiliaria`.`archivo_inmueble` (`tipo`, `nombre`, `inmueble`) VALUES ('0', 'property_8.jpg', '8');
+INSERT INTO `inmobiliaria`.`archivo_inmueble` (`tipo`, `nombre`, `inmueble`) VALUES ('0', 'property_9.jpg', '9');
