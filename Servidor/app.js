@@ -35,9 +35,20 @@ app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(express.static(path.join(__dirname, 'public')));
 
+/**
+ * Permitimos acceso desde el cliente 4200 y al Karma 9876
+ */
 app.use(function (req, res, next) {
-    // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+    /**
+     * Lista de dominios permitidos
+     */
+    var allowedOrigins = ['http://localhost:4200', 'http://localhost:9876'];
+    // obtenemos el origin
+    var origin = req.headers.origin;
+    if(allowedOrigins.indexOf(origin) > -1){
+        // permitimos el acceso del origin, siempre y cuando este en el array allowedOrigins
+         res.setHeader('Access-Control-Allow-Origin', origin);
+    }
     // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     // Request headers you wish to allow

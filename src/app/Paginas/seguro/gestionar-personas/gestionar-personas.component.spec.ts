@@ -11,7 +11,7 @@ import {
   Http
 } from '@angular/http';
 
-fdescribe('GestionarPersonasComponent', () => {
+describe('GestionarPersonasComponent', () => {
   // Rol que tendra la persona
   // tslint:disable-next-line:prefer-const
   let rol = new Rol();
