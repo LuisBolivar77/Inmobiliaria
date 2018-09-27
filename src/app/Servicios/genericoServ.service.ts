@@ -21,6 +21,7 @@ export class GenericoService {
      */
     listar (table: string, object: object) {
         var data = {"tabla" : table, "objeto" : object}
+        console.log(data);
         return this.http.post<any>(this.domain + 'generico/listar', data)
         .pipe(
             map(res => {

@@ -93,4 +93,15 @@ export class VerInmuebleComponent implements OnInit {
     return this.inmueble2.addComa(valor);
   }
 
+  /**
+   * Apartir de un booleano nos devuelve si, si o no
+   */
+  siNo(boolean){
+    if(boolean == 1){
+      return "Si";
+    }else{
+      return "No";
+    }
+  }
+
 }

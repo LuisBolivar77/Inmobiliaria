@@ -15,8 +15,8 @@
           <div class="property">
             <div class="property_image">
               <img src="template/images/{{fotos[(i.id)]}}" alt="">
-              <div  *ngIf="i.tipoAV == 0" class="tag_featured property_tag"><a href="#">{{getTipoAV(i.tipoAV)}}</a></div>
-              <div *ngIf="i.tipoAV == 1" class="tag_offer property_tag"><a href="#">{{getTipoAV(i.tipoAV)}}</a></div>
+              <div *ngIf="i.tipoAV == 0" class="tag_featured property_tag"><a href='/?objeto={"tipoAV":"{{i.tipoAV}}"}'>{{getTipoAV(i.tipoAV)}}</a></div>
+              <div *ngIf="i.tipoAV == 1" class="tag_offer property_tag"><a href='/?objeto={"tipoAV":"{{i.tipoAV}}"}'>{{getTipoAV(i.tipoAV)}}</a></div>
             </div>
             <div class="property_body text-center">
               <div class="property_location">{{i.ciudad.nombre}} ({{i.ciudad.departamento.nombre}})</div>

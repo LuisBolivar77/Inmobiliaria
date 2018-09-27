@@ -19,12 +19,21 @@ export class IndexComponent implements OnInit {
   fotos: Array<{}> = [];
   // Inmueble
   inmueble: Inmueble = new Inmueble();
+  // parametros de busqueda
 
   constructor(private genericoServicio: GenericoService) {}
 
   ngOnInit() {
-    // listamos los inmuebles
-    this.listarInmuebles();
+    // validamos si hay parametros para filtrar
+    var objeto = this.genericoServicio.getUrlParameter("objeto");
+    if(objeto != undefined && objeto != '' && objeto != null){
+      // Cargamos el resultado de inmuebles teniendo en cuenta los parametros en el objeto
+      this.listarByParametros(objeto);
+    }else{
+      // Como no hay parametros de busqueda, cargamos todos los inmuebles
+      // listamos los inmuebles
+      this.listarInmuebles();
+    }
   }
 
   /**
@@ -33,6 +42,22 @@ export class IndexComponent implements OnInit {
   listarInmuebles(){
     // Obtenemos la lista de inmuebles
     this.genericoServicio.listar("inmueble",{"estado":1}).subscribe(r => {
+      if(r.data != null){
+        this.inmuebles = r.data;
+        // Agregamos los datos (objetos) adicionales a cada inmueble
+        this.agregarObjetos(this.inmuebles);
+      }
+    });
+  }
+
+    /**
+   * Carga la lista de inmuebles disponibles (estado 1 = publicado)
+   */
+  listarByParametros(objeto){
+    // convertimos el texto a objeto json
+    var json = JSON.parse(objeto);
+    // Obtenemos la lista de inmuebles
+    this.genericoServicio.listar("inmueble",json).subscribe(r => {
       if(r.data != null){
         this.inmuebles = r.data;
         // Agregamos los datos (objetos) adicionales a cada inmueble
