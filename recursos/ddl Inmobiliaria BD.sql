@@ -126,7 +126,7 @@ CREATE TABLE inmueble (
     estado                       INTEGER NOT NULL,
     tipoAV                       INTEGER NOT NULL,
     garajes                      INTEGER NOT NULL,
-    habitaciones                 INTEGER NOT NULL,
+    habitaciones                   INTEGER NOT NULL,
     detalles                     VARCHAR(400) NOT NULL,
     anoconstruccion              VARCHAR(20) NOT NULL,
     ascensor                     CHAR(1) NOT NULL,
@@ -143,7 +143,7 @@ CREATE TABLE inmueble (
     tipo_cortinas                VARCHAR(100) NOT NULL,
     cuarto_servicio              CHAR(1) NOT NULL,
     chimenea                     CHAR(1) NOT NULL,
-    cocinaAC                     CHAR(1) NOT NULL,
+    cocinaAC         CHAR(1) NOT NULL,
     comedorIndependiente         CHAR(1) NOT NULL,
     vista_exterior_interior      CHAR(1) NOT NULL,
     zona                         INTEGER NOT NULL,
@@ -155,6 +155,7 @@ CREATE TABLE inmueble (
     promocion                    INTEGER,
     PRIMARY KEY ( id )
 );
+ALTER TABLE inmueble ADD CONSTRAINT inmueble__un UNIQUE ( numero_matricula );
 
 CREATE TABLE personas (
     id                 INTEGER NOT NULL AUTO_INCREMENT,

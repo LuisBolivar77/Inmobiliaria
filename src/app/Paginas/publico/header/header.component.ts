@@ -44,8 +44,8 @@ export class HeaderComponent implements OnInit {
    * Busca de acuerdo a los parametros seleccionados por el usuario
    */
   buscar(){
-    window.alert();
-    this.servicios.redireccionar("/");
+    console.log(this.inmueble);
+    this.servicios.redireccionar("/?"+this.inmueble);
   }
 
   /**

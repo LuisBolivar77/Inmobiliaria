@@ -89,7 +89,7 @@
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="antiguedad" id="8D0B884E-1074-410C-C07E-00FBC46C71AE">
+<Column name="habitaciones" id="8D0B884E-1074-410C-C07E-00FBC46C71AE">
 <createdBy>krlox</createdBy>
 <createdTime>2018-09-18 21:41:31 UTC</createdTime>
 <ownerDesignName>marelsa</ownerDesignName>
