@@ -16,11 +16,11 @@ export class GenericoService {
 
     /**
      * Listar registros de una determinada tabla
-     * @param tabla la tabla de donde se traera los registros 
+     * @param tabla la tabla de donde se traera los registros
      * @param objeto los parametros dado el caso que vaya a iltrar
      */
     listar (table: string, object: object) {
-        var data = {"tabla" : table, "objeto" : object}
+        const data = {'tabla' : table, 'objeto' : object};
         return this.http.post<any>(this.domain + 'generico/listar', data)
         .pipe(
             map(res => {
@@ -31,11 +31,11 @@ export class GenericoService {
 
     /**
      * Registrar en una determinada tabla
-     * @param tabla la tabla de donde se traera los registros 
+     * @param tabla la tabla de donde se traera los registros
      * @param objeto el objeto a registrar
      */
     registrar (table: string, object: object) {
-        var data = {"tabla" : table, "objeto" : object}
+        const data = {'tabla' : table, 'objeto' : object};
         return this.http.post<any>(this.domain + 'generico/guardar', data)
         .pipe(
             map(res => {
@@ -46,11 +46,11 @@ export class GenericoService {
 
     /**
      * Editar en una determinada tabla
-     * @param tabla la tabla de donde se traera los registros 
+     * @param tabla la tabla de donde se traera los registros
      * @param objeto el objeto a editar
      */
     editar (table: string, object: object, pk: string) {
-        var data = {"tabla" : table, "objeto" : object, "pk" : pk}
+        const data = {'tabla' : table, 'objeto' : object, 'pk' : pk};
         return this.http.post<any>(this.domain + 'generico/editar', data)
         .pipe(
             map(res => {
@@ -61,11 +61,11 @@ export class GenericoService {
 
     /**
      * Buscar en una determinada tabla
-     * @param tabla la tabla de donde se traera los registros 
+     * @param tabla la tabla de donde se traera los registros
      * @param objeto los parametros dado el caso que vaya a iltrar
      */
     buscar (table: string, object: object) {
-        var data = {"tabla" : table, "objeto" : object}
+        const data = {'tabla' : table, 'objeto' : object};
         return this.http.post<any>(this.domain + 'generico/buscar', data)
         .pipe(
             map(res => {
@@ -80,7 +80,7 @@ export class GenericoService {
      * @param objeto los parametros para eliminar, el objeto tiene la pk y el valor
      */
     eliminar (table: string, object: object) {
-        var data = {"tabla" : table, "objeto" : object}
+        const data = {'tabla' : table, 'objeto' : object};
         return this.http.post<any>(this.domain + 'generico/eliminar', data)
         .pipe(
             map(res => {

@@ -1,15 +1,13 @@
-import { Cargo } from "./Cargo";
-import { Usuario } from "./Usuario";
-import { Experiencia } from "./Experiencia";
-import { Formacion } from "./formacion";
+import { Cargo } from './Cargo';
+import { Usuario } from './Usuario';
 
 /**
  * Empleado de la inmobiliaria
  */
-export class Empleado{
-    
+export class Empleado {
+
     usuario: Usuario;
     salario: number;
     cargo: Cargo;
-    
+
 }

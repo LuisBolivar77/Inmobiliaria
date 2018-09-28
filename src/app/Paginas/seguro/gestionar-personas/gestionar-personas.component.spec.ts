@@ -1,3 +1,4 @@
+import { GenericoService } from './../../../Servicios/genericoServ.service';
 import { PersonaService } from './../../../Servicios/personaServ.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
@@ -10,6 +11,7 @@ import {
   ResponseOptions,
   Http
 } from '@angular/http';
+import { not } from '@angular/compiler/src/output/output_ast';
 
 fdescribe('GestionarPersonasComponent', () => {
   // Rol que tendra la persona
@@ -22,17 +24,17 @@ fdescribe('GestionarPersonasComponent', () => {
   // tslint:disable-next-line:prefer-const
   let usuario = new Usuario();
 
-  let service: PersonaService;
+  let service: GenericoService;
   let httpMock: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers:    [ PersonaService],
+      providers:    [ GenericoService ],
       imports: [ HttpClientTestingModule ],
     });
 
     // Returns a service with the MockBackend so we can test with dummy responses
-    service = TestBed.get(PersonaService);
+    service = TestBed.get(GenericoService);
     httpMock = TestBed.get(HttpTestingController);
   });
 
@@ -57,25 +59,9 @@ fdescribe('GestionarPersonasComponent', () => {
 
   it('buscar un cliente', () => {
     // Perform a request and make sure we get the response we expect
-
-    const ced = '1094';
-    service.personaByCedula(persona).subscribe(res => {
-
-      expect<any>(res.length).toBe(1);
+    service.listar('personas', null).subscribe(res => {
+      console.log(res.data);
+      expect<any>(res.data).not.toBe(null);
     });
-
-    // const request = httpMock.expectOne('http://localhost:4300/personas/persona-by-cedula/' + ced);
-    // expect(request.request.method).toBe('GET');
   });
-
-  /**
-  it('registrar un cliente', () => {
-    service.registrar(usuario).subscribe(res => {
-      expect<any>(res).toBe('exito');
-
-    });
-    const request = httpMock.expectOne('http://localhost:4400/personas/registrar' + persona.cedula);
-    expect(request.request.method).toBe('POST');
-  });
-   */
 });

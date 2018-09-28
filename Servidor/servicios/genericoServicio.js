@@ -132,6 +132,7 @@ exports.buscar = function(req, res){
             sql += key+" = "+parametros[key];
             sum++;
         }
+        console.log('consultaaaaaaaaaaaa ....... ' + sql);
       }
       // Ejecutamos la consulta y retornamos
       req.getConnection(function(err,connection){

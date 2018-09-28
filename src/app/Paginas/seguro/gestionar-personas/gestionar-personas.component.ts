@@ -121,7 +121,7 @@ export class GestionarPersonasComponent implements OnInit {
   }
 
   /**
-   * Ver la inormacion de una persona de la tabla
+   * Ver la informacion de una persona de la tabla
    */
   ver(p: Persona) {
     this.persona.cedula = p.cedula;

@@ -5,15 +5,16 @@ import { Promocion } from './Promocion';
 export class Inmueble {
 
     direccion: string;
+    numero_matricula: string;
     area: number;
     valor: number;
     banios: number;
-    estado: boolean;
+    estado: number;
     tipoAV: number;
     garajes: number;
-    antiguedad: number;
+    habitaciones: number;
     detalles: string;
-    anioContruccion: string;
+    anoconstruccion: string;
     ascensor: boolean;
     canchasDepor: boolean;
     zonasHumedas: boolean;

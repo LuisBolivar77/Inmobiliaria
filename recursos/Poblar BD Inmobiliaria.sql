@@ -34,3 +34,35 @@ INSERT INTO `inmobiliaria`.`cargos` (`id`, `nombre`, `descripcion`) VALUES ('4',
 -- Empleados --
 INSERT INTO `inmobiliaria`.`empleados` (`usuario`, `salario`, `cargo`) VALUES ('2', '1200000', '2');
 
+-- Departamentos --
+
+INSERT INTO `inmobiliaria`.`departamentos` (`nombre`) VALUES ('Quindio');
+INSERT INTO `inmobiliaria`.`departamentos` (`nombre`) VALUES ('Risaralda');
+INSERT INTO `inmobiliaria`.`departamentos` (`nombre`) VALUES ('Cundinamarca');
+INSERT INTO `inmobiliaria`.`departamentos` (`nombre`) VALUES ('Antioquia');
+INSERT INTO `inmobiliaria`.`departamentos` (`nombre`) VALUES ('Nariño');
+
+-- Ciudadades --
+
+INSERT INTO `inmobiliaria`.`ciudades` (`nombre`, `departamento`) VALUES ('Calarca', '1');
+INSERT INTO `inmobiliaria`.`ciudades` (`nombre`, `departamento`) VALUES ('Circacia', '1');
+INSERT INTO `inmobiliaria`.`ciudades` (`nombre`, `departamento`) VALUES ('Filandia', '1');
+INSERT INTO `inmobiliaria`.`ciudades` (`nombre`, `departamento`) VALUES ('Pereira', '2');
+INSERT INTO `inmobiliaria`.`ciudades` (`nombre`, `departamento`) VALUES ('Manizales', '2');
+INSERT INTO `inmobiliaria`.`ciudades` (`nombre`, `departamento`) VALUES ('Dos Quebradas', '2');
+INSERT INTO `inmobiliaria`.`ciudades` (`nombre`, `departamento`) VALUES ('Sanra rosa del cabal', '2');
+INSERT INTO `inmobiliaria`.`ciudades` (`nombre`, `departamento`) VALUES ('Bogota', '3');
+INSERT INTO `inmobiliaria`.`ciudades` (`nombre`, `departamento`) VALUES ('Fusagasuga', '3');
+INSERT INTO `inmobiliaria`.`ciudades` (`nombre`, `departamento`) VALUES ('Cajica', '3');
+INSERT INTO `inmobiliaria`.`ciudades` (`nombre`, `departamento`) VALUES ('Cota', '3');
+INSERT INTO `inmobiliaria`.`ciudades` (`nombre`, `departamento`) VALUES ('Medellin', '4');
+INSERT INTO `inmobiliaria`.`ciudades` (`nombre`, `departamento`) VALUES ('Zaragoza', '4');
+INSERT INTO `inmobiliaria`.`ciudades` (`nombre`, `departamento`) VALUES ('La ceja', '4');
+INSERT INTO `inmobiliaria`.`ciudades` (`nombre`, `departamento`) VALUES ('Puerto berrio', '4');
+INSERT INTO `inmobiliaria`.`ciudades` (`nombre`, `departamento`) VALUES ('Pasto', '5');
+INSERT INTO `inmobiliaria`.`ciudades` (`nombre`, `departamento`) VALUES ('Tumaco', '5');
+INSERT INTO `inmobiliaria`.`ciudades` (`nombre`, `departamento`) VALUES ('La union', '5');
+INSERT INTO `inmobiliaria`.`ciudades` (`nombre`, `departamento`) VALUES ('El peñol', '5');
+INSERT INTO `inmobiliaria`.`ciudades` (`nombre`, `departamento`) VALUES ('Nariño', '5');
+
+
