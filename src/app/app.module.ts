@@ -18,7 +18,7 @@ import { GestionarAdministradoresComponent } from './Paginas/seguro/gestionar-ad
 import { PromocionesComponent } from './Paginas/publico/promociones/promociones.component';
 import { EditarCuentaComponent } from './Paginas/seguro/editar-cuenta/editar-cuenta.component';
 import { InmueblesAdminComponent } from './Paginas/seguro/inmuebles-admin/inmuebles-admin.component';
-import { VerInmuebleComponent } from './paginas/publico/ver-inmueble/ver-inmueble.component';
+import { VerInmuebleComponent } from './Paginas/publico/ver-inmueble/ver-inmueble.component';
 
 @NgModule({
   declarations: [

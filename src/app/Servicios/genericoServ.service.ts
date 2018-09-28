@@ -90,6 +90,7 @@ export class GenericoService {
         );
     }
 
+
     /**
      * Returna una variable por get
      * @param {String} sParam Nombre del parametro get
@@ -108,6 +109,6 @@ export class GenericoService {
                 return sParameterName[1] === undefined ? true : sParameterName[1];
             }
     }
-}
 
+}
 }
