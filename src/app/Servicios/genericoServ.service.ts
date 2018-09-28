@@ -90,6 +90,7 @@ export class GenericoService {
         );
     }
 
+
     /**
      * Returna una variable por get
      * @param {String} sParam Nombre del parametro get
@@ -98,7 +99,7 @@ export class GenericoService {
      * @version 0.1
     */
     getUrlParameter(sParam) {
-        const sPageURL = decodeURIComponent(window.location.search.substring(1)),
+        var sPageURL = decodeURIComponent(window.location.search.substring(1)),
             sURLVariables = sPageURL.split('&'),
             sParameterName,
             i;
@@ -108,6 +109,6 @@ export class GenericoService {
                 return sParameterName[1] === undefined ? true : sParameterName[1];
             }
     }
-}
 
+}
 }
