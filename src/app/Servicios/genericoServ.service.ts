@@ -98,7 +98,7 @@ export class GenericoService {
      * @version 0.1
     */
     getUrlParameter(sParam) {
-        const sPageURL = decodeURIComponent(window.location.search.substring(1)),
+        var sPageURL = decodeURIComponent(window.location.search.substring(1)),
             sURLVariables = sPageURL.split('&'),
             sParameterName,
             i;
