@@ -276,7 +276,7 @@
 <ownDataTypeParameters>1,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="cocinaAbiertaCerrada" id="57D7F766-4AA4-BB4B-75B4-2C5486C3A1AD">
+<Column name="cocinaAC" id="57D7F766-4AA4-BB4B-75B4-2C5486C3A1AD">
 <createdBy>luchobolivar</createdBy>
 <createdTime>2018-09-20 16:32:32 UTC</createdTime>
 <ownerDesignName>marelsa</ownerDesignName>

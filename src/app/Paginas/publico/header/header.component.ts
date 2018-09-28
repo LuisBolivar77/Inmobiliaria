@@ -44,8 +44,10 @@ export class HeaderComponent implements OnInit {
    * Busca de acuerdo a los parametros seleccionados por el usuario
    */
   buscar(){
-    console.log(this.inmueble);
-    this.servicios.redireccionar("/?"+this.inmueble);
+    // Convertimos el objeto inmueble a json
+    var json = JSON.stringify(this.inmueble);
+    // Redireccionamos al index con los parametros a buscar
+    location.href="/?objeto="+json;
   }
 
   /**

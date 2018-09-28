@@ -26,7 +26,7 @@ export class IndexComponent implements OnInit {
   ngOnInit() {
     // validamos si hay parametros para filtrar
     var objeto = this.genericoServicio.getUrlParameter("objeto");
-    if(objeto != undefined && objeto != '' && objeto != null){
+    if(objeto != undefined && objeto != '' && objeto != null && objeto != "{}"){
       // Cargamos el resultado de inmuebles teniendo en cuenta los parametros en el objeto
       this.listarByParametros(objeto);
     }else{
