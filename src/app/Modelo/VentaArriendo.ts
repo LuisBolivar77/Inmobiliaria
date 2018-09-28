@@ -1,4 +1,4 @@
-export class Departamento {
+export class VentaArriendo {
 
     id: number;
     nombre: string;

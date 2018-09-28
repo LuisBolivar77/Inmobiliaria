@@ -72,6 +72,7 @@ export class UsuarioService {
      * retorna true si no esta, de lo contrario false
      */
     pageInArray(page: string, accesos: Array<Acceso>) {
+        // tslint:disable-next-line:prefer-const
         for (let acceso of accesos) {
             if (acceso.url === page) {
                 return false;

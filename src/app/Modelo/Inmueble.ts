@@ -6,6 +6,7 @@ export class Inmueble {
 
     id: number;
     direccion: string;
+    numero_matricula: string;
     area: number;
     valor: number;
     banios: number;
@@ -24,7 +25,7 @@ export class Inmueble {
     garajes: number;
     habitaciones: number;
     detalles: string;
-    anoContruccion: string;
+    anoconstruccion: string;
     ascensor: boolean;
     canchasDepor: boolean;
     zonasHumedas: boolean;
@@ -60,17 +61,17 @@ export class Inmueble {
      * retorna el valor texto de un estado
      * @param estado el numero del indice a retornar
      */
-    getEstado(estado: number){
-        var estados = [
-            "pendiente de publicacion",
-            "publicado",
-            "Vendido o Arrendado",
-            "Eliminado"
-        ]
-        if(estado == null){
+    getEstado(estado: number) {
+        const estados = [
+            'pendiente de publicacion',
+            'publicado',
+            'Vendido o Arrendado',
+            'Eliminado'
+        ];
+        if (estado == null) {
             // Retornamos todo el listado de estados
             return estados;
-        }else{
+        } else {
             return estados[estado];
         }
     }
@@ -79,15 +80,15 @@ export class Inmueble {
      * retorna el valor texto de un tipo venta arrendo
      * @param tipoAV el numero del indice a retornar
      */
-    getTipoAV(tipoAV: number){
-        var tipos = [
-            "Arriendo",
-            "Venta"
-        ]
-        if(tipoAV == null){
+    getTipoAV(tipoAV: number) {
+        const tipos = [
+            'Arriendo',
+            'Venta'
+        ];
+        if (tipoAV == null) {
             // Retornamos todo el listado de tipos
             return tipos;
-        }else{
+        } else {
             return tipos[tipoAV];
         }
     }
@@ -96,17 +97,17 @@ export class Inmueble {
      * retorna el valor texto de una zona
      * @param zona el numero del indice a retornar
      */
-    getZona(zona: number){
-        var zonas = [
-            "Norte",
-            "Sur",
-            "Oriente",
-            "Occidente"
-        ]
-        if(zona == null){
+    getZona(zona: number) {
+        const zonas = [
+            'Norte',
+            'Sur',
+            'Oriente',
+            'Occidente'
+        ];
+        if (zona == null) {
             // Retornamos todo el listado de zonas
             return zonas;
-        }else{
+        } else {
             return zonas[zona];
         }
     }
@@ -116,21 +117,23 @@ export class Inmueble {
      * @param numero el numero al que le agregaremos comas
      */
     addComa(num) {
-        var cents,sign;
-        if (!num || num == 'NaN') return '-';
-        if (num == 'Infinity') return '&#x221e;';
+        let cents, sign;
+        if (!num || num === 'NaN') { return '-'; }
+        if (num === 'Infinity') { return '&#x221e;'; }
         num = num.toString().replace(/\$|\,/g, '');
-        if (isNaN(num))
-            num = "0";
-        sign = (num == (num = Math.abs(num)));
+        if (isNaN(num)) {
+            num = '0';
+        sign = (num === (num = Math.abs(num)));
         num = Math.floor(num * 100 + 0.50000000001);
         cents = num % 100;
         num = Math.floor(num / 100).toString();
-        if (cents < 10)
-            cents = "0" + cents;
-        for (var i = 0; i < Math.floor((num.length - (1 + i)) / 3) ; i++)
+        }
+        if (cents < 10) {
+            cents = '0' + cents;
+        }
+        for (let i = 0; i < Math.floor((num.length - (1 + i)) / 3) ; i++) {
             num = num.substring(0, num.length - (4 * i + 3)) + '.' + num.substring(num.length - (4 * i + 3));
+        }
         return (((sign) ? '' : '-') + num + ',' + cents);
     }
-    
 }
