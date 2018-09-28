@@ -22,7 +22,7 @@ export class Inmueble {
      */
     tipoAV: number;
     garajes: number;
-    antiguedad: number;
+    habitaciones: number;
     detalles: string;
     anoContruccion: string;
     ascensor: boolean;

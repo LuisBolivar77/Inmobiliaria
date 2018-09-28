@@ -78,7 +78,7 @@
 									<div class="sidebar_search_select">Estudio: <span>{{siNo(inmueble.estudio)}}</span></div>
 									<div class="sidebar_search_select">Cuarto de Servicio: <span>{{siNo(inmueble.cuarto_servicio)}}</span></div>
 									<div class="sidebar_search_select">Chimenea: <span>{{siNo(inmueble.chimenea)}}</span></div>
-									<div class="sidebar_search_select">Cocina Abierta/Cerrada: <span>{{siNo(inmueble.cocinaabiertacerrada)}}</span></div>
+									<div class="sidebar_search_select">Cocina Abierta/Cerrada: <span>{{siNo(inmueble.cocinaAC)}}</span></div>
 									<div class="sidebar_search_select">Comedor Independiente: <span>{{siNo(inmueble.comedorIndependiente)}}</span></div>
 									<div class="sidebar_search_select">Vista Exterior / Interior: <span>{{siNo(inmueble.vista_exterior_interior)}}</span></div>
 									<button class="sidebar_search_button search_form_button" style="width: 100%;margin-top:20px!important">Reservar Visita</button>
@@ -114,7 +114,7 @@
 									<div class="property_room_title">Habitaciones</div>
 									<div class="property_room_content d-flex flex-row align-items-center justify-content-start">
 										<div class="room_icon"><img src="template/images/room_1.png" alt=""></div>
-										<div class="room_num">4</div>
+										<div class="room_num">{{inmueble.habitaciones}}</div>
 									</div>
 								</div>
 
