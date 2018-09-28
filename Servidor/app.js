@@ -12,10 +12,8 @@ var path = require('path');
 
 // servicios de usuario
 var usuarioServicio = require('./servicios/UsuarioServicio')
-
 // servicios de rol y acessos
 var rolServicio = require('./servicios/RolServicio')
-
 // servicios de inmuebles
 var inmublesServicio = require('./servicios/InmublesServicio')
 // servicios genericos
@@ -24,10 +22,8 @@ var genericoServicio = require('./servicios/genericoServicio')
 // -------------END --------------- //
 
 var app = express();
-
 var connection  = require('express-myconnection'); 
 var mysql = require('mysql');
-
 // all environments
 app.set('port', process.env.PORT || 4300);
 app.set('views', path.join(__dirname, 'views'));
@@ -39,9 +35,20 @@ app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(express.static(path.join(__dirname, 'public')));
 
+/**
+ * Permitimos acceso desde el cliente 4200 y al Karma 9876
+ */
 app.use(function (req, res, next) {
-    // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+    /**
+     * Lista de dominios permitidos
+     */
+    var allowedOrigins = ['http://localhost:4200', 'http://localhost:9876'];
+    // obtenemos el origin
+    var origin = req.headers.origin;
+    if(allowedOrigins.indexOf(origin) > -1){
+        // permitimos el acceso del origin, siempre y cuando este en el array allowedOrigins
+         res.setHeader('Access-Control-Allow-Origin', origin);
+    }
     // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     // Request headers you wish to allow
@@ -68,7 +75,7 @@ app.use(
         
         host: 'localhost', //'localhost',
         user: 'root',
-        password : 'root',
+        password : '',
         port : 3306, //port mysql
         database:'inmobiliaria'
 

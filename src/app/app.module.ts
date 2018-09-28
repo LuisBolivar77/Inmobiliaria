@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { RegistroUsuarioComponent } from './Paginas/publico/registro-usuario/registro-usuario.component';
@@ -18,6 +18,7 @@ import { GestionarAdministradoresComponent } from './Paginas/seguro/gestionar-ad
 import { PromocionesComponent } from './Paginas/publico/promociones/promociones.component';
 import { EditarCuentaComponent } from './Paginas/seguro/editar-cuenta/editar-cuenta.component';
 import { InmueblesAdminComponent } from './Paginas/seguro/inmuebles-admin/inmuebles-admin.component';
+import { VerInmuebleComponent } from './paginas/publico/ver-inmueble/ver-inmueble.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { InmueblesAdminComponent } from './Paginas/seguro/inmuebles-admin/inmueb
     GestionarAdministradoresComponent,
     PromocionesComponent,
     EditarCuentaComponent,
-    InmueblesAdminComponent
+    InmueblesAdminComponent,
+    VerInmuebleComponent
   ],
   imports: [
     BrowserModule,
@@ -46,6 +48,10 @@ import { InmueblesAdminComponent } from './Paginas/seguro/inmuebles-admin/inmueb
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
+      {
+        path: 'ver-inmueble',
+        component: VerInmuebleComponent
+      },
       {
         path: 'administracion/gestion-inmuebles',
         component: InmueblesAdminComponent

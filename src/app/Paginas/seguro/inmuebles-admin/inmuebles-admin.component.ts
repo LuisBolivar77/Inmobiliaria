@@ -153,12 +153,11 @@ export class InmueblesAdminComponent implements OnInit {
     const fecha = this.fechaActual();
     this.inmueble.fechaAprobacion = fecha;
     this.inmueble.ciudad = this.ciudadSeleccionada;
-    this.inmueble.tipoInmueble = this.tipoInmuebleSeleccionado;
     this.inmueble.tipoAV = this.tipoAVSeleccionado.id;
     this.inmueble.zona = this.zonaSeleccionada.id;
     this.inmueble.estado = 1;
     this.inmueble.ciudad = this.ciudadSeleccionada;
-    this.inmueble.tipoInmueble = this.tipoInmuebleSeleccionado;
+    this.inmueble.tipo = this.tipoInmuebleSeleccionado;
     this.inmueble.zona = this.zonaSeleccionada.id;
     this.inmueble.tipoAV = this.tipoAVSeleccionado.id;
     this.inmueble.ascensor = this.markedAsensor;
