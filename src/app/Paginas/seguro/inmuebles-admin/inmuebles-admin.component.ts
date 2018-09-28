@@ -117,14 +117,8 @@ export class InmueblesAdminComponent implements OnInit {
   }
 
   registrar(form: NgForm) {
-    console.log('////////////// entro registrar /////////////');
-    console.log('////////////// cedula /////////////' + this.cedula);
-    if (this.cedula != null) {
-      console.log('////////////// entro primer if /////////////');
-      this.buscarUsuario();
-      console.log('////////////// valor segundo if /////////////' + this.valor);
-      if (this.valor) {
 
+        console.log('persona a guardar /////////////// ' + this.inmueble.usuario.persona);
         this.llenarInmueble();
 
         this.generico.registrar('inmueble', {'inmueble': this.inmueble}).subscribe(res => {
@@ -133,20 +127,12 @@ export class InmueblesAdminComponent implements OnInit {
             this.show = 2;
             // Actualizamos la lista de empleados
             this.listar();
-            form.reset();
+            window.alert(res.data);
           } else {
             this.msj = res.data;
             this.show = 1;
           }
         });
-      } else {
-        this.show = 1;
-        this.msj = 'No existe ningun usuario registrado con la cedula: ' + this.cedula;
-      }
-    } else {
-      this.show = 1;
-      this.msj = 'debe ingresar el numero de cedula del usuario propietario';
-    }
   }
 
   llenarInmueble() {
@@ -172,7 +158,7 @@ export class InmueblesAdminComponent implements OnInit {
     this.inmueble.parqueadero = this.markedParqueadero;
     this.inmueble.precioNegociable = this.markedPrecioNegociable;
     this.inmueble.transporteCercano = this.markedTransporteCercano;
-    this.inmueble.vistaExterios = this.markedVistaExterios;
+    this.inmueble.vistaExterior = this.markedVistaExterios;
     this.inmueble.zonaInfantil = this.markedZonaInfantil;
     this.inmueble.zonasHumedas = this.markedZonasHumedas;
     this.inmueble.zonasRopas = this.markedZonasRopas;
@@ -196,15 +182,12 @@ export class InmueblesAdminComponent implements OnInit {
     /**
    * Buscar empleado
    */
-  buscarUsuario() {
-    console.log('////////////// entro buscar /////////////');
+  buscarUsuario(form: NgForm) {
       this.generico.buscar('personas', {'cedula': this.cedula}).subscribe(rta => {
         if (rta.data == null) {
           this.valor = false;
-          console.log('////////////// entro null /////////////');
           // this.limpiar();
         } else {
-          console.log('////////////// entro true /////////////');
           this.show = 3;
           // Guardamos el resultado en persona
           this.persona = rta.data;
@@ -213,11 +196,12 @@ export class InmueblesAdminComponent implements OnInit {
                 this.usuarioCliente = rta2.data;
                 // Setteamos los datos al empleado
                 this.inmueble.usuario = this.usuarioCliente;
+                this.inmueble.usuario.persona = this.persona;
+                this.registrar(form);
                 this.valor = true;
           });
         }
       });
-      console.log('////////////// lo que retorna /////////////' + this.valor);
   }
 
   ver(e: Inmueble) {

@@ -42,7 +42,7 @@ export class Inmueble {
     chimenea: boolean;
     cocinaAC: boolean;
     comedorIndependiente: boolean;
-    vistaExterios: boolean;
+    vistaExterior: boolean;
     /**
      * 0 = Norte
      * 1 = Sur
