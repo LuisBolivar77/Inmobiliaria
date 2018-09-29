@@ -12,7 +12,7 @@ import { Inmueble } from '../../../Modelo/Inmueble';
 import { GenericoService } from '../../../Servicios/genericoServ.service';
 import { HttpClientModule } from '@angular/common/http';
 
-fdescribe('VerInmuebleComponent', () => {
+describe('VerInmuebleComponent', () => {
   // inmueble a ver
   let inmueble = new Inmueble();
   /**

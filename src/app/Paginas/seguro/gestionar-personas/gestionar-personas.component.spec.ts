@@ -15,7 +15,7 @@ import { not } from '@angular/compiler/src/output/output_ast';
 import { HttpClientModule } from '@angular/common/http';
 import { GestionarPersonasComponent } from './gestionar-personas.component';
 
-describe('GestionarPersonasComponent', () => {
+fdescribe('GestionarPersonasComponent', () => {
   // Rol que tendra la persona
   // tslint:disable-next-line:prefer-const
   let rol = new Rol();
@@ -37,13 +37,18 @@ describe('GestionarPersonasComponent', () => {
 
   });
 
-  beforeEach(() => {
+ 
+    
+
+
+  it('crear una persona', () => {
+
     rol.id = 1;
     rol.nombre = 'Administrador';
     rol.descripcion = 'administrador';
 
     // datos de la persona
-    persona.cedula = '123';
+    persona.cedula = '123456789';
     persona.nombre = 'gaga';
     persona.apellido = 'posada';
     persona.fecha_nacimiento = '1997-10-10';
@@ -54,17 +59,21 @@ describe('GestionarPersonasComponent', () => {
     usuario.persona = persona;
     usuario.username = 'laura';
     usuario.password = '123';
-  });
 
-  it('crear un cliente', () => {
         // Usamos TestBed para poder usar el servicio http
 
     const servicio: GenericoService = TestBed.get(GenericoService);
 
     // Perform a request and make sure we get the response we expect
-    servicio.registrar("persona",{usuario}).subscribe(rta => {
-      //console.log(res.data);
-      expect(rta.data.length).toEqual(1);
+    servicio.registrar("personas",{usuario}).subscribe(rta => {
+      console.log("ENTROOOOOOOOOOOOOOOOOOOOOOOOOO");
+    //console.log(usuario);
+     // expect(rta.data.length).toEqual(1);
+     servicio.buscar("personas", {"id":persona.cedula}).subscribe(rtap => {
+      // Validamos si la respuesta si concuerda con la esparada      
+      expect(rtap.cedula).toEqual('123456789');
+    });
+
     });
   });
 });
