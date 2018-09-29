@@ -147,7 +147,7 @@ jardines CHAR(1) NOT NULL,
 parqueadero CHAR(1) NOT NULL,
 precioNegociable CHAR(1) NOT NULL,
 transporteCercano CHAR(1) NOT NULL,
-vistaExteriores CHAR(1) NOT NULL,
+vistaExterior CHAR(1) NOT NULL,
 zonaInfantil CHAR(1) NOT NULL,
 zonasHumedas CHAR(1) NOT NULL,
 zonaRopas CHAR(1) NOT NULL,
@@ -247,55 +247,55 @@ ALTER TABLE rol_accesos ADD CONSTRAINT acceso FOREIGN KEY ( acceso )
     REFERENCES accesos ( id );
 
 ALTER TABLE caucion ADD CONSTRAINT arriendo FOREIGN KEY ( arriendo )
-    REFERENCES arriendo ( id );
+    REFERENCES arriendo ( id ) ON DELETE CASCADE;
 
 ALTER TABLE arriendo ADD CONSTRAINT arriendo_contrato_fk FOREIGN KEY ( contrato )
-    REFERENCES contrato ( id );
+    REFERENCES contrato ( id ) ON DELETE CASCADE;
 
 ALTER TABLE informe ADD CONSTRAINT arriendov2 FOREIGN KEY ( arriendo_id )
-    REFERENCES arriendo ( id );
+    REFERENCES arriendo ( id ) ON DELETE CASCADE;
 
 ALTER TABLE cita_desalojo ADD CONSTRAINT cita_desalojo_arriendo_fk FOREIGN KEY ( arriendo )
-    REFERENCES arriendo ( id );
+    REFERENCES arriendo ( id ) ON DELETE CASCADE;
 
 ALTER TABLE ciudades ADD CONSTRAINT ciudades_departamentos_fk FOREIGN KEY ( departamento )
     REFERENCES departamentos ( id );
 
 ALTER TABLE venta ADD CONSTRAINT contraro FOREIGN KEY ( contrato )
-    REFERENCES contrato ( id );
+    REFERENCES contrato ( id ) ON DELETE CASCADE;
 
 ALTER TABLE reservar_visita ADD CONSTRAINT empleado FOREIGN KEY ( empleado )
-    REFERENCES personas ( id );
+    REFERENCES personas ( id ) ON DELETE CASCADE;
 
 ALTER TABLE empleados ADD CONSTRAINT empleados_cargos_fk FOREIGN KEY ( cargo )
     REFERENCES cargos ( id );
 
 ALTER TABLE empleados ADD CONSTRAINT empleados_usuarios_fk FOREIGN KEY ( usuario )
-    REFERENCES usuarios ( persona );
+    REFERENCES usuarios ( persona ) ON DELETE CASCADE;
 
 ALTER TABLE venta ADD CONSTRAINT empleadov2 FOREIGN KEY ( empleado )
-    REFERENCES personas ( id );
+    REFERENCES personas ( id ) ON DELETE CASCADE;
 
 ALTER TABLE arriendo ADD CONSTRAINT empleadov3 FOREIGN KEY ( empleado )
-    REFERENCES personas ( id );
+    REFERENCES personas ( id ) ON DELETE CASCADE;
 
 ALTER TABLE cita_desalojo ADD CONSTRAINT empleadov5 FOREIGN KEY ( empleado )
-    REFERENCES personas ( id );
+    REFERENCES personas ( id ) ON DELETE CASCADE;
 
 ALTER TABLE formato_ventas ADD CONSTRAINT empleadov6 FOREIGN KEY ( empleado )
-    REFERENCES personas ( id );
+    REFERENCES personas ( id ) ON DELETE CASCADE;
 
 ALTER TABLE experiencias ADD CONSTRAINT experiencias_empleados_fk FOREIGN KEY ( empleado )
-    REFERENCES empleados ( usuario );
+    REFERENCES empleados ( usuario ) ON DELETE CASCADE;
 
 ALTER TABLE formaciones ADD CONSTRAINT formaciones_empleados_fk FOREIGN KEY ( empleado )
-    REFERENCES empleados ( usuario );
+    REFERENCES empleados ( usuario ) ON DELETE CASCADE;
 
 ALTER TABLE archivo_inmueble ADD CONSTRAINT fotos_inmueble_inmueble_fk FOREIGN KEY ( inmueble )
-    REFERENCES inmueble ( id );
+    REFERENCES inmueble ( id ) ON DELETE CASCADE;
 
 ALTER TABLE formato_ventas ADD CONSTRAINT inmueble FOREIGN KEY ( inmueble )
-    REFERENCES inmueble ( id );
+    REFERENCES inmueble ( id ) ON DELETE CASCADE;
 
 ALTER TABLE inmueble ADD CONSTRAINT inmueble_ciudades_fk FOREIGN KEY ( ciudad )
     REFERENCES ciudades ( id );
@@ -304,28 +304,28 @@ ALTER TABLE inmueble ADD CONSTRAINT inmueble_promocion_fk FOREIGN KEY ( promocio
     REFERENCES promocion ( id );
 
 ALTER TABLE inmueble ADD CONSTRAINT inmueble_usuarios_fk FOREIGN KEY ( usuario )
-    REFERENCES usuarios ( persona );
+    REFERENCES usuarios ( persona ) ON DELETE CASCADE;
 
 ALTER TABLE inmueble ADD CONSTRAINT inmueble_usuarios_fkv2 FOREIGN KEY ( administrador )
-    REFERENCES usuarios ( persona );
+    REFERENCES usuarios ( persona ) ON DELETE CASCADE;
 
 ALTER TABLE reunion ADD CONSTRAINT persona FOREIGN KEY ( persona )
-    REFERENCES personas ( id );
+    REFERENCES personas ( id ) ON DELETE CASCADE;
 
 ALTER TABLE personas ADD CONSTRAINT personas_roles_fk FOREIGN KEY ( rol )
     REFERENCES roles ( id );
 
 ALTER TABLE contrato ADD CONSTRAINT personav1 FOREIGN KEY ( empleado )
-    REFERENCES personas ( id );
+    REFERENCES personas ( id ) ON DELETE CASCADE;
 
 ALTER TABLE contrato ADD CONSTRAINT personav3 FOREIGN KEY ( cliente )
-    REFERENCES personas ( id );
+    REFERENCES personas ( id ) ON DELETE CASCADE;
 
 ALTER TABLE reservar_visita ADD CONSTRAINT res_visita_inm_fk FOREIGN KEY ( inmueble )
-    REFERENCES inmueble ( id );
+    REFERENCES inmueble ( id ) ON DELETE CASCADE;
 
 ALTER TABLE contrato ADD CONSTRAINT reservar_visita FOREIGN KEY ( visita )
-    REFERENCES reservar_visita ( id );
+    REFERENCES reservar_visita ( id ) ON DELETE CASCADE;
 
 ALTER TABLE rol_accesos ADD CONSTRAINT rol FOREIGN KEY ( rol )
     REFERENCES roles ( id );
@@ -334,10 +334,10 @@ ALTER TABLE inmueble ADD CONSTRAINT tipo_inmueble_fk FOREIGN KEY ( tipo )
     REFERENCES tipo_inmueble ( id );
 
 ALTER TABLE usuarios ADD CONSTRAINT usuario_personas_fk FOREIGN KEY ( persona )
-    REFERENCES personas ( id );
+    REFERENCES personas ( id ) ON DELETE CASCADE;
 
 ALTER TABLE reservar_visita ADD CONSTRAINT visita_personas_fk FOREIGN KEY ( cliente )
-    REFERENCES personas ( id );
+    REFERENCES personas ( id ) ON DELETE CASCADE;
 
 
 

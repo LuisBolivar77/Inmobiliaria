@@ -71,11 +71,11 @@ export class AprobacionInmueblesComponent implements OnInit {
 
   aprobarInmueble(inmueble:Inmueble){
     inmueble.estado = 1;
-    inmueble.admin = this.usuarioSesion;
+    inmueble.administrador = this.usuarioSesion;
     var aux: AuxiliarObjeto = new AuxiliarObjeto();
     aux.objeto = inmueble;
-    aux.replaceValue("administrador",admin);
-    aux.replaceValue("promocion",  inmueble.promo.id);
+    aux.replaceValue("administrador",inmueble.administrador);
+    aux.replaceValue("promocion",  inmueble.promocion.id);
     aux.replaceValue("tipo",  inmueble.tipo.id);
     aux.replaceValue("ciudad", inmueble.ciudad.id);
     aux.replaceValue("usuario", inmueble.usuario.persona.id);

@@ -44,7 +44,8 @@ export class GestionarEmpleadosComponent implements OnInit {
   show: number;
   msj: string;
 
-  constructor(private genericoServicio: GenericoService, private personaServicio: PersonaService, private usuarioServicio: UsuarioService) { }
+  constructor(private genericoServicio: GenericoService, private personaServicio: PersonaService, 
+    private usuarioServicio: UsuarioService) { }
 
   ngOnInit() {
     // Validamos si el usuario tiene acceso a la pagina
@@ -272,8 +273,18 @@ export class GestionarEmpleadosComponent implements OnInit {
   /**
    * Eliminar empleado con su usuario de la base de datos
    */
-  eliminar(persona: Persona) {
-    window.alert(persona.nombre);
+  eliminar(e: Empleado) {
+    this.genericoServicio.eliminar("personas", {"id": e.usuario.persona.id}).subscribe(rta => {
+      if (rta.data === 'exito') {
+        this.msj = 'Se ha eliminado la persona correctamente';
+        this.show = 2;
+        this.listar();
+      } else {
+        this.msj = 'No se ha podido eliminar la persona: ' + rta.data;
+        this.show = 1;
+      }
+      window.alert(this.msj);
+    });
   }
 
   /**
