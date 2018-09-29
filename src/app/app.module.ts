@@ -19,6 +19,7 @@ import { PromocionesComponent } from './Paginas/publico/promociones/promociones.
 import { EditarCuentaComponent } from './Paginas/seguro/editar-cuenta/editar-cuenta.component';
 import { InmueblesAdminComponent } from './Paginas/seguro/inmuebles-admin/inmuebles-admin.component';
 import { VerInmuebleComponent } from './Paginas/publico/ver-inmueble/ver-inmueble.component';
+import { AprobacionInmueblesComponent } from './Paginas/seguro/aprobacion-inmuebles/aprobacion-inmuebles.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { VerInmuebleComponent } from './Paginas/publico/ver-inmueble/ver-inmuebl
     PromocionesComponent,
     EditarCuentaComponent,
     InmueblesAdminComponent,
-    VerInmuebleComponent
+    VerInmuebleComponent,
+    AprobacionInmueblesComponent
   ],
   imports: [
     BrowserModule,
@@ -48,6 +50,10 @@ import { VerInmuebleComponent } from './Paginas/publico/ver-inmueble/ver-inmuebl
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
+      {
+        path:'administracion/aprobar-inmueble',
+        component: AprobacionInmueblesComponent
+      },
       {
         path: 'ver-inmueble',
         component: VerInmuebleComponent
