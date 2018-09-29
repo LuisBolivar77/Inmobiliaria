@@ -6,6 +6,7 @@ import { RolService } from '../../../Servicios/rolServ.service';
 import { PersonaService } from '../../../Servicios/personaServ.service';
 import { UsuarioService } from '../../../Servicios/usuarioServ.service';
 import { NgForm } from '@angular/forms';
+import { GenericoService } from '../../../Servicios/genericoServ.service';
 
 @Component({
   selector: 'app-gestionar-administradores',
@@ -28,7 +29,7 @@ export class GestionarAdministradoresComponent implements OnInit {
   show: number;
   msj: string;
 
-  constructor(private rolServicio: RolService, private personaServicio: PersonaService, private usuarioServicio: UsuarioService) { }
+  constructor(private genericoServicio: GenericoService, private personaServicio: PersonaService, private usuarioServicio: UsuarioService) { }
 
   ngOnInit() {
     // Asignamos el rol administrador con id 1
@@ -140,7 +141,17 @@ export class GestionarAdministradoresComponent implements OnInit {
   /**
    * Eliminar administrador con su usuario de la base de datos
    */
-  eliminar(persona: Persona) {
-    window.alert(persona.nombre);
+  eliminar(p: Persona) {
+    this.genericoServicio.eliminar("personas", {"id": p.id}).subscribe(rta => {
+      if (rta.data === 'exito') {
+        this.msj = 'Se ha eliminado el cliente correctamente';
+        this.show = 2;
+        this.listar();
+      } else {
+        this.msj = 'No se ha podido eliminar el cliente: ' + rta.data;
+        this.show = 1;
+      }
+      window.alert(this.msj);
+    });
   }
 }

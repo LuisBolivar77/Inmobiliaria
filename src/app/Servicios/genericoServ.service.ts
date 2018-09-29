@@ -20,8 +20,7 @@ export class GenericoService {
      * @param objeto los parametros dado el caso que vaya a iltrar
      */
     listar (table: string, object: object) {
-        const data = {'tabla' : table, 'objeto' : object};
-        console.log(data);
+        var data = {'tabla' : table, 'objeto' : object};
         return this.http.post<any>(this.domain + 'generico/listar', data)
         .pipe(
             map(res => {
@@ -36,7 +35,7 @@ export class GenericoService {
      * @param objeto el objeto a registrar
      */
     registrar (table: string, object: object) {
-        const data = {'tabla' : table, 'objeto' : object};
+        var data = {'tabla' : table, 'objeto' : object};
         return this.http.post<any>(this.domain + 'generico/guardar', data)
         .pipe(
             map(res => {
@@ -51,7 +50,7 @@ export class GenericoService {
      * @param objeto el objeto a editar
      */
     editar (table: string, object: object, pk: string) {
-        const data = {'tabla' : table, 'objeto' : object, 'pk' : pk};
+        var data = {'tabla' : table, 'objeto' : object, 'pk' : pk};
         return this.http.post<any>(this.domain + 'generico/editar', data)
         .pipe(
             map(res => {
@@ -66,7 +65,7 @@ export class GenericoService {
      * @param objeto los parametros dado el caso que vaya a iltrar
      */
     buscar (table: string, object: object) {
-        const data = {'tabla' : table, 'objeto' : object};
+        var data = {'tabla' : table, 'objeto' : object};
         return this.http.post<any>(this.domain + 'generico/buscar', data)
         .pipe(
             map(res => {
@@ -81,7 +80,7 @@ export class GenericoService {
      * @param objeto los parametros para eliminar, el objeto tiene la pk y el valor
      */
     eliminar (table: string, object: object) {
-        const data = {'tabla' : table, 'objeto' : object};
+        var data = {'tabla' : table, 'objeto' : object};
         return this.http.post<any>(this.domain + 'generico/eliminar', data)
         .pipe(
             map(res => {
