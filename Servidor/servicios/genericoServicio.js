@@ -12,10 +12,19 @@ exports.listar = function(req, res){
     var sql = "SELECT * FROM "+tabla;
     if(parametros != null){
       sql += " WHERE ";
+      var sum = 0;
+      // cantidad de parametros en el objeto
+      var size = Object.keys(parametros).length;
       for (var key in parametros) {
-            sql += key+" = "+parametros[key];
+          if(sum != 0 && sum != size){
+                sql += " AND ";
+          }
+          sql += key+" = "+parametros[key];
+          sum++;
       }
     }
+    // Imprimimos en consola la peticion y el origen
+    indicaOrigin(req,sql);
     // Ejecutamos la consulta y retornamos
     req.getConnection(function(err,connection){
           var query = connection.query(sql,function(err,rows){
@@ -53,9 +62,8 @@ exports.guardar = function(req, res){
       }
       // La consulta a ejecutar
       var sql = "INSERT INTO "+tabla+" set ? ";
-      console.log(data);
-      console.log(objeto);
-      console.log(sql);
+      // Imprimimos en consola la peticion y el origen
+      indicaOrigin(req,sql);
       // Ejecutamos la consulta y retornamos
       req.getConnection(function(err,connection){
             connection.query(sql,objeto,function(err,rows){
@@ -95,6 +103,8 @@ exports.editar = function(req, res){
       }
       // La consulta a ejecutar
       var sql = "UPDATE "+tabla+" set ? WHERE "+pk+" = ?";
+      // Imprimimos en consola la peticion y el origen
+      indicaOrigin(req,sql);
       // Ejecutamos la consulta y retornamos
       req.getConnection(function(err,connection){
             var query = connection.query(sql,[objeto,objeto[pk]],function(err,rows){
@@ -132,8 +142,9 @@ exports.buscar = function(req, res){
             sql += key+" = "+parametros[key];
             sum++;
         }
-        console.log('consultaaaaaaaaaaaa ....... ' + sql);
       }
+      // Imprimimos en consola la peticion y el origen
+      indicaOrigin(req,sql);
       // Ejecutamos la consulta y retornamos
       req.getConnection(function(err,connection){
             var query = connection.query(sql,function(err,rows){
@@ -160,6 +171,8 @@ exports.eliminar = function(req, res){
       var pk = Object.keys(objeto)[0];
       // La consulta a ejecutar
       var sql = "DELETE FROM "+tabla+" WHERE "+pk+" = ?";
+      // Imprimimos en consola la peticion y el origen
+      indicaOrigin(req,sql);
       // Ejecutamos la consulta y retornamos
       req.getConnection(function(err,connection){
             var query = connection.query(sql,objeto[pk],function(err,rows){
@@ -194,4 +207,11 @@ function obtenerId(objeto){
             }
       }
       return id;
+}
+
+/**
+ * Nos indica el origen de la peticion del servicio
+ */
+function indicaOrigin(req,sql){
+      console.log("Origen: "+req.headers.origin+" - Peticion: "+sql);
 }

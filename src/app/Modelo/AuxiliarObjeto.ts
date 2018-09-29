@@ -19,4 +19,13 @@ export class AuxiliarObjeto {
             }
         }
     }
+
+    /**
+     * Elimina un atributo del objeto
+     * @param atributo el atributo a eliminar
+     */
+    eliminarAtributo(atributo){
+        // eliminamos el atributo del objeto
+        delete this.objeto[atributo];
+    }
 }

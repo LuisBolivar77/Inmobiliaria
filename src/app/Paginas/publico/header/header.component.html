@@ -113,7 +113,7 @@
 								<div class="search_form_content d-flex flex-row align-items-start justfy-content-start flex-wrap">
 									<div>
 										<!-- Tipo Arrendo o Venta -->
-										<select [(ngModel)]="inmueble.tipoAV" name="tipoAV" class="search_form_select"><option *ngFor="let av of inmueble.getTipoAV()" value="{{av}}">Inmueble en {{av}}</option></select>
+										<select [(ngModel)]="inmueble.tipoAV" name="tipoAV" class="search_form_select"><option *ngFor="let av of inmueble.getTipoAV()" value="{{inmueble.getTipoAV().indexOf(av)}}">Inmueble en {{av}}</option></select>
 									</div>
 									<div>
 										<!-- tipos de inmueble -->
@@ -125,17 +125,17 @@
 									</div>
 									<div>
 										<!-- Sector -->
-										<select [(ngModel)]="inmueble.zona" name="zona" class="search_form_select"><option *ngFor="let z of inmueble.getZona()" value="{{z}}">Sector {{z}}</option></select>
+										<select [(ngModel)]="inmueble.zona" name="zona" class="search_form_select"><option *ngFor="let z of inmueble.getZona()" value="{{inmueble.getZona().indexOf(z)}}">Sector {{z}}</option></select>
 									</div>
 									<div>
 										<select [(ngModel)]="inmueble.habitaciones" name="habitaciones" class="search_form_select">
 											<option disabled selected>Habitaciones</option>
-											<option value="0">0</option>
-											<option value="1">1</option>
-											<option value="2">2</option>
-											<option value="3">3</option>
-											<option value="4">4</option>
-											<option value="5">5</option>
+											<option value="0">Sin habitaciones</option>
+											<option value="1">1 Habitacion</option>
+											<option value="2">2 Habitaciones</option>
+											<option value="3">3 Habitaciones</option>
+											<option value="4">4 Habitaciones</option>
+											<option value="5">5 Habitaciones</option>
 										</select>
 									</div>
 								</div>
