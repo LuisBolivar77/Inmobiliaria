@@ -12,6 +12,8 @@ import {
   Http
 } from '@angular/http';
 import { not } from '@angular/compiler/src/output/output_ast';
+import { HttpClientModule } from '@angular/common/http';
+import { GestionarPersonasComponent } from './gestionar-personas.component';
 
 describe('GestionarPersonasComponent', () => {
   // Rol que tendra la persona
@@ -24,18 +26,15 @@ describe('GestionarPersonasComponent', () => {
   // tslint:disable-next-line:prefer-const
   let usuario = new Usuario();
 
-  let service: GenericoService;
-  let httpMock: HttpTestingController;
+  
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers:    [ GenericoService ],
-      imports: [ HttpClientTestingModule ],
+      imports: [ HttpClientModule ],
+      declarations:[GestionarPersonasComponent]
     });
 
-    // Returns a service with the MockBackend so we can test with dummy responses
-    service = TestBed.get(GenericoService);
-    httpMock = TestBed.get(HttpTestingController);
   });
 
   beforeEach(() => {
@@ -57,11 +56,15 @@ describe('GestionarPersonasComponent', () => {
     usuario.password = '123';
   });
 
-  it('buscar un cliente', () => {
+  it('crear un cliente', () => {
+        // Usamos TestBed para poder usar el servicio http
+
+    const servicio: GenericoService = TestBed.get(GenericoService);
+
     // Perform a request and make sure we get the response we expect
-    service.listar('personas', null).subscribe(res => {
-      console.log(res.data);
-      expect<any>(res.data).not.toBe(null);
+    servicio.registrar("persona",{usuario}).subscribe(rta => {
+      //console.log(res.data);
+      expect(rta.data.length).toEqual(1);
     });
   });
 });
