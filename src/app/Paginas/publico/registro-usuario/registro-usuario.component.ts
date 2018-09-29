@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { UsuarioService } from '../../../Servicios/usuarioServ.service';
 import { NgForm } from '@angular/forms';
 import { RolService } from '../../../Servicios/rolServ.service';
+import { GenericoService } from '../../../Servicios/genericoServ.service';
 
 @Component({
   selector: 'app-registro-usuario',
@@ -30,7 +31,8 @@ export class RegistroUsuarioComponent implements OnInit {
   show: number;
   msj: string;
 
-  constructor(private rolServicio: RolService, private personaServicio: PersonaService, private servicios: UsuarioService) { }
+  constructor( private rolServicio: RolService,
+    private personaServicio: PersonaService, private servicios: UsuarioService) { }
 
   ngOnInit() {
     // Asignamos el rol Cliente con id 2
@@ -51,7 +53,6 @@ export class RegistroUsuarioComponent implements OnInit {
     this.persona.rol = this.rol;
     // Asignamos la persona al usuario
     this.usuario.persona = this.persona;
-    console.log(this.usuario);
     this.personaServicio.registrar(this.usuario).subscribe(rta => {
       if (rta.data === 'exito') {
         this.msj = 'Se ha registrado correctamente';

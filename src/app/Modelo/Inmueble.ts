@@ -54,8 +54,8 @@ export class Inmueble {
     tipo: TipoInmueble;
     ciudad: Ciudad;
     usuario: Usuario;
-    admin: Usuario;
-    promo: Promocion;
+    administrador: Usuario;
+    promocion: Promocion;
 
     /**
      * retorna el valor texto de un estado
