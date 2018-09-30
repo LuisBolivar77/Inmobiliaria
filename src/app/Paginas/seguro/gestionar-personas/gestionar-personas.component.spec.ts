@@ -16,52 +16,160 @@ import { HttpClientModule } from '@angular/common/http';
 import { GestionarPersonasComponent } from './gestionar-personas.component';
 import { NgForm, FormsModule } from '@angular/forms';
 
-fdescribe('GestionarPersonasComponent', () => {
-  
+describe('GestionarPersonasComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers:    [ GenericoService ],
-      imports: [ HttpClientModule, FormsModule ],
-      declarations:[GestionarPersonasComponent]
+      providers: [PersonaService],
+      imports: [HttpClientModule, FormsModule],
+      declarations: [GestionarPersonasComponent]
     });
 
   });
 
   it('crear una persona', () => {
-    // Rol que tendra la persona
-  // tslint:disable-next-line:prefer-const
-  let rol = new Rol();
-  // la informacion de la persona asociada al usuario
-  // tslint:disable-next-line:prefer-const
-  let persona = new Persona();
-  // usuario que se registra con la persona
-  // tslint:disable-next-line:prefer-const
-  let usuario = new Usuario();  
 
-   rol.id = 1;
+    // Rol que tendra la persona  
+    let rol = new Rol();
+    // persona asociada al usuario
+    let persona = new Persona();
+    // usuario que se registra con la persona
+    let usuario = new Usuario();
+
+    //Datos del rol
+    rol.id = 1;
     // datos de la persona
-    persona.cedula = '123';
+    persona.cedula = '12345';
     persona.nombre = 'gaga';
     persona.apellido = 'posada';
-    let fecha = new Date('1997-03-03');
-    persona.fecha_nacimiento = fecha;
+    persona.fecha_nacimiento = '1997-03-03';
     persona.telefono = '3134566545';
     persona.direccion = 'calle 45';
     persona.rol = rol;
-      // datos del usuario
+    // datos del usuario
     usuario.persona = persona;
     usuario.username = 'laura';
     usuario.password = '123';
     // Usamos TestBed para poder usar el servicio http
-    const servicio: GenericoService = TestBed.get(GenericoService);
+    const servicio: PersonaService = TestBed.get(PersonaService);
     // usamos el servicio para registrar la persona
-    servicio.registrar('personas', persona).subscribe(res => {
+    servicio.registrar(usuario).subscribe(res => {
 
-      console.log(res.data);
-   //   expect<any>(res.data).not.toBe(null);
+      expect<any>(res.data).not.toBe(null);
+
     });
 
+  });
+});
+
+describe('GestionarPersonasComponent', () => {
+   
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      // el servicio a usar
+      providers: [PersonaService],
+      // Importamos el http para poder consumir los servicios
+      imports: [HttpClientModule, FormsModule],
+      // Se declara el componente, para poder ver el reporte en el coverage
+      declarations: [GestionarPersonasComponent]
     });
   });
+
+  /**
+   * Buscar la persona que ya se encuentra registrada
+   */
+  it('Buscar persona', () => {
+
+    // Rol que tendra la persona  
+    let rol = new Rol();
+    // persona asociada al usuario
+    let persona = new Persona();
+    // usuario que se registra con la persona
+    let usuario = new Usuario();
+
+    // Usamos TestBed para poder usar el servicio http
+    const servicio: PersonaService = TestBed.get(PersonaService);
+    // Usamos el servicio para buscar el empleado
+    servicio.personaByCedula(persona).subscribe(rta => {
+             // Guardamos el retorno del servicio en la variable empleado, creada previamente
+      persona = rta;
+      persona.cedula = '12345';
+      console.log(persona);
+
+      // Validamos si la respuesta si concuerda con la esparada
+      expect(persona.cedula).toEqual('12345');
+    });
+  });
+});
+
+describe('GestionarPersonasComponent', () => {
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      // el servicio a usar
+      providers: [PersonaService],
+      // Importamos el http para poder consumir los servicios
+      imports: [HttpClientModule, FormsModule],
+      // Se declara el componente, para poder ver el reporte en el coverage
+      declarations: [GestionarPersonasComponent]
+    });
+  });
+
+  it('editar una persona', () => {
+
+    // Rol que tendra la persona  
+    let rol = new Rol();
+    // persona asociada al usuario
+    let persona = new Persona();
+    // usuario que se registra con la persona
+    let usuario = new Usuario();
+
+    //Datos del rol
+    rol.id = 1;
+    // datos de la persona
+    persona.id= 27;
+    persona.cedula = '12345';
+    persona.nombre = 'Laura Vanessa';
+    persona.apellido = 'posada';
+    persona.fecha_nacimiento = '1997-03-03';
+    persona.telefono = '3134566545';
+    persona.direccion = 'calle 45';
+    persona.rol = rol;
+    // datos del usuario
+    usuario.persona = persona;
+    usuario.username = 'laura';
+    usuario.password = '123';
+    // Usamos TestBed para poder usar el servicio http
+    const servicio: PersonaService = TestBed.get(PersonaService);
+    // usamos el servicio para editar la persona
+    servicio.editar(usuario).subscribe(res => {
+      console.log(res);
+      expect<any>(res.data).not.toBe(null);
+
+    });
+
+  });
+});
+
+
+
+
+
+
+
+
+  //console.log(persona.cedula);
+  //servicio.buscar('personas', persona).subscribe(res =>{
+   // console.log(persona.cedula);
+   // console.log(persona+ "buscar persona ¿quien?")
+   // console.log(persona.cedula);
+    //persona.cedula = res;
+    //console.log(res + "AQUI buscar ");
+
+    //servicio.eliminar('personas', persona).subscribe(res => {
+      //console.log("Elimino esta mondaaaa");
+    //  expect<any>(res.data);
+    //});
+
+//});
 
