@@ -150,26 +150,3 @@ describe('GestionarPersonasComponent', () => {
 
   });
 });
-
-
-
-
-
-
-
-
-  //console.log(persona.cedula);
-  //servicio.buscar('personas', persona).subscribe(res =>{
-   // console.log(persona.cedula);
-   // console.log(persona+ "buscar persona ¿quien?")
-   // console.log(persona.cedula);
-    //persona.cedula = res;
-    //console.log(res + "AQUI buscar ");
-
-    //servicio.eliminar('personas', persona).subscribe(res => {
-      //console.log("Elimino esta mondaaaa");
-    //  expect<any>(res.data);
-    //});
-
-//});
-
