@@ -53,6 +53,7 @@ export class GestionarEmpleadosComponent implements OnInit {
     this.empleado.cargo = this.cargo;
     this.empleado.usuario = this.usuario;
     this.empleado.usuario.persona = this.persona;
+    this.rol.id = 3; 
     this.empleado.usuario.persona.rol = this.rol;
     // Actualizamos la tabla de empleados
     this.listar();
