@@ -38,18 +38,13 @@ fdescribe('GestionarPersonasComponent', () => {
   // usuario que se registra con la persona
   // tslint:disable-next-line:prefer-const
   let usuario = new Usuario();  
-    console.log("POR AQUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII itititititititiit");
-    
-    rol.id = 1;
-    rol.nombre = 'Administrador';
-    rol.descripcion = 'administrador';
 
+   rol.id = 1;
     // datos de la persona
-    persona.id=7;
-    persona.cedula = '123456789';
+    persona.cedula = '123';
     persona.nombre = 'gaga';
     persona.apellido = 'posada';
-      let fecha = new Date('1997-03-03');
+    let fecha = new Date('1997-03-03');
     persona.fecha_nacimiento = fecha;
     persona.telefono = '3134566545';
     persona.direccion = 'calle 45';
@@ -58,23 +53,15 @@ fdescribe('GestionarPersonasComponent', () => {
     usuario.persona = persona;
     usuario.username = 'laura';
     usuario.password = '123';
-
-    console.log(persona + " HOLAAAAAAAAAAAAAAAAAA POR AQUIIIIIIIII");
-
-     // Usamos TestBed para poder usar el servicio http
+    // Usamos TestBed para poder usar el servicio http
     const servicio: GenericoService = TestBed.get(GenericoService);
-      
-    // Perform a request and make sure we get the response we expect
-    servicio.registrar("personas",{"cedula":persona}).subscribe(rta => {
-      console.log("ENTROOOOOOOOOOOOOOOOOOOOOOOOOO");
-    //console.log(usuario);
-    console.log(rta);
-    //  expect(rta.data.length).toEqual(1);
-    // servicio.buscar("personas", {"id":persona.cedula}).subscribe(rtap => {
-      // Validamos si la respuesta si concuerda con la esparada      
-     // expect(rtap.cedula).toEqual('123456789');
-   // });
+    // usamos el servicio para registrar la persona
+    servicio.registrar('personas', persona).subscribe(res => {
+
+      console.log(res.data);
+   //   expect<any>(res.data).not.toBe(null);
+    });
 
     });
   });
-});
+
