@@ -44,7 +44,8 @@ export class GestionarEmpleadosComponent implements OnInit {
   show: number;
   msj: string;
 
-  constructor(private genericoServicio: GenericoService, private personaServicio: PersonaService, private usuarioServicio: UsuarioService) { }
+  constructor(private genericoServicio: GenericoService, private personaServicio: PersonaService, 
+    private usuarioServicio: UsuarioService) { }
 
   ngOnInit() {
     // Validamos si el usuario tiene acceso a la pagina

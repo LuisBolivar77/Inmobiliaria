@@ -10,6 +10,7 @@ import { GenericoService } from './../../../Servicios/genericoServ.service';
 import { Component, OnInit } from '@angular/core';
 import { Persona } from '../../../Modelo/Persona';
 import { UsuarioService } from '../../../Servicios/usuarioServ.service';
+import { AuxiliarObjeto } from '../../../Modelo/AuxiliarObjeto';
 
 @Component({
   selector: 'app-inmuebles-admin',
@@ -21,7 +22,7 @@ export class InmueblesAdminComponent implements OnInit {
   file: File[];
 
   inmueble: Inmueble = new Inmueble();
-
+  inmuebleTemporal: Inmueble = new Inmueble();
   ciudadSeleccionada: Ciudad = new Ciudad();
   tipoInmuebleSeleccionado: TipoInmueble = new TipoInmueble();
   zonaSeleccionada: Zona = new Zona;
@@ -32,54 +33,24 @@ export class InmueblesAdminComponent implements OnInit {
   usuarioListar: Usuario = new Usuario();
   departamentoSeleccionado: Departamento = new Departamento();
   usuarioSesion: Usuario = new Usuario();
+  ciudadBusqueda: Ciudad = new Ciudad();
 
   // variables Checkbox
-  markedAsensor = false;
   theCheckboxAsensor = false;
-  //
-  markedCanchasDepor = false;
   theCheckboxCanchasDepor = false;
-  //
-  markedZonasHumedas = false;
   theCheckboxZonasHumedas = false;
-  //
-  markedZonaInfantil = false;
   theCheckboxZonaInfantil = false;
-  //
-  markedJardines = false;
   theCheckboxJardines = false;
-  //
-  markedTransporteCercano = false;
   theCheckboxTransporteCercano = false;
-  //
-  markedPrecioNegociable = false;
   theCheckboxPrecioNegociable = false;
-  //
-  markedZonasRopas = false;
   theCheckboxZonasRopas = false;
-  //
-  markedParqueadero = false;
   theCheckboxParqueadero = false;
-  //
-  markedDeposito = false;
   theCheckboxDeposito = false;
-  //
-  markedEstudio = false;
   theCheckboxEstudio = false;
-  //
-  markedCuartoServicio = false;
   theCheckboxCuartoServicio = false;
-  //
-  markedChimenea = false;
   theCheckboxChimenea = false;
-  //
-  markedCocinaAC = false;
   theCheckboxCocinaAC = false;
-  //
-  markedComedorIndependiente = false;
   theCheckboxComedorIndependiente = false;
-  //
-  markedVistaExterios = false;
   theCheckboxVistaExterios = false;
 
   ciudades: Array<Ciudad> = [];
@@ -93,7 +64,9 @@ export class InmueblesAdminComponent implements OnInit {
   msj: string;
   cedula: string;
   encontroUsu: boolean;
-  valor = false;
+  numMatriculaBuscar: string;
+  busco: boolean;
+  resul: string;
 
   constructor(private generico: GenericoService, private usuarioServicio: UsuarioService) { }
 
@@ -106,9 +79,9 @@ export class InmueblesAdminComponent implements OnInit {
     this.listar();
     this.listarDepartamentos();
     this.listarTipoInmuebles();
-    console.log(this.ciudades.length);
     this.listarZonas();
     this.listarVentaArriendo();
+    this.busco = false;
 
   }
 
@@ -117,17 +90,15 @@ export class InmueblesAdminComponent implements OnInit {
   }
 
   registrar(form: NgForm) {
-
-        console.log('persona a guardar /////////////// ' + this.inmueble.usuario.persona);
         this.llenarInmueble();
 
-        this.generico.registrar('inmueble', {'inmueble': this.inmueble}).subscribe(res => {
+        this.generico.registrar('inmueble', this.inmueble).subscribe(res => {
           if (res.data === 'exito') {
-            this.msj = 'Se ha registrado correctamente';
+            this.msj = 'El inmueble se ha registrado correctamente';
             this.show = 2;
             // Actualizamos la lista de empleados
             this.listar();
-            window.alert(res.data);
+            form.reset();
           } else {
             this.msj = res.data;
             this.show = 1;
@@ -138,70 +109,73 @@ export class InmueblesAdminComponent implements OnInit {
   llenarInmueble() {
     const fecha = this.fechaActual();
     this.inmueble.fechaAprobacion = fecha;
-    this.inmueble.ciudad = this.ciudadSeleccionada;
     this.inmueble.tipoAV = this.tipoAVSeleccionado.id;
     this.inmueble.zona = this.zonaSeleccionada.id;
-    this.inmueble.estado = 1;
     this.inmueble.ciudad = this.ciudadSeleccionada;
     this.inmueble.tipo = this.tipoInmuebleSeleccionado;
-    this.inmueble.zona = this.zonaSeleccionada.id;
-    this.inmueble.tipoAV = this.tipoAVSeleccionado.id;
-    this.inmueble.ascensor = this.markedAsensor;
-    this.inmueble.canchasDepor = this.markedCanchasDepor;
-    this.inmueble.chimenea = this.markedChimenea;
-    this.inmueble.cocinaAC = this.markedCocinaAC;
-    this.inmueble.comedorIndependiente = this.markedComedorIndependiente;
-    this.inmueble.cuartoServicio = this.markedCuartoServicio;
-    this.inmueble.deposito = this.markedDeposito;
-    this.inmueble.estudio = this.markedEstudio;
-    this.inmueble.jardines = this.markedJardines;
-    this.inmueble.parqueadero = this.markedParqueadero;
-    this.inmueble.precioNegociable = this.markedPrecioNegociable;
-    this.inmueble.transporteCercano = this.markedTransporteCercano;
-    this.inmueble.vistaExterior = this.markedVistaExterios;
-    this.inmueble.zonaInfantil = this.markedZonaInfantil;
-    this.inmueble.zonasHumedas = this.markedZonasHumedas;
-    this.inmueble.zonasRopas = this.markedZonasRopas;
+    this.inmueble.usuario = this.usuarioCliente;
+    this.inmueble.estado = 1;
+    this.inmueble.ascensor = this.theCheckboxAsensor;
+    this.inmueble.canchasDepor = this.theCheckboxCanchasDepor;
+    this.inmueble.chimenea = this.theCheckboxChimenea;
+    this.inmueble.cocinaAC = this.theCheckboxCocinaAC;
+    this.inmueble.comedorIndependiente = this.theCheckboxComedorIndependiente;
+    this.inmueble.cuartoServicio = this.theCheckboxCuartoServicio;
+    this.inmueble.deposito = this.theCheckboxDeposito;
+    this.inmueble.estudio = this.theCheckboxEstudio;
+    this.inmueble.jardines = this.theCheckboxJardines;
+    this.inmueble.parqueadero = this.theCheckboxParqueadero;
+    this.inmueble.precioNegociable = this.theCheckboxPrecioNegociable;
+    this.inmueble.transporteCercano = this.theCheckboxTransporteCercano;
+    this.inmueble.vistaExterior = this.theCheckboxVistaExterios;
+    this.inmueble.zonaInfantil = this.theCheckboxZonaInfantil;
+    this.inmueble.zonasHumedas = this.theCheckboxZonasHumedas;
+    this.inmueble.zonasRopas = this.theCheckboxZonasRopas;
   }
 
 
   /**
-   * Buscar persona
+   * Buscar un inmueble
    */
   buscarInmueble() {
-      this.generico.buscar('inmueble', {'numero_matricula': this.inmueble.numero_matricula}).subscribe(rta => {
+    this.checkboxToNull();
+      this.generico.buscar('inmueble', {'numero_matricula': this.numMatriculaBuscar}).subscribe(rta => {
         if (rta.data == null) {
           this.show = 1;
-          this.msj = 'No existe el inmueble con ese numero de matricula ' + this.inmueble.numero_matricula;
+          this.msj = 'No existe el inmueble con ese numero de matricula: ' + this.numMatriculaBuscar;
         } else {
-          this.show = 3;
+          console.log(rta.data);
+          this.busco = true;
+          this.inmuebleTemporal = rta.data;
+          console.log('/////// valor ascensor ///////// --- ' + this.inmuebleTemporal.ascensor);
+          this.buscarCiudad();
+          this.zonaSeleccionada.id = this.inmuebleTemporal.zona;
+          this.tipoAVSeleccionado.id = this.inmuebleTemporal.tipoAV;
+          this.inmueble = this.inmuebleTemporal;
         }
       });
   }
 
     /**
-   * Buscar empleado
+   * Buscar un usuario
    */
   buscarUsuario(form: NgForm) {
+    if (this.cedula != null) {
       this.generico.buscar('personas', {'cedula': this.cedula}).subscribe(rta => {
         if (rta.data == null) {
-          this.valor = false;
-          // this.limpiar();
+          this.show = 1;
+          this.msj = rta.data;
         } else {
-          this.show = 3;
           // Guardamos el resultado en persona
           this.persona = rta.data;
-          // Buscamos el usuario
-          this.generico.buscar('usuarios', {'persona': this.persona.id}).subscribe(rta2 => {
-                this.usuarioCliente = rta2.data;
-                // Setteamos los datos al empleado
-                this.inmueble.usuario = this.usuarioCliente;
-                this.inmueble.usuario.persona = this.persona;
-                this.registrar(form);
-                this.valor = true;
-          });
+          this.usuarioCliente.persona = this.persona;
+          this.registrar(form);
         }
       });
+    } else {
+      this.show = 1;
+      this.msj = 'error, debe ingresar la cedula del propietaria';
+    }
   }
 
   ver(e: Inmueble) {
@@ -210,6 +184,10 @@ export class InmueblesAdminComponent implements OnInit {
 
   eliminar(e: Inmueble) {
 
+  }
+
+  editar(form: NgForm) {
+    this.busco = false;
   }
 
   /**
@@ -248,7 +226,6 @@ export class InmueblesAdminComponent implements OnInit {
   listarCiudades() {
     this.generico.listar('ciudades', {'departamento': this.departamentoSeleccionado.id}).subscribe(res => {
       this.ciudades = res.data;
-      console.log(this.ciudades);
     });
   }
 
@@ -258,8 +235,21 @@ export class InmueblesAdminComponent implements OnInit {
   listarTipoInmuebles() {
     this.generico.listar('tipo_inmueble', null).subscribe(res => {
       this.tiposInmueble = res.data;
-      console.log(this.tiposInmueble);
     });
+  }
+
+  buscarCiudad() {
+    this.generico.buscar('ciudades', {'id': this.inmuebleTemporal.ciudad}).subscribe(res => {
+      this.ciudadSeleccionada = res.data;
+      this.generico.buscar('departamentos', {'id': this.ciudadSeleccionada.departamento}).subscribe(res2 => {
+        this.departamentoSeleccionado = res2.data;
+        this.listarCiudades();
+      });
+    });
+  }
+
+  cambio(cambiar: boolean) {
+
   }
 
   listarZonas() {
@@ -314,68 +304,43 @@ export class InmueblesAdminComponent implements OnInit {
 
   }
 
-  toggleVisibilityAsensor(e) {
-    this.markedAsensor = e.target.checked;
+  checkboxToNull() {
+    this.theCheckboxAsensor = null;
+    this.theCheckboxCanchasDepor = null;
+    this.theCheckboxZonasHumedas = null;
+    this.theCheckboxZonaInfantil = null;
+    this.theCheckboxJardines = null;
+    this.theCheckboxTransporteCercano = null;
+    this.theCheckboxPrecioNegociable = null;
+    this.theCheckboxZonasRopas = null;
+    this.theCheckboxParqueadero = null;
+    this.theCheckboxDeposito = null;
+    this.theCheckboxEstudio = null;
+    this.theCheckboxCuartoServicio = null;
+    this.theCheckboxChimenea = null;
+    this.theCheckboxCocinaAC = null;
+    this.theCheckboxComedorIndependiente = null;
+    this.theCheckboxVistaExterios = null;
+
   }
 
-  toggleVisibilityCanchasDepor(e) {
-    this.markedCanchasDepor = e.target.checked;
-  }
 
-  toggleVisibilityZonasHumedas(e) {
-    this.markedZonasHumedas = e.target.checked;
+  setCheckBox() {
+    this.theCheckboxAsensor = this.inmuebleTemporal.ascensor;
+    this.theCheckboxCanchasDepor = this.inmuebleTemporal.canchasDepor;
+    this.theCheckboxZonasHumedas = this.inmuebleTemporal.zonasHumedas;
+    this.theCheckboxZonaInfantil = this.inmuebleTemporal.zonaInfantil;
+    this.theCheckboxJardines = this.inmuebleTemporal.jardines;
+    this.theCheckboxTransporteCercano = this.inmuebleTemporal.transporteCercano;
+    this.theCheckboxPrecioNegociable = this.inmuebleTemporal.precioNegociable;
+    this.theCheckboxZonasRopas = this.inmuebleTemporal.zonasRopas;
+    this.theCheckboxParqueadero = this.inmuebleTemporal.parqueadero;
+    this.theCheckboxDeposito = this.inmuebleTemporal.deposito;
+    this.theCheckboxEstudio = this.inmuebleTemporal.estudio;
+    this.theCheckboxCuartoServicio = this.inmuebleTemporal.cuartoServicio;
+    this.theCheckboxChimenea = this.inmuebleTemporal.chimenea;
+    this.theCheckboxCocinaAC = this.inmuebleTemporal.cocinaAC;
+    this.theCheckboxComedorIndependiente = this.inmuebleTemporal.comedorIndependiente;
+    this.theCheckboxVistaExterios = this.inmuebleTemporal.vistaExterior;
   }
-
-  toggleVisibilityZonaInfantil(e) {
-    this.markedZonaInfantil = e.target.checked;
-  }
-
-  toggleVisibilityJardines(e) {
-    this.markedJardines = e.target.checked;
-  }
-
-  toggleVisibilityTransporteCercano(e) {
-    this.markedTransporteCercano = e.target.checked;
-  }
-
-  toggleVisibilityPrecioNegociable(e) {
-    this.markedPrecioNegociable = e.target.checked;
-  }
-
-  toggleVisibilityZonasRopas(e) {
-    this.markedZonasRopas = e.target.checked;
-  }
-
-  toggleVisibilityParqueadero(e) {
-    this.markedParqueadero = e.target.checked;
-  }
-
-  toggleVisibilityDeposito(e) {
-    this.markedDeposito = e.target.checked;
-  }
-
-  toggleVisibilityEstudio(e) {
-    this.markedEstudio = e.target.checked;
-  }
-
-  toggleVisibilityCuartoServicio(e) {
-    this.markedCuartoServicio = e.target.checked;
-  }
-
-  toggleVisibilityChimenea(e) {
-    this.markedChimenea = e.target.checked;
-  }
-
-  toggleVisibilityCocinaAC(e) {
-    this.markedCocinaAC = e.target.checked;
-  }
-
-  toggleVisibilityComedorIndependiente(e) {
-    this.markedComedorIndependiente = e.target.checked;
-  }
-
-  toggleVisibilityVistaExterios(e) {
-    this.markedVistaExterios = e.target.checked;
-  }
-
 }

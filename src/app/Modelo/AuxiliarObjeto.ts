@@ -2,7 +2,7 @@
  * Este auxiliar objeto lo usamos para cuando queremos registrar un objeto
  * y no mandar los objetos (foraneas) si no solo el id de la foranea
  */
-export class AuxiliarObjeto{
+export class AuxiliarObjeto {
 
     objeto: object;
 
@@ -11,9 +11,9 @@ export class AuxiliarObjeto{
      * @param atributo el nombre del atributo del objeto
      * @param value valor a remplazar
      */
-    replaceValue(atributo,value){
-        for(var key in this.objeto){
-            if(key == atributo){
+    replaceValue(atributo, value) {
+        for (var key in this.objeto) {
+            if (key === atributo) {
                 // Asignamos el nuevo valor
                 this.objeto[key] = value;
             }
