@@ -10,12 +10,14 @@ import { Usuario } from '../../../Modelo/Usuario';
 import { GestionarPersonasComponent } from './gestionar-personas.component';
 
 
-describe('Gestionar cliente', () => {
+fdescribe('Gestionar persona', () => {
+  console.log("ENTRO GESTIONAR PERSONAS PRUEBAS");
+  
 
   let component:  GestionarPersonasComponent;
   let fixture: ComponentFixture<GestionarPersonasComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(async(() => {    
     TestBed.configureTestingModule({
       // el servicio a usar
       providers: [],
@@ -35,12 +37,12 @@ describe('Gestionar cliente', () => {
 
   });
 
-  it('crear una persona', () => {
+  it('crear una persona GESTIONAR PERSONAS', () => {   
  
     let rol: Rol = new Rol();
     rol.id = 1;
     let persona: Persona = new Persona();
-    persona.id = 111111;
+    persona.id = 11111;
     persona.cedula = '1099';
     persona.nombre = 'Valentina';
     persona.apellido = 'Rua';
@@ -53,75 +55,16 @@ describe('Gestionar cliente', () => {
     usuario.password = 'valen';
     usuario.username = 'valen123';
     usuario.persona = persona;
-
-    component.usuario.persona = persona;
-
+    component.usuario = usuario;
+    
     let respuesta = component.registrar(null);
 
     expect(respuesta).toBeTruthy;
 
   });
 
-  it('buscar ciente', () => {
-    component.persona.cedula = '1094';
-    let respuesta = component.buscar();
-    expect(respuesta).toBeTruthy;
-  });
 
-  it('buscar ciente no existe', () => {
-    component.persona.cedula = '1094555';
-    let respuesta = component.buscar();
-    expect(respuesta).toBeFalsy;
-  });
-
-  it('editar ciente', () => {
-
-    let rol: Rol = new Rol();
-    rol.id = 3;
-    let persona: Persona = new Persona();
-    persona.cedula = '1094';
-    persona.nombre = 'Sandra';
-    persona.apellido = 'Jaramillo';
-    persona.fecha_nacimiento = '1992-24-05';
-    persona.telefono = '698349295';
-    persona.direccion = 'Madrid m3#4';
-    persona.rol = rol;
-
-    component.usuario.persona = persona;
-
-    let respuesta = component.editar(null);
-
-    expect(respuesta).toBeTruthy;
-
-  });
-
-  it('Ver la inormacion de un empleado de la tabla', () => {
-    let persona: Persona = new Persona();
-    persona.cedula = '1094';
-    let respuesta = component.ver(persona);
-    expect(respuesta).toBeTruthy;
-  });
-
-  it('Buscar desde el formulario html verdadero', () => {
-    component.persona.cedula = '1094';
-    let respuesta = component.fbuscar(event);
-    expect(respuesta).toBeTruthy;
-  });
-
-  it('Buscar desde el formulario html falso', () => {
-    component.persona.cedula = '1094555';
-    let respuesta = component.fbuscar(event);
-    expect(respuesta).toBeFalsy;
-  });
-
-
-  it('eliminar cliente', () => {
-    let persona: Persona = new Persona();
-    persona.id = 1;
-    let respuesta = component.eliminar(persona);
-    expect(respuesta).toBeFalsy;
-  });
-
+  
 
 
 });
