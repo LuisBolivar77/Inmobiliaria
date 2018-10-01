@@ -117,7 +117,9 @@ export class Inmueble {
      * @param numero el numero al que le agregaremos comas
      */
     addComa(num) {
+        // tslint:disable-next-line:no-var-keyword
         var cents;
+        // tslint:disable-next-line:no-var-keyword
         var sign;
         if (!num || num === 'NaN') { return '-'; }
         if (num === 'Infinity') { return '&#x221e;'; }
@@ -132,6 +134,7 @@ export class Inmueble {
         if (cents < 10) {
             cents = '0' + cents;
         }
+        // tslint:disable-next-line:no-var-keyword
         for (var i = 0; i < Math.floor((num.length - (1 + i)) / 3) ; i++) {
             num = num.substring(0, num.length - (4 * i + 3)) + '.' + num.substring(num.length - (4 * i + 3));
         }

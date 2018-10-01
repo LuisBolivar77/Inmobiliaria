@@ -29,7 +29,8 @@ export class GestionarClientesComponent implements OnInit {
   show: number;
   msj: string;
 
-  constructor(private genericoServicio: GenericoService, private personaServicio: PersonaService, private usuarioServicio: UsuarioService) { }
+  constructor(private genericoServicio: GenericoService,
+    private personaServicio: PersonaService, private usuarioServicio: UsuarioService) { }
 
   ngOnInit() {
     // Asignamos el rol cliente con id 2
@@ -142,7 +143,7 @@ export class GestionarClientesComponent implements OnInit {
    * Eliminar cliente con su usuario de la base de datos
    */
   eliminar(p: Persona) {
-    this.genericoServicio.eliminar("personas", {"id": p.id}).subscribe(rta => {
+    this.genericoServicio.eliminar('personas', {'id': p.id}).subscribe(rta => {
       if (rta.data === 'exito') {
         this.msj = 'Se ha eliminado el cliente correctamente';
         this.show = 2;
