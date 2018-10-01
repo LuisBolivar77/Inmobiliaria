@@ -3,6 +3,9 @@ import { GenericoService } from '../../../Servicios/genericoServ.service';
 import { Inmueble } from '../../../Modelo/Inmueble';
 import { UsuarioService } from '../../../Servicios/usuarioServ.service';
 import { Archivo } from '../../../Modelo/Archivo';
+import { Ciudad } from '../../../Modelo/Ciudad';
+import { Departamento } from '../../../Modelo/Departamento';
+import { TipoInmueble } from '../../../Modelo/TipoInmueble';
 
 @Component({
   selector: 'app-ver-inmueble',
@@ -23,16 +26,20 @@ export class VerInmuebleComponent implements OnInit {
   constructor(private genericoServicio: GenericoService, private usuarioServicio: UsuarioService) { }
 
   ngOnInit() {
+    this.inmueble.tipo = new TipoInmueble();
+    this.inmueble.ciudad = new Ciudad();
+    this.inmueble.ciudad.departamento = new Departamento();
     // Obtenemos el id del inmueble, que se paso por get (url)
     const id = this.genericoServicio.getUrlParameter('id');
     if (id === undefined || id === '') {
       // Como el id no esta, redireccionamos al inicio
       this.usuarioServicio.redireccionar('/');
+      return false;
     } else {
       // Cargamos el inmueble
       this.inmueble.id = id;
       this.cargarInmueble();
-
+      return true;
     }
   }
 
@@ -60,6 +67,7 @@ export class VerInmuebleComponent implements OnInit {
                 // Guardamos el nombre de la foto en el array de fotos,
                 // asignando como clave el id del inmueble
                 this.fotos = r5.data;
+                return true;
             });
           });
         });
@@ -67,6 +75,7 @@ export class VerInmuebleComponent implements OnInit {
       } else {
         // Como el inmueble no se encontro, redireccionamos el usuario al inicio
         this.usuarioServicio.redireccionar('/');
+        return false;
       }
     });
   }
