@@ -1,46 +1,131 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { async, TestBed, ComponentFixture } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { RouterTestingModule } from '@angular/router/testing';
 import { VerInmuebleComponent } from './ver-inmueble.component';
-import {
-  BaseRequestOptions,
-  Response,
-  ResponseOptions,
-  Http,
-  HttpModule
-} from '@angular/http';
-import { Inmueble } from '../../../Modelo/Inmueble';
 import { GenericoService } from '../../../Servicios/genericoServ.service';
 import { HttpClientModule } from '@angular/common/http';
+import { UsuarioService } from '../../../Servicios/usuarioServ.service';
 
-describe('VerInmuebleComponent', () => {
-  // inmueble a ver
-  let inmueble = new Inmueble();
+fdescribe('VerInmuebleComponent', () => {
+  /**
+   * Componente de ver inmueble
+   */
+  let componente: VerInmuebleComponent;
+  let fixture: ComponentFixture<VerInmuebleComponent>;
+
+// ----------------------------------------------------------------------------------
+  /**
+   * Se ejecuta en cada it de manera asincrona
+   */
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      // el servicio a usar
+      providers: [ GenericoService, UsuarioService],
+      // Importamos el http para poder consumir los servicios
+      imports: [ HttpClientModule, RouterTestingModule],
+      // Se declara el componente, para poder ver el reporte en el coverage
+      declarations: [ VerInmuebleComponent ]
+    }).compileComponents();
+  }));
+// ----------------------------------------------------------------------------------
   /**
    * Se ejecuta antes de cada it
    */
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      // el servicio a usar
-      providers: [ GenericoService],
-      // Importamos el http para poder consumir los servicios
-      imports: [ HttpClientModule ],
-      // Se declara el componente, para poder ver el reporte en el coverage
-      declarations: [ VerInmuebleComponent ]
-    });
+    fixture = TestBed.createComponent( VerInmuebleComponent);
+    // Inicializamos el componente, para poder acceder a sus metodos
+    componente = fixture.componentInstance;
+    fixture.detectChanges();
   });
-
+// ----------------------------------------------------------------------------------
+  it('Crear componente', () => {
+    expect(componente).toBeTruthy();
+  });
+// ----------------------------------------------------------------------------------
   /**
-   * Buscar el inmueble cuando este ya existe
+   *  probando el ngOnInit cuando existe el parametro GET
    */
-  it('buscar inmueble cuando existe', () => {
-    // Usamos TestBed para poder usar el servicio http
-    const servicio: GenericoService = TestBed.get(GenericoService);
-    // Setteamos el id del inmueble a buscar, ya debe existir un inmueble con id 4
-    inmueble.id = 4;
-    // Usamos el servicio para buscar el inmueble
-    servicio.buscar("inmueble", {"id":inmueble.id}).subscribe(rta => {
-      // Validamos si la respuesta si concuerda con la esparada      
-      expect(rta.data.length).toEqual(1);
-    });
+  it('ngOnInit Existe parametro GET', () => {
+    let ver = componente.ngOnInit();
+    // toBeTruthy cuando es verdadero
+    expect(ver).toBeTruthy; 
   });
+// ----------------------------------------------------------------------------------
+  /**
+   *  probando el ngOnInit cuando no existe el parametro GET
+   */
+  it('ngOnInit No existe parametro GET', () => {
+    let ver = componente.ngOnInit();
+    // toBeFalsy cuando es Falso
+    expect(ver).toBeFalsy; 
+  });
+// ----------------------------------------------------------------------------------
+  /**
+   *  Busca el inmueble y carga la informacion
+   */
+  it('Cargar Inmueble', () => {
+    // id del inmueble a buscar y cargar
+    componente.inmueble.id = 2;
+    let ver = componente.cargarInmueble();
+    // toBeTruthy cuando es verdadero
+    expect(ver).toBeTruthy; 
+    console.log(componente.inmueble);
+  });
+// ----------------------------------------------------------------------------------
+  /**
+   *  probando el flujo alterno, cuando no se encuentra un inmueble
+   */
+  it('No Cargar Inmueble', () => {
+    // id del inmueble a buscar y a no cargar, este inmueble no debe existir en la bd
+    componente.inmueble.id = 200;
+    let ver = componente.cargarInmueble();
+    // toBeFalsy cuando es Falso
+    expect(ver).toBeFalsy; 
+  });
+// ----------------------------------------------------------------------------------
+  /**
+   * obtener zona
+   */
+  it('Obtener Zona', ()=> {
+    let zona = componente.getZona(0);
+    // validamos si la respuesta concuerda con la esparada
+    expect(zona).toContain("Norte");
+  });
+// ----------------------------------------------------------------------------------
+  /**
+   * obtener tipo AV
+   */
+  it('Obtener TipoAV', ()=> {
+    let tipoav = componente.getTipoAV(0);
+    // validamos si la respuesta concuerda con la esparada
+    expect(tipoav).toContain("Arriendo");
+  });
+// ----------------------------------------------------------------------------------
+  /**
+   * Agregar punto a un numero
+   */
+  it('addComa', ()=> {
+    let valor = componente.addComa(100000);
+    // validamos si la respuesta concuerda con la esparada
+    expect(valor).toContain("100.000");
+  });
+// ----------------------------------------------------------------------------------
+  /**
+   * probar si un boolean nos devuelve si o no
+   */
+  it('siNo cuando devuelve Si', ()=> {
+    let valor = componente.siNo(1);
+    // validamos si la respuesta concuerda con la esparada
+    expect(valor).toContain("Si");
+  });
+// ----------------------------------------------------------------------------------
+  /**
+   * probar si un boolean nos devuelve si o no
+   */
+  it('siNo cuando devuelve NO', ()=> {
+    let valor = componente.siNo(0);
+    // validamos si la respuesta concuerda con la esparada
+    expect(valor).toContain("No");
+  });
+// ---------------------------------------------------------------------------------
 });

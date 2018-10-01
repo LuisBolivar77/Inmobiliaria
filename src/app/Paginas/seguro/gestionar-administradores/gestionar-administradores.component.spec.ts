@@ -57,3 +57,98 @@ describe('GestionarAdministradoresComponent', () => {
 
   });
 });
+
+fdescribe('GestionarAdministradoresComponent', () => {
+  
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [PersonaService],
+      imports: [HttpClientModule, FormsModule],
+      declarations: [ GestionarAdministradoresComponent ]
+    })
+  });
+
+  it('buscar un administrador por cedula', () => { 
+    // persona asociada al usuario
+    let persona = new Persona();
+    //Cedula persona
+    persona.cedula = '4194';
+    // Usamos TestBed para poder usar el servicio http
+    const servicio: PersonaService = TestBed.get(PersonaService);
+    // usamos el servicio para registrar la persona
+    servicio.personaByCedula(persona).subscribe(res => {
+    expect<any>(res.data).not.toBe(null);
+    });
+  });
+});
+
+fdescribe('GestionarAdministradoresComponent', () => {
+  
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [PersonaService],
+      imports: [HttpClientModule, FormsModule],
+      declarations: [ GestionarAdministradoresComponent ]
+    })
+  });
+
+  it('buscar un administrador por rol', () => { 
+    // persona asociada al usuario
+    let persona = new Persona();
+    let rol = new Rol();
+    //Cedula persona
+    persona.cedula='4194';
+    persona.rol.id = 1;
+    // Usamos TestBed para poder usar el servicio http
+    const servicio: PersonaService = TestBed.get(PersonaService);
+    // usamos el servicio para registrar la persona
+    servicio.personaByCedulaRol(persona).subscribe(res => {
+    expect<any>(res.data).not.toBe(null);
+    });
+  });
+});
+
+describe('GestionarAdministradoresComponent', () => {
+  
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [PersonaService],
+      imports: [HttpClientModule, FormsModule],
+      declarations: [ GestionarAdministradoresComponent ]
+    })
+  });
+
+  it('editar un administrador', () => {
+    // Rol que tendra la persona  
+    let rol = new Rol();
+    // persona asociada al usuario
+    let persona = new Persona();
+    // usuario que se registra con la persona
+    let usuario = new Usuario();
+
+    //Datos del rol
+    rol.id = 1;
+    persona.id = 8;
+    // datos de la persona
+    persona.cedula = '4194'
+    persona.nombre = 'Rosalba';
+    persona.apellido = 'Cardona';
+    persona.fecha_nacimiento = '1978-03-30';
+    persona.telefono = '3155819215';
+    persona.direccion = 'Torre Horizonte';
+    persona.rol = rol;
+    // datos del usuario
+    usuario.persona = persona;
+    usuario.username = 'Rosa';
+    usuario.password = '1234';
+    // Usamos TestBed para poder usar el servicio http
+    const servicio: PersonaService = TestBed.get(PersonaService);
+    // usamos el servicio para registrar la persona
+    servicio.editar(usuario).subscribe(res => {
+    expect<any>(res.data).not.toBe(null);
+    });
+
+  });
+});
+
+
