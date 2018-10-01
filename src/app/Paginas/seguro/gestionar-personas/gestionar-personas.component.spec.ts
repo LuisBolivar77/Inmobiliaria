@@ -1,21 +1,139 @@
-import { GenericoService } from './../../../Servicios/genericoServ.service';
-import { PersonaService } from './../../../Servicios/personaServ.service';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { TestBed } from '@angular/core/testing';
-import { Rol } from '../../../Modelo/Rol';
-import { Persona } from '../../../Modelo/Persona';
-import { Usuario } from '../../../Modelo/Usuario';
-import {
-  BaseRequestOptions,
-  Response,
-  ResponseOptions,
-  Http
-} from '@angular/http';
-import { not } from '@angular/compiler/src/output/output_ast';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { GenericoService } from '../../../Servicios/genericoServ.service';
 import { HttpClientModule } from '@angular/common/http';
-import { GestionarPersonasComponent } from './gestionar-personas.component';
+import { Persona } from '../../../Modelo/Persona';
+import { Rol } from '../../../Modelo/Rol';
+import { PersonaService } from '../../../Servicios/personaServ.service';
 import { NgForm, FormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
+import { Usuario } from '../../../Modelo/Usuario';
+import { GestionarPersonasComponent } from './gestionar-personas.component';
 
+
+describe('Gestionar cliente', () => {
+
+  let component:  GestionarPersonasComponent;
+  let fixture: ComponentFixture<GestionarPersonasComponent>;
+
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      // el servicio a usar
+      providers: [],
+      // Importamos el http para poder consumir los servicios
+      imports: [HttpClientModule, FormsModule, RouterTestingModule],
+      // Se declara el componente, para poder ver el reporte en el coverage
+      declarations: [GestionarPersonasComponent]
+    })
+      .compileComponents();
+  }));
+
+  beforeEach(() => {
+
+    fixture = TestBed.createComponent(GestionarPersonasComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+
+  });
+
+  it('crear una persona', () => {
+ 
+    let rol: Rol = new Rol();
+    rol.id = 1;
+    let persona: Persona = new Persona();
+    persona.id = 111111;
+    persona.cedula = '1099';
+    persona.nombre = 'Valentina';
+    persona.apellido = 'Rua';
+    persona.fecha_nacimiento = '1999-29-11';
+    persona.telefono = '3128762521';
+    persona.direccion = 'montenegro';
+    persona.rol = rol;
+
+    let usuario: Usuario = new Usuario();
+    usuario.password = 'valen';
+    usuario.username = 'valen123';
+    usuario.persona = persona;
+
+    component.usuario.persona = persona;
+
+    let respuesta = component.registrar(null);
+
+    expect(respuesta).toBeTruthy;
+
+  });
+
+  it('buscar ciente', () => {
+    component.persona.cedula = '1094';
+    let respuesta = component.buscar();
+    expect(respuesta).toBeTruthy;
+  });
+
+  it('buscar ciente no existe', () => {
+    component.persona.cedula = '1094555';
+    let respuesta = component.buscar();
+    expect(respuesta).toBeFalsy;
+  });
+
+  it('editar ciente', () => {
+
+    let rol: Rol = new Rol();
+    rol.id = 3;
+    let persona: Persona = new Persona();
+    persona.cedula = '1094';
+    persona.nombre = 'Sandra';
+    persona.apellido = 'Jaramillo';
+    persona.fecha_nacimiento = '1992-24-05';
+    persona.telefono = '698349295';
+    persona.direccion = 'Madrid m3#4';
+    persona.rol = rol;
+
+    component.usuario.persona = persona;
+
+    let respuesta = component.editar(null);
+
+    expect(respuesta).toBeTruthy;
+
+  });
+
+  it('Ver la inormacion de un empleado de la tabla', () => {
+    let persona: Persona = new Persona();
+    persona.cedula = '1094';
+    let respuesta = component.ver(persona);
+    expect(respuesta).toBeTruthy;
+  });
+
+  it('Buscar desde el formulario html verdadero', () => {
+    component.persona.cedula = '1094';
+    let respuesta = component.fbuscar(event);
+    expect(respuesta).toBeTruthy;
+  });
+
+  it('Buscar desde el formulario html falso', () => {
+    component.persona.cedula = '1094555';
+    let respuesta = component.fbuscar(event);
+    expect(respuesta).toBeFalsy;
+  });
+
+
+  it('eliminar cliente', () => {
+    let persona: Persona = new Persona();
+    persona.id = 1;
+    let respuesta = component.eliminar(persona);
+    expect(respuesta).toBeFalsy;
+  });
+
+
+
+});
+
+//------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//--
+/*
 describe('GestionarPersonasComponent', () => {
 
   beforeEach(() => {
@@ -75,9 +193,9 @@ describe('GestionarPersonasComponent', () => {
     });
   });
 
-  /**
+  
    * Buscar la persona que ya se encuentra registrada
-   */
+   
   it('Buscar persona', () => {
 
     // Rol que tendra la persona  
@@ -101,6 +219,7 @@ describe('GestionarPersonasComponent', () => {
     });
   });
 });
+
 
 describe('GestionarPersonasComponent', () => {
 
@@ -150,3 +269,4 @@ describe('GestionarPersonasComponent', () => {
 
   });
 });
+*/
