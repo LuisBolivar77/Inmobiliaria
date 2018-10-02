@@ -10,7 +10,7 @@ import { Usuario } from '../../../Modelo/Usuario';
 import { GestionarPersonasComponent } from './gestionar-personas.component';
 
 
-fdescribe('Gestionar persona', () => {
+describe('Gestionar persona', () => {
   console.log("ENTRO GESTIONAR PERSONAS PRUEBAS");
   
 
