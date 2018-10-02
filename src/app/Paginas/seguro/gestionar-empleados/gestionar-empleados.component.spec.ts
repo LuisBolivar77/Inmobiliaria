@@ -85,19 +85,19 @@ describe('Gestionar un empeleado', () => {
     component.rol.id =3;
 
     let persona: Persona = new Persona();
-    persona.id = 2;
-    persona.cedula = '1090';
+    persona.id = 16;
+    persona.cedula = '4194';
     persona.nombre = 'Valentina';
     persona.apellido = 'Rua';
     persona.fecha_nacimiento = '1999-29-11';
     persona.telefono = '3128762521';
     persona.direccion = 'montenegro';
     persona.rol = rol;
-    component.persona.cedula = '1090';
+    component.persona.cedula = '4194';
 
     let usuario: Usuario = new Usuario();
-    usuario.password = 'valen';
-    usuario.username = 'valen123';
+    usuario.username = 'Rosa';
+    usuario.password = '1234';    
     usuario.persona = persona;
     component.usuario = usuario;
 
