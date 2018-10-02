@@ -12,7 +12,7 @@ import { Empleado } from '../../../Modelo/Empleado';
 import { Cargo } from '../../../Modelo/Cargo';
 import { GestionarEmpleadosComponent } from './gestionar-empleados.component';
 
-describe('Gestionar un empeleadfo', () => {
+fdescribe('Gestionar un empeleadfo', () => {
 
   let component: GestionarEmpleadosComponent;
   let fixture: ComponentFixture<GestionarEmpleadosComponent>;
@@ -41,33 +41,113 @@ describe('Gestionar un empeleadfo', () => {
     
     let rol: Rol = new Rol();
     rol.id = 1;
+    component.rol.id =1;
 
     let persona: Persona = new Persona();
-    persona.id = 123456;
-    persona.cedula = '1097730';
-    persona.nombre = 'Laura Vanessa';
-    persona.apellido = 'Posadsa castaño';
-    persona.fecha_nacimiento = '1998-04-05';
-    persona.telefono = '3207356688';
-    persona.direccion = 'Armenia';
+    persona.id = 11111;
+    persona.cedula = '109129';
+    persona.nombre = 'Valentina';
+    persona.apellido = 'Rua';
+    persona.fecha_nacimiento = '1999-29-11';
+    persona.telefono = '3128762521';
+    persona.direccion = 'montenegro';
     persona.rol = rol;
+    component.persona.cedula = '109129';
 
     let usuario: Usuario = new Usuario();
-    usuario.password = 'laura';
-    usuario.username = 'laura';
+    usuario.password = 'valen';
+    usuario.username = 'valen123';
     usuario.persona = persona;
+    component.usuario = usuario;
 
     let cargo: Cargo = new Cargo();
-    cargo.id=1;
+    cargo.id=2;
+    component.cargo.id=2;
     
     let empleado: Empleado = new Empleado();
     empleado.usuario = usuario;
     empleado.salario = 12345;
-    empleado.cargo.id= cargo.id;    
-
+    empleado.cargo= cargo;
     component.empleado = empleado;
 
     let respuesta = component.registrar(null);
+
+    expect(respuesta).toBeTruthy;
+
+  });
+
+
+  it('buscar empleado GESTIONAR EMPLEADO', () => {
+
+    let rol: Rol = new Rol();
+    rol.id = 1;
+    component.rol.id =1;
+
+    let persona: Persona = new Persona();
+    persona.id = 2;
+    persona.cedula = '1090';
+    persona.nombre = 'Valentina';
+    persona.apellido = 'Rua';
+    persona.fecha_nacimiento = '1999-29-11';
+    persona.telefono = '3128762521';
+    persona.direccion = 'montenegro';
+    persona.rol = rol;
+    component.persona.cedula = '1090';
+
+    let usuario: Usuario = new Usuario();
+    usuario.password = 'valen';
+    usuario.username = 'valen123';
+    usuario.persona = persona;
+    component.usuario = usuario;
+
+    let cargo: Cargo = new Cargo();
+    cargo.id=1;
+    component.cargo.id=1;
+    
+    let empleado: Empleado = new Empleado();
+    empleado.usuario = usuario;
+    empleado.salario = 12345;
+    empleado.cargo= cargo;
+    component.empleado = empleado;
+
+    let respuesta = component.buscar();
+    expect(respuesta).toBeTruthy;
+  });
+
+  it('editar persona', () => {
+
+    let rol: Rol = new Rol();
+    rol.id = 1;
+    component.rol.id =1;
+
+    let persona: Persona = new Persona();
+    persona.id = 2;
+    persona.cedula = '1090';
+    persona.nombre = 'Valentina';
+    persona.apellido = 'Rua';
+    persona.fecha_nacimiento = '1999-29-11';
+    persona.telefono = '3128762521';
+    persona.direccion = 'montenegro';
+    persona.rol = rol;
+    component.persona.cedula = '1090';
+
+    let usuario: Usuario = new Usuario();
+    usuario.password = 'valen';
+    usuario.username = 'valen123';
+    usuario.persona = persona;
+    component.usuario = usuario;
+
+    let cargo: Cargo = new Cargo();
+    cargo.id=1;
+    component.cargo.id=1;
+    
+    let empleado: Empleado = new Empleado();
+    empleado.usuario = usuario;
+    empleado.salario = 12345;
+    empleado.cargo= cargo;
+    component.empleado = empleado;
+
+    let respuesta = component.editar(null);
 
     expect(respuesta).toBeTruthy;
 

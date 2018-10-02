@@ -11,7 +11,7 @@ import { GestionarPersonasComponent } from './gestionar-personas.component';
 import { Empleado } from '../../../Modelo/Empleado';
 
 
-fdescribe('Gestionar persona', () => {
+describe('Gestionar persona', () => {
   //console.log("ENTRO GESTIONAR PERSONAS PRUEBAS"); 
 
   let component: GestionarPersonasComponent;
