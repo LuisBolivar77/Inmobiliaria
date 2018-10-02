@@ -88,7 +88,7 @@ describe('GestionarAdministradoresComponent', () => {
     componente.persona.id = 16;
     // datos de la persona
     persona.cedula = '4194'
-    componente.persona.cedula = '4194'
+    componente.persona.cedula = '4194';
     persona.nombre = 'Rosalba';
     persona.apellido = 'Cardona';
     persona.fecha_nacimiento = '1978-03-30';

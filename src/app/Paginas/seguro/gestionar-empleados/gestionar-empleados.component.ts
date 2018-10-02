@@ -38,8 +38,12 @@ export class GestionarEmpleadosComponent implements OnInit {
   cargo: Cargo = new Cargo();
   // formacion del empleado
   formacion: Formacion =  new Formacion();
+  // Archivo certiFicacion de la ormacion
+  archivoFormacion: File = null; 
   // experiencia del empleado
   experiencia: Experiencia = new Experiencia();
+  // Archivo certiFicacion de la experiencia
+  archivoExpeiencia: File = null; 
   // Variables para los mensajes en la pagina
   show: number;
   msj: string;
@@ -176,6 +180,7 @@ export class GestionarEmpleadosComponent implements OnInit {
         this.show = 3;
         // Guardamos el resultado en persona
         this.persona = rta.data;
+        this.persona.fecha_nacimiento = this.genericoServicio.formatoFecha(this.persona.fecha_nacimiento);
         // Asignamos el rol
         this.rol.id = rta.data.rol;
         this.persona.rol = this.rol;
@@ -292,6 +297,22 @@ export class GestionarEmpleadosComponent implements OnInit {
   }
 
   /**
+   * Asigna el archivo seleccionado del input en certificacion de experiencia o formacion
+   * @param event contiene el archivo que selecciono el usuario
+   * @param tipo define si el tipo de archivo es para experiencia o formacion
+   */
+  asignarArchivo(event,tipo) {
+    let selectedFile = <File>event.target.files[0];
+    if(tipo == 1){
+      // Archivo Formacion
+      this.archivoFormacion = selectedFile;
+    }else{
+      // Archivo Experiencia
+      this.archivoExpeiencia = selectedFile;
+    }
+  }
+
+  /**
    * Registra la formacion del empleado
    */
   registrarFormacion(form: NgForm) {
@@ -300,25 +321,36 @@ export class GestionarEmpleadosComponent implements OnInit {
     if (this.empleado.usuario.persona.id != null) {
       // Asignamos el empleado a la formacion
       this.formacion.empleado = this.empleado;
-      if (this.formacion.institucion != null && this.formacion.titulo != null) {
-        // Usamos AuxiliarObjeto para no mandar los objetos dentro, solo las foraneas
-        // tslint:disable-next-line:prefer-const
-        let auxiliar: AuxiliarObjeto = new AuxiliarObjeto();
-        auxiliar.objeto = this.formacion;
-        auxiliar.replaceValue('empleado', this.empleado.usuario.persona.id);
-        // Guardamos la formacion del empleado
-        this.genericoServicio.registrar('formaciones', auxiliar.objeto).subscribe(rta => {
-          if (rta.data === 'exito') {
-            this.msj = 'Se ha registrado la formacion academica del empleado ' + this.empleado.usuario.username;
-            this.show = 2;
-            this.listarFormaciones();
-            form.reset();
-          } else {
-            this.msj = rta.data;
+      if (this.formacion.institucion != null && this.formacion.titulo != null && this.archivoFormacion != null) {
+        // Guardamos el archivo en el servidor y 
+        //Asignamos el nombre del archivo a la certificacion de la formacion
+        this.genericoServicio.cargarArchivo(this.archivoFormacion).subscribe(r => {
+          if(r.data === 'exito'){
+            this.formacion.file_certificacion = r.nombreArchivo;
+            //Usamos AuxiliarObjeto para no mandar los objetos dentro, solo las foraneas
+            //tslint:disable-next-line:prefer-const
+            let auxiliar: AuxiliarObjeto = new AuxiliarObjeto();
+            auxiliar.objeto = this.formacion;
+            auxiliar.replaceValue('empleado', this.empleado.usuario.persona.id);
+            // Guardamos la formacion del empleado
+            this.genericoServicio.registrar('formaciones', auxiliar.objeto).subscribe(rta => {
+              if (rta.data === 'exito') {
+                this.msj = 'Se ha registrado la formacion academica del empleado ' + this.empleado.usuario.username;
+                this.show = 2;
+                this.listarFormaciones();
+                form.reset();
+              } else {
+                this.msj = rta.data;
+                this.show = 1;
+              }
+              window.alert(this.msj);
+            });
+          }else{
+            this.msj = "No se pudo subir el archivo, intente de nuevo";
             this.show = 1;
+            window.alert(this.msj);
           }
-          window.alert(this.msj);
-        });
+        });      
       } else {
         this.msj = 'Ingrese los datos para registrar la Formacion Academica';
         this.show = 1;
@@ -349,7 +381,6 @@ export class GestionarEmpleadosComponent implements OnInit {
     this.genericoServicio.listar('experiencias', {'empleado': this.empleado.usuario.persona.id}).subscribe(rta => {
       if (rta.data != null) {
         this.experiencias = rta.data;
-        console.log(rta.data);
       }
     });
   }
@@ -423,25 +454,36 @@ export class GestionarEmpleadosComponent implements OnInit {
     if (this.empleado.usuario.persona.id != null) {
       // Asignamos el empleado a la experiencia
       this.experiencia.empleado = this.empleado;
-      if (this.experiencia.empresa != null && this.experiencia.cargo != null) {
-        // Usamos AuxiliarObjeto para no mandar los objetos dentro, solo las foraneas
-        // tslint:disable-next-line:prefer-const
-        let auxiliar: AuxiliarObjeto = new AuxiliarObjeto();
-        auxiliar.objeto = this.experiencia;
-        auxiliar.replaceValue('empleado', this.empleado.usuario.persona.id);
-        // Guardamos la experiencia del empleado
-        this.genericoServicio.registrar('experiencias', auxiliar.objeto).subscribe(rta => {
-          if (rta.data === 'exito') {
-            this.msj = 'Se ha registrado la experiencia laboral del empleado ' + this.empleado.usuario.username;
-            this.show = 2;
-            this.listarExperiencias();
-            form.reset();
-          } else {
-            this.msj = rta.data;
+      if (this.experiencia.empresa != null && this.experiencia.cargo != null && this.archivoExpeiencia != null) {
+        // Guardamos el archivo en el servidor y 
+        //Asignamos el nombre del archivo a la certificacion de la experiencia
+        this.genericoServicio.cargarArchivo(this.archivoExpeiencia).subscribe(r => {
+          if(r.data === 'exito'){
+            this.experiencia.file_certificacion = r.nombreArchivo;
+            // Usamos AuxiliarObjeto para no mandar los objetos dentro, solo las foraneas
+            // tslint:disable-next-line:prefer-const
+            let auxiliar: AuxiliarObjeto = new AuxiliarObjeto();
+            auxiliar.objeto = this.experiencia;
+            auxiliar.replaceValue('empleado', this.empleado.usuario.persona.id);
+            // Guardamos la experiencia del empleado
+            this.genericoServicio.registrar('experiencias', auxiliar.objeto).subscribe(rta => {
+              if (rta.data === 'exito') {
+                this.msj = 'Se ha registrado la experiencia laboral del empleado ' + this.empleado.usuario.username;
+                this.show = 2;
+                this.listarExperiencias();
+                form.reset();
+              } else {
+                this.msj = rta.data;
+               this.show = 1;
+              }
+              window.alert(this.msj);
+            });
+          }else{
+            this.msj = "No se pudo subir el archivo, intente de nuevo";
             this.show = 1;
+            window.alert(this.msj);
           }
-          window.alert(this.msj);
-        });
+        });  
       } else {
         this.msj = 'Ingrese los datos para registrar la experiencia laboral';
         this.show = 1;
@@ -494,6 +536,8 @@ export class GestionarEmpleadosComponent implements OnInit {
    * Muestra los datos de la certificacion en el formulario y abre el pdf
    */
   verExperiencia(e: Experiencia) {
+    e.fecha_fin = this.genericoServicio.formatoFecha(e.fecha_fin);
+    e.fecha_inicio = this.genericoServicio.formatoFecha(e.fecha_inicio);
     this.experiencia = e;
   }
 

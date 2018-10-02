@@ -116,6 +116,7 @@ export class GestionarPersonasComponent implements OnInit {
         this.persona = rta.data;
         this.rol.id = rta.data.rol;
         this.persona.rol = this.rol;
+        this.persona.fecha_nacimiento = this.genericoServicio.formatoFecha(this.persona.fecha_nacimiento);
         // Buscamos el usuario asociado con la persona
         this.personaServicio.usuarioByPersona(this.persona).subscribe(rta2 => {
           this.usuario = rta2.data;
