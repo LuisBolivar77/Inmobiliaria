@@ -157,7 +157,6 @@ export class GestionarAdministradoresComponent implements OnInit {
       } else {
         this.msj = 'No se ha podido eliminar el cliente: ' + rta.data;
         this.show = 1;
-        return false;
       }
       window.alert(this.msj);
     });
