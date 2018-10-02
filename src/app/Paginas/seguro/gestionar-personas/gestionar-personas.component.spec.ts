@@ -12,12 +12,8 @@ import { Empleado } from '../../../Modelo/Empleado';
 
 
 describe('Gestionar persona', () => {
-<<<<<<< HEAD
   console.log("ENTRO GESTIONAR PERSONAS PRUEBAS");
   
-=======
-  //console.log("ENTRO GESTIONAR PERSONAS PRUEBAS"); 
->>>>>>> 7a58bd0b223293a1ef7885dd5d287529715719bc
 
   let component: GestionarPersonasComponent;
   let fixture: ComponentFixture<GestionarPersonasComponent>;

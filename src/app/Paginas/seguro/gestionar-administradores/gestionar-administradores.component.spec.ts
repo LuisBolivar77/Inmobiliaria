@@ -11,9 +11,10 @@ import { Rol } from 'src/app/Modelo/Rol';
 import { Persona } from 'src/app/Modelo/Persona';
 import { Usuario } from 'src/app/Modelo/Usuario';
 import { FormsModule } from '../../../../../node_modules/@angular/forms';
+import { prepareProfile } from '../../../../../node_modules/@types/selenium-webdriver/firefox';
 
 fdescribe('GestionarAdministradoresComponent', () => {
-
+  console.log("ENTRO ADMIN PRUEBA");
   /**
    * Componente de Gestionar Administradores
    */
@@ -25,7 +26,7 @@ fdescribe('GestionarAdministradoresComponent', () => {
       // el servicio a usar
       providers: [UsuarioService],
       // Importamos el http para poder consumir los servicios
-      imports: [HttpClientModule,FormsModule, RouterTestingModule],
+      imports: [HttpClientModule, FormsModule, RouterTestingModule],
       // Se declara el componente, para poder ver el reporte en el coverage
       declarations: [GestionarAdministradoresComponent]
     }).compileComponents();
@@ -51,106 +52,30 @@ fdescribe('GestionarAdministradoresComponent', () => {
 
     //Datos del rol
     rol.id = 1;
-    componente.rol.id=1;
+    componente.rol.id = 1;
     // datos de la persona
     persona.cedula = '4194';
+    componente.persona.cedula = '4194';
     persona.nombre = 'Rosa';
     persona.apellido = 'Cardona';
     persona.fecha_nacimiento = '1978-03-30';
     persona.telefono = '315581';
     persona.direccion = 'Bayon';
     persona.rol = rol;
-    componente.persona.cedula = '4194';
+    
     // datos del usuario
     usuario.persona = persona;
     usuario.username = 'Rosa';
     usuario.password = '1234';
-    componente.usuario=usuario;
+    componente.usuario = usuario;
 
     let registrar = componente.registrar(null);
     expect(registrar).toBeTruthy;
-
-<<<<<<< HEAD
-=======
-describe('GestionarAdministradoresComponent', () => {
-  
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [PersonaService],
-      imports: [HttpClientModule, FormsModule],
-      declarations: [ GestionarAdministradoresComponent ]
-    })
->>>>>>> 7a58bd0b223293a1ef7885dd5d287529715719bc
   });
 
   /**
-  *  Busca un administrador por la cedula cuando existe
-  */
-  it('buscar un administrador por cedula', () => {
-    // persona asociada al usuario
-    componente.persona.cedula = '4194';
-    let buscarSiCedula = componente.buscar();
-    expect(buscarSiCedula).toBeTruthy;
-  });
-
-<<<<<<< HEAD
-  /**
-  *  Busca un administrador por la cedula cuando no existe
-  */
-  it('buscar un administrador que no existe por cedula', () => {
-    componente.persona.cedula = '4194453';
-    let buscarNoCedula = componente.buscar();
-    expect(buscarNoCedula).toBeFalsy;
-=======
-describe('GestionarAdministradoresComponent', () => {
-  
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [PersonaService],
-      imports: [HttpClientModule, FormsModule],
-      declarations: [ GestionarAdministradoresComponent ]
-    })
->>>>>>> 7a58bd0b223293a1ef7885dd5d287529715719bc
-  });
-
-  /**
-   *  Busca el empleado por el id y carga la informacion
-   */
-  it('Buscar Empleado', () => {
-    // id del emplelado a buscar y cargar
-    componente.persona.id = 8;
-    let buscarId = componente.buscar();
-    // toBeTruthy cuando es verdadero
-    expect(buscarId).toBeTruthy;
-    console.log(componente.persona);
-  });
-
-  /**
-   *  Busca el empleado por rol y carga la informacion
-   */
-  it('Editar Empleado', () => {
-    // id del emplelado a buscar y cargar
-    componente.usuario.persona.rol.id = 1;
-    let buscarRol = componente.buscar();
-    // toBeTruthy cuando es verdadero
-    expect(buscarRol).toBeTruthy;
-    console.log(componente.persona);
-  });
-
-  /**
-   *  probando el flujo alterno, cuando no se encuentra un empleado
-   */
-  it('Empleado No Carga', () => {
-    // id del empleado a buscar y a no cargar, este empleado no debe existir en la bd
-    componente.persona.id = 100;
-    let b = componente.buscar();
-    // toBeFalsy cuando es Falso
-    expect(b).toBeFalsy;
-  });
-
-  /**
-   * Edita un administrador
-   */
+     * Edita un administrador
+     */
   it('editar un administrador', () => {
     let rol = new Rol();
     // persona asociada al usuario
@@ -158,34 +83,77 @@ describe('GestionarAdministradoresComponent', () => {
     // usuario que se registra con la persona
     let usuario = new Usuario();
     //Datos del rol
-    componente.rol.id = 1;
-    componente.persona.id = 8;
+    rol.id = 1;
+    persona.id = 16;
+    componente.persona.id = 16;
     // datos de la persona
-    componente.persona.cedula = '4194451'
-    componente.persona.nombre = 'Rosalba';
-    componente.persona.apellido = 'Cardona';
-    componente.persona.fecha_nacimiento = '1978-03-30';
-    componente.persona.telefono = '3155819215';
-    componente.persona.direccion = 'Torre Horizonte';
-    componente.persona.rol = rol;
+    persona.cedula = '4194'
+    componente.persona.cedula = '4194'
+    persona.nombre = 'Rosalba';
+    persona.apellido = 'Cardona';
+    persona.fecha_nacimiento = '1978-03-30';
+    persona.telefono = '3155819215';
+    persona.direccion = 'Torre Horizonte';
+    persona.rol = rol;
     // datos del usuario
-    componente.usuario.persona = persona;
-    componente.usuario.username = 'Rosa';
-    componente.usuario.password = '1234';
+    componente.usuario.persona = persona
+
     // Usamos TestBed para poder usar el servicio http
     let respuesta = componente.editar(null);
     expect(respuesta).toBeTruthy;
+  });
+
+  /**
+  *  Busca un administrador por la cedula cuando existe
+  */
+  it('buscar un administrador por cedula y rol', () => {
+    // persona asociada al usuario
+    let persona: Persona = new Persona();
+    persona.cedula = '4194';
+    componente.persona.cedula = '4194';
+    persona.rol.id = 1;
+    componente.rol.id = 1;
+    let buscarSiCedula = componente.buscar();
+    expect(buscarSiCedula).toBeTruthy;
+  });
+
+  it('Ver la inormacion de un empleado de la tabla', () => {
+    let persona: Persona = new Persona();
+    persona.cedula = '10949';
+    let respuesta = componente.ver(persona);
+    expect(respuesta).toBeTruthy;
+  });
+
+  it
+    ('Buscar desde el formulario html verdadero', () => {
+      let persona: Persona = new Persona();
+      persona.cedula = '10949';
+      componente.persona.cedula = '10949';
+      let respuesta = componente.fbuscar(event);
+      expect(respuesta).toBeTruthy;
     });
+    
+  it('Buscar desde el formulario html falso', () => {
+    let persona: Persona = new Persona();
+    persona.cedula = '109499999';
+    componente.persona.cedula = '109499999';
+    persona.rol.id = 1;
+    componente.rol.id = 1;
+    let respuesta = componente.fbuscar(event);
+    expect(respuesta).toBeFalsy;
+  });
 
   /**
    *  Elimina un administrador
    */
-    it('Eliminar un administrador', () => {
-      let persona: Persona = new Persona();
-      persona.id = 1;
-      let eliminar = componente.eliminar(persona);
-      expect(eliminar).toBeFalsy;
-    })
+  it('Eliminar un administrador', () => {
+    let persona: Persona = new Persona();
+    persona.id = 2;
+    let eliminar = componente.eliminar(persona);
+    expect(eliminar).toBeFalsy;
+  });
+
+
 
 });
 

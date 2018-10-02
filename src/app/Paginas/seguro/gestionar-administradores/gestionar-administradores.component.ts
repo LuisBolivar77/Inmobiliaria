@@ -46,7 +46,9 @@ export class GestionarAdministradoresComponent implements OnInit {
    * Registra un administrador con su usuario
    */
   registrar(form: NgForm) {
-    this.usuario.persona = this.persona;
+    this.rol.id = this.persona.rol.id;
+    this.persona.rol = this.rol;
+    this.usuario.persona.cedula = this.persona.cedula;
     this.personaServicio.registrar(this.usuario).subscribe(rta => {
       if (rta.data === 'exito') {
         this.msj = 'Se ha registrado correctamente';
@@ -70,8 +72,8 @@ export class GestionarAdministradoresComponent implements OnInit {
    * Edita un administrador con su usuario
    */
   editar(form: NgForm) {
-    if (this.usuario.persona != null && this.persona != null) {
-      this.usuario.persona = this.persona;
+    if (this.usuario.persona.cedula != null && this.persona.cedula != null) {
+      this.usuario.persona.cedula = this.persona.cedula;
       this.personaServicio.editar(this.usuario).subscribe(rta => {
         if (rta.data === 'exito') {
           this.msj = 'Se ha editado correctamente';
@@ -134,6 +136,7 @@ export class GestionarAdministradoresComponent implements OnInit {
       this.buscar();
     }
   }
+  
   /**
    * Lista todas los administradores registradas
    */
