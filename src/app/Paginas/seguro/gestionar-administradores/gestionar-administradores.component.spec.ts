@@ -58,7 +58,7 @@ describe('GestionarAdministradoresComponent', () => {
   });
 });
 
-fdescribe('GestionarAdministradoresComponent', () => {
+describe('GestionarAdministradoresComponent', () => {
   
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -82,7 +82,7 @@ fdescribe('GestionarAdministradoresComponent', () => {
   });
 });
 
-fdescribe('GestionarAdministradoresComponent', () => {
+describe('GestionarAdministradoresComponent', () => {
   
   beforeEach(() => {
     TestBed.configureTestingModule({

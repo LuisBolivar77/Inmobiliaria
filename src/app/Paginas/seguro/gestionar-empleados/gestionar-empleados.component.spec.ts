@@ -1,156 +1,75 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GestionarEmpleadosComponent } from './gestionar-empleados.component';
-import {
-  BaseRequestOptions,
-  Response,
-  ResponseOptions,
-  Http
-} from '@angular/http';
-import { HttpClientModule } from '@angular/common/http';
-import { NgForm, FormsModule } from '@angular/forms';
-import { not } from '@angular/compiler/src/output/output_ast';
 import { GenericoService } from '../../../Servicios/genericoServ.service';
-import { Usuario } from '../../../Modelo/Usuario';
-import { Cargo } from '../../../Modelo/Cargo';
-import { Empleado } from '../../../Modelo/Empleado';
+import { HttpClientModule } from '@angular/common/http';
 import { Persona } from '../../../Modelo/Persona';
+import { Rol } from '../../../Modelo/Rol';
+import { PersonaService } from '../../../Servicios/personaServ.service';
+import { NgForm, FormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
+import { Usuario } from '../../../Modelo/Usuario';
+import { Empleado } from '../../../Modelo/Empleado';
+import { Cargo } from '../../../Modelo/Cargo';
+import { GestionarEmpleadosComponent } from './gestionar-empleados.component';
 
+describe('Gestionar un empeleadfo', () => {
 
-describe('GestionarEmpleadosComponent', () => {
+  let component: GestionarEmpleadosComponent;
+  let fixture: ComponentFixture<GestionarEmpleadosComponent>;
 
-  beforeEach(() => {
-
-    TestBed.configureTestingModule({
-      providers: [GenericoService],
-      imports: [HttpClientModule, FormsModule],
-      declarations: [GestionarEmpleadosComponent]
-    });
-
-  });
-
-  it('crear un empleado', () => {
-    // Usuario que tiene una persona  
-    let usuario = new Usuario();
-    // cargo que se registra con el empleado
-    let cargo = new Cargo();
-    // empleado a crear
-    let empleado = new Empleado();  
-    // datos persona
-    let persona = new Persona() ;
-
-    //datos persona
-    persona.id= 27;
-
-    //Datos del usuario
-    usuario.persona = persona;
-    
-    //datos del cargo
-    cargo.id= 1;
-    // datos del empleado
-    empleado.cargo=cargo;
-    empleado.salario = 2000;
-    empleado.usuario=usuario;
-
-    // Usamos TestBed para poder usar el servicio http
-    const servicio: GenericoService = TestBed.get(GenericoService);
-    // usamos el servicio para registrar la persona
-    servicio.registrar('empleados', empleado).subscribe(res => {
-
-      console.log(res.data);
-      expect<any>(res.data).not.toBe(null);
-
-    });
-
-  });
-});
-
-describe('GestionarEmpleadosComponent', () => {
-   
-  beforeEach(() => {
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
       // el servicio a usar
       providers: [GenericoService],
       // Importamos el http para poder consumir los servicios
-      imports: [HttpClientModule, FormsModule],
+      imports: [HttpClientModule, FormsModule, RouterTestingModule],
       // Se declara el componente, para poder ver el reporte en el coverage
       declarations: [GestionarEmpleadosComponent]
-    });
-  });
-
-  /**
-   * Buscar la persona que ya se encuentra registrada
-   */
-  it('Buscar empleado', () => {
-
-    // Rol que tendra la persona  
-    let cargo = new Cargo();
-    // persona asociada al usuario
-    let persona = new Persona();
-    // usuario que se registra con la persona
-    let usuario = new Usuario();
-    //
-    let empleado = new Empleado();
-
-    // Usamos TestBed para poder usar el servicio http
-    const servicio: GenericoService = TestBed.get(GenericoService);
-    // Usamos el servicio para buscar el empleado
-    servicio.buscar('empleados', empleado).subscribe(rta => {
-             // Guardamos el retorno del servicio en la variable empleado, creada previamente
-      empleado = rta;
-      empleado.usuario.persona.cedula = '12345';
-
-      // Validamos si la respuesta si concuerda con la esparada
-      expect(empleado.usuario.persona.cedula).toEqual('12345');
-    });
-  });
-});
-
-describe('GestionarEmpleadosComponent', () => {
+    })
+      .compileComponents();
+  }));
 
   beforeEach(() => {
 
-    TestBed.configureTestingModule({
-      providers: [GenericoService],
-      imports: [HttpClientModule, FormsModule],
-      declarations: [GestionarEmpleadosComponent]
-    });
+    fixture = TestBed.createComponent(GestionarEmpleadosComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
 
   });
 
-  it('editar una empleado', () => {
-    // Usuario que tiene una persona  
-    let usuario = new Usuario();
-    // cargo que se registra con el empleado
-    let cargo = new Cargo();
-    // empleado a crear
-    let empleado = new Empleado();  
-    // datos persona
-    let persona = new Persona() ;
-
-    //datos persona
-    persona.id= 27;
-
-    //Datos del usuario
-    usuario.persona = persona;
+  it('crear un empleado', () => {
     
-    //datos del cargo
-    cargo.id= 1;
-    // datos del empleado
-    empleado.cargo=cargo;
-    empleado.salario = 12300;
-    empleado.usuario=usuario;
+    let rol: Rol = new Rol();
+    rol.id = 1;
 
-    // Usamos TestBed para poder usar el servicio http
-    const servicio: GenericoService = TestBed.get(GenericoService);
-    // usamos el servicio para registrar la persona
-    servicio.editar('empleados', empleado,'27').subscribe(res => {
+    let persona: Persona = new Persona();
+    persona.id = 123456;
+    persona.cedula = '1097730';
+    persona.nombre = 'Laura Vanessa';
+    persona.apellido = 'Posadsa castaño';
+    persona.fecha_nacimiento = '1998-04-05';
+    persona.telefono = '3207356688';
+    persona.direccion = 'Armenia';
+    persona.rol = rol;
 
-      console.log(res.data);
-      expect<any>(res.data).not.toBe(null);
+    let usuario: Usuario = new Usuario();
+    usuario.password = 'laura';
+    usuario.username = 'laura';
+    usuario.persona = persona;
 
-    });
+    let cargo: Cargo = new Cargo();
+    cargo.id=1;
+    
+    let empleado: Empleado = new Empleado();
+    empleado.usuario = usuario;
+    empleado.salario = 12345;
+    empleado.cargo.id= cargo.id;    
+
+    component.empleado = empleado;
+
+    let respuesta = component.registrar(null);
+
+    expect(respuesta).toBeTruthy;
 
   });
 });
-

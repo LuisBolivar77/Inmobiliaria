@@ -35,7 +35,7 @@ export class GestionarPersonasComponent implements OnInit {
 
   ngOnInit() {
     // Validamos si el usuario tiene acceso a la pagina
-    this.usuarioServicio.esAccesible('administracion/gestionar-personas');
+   // this.usuarioServicio.esAccesible('administracion/gestionar-personas');
     this.persona.rol = this.rol;
     // Obtenemos la lista de roles
     this.rolServicio.listar().subscribe(rta => {
