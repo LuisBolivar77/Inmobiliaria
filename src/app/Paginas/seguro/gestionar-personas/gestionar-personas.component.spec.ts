@@ -1,79 +1,141 @@
-import { GenericoService } from './../../../Servicios/genericoServ.service';
-import { PersonaService } from './../../../Servicios/personaServ.service';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { TestBed } from '@angular/core/testing';
-import { Rol } from '../../../Modelo/Rol';
-import { Persona } from '../../../Modelo/Persona';
-import { Usuario } from '../../../Modelo/Usuario';
-import {
-  BaseRequestOptions,
-  Response,
-  ResponseOptions,
-  Http
-} from '@angular/http';
-import { not } from '@angular/compiler/src/output/output_ast';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { GenericoService } from '../../../Servicios/genericoServ.service';
 import { HttpClientModule } from '@angular/common/http';
+import { Persona } from '../../../Modelo/Persona';
+import { Rol } from '../../../Modelo/Rol';
+import { PersonaService } from '../../../Servicios/personaServ.service';
+import { NgForm, FormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
+import { Usuario } from '../../../Modelo/Usuario';
 import { GestionarPersonasComponent } from './gestionar-personas.component';
+import { Empleado } from '../../../Modelo/Empleado';
 
-fdescribe('GestionarPersonasComponent', () => {
-  // Rol que tendra la persona
-  // tslint:disable-next-line:prefer-const
-  let rol = new Rol();
-  // la informacion de la persona asociada al usuario
-  // tslint:disable-next-line:prefer-const
-  let persona = new Persona();
-  // usuario que se registra con la persona
-  // tslint:disable-next-line:prefer-const
-  let usuario = new Usuario();
 
+describe('Gestionar persona', () => {
+  console.log("ENTRO GESTIONAR PERSONAS PRUEBAS");
   
 
-  beforeEach(() => {
+  let component: GestionarPersonasComponent;
+  let fixture: ComponentFixture<GestionarPersonasComponent>;
+
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
-      providers:    [ GenericoService ],
-      imports: [ HttpClientModule ],
-      declarations:[GestionarPersonasComponent]
-    });
+      // el servicio a usar
+      providers: [PersonaService],
+      // Importamos el http para poder consumir los servicios
+      imports: [HttpClientModule, FormsModule, RouterTestingModule],
+      // Se declara el componente, para poder ver el reporte en el coverage
+      declarations: [GestionarPersonasComponent]
+    })
+      .compileComponents();
+  }));
+
+  beforeEach(() => {
+
+    fixture = TestBed.createComponent(GestionarPersonasComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
 
   });
 
- 
-    
+  it('crear una persona GESTIONAR PERSONAS', () => {
 
-
-  it('crear una persona', () => {
-
+    let rol: Rol = new Rol();
     rol.id = 1;
-    rol.nombre = 'Administrador';
-    rol.descripcion = 'administrador';
+    component.rol.id =1;
 
-    // datos de la persona
-    persona.cedula = '123456789';
-    persona.nombre = 'gaga';
-    persona.apellido = 'posada';
-    persona.fecha_nacimiento = '1997-10-10';
-    persona.telefono = '3134566545';
-    persona.direccion = 'calle 45';
+    let persona: Persona = new Persona();
+    //persona.id = 11111;
+    persona.cedula = '1099';
+    persona.nombre = 'Valentina';
+    persona.apellido = 'Rua';
+    persona.fecha_nacimiento = '1999-29-11';
+    persona.telefono = '3128762521';
+    persona.direccion = 'montenegro';
     persona.rol = rol;
-      // datos del usuario
+    component.persona.cedula = '1099';
+
+    let usuario: Usuario = new Usuario();
+    usuario.password = 'valen';
+    usuario.username = 'valen123';
     usuario.persona = persona;
-    usuario.username = 'laura';
-    usuario.password = '123';
+    component.usuario = usuario;
 
-        // Usamos TestBed para poder usar el servicio http
+    let respuesta = component.registrar(null);
 
-    const servicio: GenericoService = TestBed.get(GenericoService);
+    expect(respuesta).toBeTruthy;
 
-    // Perform a request and make sure we get the response we expect
-    servicio.registrar("personas",{usuario}).subscribe(rta => {
-      console.log("ENTROOOOOOOOOOOOOOOOOOOOOOOOOO");
-    //console.log(usuario);
-     // expect(rta.data.length).toEqual(1);
-     servicio.buscar("personas", {"id":persona.cedula}).subscribe(rtap => {
-      // Validamos si la respuesta si concuerda con la esparada      
-      expect(rtap.cedula).toEqual('123456789');
-    });
-
-    });
   });
+
+  it('buscar persona GESTIONAR PERSONAS', () => {
+
+    let rol: Rol = new Rol();
+    rol.id = 1;
+    component.rol.id =1;
+
+    let persona: Persona = new Persona();
+    //persona.id = 11111;
+    persona.cedula = '1090';
+    persona.nombre = 'Valentina';
+    persona.apellido = 'Rua';
+    persona.fecha_nacimiento = '1999-29-11';
+    persona.telefono = '3128762521';
+    persona.direccion = 'montenegro';
+    persona.rol = rol;
+    component.persona.cedula = '1090';
+
+    let usuario: Usuario = new Usuario();
+    usuario.password = 'valen';
+    usuario.username = 'valen123';
+    usuario.persona = persona;
+    component.usuario = usuario;
+
+    let respuesta = component.buscar();
+    expect(respuesta).toBeTruthy;
+  });
+
+  it('buscar persona no existe', () => {
+    let pers: Persona = new Persona();
+    pers.cedula = '1090';
+    component.persona = pers;
+
+    let respuesta = component.buscar();
+    expect(respuesta).toBeFalsy;
+  });
+
+  it('editar persona', () => {
+
+    let rol: Rol = new Rol();
+    rol.id = 1;
+    let persona: Persona = new Persona();
+    persona.id = 2;
+    persona.cedula = '1090';
+    persona.nombre = 'Valentina';
+    persona.apellido = 'Rua Gonzales';
+    persona.fecha_nacimiento = '1999-29-11';
+    persona.telefono = '3004501089';
+    persona.direccion = 'Centenario';
+    persona.rol = rol;
+
+    component.usuario.persona = persona;
+
+    let respuesta = component.editar(null);
+
+    expect(respuesta).toBeTruthy;
+
+  });
+
+  it('Buscar desde el formulario html falso', () => {
+    component.persona.cedula = '1093';
+    let respuesta = component.fbuscar(event);
+    expect(respuesta).toBeFalsy;
+  });
+
+  it('eliminar persona', () => {
+    let persona: Persona = new Persona();
+    persona.id = 27;
+    let respuesta = component.eliminar(persona);
+    expect(respuesta).toBeTruthy;
+  });
+
 });

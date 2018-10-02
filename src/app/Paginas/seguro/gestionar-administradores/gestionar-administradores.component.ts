@@ -37,7 +37,7 @@ export class GestionarAdministradoresComponent implements OnInit {
     // Asignamos el rol a la persona
     this.persona.rol = this.rol;
     // Validamos si el usuario tiene acceso a la pagina
-    this.usuarioServicio.esAccesible('administracion/gestionar-administradores');
+    //this.usuarioServicio.esAccesible('administracion/gestionar-administradores');
     // Actualizamos la tabla de administradores
     this.listar();
   }
@@ -46,7 +46,9 @@ export class GestionarAdministradoresComponent implements OnInit {
    * Registra un administrador con su usuario
    */
   registrar(form: NgForm) {
-    this.usuario.persona = this.persona;
+    this.rol.id = this.persona.rol.id;
+    this.persona.rol = this.rol;
+    this.usuario.persona.cedula = this.persona.cedula;
     this.personaServicio.registrar(this.usuario).subscribe(rta => {
       if (rta.data === 'exito') {
         this.msj = 'Se ha registrado correctamente';
@@ -56,10 +58,12 @@ export class GestionarAdministradoresComponent implements OnInit {
         form.reset();
         // Actualizamos la lista de administradores
         this.listar();
+        return true;
       } else {
         this.msj = rta.data;
         this.show = 1;
         window.alert(rta.data);
+        return false;
       }
     });
   }
@@ -68,23 +72,25 @@ export class GestionarAdministradoresComponent implements OnInit {
    * Edita un administrador con su usuario
    */
   editar(form: NgForm) {
-    if (this.usuario.persona != null && this.persona != null) {
-    this.usuario.persona = this.persona;
-    this.personaServicio.editar(this.usuario).subscribe(rta => {
-      if (rta.data === 'exito') {
-        this.msj = 'Se ha editado correctamente';
-        this.show = 2;
-        window.alert(this.msj);
-        // limpiamos los campos
-        form.reset();
-        // Actualizamos la lista de administradores
-        this.listar();
-      } else {
-        this.msj = rta.data;
-        this.show = 1;
-        window.alert(rta.data);
-      }
-    });
+    if (this.usuario.persona.cedula != null && this.persona.cedula != null) {
+      this.usuario.persona.cedula = this.persona.cedula;
+      this.personaServicio.editar(this.usuario).subscribe(rta => {
+        if (rta.data === 'exito') {
+          this.msj = 'Se ha editado correctamente';
+          this.show = 2;
+          window.alert(this.msj);
+          // limpiamos los campos
+          form.reset();
+          // Actualizamos la lista de administradores
+          this.listar();
+          return true;
+        } else {
+          this.msj = rta.data;
+          this.show = 1;
+          window.alert(rta.data);
+          return false;
+        }
+      });
     } else {
       this.msj = 'Primero busque el administrador que va a editar';
       this.show = 1;
@@ -100,6 +106,7 @@ export class GestionarAdministradoresComponent implements OnInit {
       if (rta.data == null) {
         this.show = 1;
         this.msj = 'No existe un administrador con cedula ' + this.persona.cedula;
+        return false;
       } else {
         this.show = 3;
         this.persona = rta.data;
@@ -107,6 +114,7 @@ export class GestionarAdministradoresComponent implements OnInit {
         // Buscamos el usuario asociado con el administrador
         this.personaServicio.usuarioByPersona(this.persona).subscribe(rta2 => {
           this.usuario = rta2.data;
+          return true;
         });
       }
     });
@@ -128,6 +136,7 @@ export class GestionarAdministradoresComponent implements OnInit {
       this.buscar();
     }
   }
+  
   /**
    * Lista todas los administradores registradas
    */
@@ -142,11 +151,12 @@ export class GestionarAdministradoresComponent implements OnInit {
    * Eliminar administrador con su usuario de la base de datos
    */
   eliminar(p: Persona) {
-    this.genericoServicio.eliminar("personas", {"id": p.id}).subscribe(rta => {
+    this.genericoServicio.eliminar("personas", { "id": p.id }).subscribe(rta => {
       if (rta.data === 'exito') {
         this.msj = 'Se ha eliminado el cliente correctamente';
         this.show = 2;
         this.listar();
+        return true;
       } else {
         this.msj = 'No se ha podido eliminar el cliente: ' + rta.data;
         this.show = 1;

@@ -1,5 +1,4 @@
 	<!-- Intro -->
-
 	<div class="intro">
 		<div class="container">
 			<div class="row">
@@ -66,21 +65,21 @@
 							<div class="sidebar_search_form_container">
 								<form action="#" class="sidebar_search_form" id="sidebar_search_form">
 									<div class="sidebar_search_select">Ascensor: <span>{{siNo(inmueble.ascensor)}}</span></div>
-									<div class="sidebar_search_select">Canchas Deportivas: <span>{{siNo(inmueble.canchas_deportivas)}}</span></div>
-									<div class="sidebar_search_select">Zonas Humedas: <span>{{siNo(inmueble.zonas_humedas)}}</span></div>
-									<div class="sidebar_search_select">Zona Infantil: <span>{{siNo(inmueble.zona_inantil)}}</span></div>
+									<div class="sidebar_search_select">Canchas Deportivas: <span>{{siNo(inmueble.canchasDepor)}}</span></div>
+									<div class="sidebar_search_select">Zonas Humedas: <span>{{siNo(inmueble.zonasHumedas)}}</span></div>
+									<div class="sidebar_search_select">Zona Infantil: <span>{{siNo(inmueble.zonaInfantil)}}</span></div>
 									<div class="sidebar_search_select">Jardines: <span>{{siNo(inmueble.jardines)}}</span></div>
-									<div class="sidebar_search_select">Transporte Publico Cercano: <span>{{siNo(inmueble.transporte_publico_cercano)}}</span></div>
-									<div class="sidebar_search_select">Precio Negociable: <span>{{siNo(inmueble.precio_negociable)}}</span></div>
-									<div class="sidebar_search_select">Zona de Ropas: <span>{{siNo(inmueble.zona_ropas)}}</span></div>
+									<div class="sidebar_search_select">Transporte Publico Cercano: <span>{{siNo(inmueble.transporteCercano)}}</span></div>
+									<div class="sidebar_search_select">Precio Negociable: <span>{{siNo(inmueble.precioNegociable)}}</span></div>
+									<div class="sidebar_search_select">Zona de Ropas: <span>{{siNo(inmueble.zonaRopas)}}</span></div>
 									<div class="sidebar_search_select">Parqueadero: <span>{{siNo(inmueble.parqueadero)}}</span></div>
 									<div class="sidebar_search_select">Depositov: <span>{{siNo(inmueble.deposito)}}</span></div>
 									<div class="sidebar_search_select">Estudio: <span>{{siNo(inmueble.estudio)}}</span></div>
-									<div class="sidebar_search_select">Cuarto de Servicio: <span>{{siNo(inmueble.cuarto_servicio)}}</span></div>
+									<div class="sidebar_search_select">Cuarto de Servicio: <span>{{siNo(inmueble.cuartoServicio)}}</span></div>
 									<div class="sidebar_search_select">Chimenea: <span>{{siNo(inmueble.chimenea)}}</span></div>
 									<div class="sidebar_search_select">Cocina Abierta/Cerrada: <span>{{siNo(inmueble.cocinaAC)}}</span></div>
 									<div class="sidebar_search_select">Comedor Independiente: <span>{{siNo(inmueble.comedorIndependiente)}}</span></div>
-									<div class="sidebar_search_select">Vista Exterior / Interior: <span>{{siNo(inmueble.vista_exterior_interior)}}</span></div>
+									<div class="sidebar_search_select">Vista Exterior / Interior: <span>{{siNo(inmueble.vistaExterior)}}</span></div>
 									<button class="sidebar_search_button search_form_button" style="width: 100%;margin-top:20px!important">Reservar Visita</button>
 								</form>
 							</div>
@@ -172,16 +171,16 @@
 							<div class="property_title">Detalles Adicionales</div>
 							<div class="details_container">
 								<ul>
-                  <li><span><b>UBICACION</b></span></li>
+                                    <li><span><b>UBICACION</b></span></li>
 									<li><span>Departamento: </span>{{inmueble.ciudad.departamento.nombre}}</li>
 									<li><span>Ciudad: </span>{{inmueble.ciudad.nombre}}</li>
-                  <li><span>Sector: </span>{{getZona(inmueble.zona)}}</li>
-                  <li><span>Direccion: </span>{{inmueble.direccion}}</li>
-                  <li><span>Año de construccion: </span>{{inmueble.anoconstruccion}}</li>
-				  <li><span>Antiguedad: </span>{{anio-inmueble.anoconstruccion}} años</li>
-				  <li><span><b>Numero de Matricula: </b></span>{{inmueble.numero_matricula}}</li>
-                  <li><span><b>TIPO DE CORTINAS: </b></span>{{inmueble.tipo_cortinas}}</li>
-                  <li><span><b>CODIGO DEL INMUEBLE: </b></span>{{inmueble.id}}</li>
+                                    <li><span>Sector: </span>{{getZona(inmueble.zona)}}</li>
+                                    <li><span>Direccion: </span>{{inmueble.direccion}}</li>
+                                    <li><span>Año de construccion: </span>{{inmueble.anoconstruccion}}</li>
+				                    <li><span>Antiguedad: </span>{{inmueble.anoconstruccion}} años</li>
+				                    <li><span><b>Numero de Matricula: </b></span>{{inmueble.numero_matricula}}</li>
+                                    <li><span><b>TIPO DE CORTINAS: </b></span>{{inmueble.tipoCortinas}}</li>
+                                    <li><span><b>CODIGO DEL INMUEBLE: </b></span>{{inmueble.id}}</li>
 								</ul>
 							</div>
 						</div>
