@@ -8,7 +8,7 @@ export class Persona {
     cedula: string;
     nombre: string;
     apellido: string;
-    fecha_nacimiento: String;
+    fecha_nacimiento: string;
     telefono: string;
     direccion: string;
     rol: Rol;

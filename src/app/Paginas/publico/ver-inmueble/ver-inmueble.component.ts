@@ -41,7 +41,7 @@ export class VerInmuebleComponent implements OnInit {
       this.cargarInmueble();
       return true;
     }
-  }
+  }z
 
   /**
    * Busca el inmueble y carga la informacion
