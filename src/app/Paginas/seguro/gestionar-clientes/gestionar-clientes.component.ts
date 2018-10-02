@@ -29,8 +29,7 @@ export class GestionarClientesComponent implements OnInit {
   show: number;
   msj: string;
 
-  constructor(private genericoServicio: GenericoService,
-    private personaServicio: PersonaService, private usuarioServicio: UsuarioService) { }
+  constructor(private genericoServicio: GenericoService, private personaServicio: PersonaService, private usuarioServicio: UsuarioService) { }
 
   ngOnInit() {
     // Asignamos el rol cliente con id 2
@@ -47,6 +46,7 @@ export class GestionarClientesComponent implements OnInit {
    * Registra un cliente con su usuario
    */
   registrar(form: NgForm) {
+   // console.log('paso por aqui');
     this.usuario.persona = this.persona;
     this.personaServicio.registrar(this.usuario).subscribe(rta => {
       if (rta.data === 'exito') {
@@ -57,10 +57,12 @@ export class GestionarClientesComponent implements OnInit {
         form.reset();
         // Actualizamos la lista de clientes
         this.listar();
+        return true;
       } else {
         this.msj = rta.data;
         this.show = 1;
         window.alert(rta.data);
+        return false;
       }
     });
   }
@@ -80,16 +82,19 @@ export class GestionarClientesComponent implements OnInit {
         form.reset();
         // Actualizamos la lista de clientes
         this.listar();
+        return true;
       } else {
         this.msj = rta.data;
         this.show = 1;
         window.alert(rta.data);
+        return false;
       }
     });
     } else {
       this.msj = 'Primero busque el cliente que va a editar';
       this.show = 1;
       window.alert(this.msj);
+      return false;
     }
   }
 
@@ -101,6 +106,7 @@ export class GestionarClientesComponent implements OnInit {
       if (rta.data == null) {
         this.show = 1;
         this.msj = 'No existe un cliente con cedula ' + this.persona.cedula;
+        return false;
       } else {
         this.show = 3;
         this.persona = rta.data;
@@ -108,6 +114,7 @@ export class GestionarClientesComponent implements OnInit {
         // Buscamos el usuario asociado con el cliente
         this.personaServicio.usuarioByPersona(this.persona).subscribe(rta2 => {
           this.usuario = rta2.data;
+          return true;
         });
       }
     });
@@ -127,6 +134,7 @@ export class GestionarClientesComponent implements OnInit {
     event.preventDefault();
     if (this.persona.cedula != null) {
       this.buscar();
+      return true;
     }
   }
   /**
@@ -143,7 +151,7 @@ export class GestionarClientesComponent implements OnInit {
    * Eliminar cliente con su usuario de la base de datos
    */
   eliminar(p: Persona) {
-    this.genericoServicio.eliminar('personas', {'id': p.id}).subscribe(rta => {
+    this.genericoServicio.eliminar("personas", {"id": p.id}).subscribe(rta => {
       if (rta.data === 'exito') {
         this.msj = 'Se ha eliminado el cliente correctamente';
         this.show = 2;
