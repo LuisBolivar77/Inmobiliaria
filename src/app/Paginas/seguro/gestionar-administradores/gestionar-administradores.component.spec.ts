@@ -1,29 +1,45 @@
-import { GenericoService } from './../../../Servicios/genericoServ.service';
-import { PersonaService } from './../../../Servicios/personaServ.service';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { TestBed } from '@angular/core/testing';
-import { Rol } from '../../../Modelo/Rol';
-import { Persona } from '../../../Modelo/Persona';
-import { Usuario } from '../../../Modelo/Usuario';
-import {
-  BaseRequestOptions,
-  Response,
-  ResponseOptions,
-  Http
-} from '@angular/http';
-import { not } from '@angular/compiler/src/output/output_ast';
-import { HttpClientModule } from '@angular/common/http';
+import { async, TestBed, ComponentFixture } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { RouterTestingModule } from '@angular/router/testing';
 import { GestionarAdministradoresComponent } from './gestionar-administradores.component';
-import { NgForm, FormsModule } from '@angular/forms';
+import { GenericoService } from '../../../Servicios/genericoServ.service';
+import { HttpClientModule } from '@angular/common/http';
+import { RolService } from '../../../Servicios/rolServ.service';
+import { PersonaService } from '../../../Servicios/personaServ.service';
+import { UsuarioService } from '../../../Servicios/usuarioServ.service';
+import { Rol } from 'src/app/Modelo/Rol';
+import { Persona } from 'src/app/Modelo/Persona';
+import { Usuario } from 'src/app/Modelo/Usuario';
+import { FormsModule } from '../../../../../node_modules/@angular/forms';
+import { prepareProfile } from '../../../../../node_modules/@types/selenium-webdriver/firefox';
 
-describe('GestionarAdministradoresComponent', () => {
-  
-  beforeEach(() => {
+fdescribe('GestionarAdministradoresComponent', () => {
+  console.log("ENTRO ADMIN PRUEBA");
+  /**
+   * Componente de Gestionar Administradores
+   */
+  let componente: GestionarAdministradoresComponent;
+  let fixture: ComponentFixture<GestionarAdministradoresComponent>;
+
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
-      providers: [PersonaService],
-      imports: [HttpClientModule, FormsModule],
-      declarations: [ GestionarAdministradoresComponent ]
-    })
+      // el servicio a usar
+      providers: [UsuarioService],
+      // Importamos el http para poder consumir los servicios
+      imports: [HttpClientModule, FormsModule, RouterTestingModule],
+      // Se declara el componente, para poder ver el reporte en el coverage
+      declarations: [GestionarAdministradoresComponent]
+    }).compileComponents();
+  }));
+
+  /**
+   * Se ejecuta antes de cada it
+   */
+  beforeEach(() => {
+    fixture = TestBed.createComponent(GestionarAdministradoresComponent);
+    // Inicializamos el componente, para poder acceder a sus metodos
+    componente = fixture.componentInstance;
+    fixture.detectChanges();
   });
 
   it('crear un administrador', () => {
@@ -36,101 +52,43 @@ describe('GestionarAdministradoresComponent', () => {
 
     //Datos del rol
     rol.id = 1;
+    componente.rol.id = 1;
     // datos de la persona
     persona.cedula = '4194';
+    componente.persona.cedula = '4194';
     persona.nombre = 'Rosa';
     persona.apellido = 'Cardona';
     persona.fecha_nacimiento = '1978-03-30';
     persona.telefono = '315581';
     persona.direccion = 'Bayon';
     persona.rol = rol;
+    
     // datos del usuario
     usuario.persona = persona;
     usuario.username = 'Rosa';
     usuario.password = '1234';
-    // Usamos TestBed para poder usar el servicio http
-    const servicio: PersonaService = TestBed.get(PersonaService);
-    // usamos el servicio para registrar la persona
-    servicio.registrar(usuario).subscribe(res => {
-    expect<any>(res.data).not.toBe(null);
-    });
+    componente.usuario = usuario;
 
-  });
-});
-
-fdescribe('GestionarAdministradoresComponent', () => {
-  
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [PersonaService],
-      imports: [HttpClientModule, FormsModule],
-      declarations: [ GestionarAdministradoresComponent ]
-    })
+    let registrar = componente.registrar(null);
+    expect(registrar).toBeTruthy;
   });
 
-  it('buscar un administrador por cedula', () => { 
-    // persona asociada al usuario
-    let persona = new Persona();
-    //Cedula persona
-    persona.cedula = '4194';
-    // Usamos TestBed para poder usar el servicio http
-    const servicio: PersonaService = TestBed.get(PersonaService);
-    // usamos el servicio para registrar la persona
-    servicio.personaByCedula(persona).subscribe(res => {
-    expect<any>(res.data).not.toBe(null);
-    });
-  });
-});
-
-fdescribe('GestionarAdministradoresComponent', () => {
-  
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [PersonaService],
-      imports: [HttpClientModule, FormsModule],
-      declarations: [ GestionarAdministradoresComponent ]
-    })
-  });
-
-  it('buscar un administrador por rol', () => { 
-    // persona asociada al usuario
-    let persona = new Persona();
-    let rol = new Rol();
-    //Cedula persona
-    persona.cedula='4194';
-    persona.rol.id = 1;
-    // Usamos TestBed para poder usar el servicio http
-    const servicio: PersonaService = TestBed.get(PersonaService);
-    // usamos el servicio para registrar la persona
-    servicio.personaByCedulaRol(persona).subscribe(res => {
-    expect<any>(res.data).not.toBe(null);
-    });
-  });
-});
-
-describe('GestionarAdministradoresComponent', () => {
-  
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [PersonaService],
-      imports: [HttpClientModule, FormsModule],
-      declarations: [ GestionarAdministradoresComponent ]
-    })
-  });
-
+  /**
+     * Edita un administrador
+     */
   it('editar un administrador', () => {
-    // Rol que tendra la persona  
     let rol = new Rol();
     // persona asociada al usuario
     let persona = new Persona();
     // usuario que se registra con la persona
     let usuario = new Usuario();
-
     //Datos del rol
     rol.id = 1;
-    persona.id = 8;
+    persona.id = 16;
+    componente.persona.id = 16;
     // datos de la persona
     persona.cedula = '4194'
+    componente.persona.cedula = '4194'
     persona.nombre = 'Rosalba';
     persona.apellido = 'Cardona';
     persona.fecha_nacimiento = '1978-03-30';
@@ -138,17 +96,65 @@ describe('GestionarAdministradoresComponent', () => {
     persona.direccion = 'Torre Horizonte';
     persona.rol = rol;
     // datos del usuario
-    usuario.persona = persona;
-    usuario.username = 'Rosa';
-    usuario.password = '1234';
-    // Usamos TestBed para poder usar el servicio http
-    const servicio: PersonaService = TestBed.get(PersonaService);
-    // usamos el servicio para registrar la persona
-    servicio.editar(usuario).subscribe(res => {
-    expect<any>(res.data).not.toBe(null);
-    });
+    componente.usuario.persona = persona
 
+    // Usamos TestBed para poder usar el servicio http
+    let respuesta = componente.editar(null);
+    expect(respuesta).toBeTruthy;
   });
+
+  /**
+  *  Busca un administrador por la cedula cuando existe
+  */
+  it('buscar un administrador por cedula y rol', () => {
+    // persona asociada al usuario
+    let persona: Persona = new Persona();
+    persona.cedula = '4194';
+    componente.persona.cedula = '4194';
+    persona.rol.id = 1;
+    componente.rol.id = 1;
+    let buscarSiCedula = componente.buscar();
+    expect(buscarSiCedula).toBeTruthy;
+  });
+
+  it('Ver la inormacion de un empleado de la tabla', () => {
+    let persona: Persona = new Persona();
+    persona.cedula = '10949';
+    let respuesta = componente.ver(persona);
+    expect(respuesta).toBeTruthy;
+  });
+
+  it
+    ('Buscar desde el formulario html verdadero', () => {
+      let persona: Persona = new Persona();
+      persona.cedula = '10949';
+      componente.persona.cedula = '10949';
+      let respuesta = componente.fbuscar(event);
+      expect(respuesta).toBeTruthy;
+    });
+    
+  it('Buscar desde el formulario html falso', () => {
+    let persona: Persona = new Persona();
+    persona.cedula = '109499999';
+    componente.persona.cedula = '109499999';
+    persona.rol.id = 1;
+    componente.rol.id = 1;
+    let respuesta = componente.fbuscar(event);
+    expect(respuesta).toBeFalsy;
+  });
+
+  /**
+   *  Elimina un administrador
+   */
+  it('Eliminar un administrador', () => {
+    let persona: Persona = new Persona();
+    persona.id = 2;
+    let eliminar = componente.eliminar(persona);
+    expect(eliminar).toBeFalsy;
+  });
+
+
+
 });
 
 

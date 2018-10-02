@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
       if (this.servicios.getUsuario() != null) {
         // como ya inicio sesion, lo redireccionamos al inicio
         this.servicios.redireccionar('/');
+        return false;
       }
     }
 
@@ -36,6 +37,7 @@ export class LoginComponent implements OnInit {
         if (rta.data == null) {
           this.msj = 'A ingresado datos incorrectos';
           this.show = 1;
+          return false;
         } else {
           // --- El usuario se encuentra registrado ---//
           this.usuario = rta.data;
@@ -63,7 +65,7 @@ export class LoginComponent implements OnInit {
                     // procedemos a guardarlo como variable de sesion en angular 6
                     this.servicios.setUsuario(this.usuario);
                     // Redirigimos el usuario al inicio
-                    window.location.reload();
+                     window.location.reload();
                   });
                 }
               });
