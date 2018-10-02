@@ -60,6 +60,9 @@ exports.guardar = function(req, res){
                   objeto[key] = elObjeto[key];
             }
       }
+      console.log(tabla);
+      console.log(elObjeto);
+      console.log(object);
       // La consulta a ejecutar
       var sql = "INSERT INTO "+tabla+" set ? ";
       // Imprimimos en consola la peticion y el origen
@@ -173,9 +176,11 @@ exports.eliminar = function(req, res){
       var sql = "DELETE FROM "+tabla+" WHERE "+pk+" = ?";
       // Imprimimos en consola la peticion y el origen
       indicaOrigin(req,sql);
+      console.log('sql: ' + sql);
       // Ejecutamos la consulta y retornamos
       req.getConnection(function(err,connection){
             var query = connection.query(sql,objeto[pk],function(err,rows){
+                  console.log(objeto[pk]);
                   if(err){
                         res.send({data:err.code});
                   }else{
@@ -195,13 +200,13 @@ function obtenerId(objeto){
             // Validamos si es un objeto
             if(typeof objeto[key] === "object"){
                   for (var key2 in objeto[key]) {
-                        if(key2 == "id"){
+                        if(key2 == "id" || key2 == "persona" || key2 == "inmueble"){
                               id = objeto[key][key2];
                         }
                   }
             }else{
                   // Validamos si el atributo es un objeto
-                  if(key == "id"){
+                  if(key == "id" || key == "persona" || key == "inmueble"){
                         id = objeto[key];
                   }
             }

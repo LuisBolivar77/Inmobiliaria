@@ -48,12 +48,12 @@ export class GestionarEmpleadosComponent implements OnInit {
   show: number;
   msj: string;
 
-  constructor(private genericoServicio: GenericoService, private personaServicio: PersonaService, 
+  constructor(private genericoServicio: GenericoService, private personaServicio: PersonaService,
     private usuarioServicio: UsuarioService) { }
 
   ngOnInit() {
     // Validamos si el usuario tiene acceso a la pagina
-    this.usuarioServicio.esAccesible('administracion/gestionar-empleados');
+   // this.usuarioServicio.esAccesible('administracion/gestionar-empleados');
     // Construimos el objeto Empleado, inicialmente vacio
     this.empleado.cargo = this.cargo;
     this.empleado.usuario = this.usuario;
@@ -69,7 +69,9 @@ export class GestionarEmpleadosComponent implements OnInit {
  /**
    * Registra un empleado con su usuario
    */
-  registrar(form: NgForm) {
+  registrar(form: NgForm) {this.rol.id = this.persona.rol.id;
+    this.persona.rol= this.rol;
+    this.usuario.persona.cedula = this.persona.cedula;
     if (this.empleado.usuario.username != null && this.empleado.usuario.persona.apellido != null) {
       // Validamos si ya hay una persona con esta cedula
       this.genericoServicio.buscar('personas', {'cedula': this.empleado.usuario.persona.cedula}).subscribe(valida => {
@@ -226,6 +228,7 @@ export class GestionarEmpleadosComponent implements OnInit {
   ver(e: Empleado) {
     this.empleado = e;
     this.buscar();
+    return true;
   }
 
   /**
@@ -280,7 +283,7 @@ export class GestionarEmpleadosComponent implements OnInit {
    * Eliminar empleado con su usuario de la base de datos
    */
   eliminar(e: Empleado) {
-    this.genericoServicio.eliminar("personas", {"id": e.usuario.persona.id}).subscribe(rta => {
+    this.genericoServicio.eliminar('personas', {'id': e.usuario.persona.id}).subscribe(rta => {
       if (rta.data === 'exito') {
         this.msj = 'Se ha eliminado la persona correctamente';
         this.show = 2;

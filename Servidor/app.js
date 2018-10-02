@@ -7,6 +7,9 @@ var express = require('express');
 var servicios = require('./servicios');
 var http = require('http');
 var path = require('path');
+const multer = require('multer');
+const bodyParser = require('body-parser');
+
 
 // --------- SERVICIOS ------------ //
 
@@ -34,6 +37,7 @@ app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(express.static(path.join(__dirname, 'public')));
+// app.use('/file', rutaArchivos);
 
 /**
  * Permitimos acceso desde el cliente 4200 y al Karma 9876
@@ -117,7 +121,6 @@ app.post('/generico/eliminar', genericoServicio.eliminar);
 //------------------ Archivos -------------------- //
 app.post('/archivo/subir', genericoServicio.cargarArchivo);
 // ------------ END -----------------------------------//
-
 app.use(app.router);
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

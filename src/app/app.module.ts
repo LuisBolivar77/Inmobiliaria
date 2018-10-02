@@ -20,6 +20,7 @@ import { EditarCuentaComponent } from './Paginas/seguro/editar-cuenta/editar-cue
 import { InmueblesAdminComponent } from './Paginas/seguro/inmuebles-admin/inmuebles-admin.component';
 import { VerInmuebleComponent } from './Paginas/publico/ver-inmueble/ver-inmueble.component';
 import { AprobacionInmueblesComponent } from './Paginas/seguro/aprobacion-inmuebles/aprobacion-inmuebles.component';
+import { FileSelectDirective } from 'ng2-file-upload';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { AprobacionInmueblesComponent } from './Paginas/seguro/aprobacion-inmueb
     EditarCuentaComponent,
     InmueblesAdminComponent,
     VerInmuebleComponent,
-    AprobacionInmueblesComponent
+    AprobacionInmueblesComponent,
+    FileSelectDirective
   ],
   imports: [
     BrowserModule,
@@ -51,7 +53,7 @@ import { AprobacionInmueblesComponent } from './Paginas/seguro/aprobacion-inmueb
     FormsModule,
     RouterModule.forRoot([
       {
-        path:'administracion/aprobar-inmueble',
+        path: 'administracion/aprobar-inmueble',
         component: AprobacionInmueblesComponent
       },
       {
