@@ -200,13 +200,13 @@ function obtenerId(objeto){
             // Validamos si es un objeto
             if(typeof objeto[key] === "object"){
                   for (var key2 in objeto[key]) {
-                        if(key2 == "id"){
+                        if(key2 == "id" || key2 == "persona" || key2 == "inmueble"){
                               id = objeto[key][key2];
                         }
                   }
             }else{
                   // Validamos si el atributo es un objeto
-                  if(key == "id"){
+                  if(key == "id" || key == "persona" || key == "inmueble"){
                         id = objeto[key];
                   }
             }

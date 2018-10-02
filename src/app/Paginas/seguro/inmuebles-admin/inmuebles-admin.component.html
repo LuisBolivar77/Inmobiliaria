@@ -51,7 +51,7 @@
                             <div class="row">
                               <div class="col-lg-6">
                                 <label *ngIf="!busco" >Cedula del Usuario Propietario:</label>
-                                <input *ngIf="!busco" type="text" [(ngModel)]="cedula" name="cedula" class="contact_input" placeholder="Cedula Usuario" required="required">
+                                <input *ngIf="!busco" type="number" min="1" [(ngModel)]="cedula" name="cedula" class="contact_input" placeholder="Cedula Usuario" required="required">
                               </div>
                               <div class="col-lg-6">
                                 <label>Direccion:</label>
@@ -61,7 +61,7 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                   <label>Numero de Matricula:</label>
-                                  <input type="text" [(ngModel)]="inmueble.numero_matricula" name="numero_matricula" class="contact_input" placeholder="Numero de Matricula" required="required">
+                                  <input type="number" min="1" [(ngModel)]="inmueble.numero_matricula" name="numero_matricula" class="contact_input" placeholder="Numero de Matricula" required="required">
                                 </div>
                                 <div class="col-lg-6">
                                   <label>Detalles:</label>
@@ -95,24 +95,24 @@
                                 </div>
                                 <div class="col-lg-6">
                                   <label>Area del predio:</label>
-                                  <input type="text" [(ngModel)]="inmueble.area" name="area" class="contact_input" placeholder="Area del Predio" required="required" >
+                                  <input type="number" min="1" [(ngModel)]="inmueble.area" name="area" class="contact_input" placeholder="Area del Predio" required="required" >
                                 </div>        
                             </div>
                             <div class="row">
                                 <div class="col-lg-6">
                                   <label>Valor del Inmueble:</label>
-                                  <input type="text" [(ngModel)]="inmueble.valor" name="valor" class="contact_input" placeholder="Valor del inmueble" required="required" >
+                                  <input type="number" min="1" [(ngModel)]="inmueble.valor" name="valor" class="contact_input" placeholder="Valor del inmueble" required="required" >
                                 </div>
                                 <div class="col-lg-6">
                                   <label>Numero de baños:</label>
-                                  <input type="text" [(ngModel)]="inmueble.banios" name="banios" class="contact_input" placeholder="Numero de baños" required="required" >
+                                  <input type="number" min="1" [(ngModel)]="inmueble.banios" name="banios" class="contact_input" placeholder="Numero de baños" required="required" >
                                 </div>
                                 
                             </div>
                             <div class="row">
                                 <div class="col-lg-6">
                                   <label>Numero de habitaciones:</label>
-                                  <input type="text" [(ngModel)]="inmueble.habitaciones" name="habitaciones" class="contact_input" placeholder="Numero de habitaciones" required="required" >
+                                  <input type="number" min="1" [(ngModel)]="inmueble.habitaciones" name="habitaciones" class="contact_input" placeholder="Numero de habitaciones" required="required" >
                                 </div>
                                 <div class="col-lg-6">
                                   <label>Zona:</label>
@@ -126,87 +126,87 @@
                                 </div>
                                 <div class="col-lg-6">
                                   <label>Numero de garajes:</label>
-                                  <input type="text" [(ngModel)]="inmueble.garajes" name="Garaje" class="contact_input" placeholder="Numero de garajes" required="required" >
+                                  <input type="number" min="1" [(ngModel)]="inmueble.garajes" name="Garaje" class="contact_input" placeholder="Numero de garajes" required="required" >
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-6">
                                   <label>Asensor: </label>
-                                  <input type="checkbox" [(ngModel)]="inmueble.ascensor"  name="Ascensor" data-md-icheck style="margin-left: 10px"/>
+                                  <input type="checkbox" [(ngModel)]="theCheckboxAsensor"  name="Ascensor" data-md-icheck style="margin-left: 10px"/>
                                 </div>
                                 <div class="col-lg-6">
                                   <label>Cancha Deportiva: </label>
-                                  <input type="checkbox" [(ngModel)]="inmueble.canchasDepor"  name="CanchaDepor" data-md-icheck style="margin-left: 10px"/>
+                                  <input type="checkbox" [(ngModel)]="theCheckboxCanchasDepor"  name="CanchaDepor" data-md-icheck style="margin-left: 10px"/>
                                 </div>
                             </div>
                             <div class="row">
                                     <div class="col-lg-6">
                                       <label>Zona Humeda: </label>
-                                      <input type="checkbox" [(ngModel)]="inmueble.zonasHumedas"  name="ZonaHumeda" data-md-ichec style="margin-left: 10px"/>
+                                      <input type="checkbox" [(ngModel)]="theCheckboxZonasHumedas"  name="ZonaHumeda" data-md-ichec style="margin-left: 10px"/>
                                     </div>
                                     <div class="col-lg-6">
                                       <label>Zona Infantil: </label>
-                                      <input type="checkbox" [(ngModel)]="inmueble.zonaInfantil" name="ZonaInfantil" data-md-icheck style="margin-left: 10px"/>
+                                      <input type="checkbox" [(ngModel)]="theCheckboxZonaInfantil" name="ZonaInfantil" data-md-icheck style="margin-left: 10px"/>
                                     </div>
                             </div>
                             <div class="row">
                                     <div class="col-lg-6">
                                       <label>Jardines: </label>
-                                      <input type="checkbox" [(ngModel)]="inmueble.jardines" name="Jardines" data-md-icheck style="margin-left: 10px"/>
+                                      <input type="checkbox" [(ngModel)]="theCheckboxJardines" name="Jardines" data-md-icheck style="margin-left: 10px"/>
                                     </div>
                                     <div class="col-lg-6">
                                       <label>Tranporte publico cercano: </label>
-                                      <input type="checkbox" [(ngModel)]="inmueble.transporteCercano" name="TransCercano" data-md-icheck style="margin-left: 10px"/>
+                                      <input type="checkbox" [(ngModel)]="theCheckboxTransporteCercano" name="TransCercano" data-md-icheck style="margin-left: 10px"/>
                                     </div>
                             </div>
                             <div class="row">
                                     <div class="col-lg-6">
                                       <label>Precio negociable: </label>
-                                      <input type="checkbox" [(ngModel)]="inmueble.precioNegociable" name="PrecioNegociable" data-md-icheck style="margin-left: 10px"/>
+                                      <input type="checkbox" [(ngModel)]="theCheckboxPrecioNegociable" name="PrecioNegociable" data-md-icheck style="margin-left: 10px"/>
                                     </div>
                                     <div class="col-lg-6">
                                       <label>Zona para secar ropa: </label>
-                                      <input type="checkbox" [(ngModel)]="inmueble.zonasRopas" name="theCheckboxZonasRopas" data-md-icheck style="margin-left: 10px"/>
+                                      <input type="checkbox" [(ngModel)]="theCheckboxZonasRopas" name="theCheckboxZonasRopas" data-md-icheck style="margin-left: 10px"/>
                                     </div>
                             </div>
                             <div class="row">
                                     <div class="col-lg-6">
                                       <label>Parqueadero: </label>
-                                      <input type="checkbox" [(ngModel)]="inmueble.parqueadero" name="Parqueadero" data-md-icheck style="margin-left: 10px"/>
+                                      <input type="checkbox" [(ngModel)]="theCheckboxParqueadero" name="Parqueadero" data-md-icheck style="margin-left: 10px"/>
                                     </div>
                                     <div class="col-lg-6">
                                       <label>Deposito: </label>
-                                      <input type="checkbox" [(ngModel)]="inmueble.deposito" name="Deposito" data-md-icheck style="margin-left: 10px"/>
+                                      <input type="checkbox" [(ngModel)]="theCheckboxDeposito" name="Deposito" data-md-icheck style="margin-left: 10px"/>
                                     </div>
                             </div>
                             <div class="row">
                                     <div class="col-lg-6">
                                       <label>Estudio: </label>
-                                      <input type="checkbox" [(ngModel)]="inmueble.estudio" name="Estudio" data-md-icheck style="margin-left: 10px"/>
+                                      <input type="checkbox" [(ngModel)]="theCheckboxEstudio" name="Estudio" data-md-icheck style="margin-left: 10px"/>
                                     </div>
                                     <div class="col-lg-6">
                                       <label>Cuarto de servicio: </label>
-                                      <input type="checkbox" [(ngModel)]="inmueble.cuartoServicio" name="CuartoServicio" data-md-icheck style="margin-left: 10px"/>
+                                      <input type="checkbox" [(ngModel)]="theCheckboxCuartoServicio" name="CuartoServicio" data-md-icheck style="margin-left: 10px"/>
                                     </div>
                             </div>
                             <div class="row">
                                     <div class="col-lg-6">
                                       <label>Chimenea: </label>
-                                      <input type="checkbox" [(ngModel)]="inmueble.chimenea" name="Chimenea" data-md-icheck style="margin-left: 10px"/>
+                                      <input type="checkbox" [(ngModel)]="theCheckboxChimenea" name="Chimenea" data-md-icheck style="margin-left: 10px"/>
                                     </div>
                                     <div class="col-lg-6">
                                       <label>Cocina abierta: </label>
-                                      <input type="checkbox" [(ngModel)]="inmueble.cocinaAC" name="CocinaAC" data-md-icheck style="margin-left: 10px"/>
+                                      <input type="checkbox" [(ngModel)]="theCheckboxCocinaAC" name="CocinaAC" data-md-icheck style="margin-left: 10px"/>
                                     </div>
                             </div>
                             <div class="row">
                                     <div class="col-lg-6">
                                       <label>Comedor Independiente: </label>
-                                      <input type="checkbox" [(ngModel)]="inmueble.comedorIndependiente" name="ComedorIndependiente" data-md-icheck style="margin-left: 10px"/>
+                                      <input type="checkbox" [(ngModel)]="theCheckboxComedorIndependiente" name="ComedorIndependiente" data-md-icheck style="margin-left: 10px"/>
                                     </div>
                                     <div class="col-lg-6">
                                       <label>Vistas Exteriores: </label>
-                                      <input type="checkbox" [(ngModel)]="inmueble.vistaExterior" name="VistaExterior" data-md-icheck style="margin-left: 10px"/>
+                                      <input type="checkbox" [(ngModel)]="theCheckboxVistaExterios" name="VistaExterior" data-md-icheck style="margin-left: 10px"/>
                                     </div>
                             </div>
                             <div class="row">
@@ -241,8 +241,10 @@
             <div class="col-lg-4">
             <div class="contact_form_container">
                 <form #formacionesForm="ngForm" class="contact_form">
-                  <div class="section_subtitle">Datos Archivos</div>
-                  <button (click)="registrar()" style="width: 100%" class="contact_button button">Registrar Archivo</button>
+                  <div *ngIf="busco" class="section_subtitle">Datos Archivos</div>
+                    <input *ngIf="busco" type="file" multiple name="myfile" (change)="onFileSelected($event)" />
+                    <button *ngIf="busco" type="submit" (click)="buscarInmuebleArchivo(datosForm)" style="width: 100%" class="contact_button button">Registrar Archivo</button>
+                    <p *ngIf="!busco"> Debe buscar el inmueble primero para porder registrar un archivo</p>
                 </form>
               </div>
               </div>

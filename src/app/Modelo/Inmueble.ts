@@ -33,7 +33,7 @@ export class Inmueble {
     jardines: boolean;
     transporteCercano: boolean;
     precioNegociable: boolean;
-    zonasRopas: boolean;
+    zonaRopas: boolean;
     parqueadero: boolean;
     deposito: boolean;
     estudio: boolean;
