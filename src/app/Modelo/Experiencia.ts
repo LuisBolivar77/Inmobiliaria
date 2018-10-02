@@ -10,8 +10,8 @@ export class Experiencia {
     empresa_direccion: string;
     empresa_telefono: string;
     cargo: string;
-    fecha_inicio: Date;
-    fecha_fin: Date;
+    fecha_inicio: string;
+    fecha_fin: string;
     file_certificacion: string;
     empleado: Empleado;
 

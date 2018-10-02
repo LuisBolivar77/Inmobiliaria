@@ -79,7 +79,11 @@ app.use(
         
         host: 'localhost', //'localhost',
         user: 'root',
+<<<<<<< HEAD
         password : 'root',
+=======
+        password : '',
+>>>>>>> f07ea870fcab9fdb10998481a89d3637d8be43ff
         port : 3306, //port mysql
         database:'inmobiliaria'
 
@@ -118,6 +122,8 @@ app.post('/generico/guardar', genericoServicio.guardar);
 app.post('/generico/editar', genericoServicio.editar);
 app.post('/generico/buscar', genericoServicio.buscar);
 app.post('/generico/eliminar', genericoServicio.eliminar);
+//------------------ Archivos -------------------- //
+app.post('/archivo/subir', genericoServicio.cargarArchivo);
 // ------------ END -----------------------------------//
 app.use(app.router);
 http.createServer(app).listen(app.get('port'), function(){
