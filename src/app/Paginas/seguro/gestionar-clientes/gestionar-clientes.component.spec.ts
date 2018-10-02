@@ -13,7 +13,7 @@ import { UsuarioService } from '../../../Servicios/usuarioServ.service';
 
 
 
-fdescribe('Gestionar cliente', () => {
+describe('Gestionar cliente', () => {
 
   let component: GestionarClientesComponent;
   let fixture: ComponentFixture<GestionarClientesComponent>;

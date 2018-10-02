@@ -74,14 +74,17 @@ export class AprobacionInmueblesComponent implements OnInit {
     inmueble.administrador = this.usuarioSesion;
     var aux: AuxiliarObjeto = new AuxiliarObjeto();
     aux.objeto = inmueble;
-    aux.replaceValue("administrador",inmueble.administrador);
+    aux.replaceValue("administrador",inmueble.administrador.persona.id);
+  if(inmueble.promocion!=null){
     aux.replaceValue("promocion",  inmueble.promocion.id);
+  }
+    //aux.eliminarAtributo("promocion"); //se elimina el atributo promocion en caso de que no lo tenga
     aux.replaceValue("tipo",  inmueble.tipo.id);
     aux.replaceValue("ciudad", inmueble.ciudad.id);
     aux.replaceValue("usuario", inmueble.usuario.persona.id);
     console.log(aux.objeto);
-    this.servicioGenerico.editar("inmueble",aux.objeto, "id").subscribe(r => {
-      if(r.data=="exito"){
+    this.servicioGenerico.editar("inmueble",{"id":inmueble.id,"estado":1},"id").subscribe(r => {
+        if(r.data=="exito"){
         this.msj= "Se ha aprobado el mueble con exito!";
         this.show=2;
         this.listar();

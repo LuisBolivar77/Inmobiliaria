@@ -13,7 +13,7 @@ import { Cargo } from '../../../Modelo/Cargo';
 import { GestionarEmpleadosComponent } from './gestionar-empleados.component';
 import { Formacion } from '../../../Modelo/Formacion';
 
-fdescribe('Gestionar un empeleadfo', () => {
+describe('Gestionar un empeleado', () => {
 
   let component: GestionarEmpleadosComponent;
   let fixture: ComponentFixture<GestionarEmpleadosComponent>;

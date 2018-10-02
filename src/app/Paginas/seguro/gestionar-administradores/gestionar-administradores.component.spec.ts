@@ -13,7 +13,7 @@ import { Usuario } from 'src/app/Modelo/Usuario';
 import { FormsModule } from '../../../../../node_modules/@angular/forms';
 import { prepareProfile } from '../../../../../node_modules/@types/selenium-webdriver/firefox';
 
-fdescribe('GestionarAdministradoresComponent', () => {
+describe('GestionarAdministradoresComponent', () => {
   console.log("ENTRO ADMIN PRUEBA");
   /**
    * Componente de Gestionar Administradores

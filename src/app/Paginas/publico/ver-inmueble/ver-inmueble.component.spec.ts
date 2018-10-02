@@ -6,7 +6,7 @@ import { GenericoService } from '../../../Servicios/genericoServ.service';
 import { HttpClientModule } from '@angular/common/http';
 import { UsuarioService } from '../../../Servicios/usuarioServ.service';
 
-fdescribe('VerInmuebleComponent', () => {
+describe('VerInmuebleComponent', () => {
   /**
    * Componente de ver inmueble
    */
