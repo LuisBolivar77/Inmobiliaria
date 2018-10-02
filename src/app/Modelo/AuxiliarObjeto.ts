@@ -22,7 +22,7 @@ export class AuxiliarObjeto {
 
     /**
      * Elimina un atributo del objeto
-     * @param atributo el atributo a eliminar
+     * @param atributo el atributo a eliminar (tiene que ser del mismo nombre que en la BD)
      */
     eliminarAtributo(atributo){
         // eliminamos el atributo del objeto
