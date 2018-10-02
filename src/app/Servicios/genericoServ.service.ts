@@ -107,7 +107,42 @@ export class GenericoService {
             if (sParameterName[0] === sParam) {
                 return sParameterName[1] === undefined ? true : sParameterName[1];
             }
+        }
     }
 
-}
+    /**
+     * 
+     * @param date 
+     */
+    formatoFecha(date){
+        // Cortamos el date a 10 caracteres y luego hacemos split cada que encuentre un -
+        var data = date.slice(0, 10).split('-');
+        // retornamos año-mes-dia
+        return data[0] + '-' + data[1] + '-' + data[2];
+    }
+
+    /**
+     * convierte un archivo a base64
+     * @param archivo a convertir en base64
+     */
+    getBase64(archivo) {
+        var reader = new FileReader();
+        reader.readAsDataURL(archivo);
+        reader.onload = function () {
+            return reader.result;
+        };
+    }
+
+    /**
+     * sube un archivo al servidor
+     * @param archivo 
+     */
+    cargarArchivo (archivo:File) {
+        return this.http.post<any>(this.domain + 'archivo/subir', archivo)
+        .pipe(
+            map(res => {
+                return res;
+            })
+        );
+    }
 }

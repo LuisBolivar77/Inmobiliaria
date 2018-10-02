@@ -215,3 +215,14 @@ function obtenerId(objeto){
 function indicaOrigin(req,sql){
       console.log("Origen: "+req.headers.origin+" - Peticion: "+sql);
 }
+
+/**
+ * cargar archivos
+ */
+exports.cargarArchivo = function(req, res){      
+      // Objetenmos los datos enviados desde el cliente
+      console.log("parametros: "+req.params.lang);
+      // Nombre del archivo a guardar, usamos date para asignar un nombre unico
+      var name = "archivo"+new Date().getTime();
+      res.send({data:"exito", nombreArchivo:name});
+}

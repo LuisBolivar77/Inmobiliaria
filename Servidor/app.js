@@ -75,7 +75,7 @@ app.use(
         
         host: 'localhost', //'localhost',
         user: 'root',
-        password : 'admin',
+        password : '',
         port : 3306, //port mysql
         database:'inmobiliaria'
 
@@ -114,6 +114,8 @@ app.post('/generico/guardar', genericoServicio.guardar);
 app.post('/generico/editar', genericoServicio.editar);
 app.post('/generico/buscar', genericoServicio.buscar);
 app.post('/generico/eliminar', genericoServicio.eliminar);
+//------------------ Archivos -------------------- //
+app.post('/archivo/subir', genericoServicio.cargarArchivo);
 // ------------ END -----------------------------------//
 
 app.use(app.router);

@@ -104,6 +104,7 @@ export class GestionarClientesComponent implements OnInit {
         this.show = 3;
         this.persona = rta.data;
         this.persona.rol = this.rol;
+        this.persona.fecha_nacimiento = this.genericoServicio.formatoFecha(this.persona.fecha_nacimiento);
         // Buscamos el usuario asociado con el cliente
         this.personaServicio.usuarioByPersona(this.persona).subscribe(rta2 => {
           this.usuario = rta2.data;
