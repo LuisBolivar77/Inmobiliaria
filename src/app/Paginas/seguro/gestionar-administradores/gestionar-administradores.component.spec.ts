@@ -70,6 +70,17 @@ fdescribe('GestionarAdministradoresComponent', () => {
     let registrar = componente.registrar(null);
     expect(registrar).toBeTruthy;
 
+<<<<<<< HEAD
+=======
+describe('GestionarAdministradoresComponent', () => {
+  
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [PersonaService],
+      imports: [HttpClientModule, FormsModule],
+      declarations: [ GestionarAdministradoresComponent ]
+    })
+>>>>>>> 7a58bd0b223293a1ef7885dd5d287529715719bc
   });
 
   /**
@@ -82,6 +93,7 @@ fdescribe('GestionarAdministradoresComponent', () => {
     expect(buscarSiCedula).toBeTruthy;
   });
 
+<<<<<<< HEAD
   /**
   *  Busca un administrador por la cedula cuando no existe
   */
@@ -89,6 +101,16 @@ fdescribe('GestionarAdministradoresComponent', () => {
     componente.persona.cedula = '4194453';
     let buscarNoCedula = componente.buscar();
     expect(buscarNoCedula).toBeFalsy;
+=======
+describe('GestionarAdministradoresComponent', () => {
+  
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [PersonaService],
+      imports: [HttpClientModule, FormsModule],
+      declarations: [ GestionarAdministradoresComponent ]
+    })
+>>>>>>> 7a58bd0b223293a1ef7885dd5d287529715719bc
   });
 
   /**
