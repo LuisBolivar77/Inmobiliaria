@@ -24,7 +24,7 @@ describe('GestionarAdministradoresComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       // el servicio a usar
-      providers: [UsuarioService],
+      providers: [PersonaService],
       // Importamos el http para poder consumir los servicios
       imports: [HttpClientModule, FormsModule, RouterTestingModule],
       // Se declara el componente, para poder ver el reporte en el coverage

@@ -12,7 +12,6 @@ import { GenericoService } from './../../../Servicios/genericoServ.service';
 import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from '../../../Servicios/usuarioServ.service';
 import { AuxiliarObjeto } from '../../../Modelo/AuxiliarObjeto';
-import { FileUploader } from 'ng2-file-upload';
 import { Archivo } from '../../../Modelo/Archivo';
 
 @Component({

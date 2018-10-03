@@ -78,48 +78,6 @@ exports.guardar = function(req, res){
 };
 
 /**
- * Guardar en una tabla determinada
- 
-exports.guardar = function(req, res){
-      // Objetenmos los datos enviados desde el cliente
-      var data = JSON.parse(JSON.stringify(req.body));
-      // Tabla donde va a ir a guardar
-      var tabla = data.tabla;
-      // El Objeto enviado desde el cliente
-      var elObjeto = data.objeto;
-      // Construimos el objeto a guardar
-      var objeto = {};
-      // Llenamos el objeto con los datos de elObjeto
-      for (var key in elObjeto) {
-            // Validamos si el atributo es un objeto
-            if(typeof elObjeto[key] === "object"){
-                  // Como es un objeto, solo obtenemos el id para la foranea
-                  objeto[key] = obtenerId(elObjeto[key]);
-            }else{
-                  objeto[key] = elObjeto[key];
-            }
-      }
-      console.log(tabla);
-      console.log(elObjeto);
-      console.log(object);
-      // La consulta a ejecutar
-      var sql = "INSERT INTO "+tabla+" set ? ";
-      // Imprimimos en consola la peticion y el origen
-      indicaOrigin(req,sql);
-      // Ejecutamos la consulta y retornamos
-      req.getConnection(function(err,connection){
-            connection.query(sql,objeto,function(err,rows){
-                if(err){
-                  res.send({data:"no se pudo guardar, intente de nuevo. "+err.code});
-                }else{
-                  // Retornamos exito en la operacion y el id asignado al registro guardado
-                  res.send({data:"exito", id:rows.insertId});
-                }
-            });
-      });
-};
-*/
-/**
  * Editar en una tabla determinada
  */
 exports.editar = function(req, res){
