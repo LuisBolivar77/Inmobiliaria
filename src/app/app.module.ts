@@ -21,6 +21,7 @@ import { InmueblesAdminComponent } from './Paginas/seguro/inmuebles-admin/inmueb
 import { VerInmuebleComponent } from './Paginas/publico/ver-inmueble/ver-inmueble.component';
 import { AprobacionInmueblesComponent } from './Paginas/seguro/aprobacion-inmuebles/aprobacion-inmuebles.component';
 import { FileSelectDirective } from 'ng2-file-upload';
+import { InmuebleClienteComponent } from './Paginas/seguro/inmueble-cliente/inmueble-cliente.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { FileSelectDirective } from 'ng2-file-upload';
     InmueblesAdminComponent,
     VerInmuebleComponent,
     AprobacionInmueblesComponent,
-    FileSelectDirective
+    FileSelectDirective,
+    InmuebleClienteComponent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +54,10 @@ import { FileSelectDirective } from 'ng2-file-upload';
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
+      {
+        path: 'cliente/gestion-inmuebles',
+        component: InmuebleClienteComponent
+      },
       {
         path: 'administracion/aprobar-inmueble',
         component: AprobacionInmueblesComponent

@@ -1,5 +1,4 @@
 import { InmuebleTemporal } from './../../../Modelo/InmuebleTemporal';
-import { Persona } from './../../../Modelo/Persona';
 import { Zona } from './../../../Modelo/Zona';
 import { Departamento } from './../../../Modelo/Departamento';
 import { Usuario } from './../../../Modelo/Usuario';
@@ -15,30 +14,23 @@ import { AuxiliarObjeto } from '../../../Modelo/AuxiliarObjeto';
 import { Archivo } from '../../../Modelo/Archivo';
 
 @Component({
-  selector: 'app-inmuebles-admin',
-  templateUrl: './inmuebles-admin.component.html',
-  styleUrls: ['./inmuebles-admin.component.css']
+  selector: 'app-inmueble-cliente',
+  templateUrl: './inmueble-cliente.component.html',
+  styleUrls: ['./inmueble-cliente.component.css']
 })
-export class InmueblesAdminComponent implements OnInit {
-
+export class InmuebleClienteComponent implements OnInit {
   file: File[] = null;
   img;
   labelFile: string;
 
-  inmueble: Inmueble;
+  inmueble: Inmueble = new Inmueble();
   ciudadSeleccionada: Ciudad = new Ciudad();
   tipoInmuebleSeleccionado: TipoInmueble = new TipoInmueble();
   zonaSeleccionada: Zona = new Zona;
   tipoAVSeleccionado: VentaArriendo = new VentaArriendo;
-  usuarioCliente: Usuario = new Usuario();
-  usuarioEmpleado: Usuario = new Usuario();
-  persona: Persona = new Persona();
-  usuarioListar: Usuario = new Usuario();
   departamentoSeleccionado: Departamento = new Departamento();
   usuarioSesion: Usuario = new Usuario();
-  ciudadBusqueda: Ciudad = new Ciudad();
   inmuebleArchivo: Inmueble = new Inmueble();
-  inmuebleTemporal: InmuebleTemporal;
 
   // variables Checkbox
   theCheckboxAsensor = false;
@@ -67,20 +59,14 @@ export class InmueblesAdminComponent implements OnInit {
 
   show: number;
   msj: string;
-  cedula: string;
-  encontroUsu: boolean;
   numMatriculaBuscar: string;
-  busco: boolean;
-  resul: string;
+  busco = false;
 
   constructor(private generico: GenericoService, private usuarioServicio: UsuarioService) { }
 
   ngOnInit() {
     // Validamos si el usuario tiene acceso a la pagina
-    // this.usuarioServicio.esAccesible('administracion/gestion-inmuebles');
-
-    this.inmueble = new Inmueble();
-    this.inmuebleTemporal = new InmuebleTemporal();
+    this.usuarioServicio.esAccesible('cliente/gestion-inmuebles');
 
     this.usuarioSesion = this.usuarioServicio.getUsuario();
     this.listar();
@@ -88,7 +74,6 @@ export class InmueblesAdminComponent implements OnInit {
     this.listarTipoInmuebles();
     this.listarZonas();
     this.listarVentaArriendo();
-    this.busco = false;
 
   }
 
@@ -99,6 +84,7 @@ export class InmueblesAdminComponent implements OnInit {
           if (res.data === 'exito') {
             this.msj = 'El inmueble se ha registrado correctamente';
             this.show = 2;
+            // Actualizamos la lista de empleados
             this.listar();
             form.reset();
           } else {
@@ -117,41 +103,13 @@ export class InmueblesAdminComponent implements OnInit {
           this.show = 1;
           this.msj = 'No existe el inmueble con ese numero de matricula: ' + this.numMatriculaBuscar;
         } else {
+          let inmuebleTemporal = new InmuebleTemporal();
           this.busco = true;
-          this.inmuebleTemporal = rta.data;
-          this.buscarCiudad(this.inmuebleTemporal);
-          this.llenarInmuebleBusqueda(this.inmuebleTemporal);
+          inmuebleTemporal = rta.data;
+          this.buscarCiudad(inmuebleTemporal);
+          this.llenarInmuebleBusqueda(inmuebleTemporal);
         }
       });
-  }
-
-    /**
-   * Buscar un usuario
-   */
-  buscarUsuario(form: NgForm) {
-    if (this.cedula != null) {
-      this.generico.buscar('personas', {'cedula': this.cedula}).subscribe(rta => {
-        if (rta.data == null) {
-          this.show = 1;
-          this.msj = rta.data;
-        } else {
-          // Guardamos el resultado en persona
-          this.persona = rta.data;
-          this.generico.buscar('usuarios', {'persona': this.persona.id}).subscribe(res => {
-            if (res.data != null) {
-              this.usuarioCliente = res.data;
-              this.registrar(form);
-            } else {
-              this.show = 1;
-              this.msj = 'error, esta persona no tiene un usuario creado en nuestro sistema';
-            }
-          });
-        }
-      });
-    } else {
-      this.show = 1;
-      this.msj = 'error, debe ingresar la cedula del propietaria';
-    }
   }
 
   ver(e: InmuebleTemporal) {
@@ -183,13 +141,15 @@ export class InmueblesAdminComponent implements OnInit {
 
     this.llenarInmuebleEditar();
 
+    /**
     const aux: AuxiliarObjeto = new AuxiliarObjeto();
     aux.objeto = this.inmueble;
     aux.replaceValue('usuario', this.usuarioCliente.persona.id);
     aux.replaceValue('ciudad',  this.ciudadSeleccionada.id);
     aux.replaceValue('tipo', this.tipoInmuebleSeleccionado.id);
+    */
 
-    this.generico.editar('inmueble', aux.objeto, 'id').subscribe(res => {
+    this.generico.editar('inmueble', this.inmueble, 'id').subscribe(res => {
       if (res.data === 'exito') {
         this.busco = false;
         this.show = 2;
@@ -209,20 +169,10 @@ export class InmueblesAdminComponent implements OnInit {
    */
   listar() {
     // Obtenemos la lista de inmuebles
-    this.generico.listar('inmueble', {'estado': 1}).subscribe(rta => {
-    if ( rta.data != null ) {
-      this.inmuebles = rta.data;
-      // tslint:disable-next-line:prefer-const
-      for (let e of this.inmuebles) {
-        // obtenemos el cargo del empleado
-        this.generico.buscar('usuarios', {'persona': e.usuario}).subscribe(rta2 => {
-          e.usuario = rta2.data;
-          this.generico.buscar('personas', {'id': e.usuario.persona}).subscribe(res => {
-            e.usuario.persona = res.data;
-          });
-        });
+    this.generico.listar('inmueble', {'usuario': this.usuarioSesion.persona}).subscribe(rta => {
+      if ( rta.data != null ) {
+        this.inmuebles = rta.data;
       }
-    }
     });
   }
   /**
@@ -263,23 +213,20 @@ export class InmueblesAdminComponent implements OnInit {
   }
 
   cambio(cambiar: boolean): boolean {
-    if (cambiar === false || cambiar === null) {
+    if (cambiar === null) {
       return false;
-    } else {
-      return true;
     }
+    return true;
   }
 
   llenarInmueble() {
-    const fecha = this.fechaActual();
-    this.inmueble.fechaAprobacion = fecha;
+
     this.inmueble.tipoAV = this.tipoAVSeleccionado.id;
     this.inmueble.zona = this.zonaSeleccionada.id;
     this.inmueble.ciudad = this.ciudadSeleccionada;
     this.inmueble.tipo = this.tipoInmuebleSeleccionado;
-    this.inmueble.usuario = this.usuarioCliente;
-    this.inmueble.estado = 1;
-    this.inmueble.administrador = this.usuarioSesion;
+    this.inmueble.estado = 0;
+    this.inmueble.usuario = this.usuarioSesion;
     this.inmueble.ascensor = this.theCheckboxAsensor;
     this.inmueble.canchasDepor = this.theCheckboxCanchasDepor;
     this.inmueble.zonasHumedas = this.theCheckboxZonasHumedas;
@@ -296,10 +243,12 @@ export class InmueblesAdminComponent implements OnInit {
     this.inmueble.cocinaAC = this.theCheckboxCocinaAC;
     this.inmueble.comedorIndependiente = this.theCheckboxComedorIndependiente;
     this.inmueble.vistaExterior = this.theCheckboxVistaExterios;
+
   }
 
   llenarInmuebleEditar() {
-    this.inmueble.usuario = this.usuarioCliente;
+
+    this.inmueble.usuario = this.usuarioSesion;
     this.inmueble.tipoAV = this.tipoAVSeleccionado.id;
     this.inmueble.zona = this.zonaSeleccionada.id;
     this.inmueble.ciudad = this.ciudadSeleccionada;
@@ -307,10 +256,7 @@ export class InmueblesAdminComponent implements OnInit {
     this.inmueble.ascensor = this.cambio(this.theCheckboxAsensor);
     this.inmueble.canchasDepor = this.cambio(this.theCheckboxCanchasDepor);
     this.inmueble.zonasHumedas = this.cambio(this.theCheckboxZonasHumedas);
-    console.log('prueba boolean como llega ////////////// ' + this.theCheckboxZonaInfantil);
     this.inmueble.zonaInfantil = this.cambio(this.theCheckboxZonaInfantil);
-    console.log('prueba boolean como vuelve despues del metodo cambio ///////////// ' + this.cambio(this.theCheckboxZonaInfantil));
-    console.log('prueba boolean ///////////// ' + this.inmueble.zonaInfantil);
     this.inmueble.jardines = this.cambio(this.theCheckboxJardines);
     this.inmueble.transporteCercano = this.cambio(this.theCheckboxTransporteCercano);
     this.inmueble.precioNegociable = this.cambio(this.theCheckboxPrecioNegociable);
@@ -323,11 +269,12 @@ export class InmueblesAdminComponent implements OnInit {
     this.inmueble.cocinaAC = this.cambio(this.theCheckboxCocinaAC);
     this.inmueble.comedorIndependiente = this.cambio(this.theCheckboxComedorIndependiente);
     this.inmueble.vistaExterior = this.cambio(this.theCheckboxVistaExterios);
+
   }
 
   llenarInmuebleBusqueda(inmuebleTemporal: InmuebleTemporal) {
 
-    this.usuarioCliente = inmuebleTemporal.usuario;
+    this.inmueble.usuario = this.usuarioSesion;
     this.getTipoInmueble(inmuebleTemporal);
     this.zonaSeleccionada.id = inmuebleTemporal.zona;
     this.tipoAVSeleccionado.id = inmuebleTemporal.tipoAV;
@@ -505,6 +452,5 @@ export class InmueblesAdminComponent implements OnInit {
     };
     myReader.readAsDataURL(file);
   }
-
 
 }
