@@ -125,7 +125,7 @@ export class InmueblesAdminComponent implements OnInit {
       });
   }
 
-    /**
+  /**
    * Buscar un usuario
    */
   buscarUsuario(form: NgForm) {
@@ -166,7 +166,7 @@ export class InmueblesAdminComponent implements OnInit {
   }
 
   eliminar(e: Inmueble) {
-    console.log('//////////// id del inmueble a eliminar /////////////  ' + e.id);
+
     this.generico.eliminar('inmueble', {'id': e.id}).subscribe(res => {
       if (res.data === 'exito') {
         this.show = 2;
@@ -183,13 +183,7 @@ export class InmueblesAdminComponent implements OnInit {
 
     this.llenarInmuebleEditar();
 
-    const aux: AuxiliarObjeto = new AuxiliarObjeto();
-    aux.objeto = this.inmueble;
-    aux.replaceValue('usuario', this.usuarioCliente.persona.id);
-    aux.replaceValue('ciudad',  this.ciudadSeleccionada.id);
-    aux.replaceValue('tipo', this.tipoInmuebleSeleccionado.id);
-
-    this.generico.editar('inmueble', aux.objeto, 'id').subscribe(res => {
+    this.generico.editar('inmueble', this.inmueble, 'id').subscribe(res => {
       if (res.data === 'exito') {
         this.busco = false;
         this.show = 2;
@@ -280,22 +274,22 @@ export class InmueblesAdminComponent implements OnInit {
     this.inmueble.usuario = this.usuarioCliente;
     this.inmueble.estado = 1;
     this.inmueble.administrador = this.usuarioSesion;
-    this.inmueble.ascensor = this.theCheckboxAsensor;
-    this.inmueble.canchasDepor = this.theCheckboxCanchasDepor;
-    this.inmueble.zonasHumedas = this.theCheckboxZonasHumedas;
-    this.inmueble.zonaInfantil = this.theCheckboxZonaInfantil;
-    this.inmueble.jardines = this.theCheckboxJardines;
-    this.inmueble.transporteCercano = this.theCheckboxTransporteCercano;
-    this.inmueble.precioNegociable = this.theCheckboxPrecioNegociable;
-    this.inmueble.zonaRopas =  this.theCheckboxZonasRopas;
-    this.inmueble.parqueadero = this.theCheckboxParqueadero;
-    this.inmueble.deposito = this.theCheckboxDeposito;
-    this.inmueble.estudio = this.theCheckboxEstudio;
-    this.inmueble.cuartoServicio = this.theCheckboxCuartoServicio;
-    this.inmueble.chimenea = this.theCheckboxChimenea;
-    this.inmueble.cocinaAC = this.theCheckboxCocinaAC;
-    this.inmueble.comedorIndependiente = this.theCheckboxComedorIndependiente;
-    this.inmueble.vistaExterior = this.theCheckboxVistaExterios;
+    this.inmueble.ascensor = this.cambio(this.theCheckboxAsensor);
+    this.inmueble.canchasDepor = this.cambio(this.theCheckboxCanchasDepor);
+    this.inmueble.zonasHumedas = this.cambio(this.theCheckboxZonasHumedas);
+    this.inmueble.zonaInfantil = this.cambio(this.theCheckboxZonaInfantil);
+    this.inmueble.jardines = this.cambio(this.theCheckboxJardines);
+    this.inmueble.transporteCercano = this.cambio(this.theCheckboxTransporteCercano);
+    this.inmueble.precioNegociable = this.cambio(this.theCheckboxPrecioNegociable);
+    this.inmueble.zonaRopas =  this.cambio(this.theCheckboxZonasRopas);
+    this.inmueble.parqueadero = this.cambio(this.theCheckboxParqueadero);
+    this.inmueble.deposito = this.cambio(this.theCheckboxDeposito);
+    this.inmueble.estudio = this.cambio(this.theCheckboxEstudio);
+    this.inmueble.cuartoServicio = this.cambio(this.theCheckboxCuartoServicio);
+    this.inmueble.chimenea = this.cambio(this.theCheckboxChimenea);
+    this.inmueble.cocinaAC = this.cambio(this.theCheckboxCocinaAC);
+    this.inmueble.comedorIndependiente = this.cambio(this.theCheckboxComedorIndependiente);
+    this.inmueble.vistaExterior = this.cambio(this.theCheckboxVistaExterios);
   }
 
   llenarInmuebleEditar() {
@@ -307,10 +301,7 @@ export class InmueblesAdminComponent implements OnInit {
     this.inmueble.ascensor = this.cambio(this.theCheckboxAsensor);
     this.inmueble.canchasDepor = this.cambio(this.theCheckboxCanchasDepor);
     this.inmueble.zonasHumedas = this.cambio(this.theCheckboxZonasHumedas);
-    console.log('prueba boolean como llega ////////////// ' + this.theCheckboxZonaInfantil);
     this.inmueble.zonaInfantil = this.cambio(this.theCheckboxZonaInfantil);
-    console.log('prueba boolean como vuelve despues del metodo cambio ///////////// ' + this.cambio(this.theCheckboxZonaInfantil));
-    console.log('prueba boolean ///////////// ' + this.inmueble.zonaInfantil);
     this.inmueble.jardines = this.cambio(this.theCheckboxJardines);
     this.inmueble.transporteCercano = this.cambio(this.theCheckboxTransporteCercano);
     this.inmueble.precioNegociable = this.cambio(this.theCheckboxPrecioNegociable);
@@ -367,19 +358,7 @@ export class InmueblesAdminComponent implements OnInit {
   getTipoInmueble(inm: InmuebleTemporal) {
     this.generico.buscar('tipo_inmueble', {'id': inm.tipo}).subscribe(res => {
       this.tipoInmuebleSeleccionado = res.data;
-      console.log(this.tipoInmuebleSeleccionado.id);
-      console.log(this.tipoInmuebleSeleccionado.nombre);
-      this.prueba(this.tipoInmuebleSeleccionado.id);
     });
-  }
-
-  prueba(num: number) {
-    for (const o of this.tiposInmueble) {
-      if (o.id === num) {
-        console.log(o.id);
-        console.log(o.nombre);
-      }
-    }
   }
 
   booleanComp(comp: string): boolean {
@@ -506,5 +485,41 @@ export class InmueblesAdminComponent implements OnInit {
     myReader.readAsDataURL(file);
   }
 
-
+  /**
+  imprimirInmueble() {
+    console.log('admin: ' + this.inmueble.administrador.username);
+    console.log('año construccion: ' + this.inmueble.anoconstruccion);
+    console.log('area: ' + this.inmueble.area);
+    console.log('ascensor: ' + this.inmueble.ascensor);
+    console.log('baños: ' + this.inmueble.banios);
+    console.log('Cancha depor: ' + this.inmueble.canchasDepor);
+    console.log('chimenea: ' + this.inmueble.chimenea);
+    console.log('ciudad: ' + this.inmueble.ciudad);
+    console.log('cocinaAC: ' + this.inmueble.cocinaAC);
+    console.log('comedor independiente: ' + this.inmueble.comedorIndependiente);
+    console.log('cuarto servicios: ' + this.inmueble.cuartoServicio);
+    console.log('deposito: ' + this.inmueble.deposito);
+    console.log('detalles: ' + this.inmueble.detalles);
+    console.log('direccion: ' + this.inmueble.direccion);
+    console.log('estado: ' + this.inmueble.estado);
+    console.log('estudio: ' + this.inmueble.estudio);
+    console.log('fecha aprobacion: ' + this.inmueble.fechaAprobacion);
+    console.log('garajes: ' + this.inmueble.garajes);
+    console.log('habitaciones: ' + this.inmueble.habitaciones);
+    console.log('chimenea: ' + this.inmueble.jardines);
+    console.log('numero matricula: ' + this.inmueble.numero_matricula);
+    console.log('parqueadero: ' + this.inmueble.parqueadero);
+    console.log('precio negociable: ' + this.inmueble.precioNegociable);
+    console.log('tipoAV: ' + this.inmueble.tipoAV);
+    console.log('tipo cortinas: ' + this.inmueble.tipoCortinas);
+    console.log('transporte cercano: ' + this.inmueble.transporteCercano);
+    console.log('usuario: ' + this.inmueble.usuario);
+    console.log('valor: ' + this.inmueble.valor);
+    console.log('vista exterios: ' + this.inmueble.vistaExterior);
+    console.log('zona: ' + this.inmueble.zona);
+    console.log('zona infantil: ' + this.inmueble.zonaInfantil);
+    console.log('zona ropas: ' + this.inmueble.zonaRopas);
+    console.log('zonas humedas: ' + this.inmueble.zonasHumedas);
+  }
+  */
 }

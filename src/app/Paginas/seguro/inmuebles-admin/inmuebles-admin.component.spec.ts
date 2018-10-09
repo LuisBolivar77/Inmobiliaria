@@ -170,20 +170,16 @@ describe('InmueblesAdminComponent', () => {
    * probamos que liste los inmuebles
    */
   it('listar los inmuebles', () => {
-    const ver = component.listar();
-    // tslint:disable-next-line:no-unused-expression
-    expect(ver).toBeTruthy;
-    console.log('lista de inmuebles' + ver);
+    component.listar();
+    expect(component.inmuebles.length).toBeGreaterThan(0);
   });
 
   /**
    * probamos que liste los inmuebles
    */
   it('listar Departamentos', () => {
-    const ver = component.listarDepartamentos();
-    // tslint:disable-next-line:no-unused-expression
-    expect(ver).toBeTruthy;
-    console.log('lista de inmuebles' + ver);
+    component.listarDepartamentos();
+    expect(component.departamentos.length).toBeGreaterThan(0);
   });
 
   /**
@@ -192,21 +188,16 @@ describe('InmueblesAdminComponent', () => {
   it('listar las Cidudades', () => {
 
     component.departamentoSeleccionado.id = 2;
-
-    const ver = component.listarCiudades();
-    // tslint:disable-next-line:no-unused-expression
-    expect(ver).toBeTruthy;
-    console.log('lista de inmuebles' + ver);
+    component.listarCiudades();
+    expect(component.ciudades.length).toBeGreaterThan(0);
   });
 
   /**
    * probamos que liste los inmuebles
    */
   it('listar los Tipos de Inmuebles', () => {
-    const ver = component.listarTipoInmuebles();
-    // tslint:disable-next-line:no-unused-expression
-    expect(ver).toBeTruthy;
-    console.log('lista de inmuebles' + ver);
+    component.listarTipoInmuebles();
+    expect(component.tiposInmueble.length).toBeGreaterThan(0);
   });
 
   it('registrar un inmueble', () => {
@@ -235,20 +226,18 @@ describe('InmueblesAdminComponent', () => {
 
     component.inmueble = inmueble;
 
-    const ver = component.registrar(null);
+    component.registrar(null);
 
-    // tslint:disable-next-line:no-unused-expression
-    expect(ver).toBeTruthy;
+    expect(component.msj).toBe('El inmueble se ha registrado correctamente');
 
   });
 
   it('Bucar un inmueble', () => {
     component.numMatriculaBuscar = '723131';
     component.inmuebleTemporal = inmuebleTemp;
-    const ver = component.buscarInmueble();
+    component.buscarInmueble();
 
-    // tslint:disable-next-line:no-unused-expression
-    expect(ver).toBeTruthy;
+    expect(component.show).toBe(1);
   });
 
   it('llenar inmueble para registro', () => {
@@ -275,17 +264,126 @@ describe('InmueblesAdminComponent', () => {
     component.theCheckboxZonasHumedas = false;
     component.theCheckboxZonasRopas = true;
 
-    const ver = component.llenarInmueble();
+    component.llenarInmueble();
 
-    // tslint:disable-next-line:no-unused-expression
-    expect(ver).toBeTruthy;
+    expect(component.inmueble).not.toBe(null);
 
   });
 
   it('llenar inmueble despues de la busqueda', () => {
+    component.llenarInmuebleBusqueda(inmuebleTemp);
 
+    expect(component.usuarioCliente).not.toBe(null);
   });
 
+  it('llenar inmueble para editar', () => {
+    component.tipoAVSeleccionado.id = 0;
+    component.zonaSeleccionada.id = 2;
+    component.ciudadSeleccionada = ciudad;
+    component.tipoInmuebleSeleccionado = tipoInmueble;
+    component.usuarioCliente = usu;
+    component.theCheckboxAsensor = true;
+    component.theCheckboxCanchasDepor = false;
+    component.theCheckboxChimenea = true;
+    component.theCheckboxCocinaAC = false;
+    component.theCheckboxComedorIndependiente = true;
+    component.theCheckboxCuartoServicio = false;
+    component.theCheckboxDeposito = true;
+    component.theCheckboxEstudio = false;
+    component.theCheckboxJardines = true;
+    component.theCheckboxParqueadero = false;
+    component.theCheckboxPrecioNegociable = false;
+    component.theCheckboxTransporteCercano = true;
+    component.theCheckboxVistaExterios = false;
+    component.theCheckboxZonaInfantil = true;
+    component.theCheckboxZonasHumedas = false;
+    component.theCheckboxZonasRopas = true;
 
+    component.llenarInmuebleEditar();
+
+    expect(component.inmueble).not.toBe(null);
+  });
+
+  it('buscar un usuario', () => {
+    component.cedula = '1093';
+
+    component.buscarUsuario(null);
+
+    expect(component.usuarioCliente).not.toBe(null);
+  });
+
+  it('Elimina un inmueble', () => {
+    component.eliminar(inmueble);
+
+    expect(component.msj).toBe('El inmueble fue eliminado');
+  });
+
+  it('edita un inmueble', () => {
+
+    component.tipoAVSeleccionado.id = 0;
+    component.zonaSeleccionada.id = 2;
+    component.ciudadSeleccionada = ciudad;
+    component.tipoInmuebleSeleccionado = tipoInmueble;
+    component.usuarioCliente = usu;
+    component.usuarioSesion = usu;
+    component.theCheckboxAsensor = true;
+    component.theCheckboxCanchasDepor = false;
+    component.theCheckboxChimenea = true;
+    component.theCheckboxCocinaAC = false;
+    component.theCheckboxComedorIndependiente = true;
+    component.theCheckboxCuartoServicio = false;
+    component.theCheckboxDeposito = true;
+    component.theCheckboxEstudio = false;
+    component.theCheckboxJardines = true;
+    component.theCheckboxParqueadero = false;
+    component.theCheckboxPrecioNegociable = false;
+    component.theCheckboxTransporteCercano = true;
+    component.theCheckboxVistaExterios = false;
+    component.theCheckboxZonaInfantil = true;
+    component.theCheckboxZonasHumedas = false;
+    component.theCheckboxZonasRopas = true;
+
+    component.inmueble = inmueble;
+
+    component.editar(null);
+
+    expect(component.msj).toBe('el inmueble se edito correctamente');
+  });
+
+  it('buscar una ciudad', () => {
+    component.departamentoSeleccionado.id = 1;
+    component.buscarCiudad(inmuebleTemp);
+    expect(component.departamentoSeleccionado).not.toBe(null);
+  });
+
+  it('cambio de booleano', () => {
+    const res = component.cambio(null);
+    expect(res).toBe(false);
+  });
+
+  it('busca un inmueble en especifico', () => {
+    component.getTipoInmueble(inmuebleTemp);
+    expect(component.tipoInmuebleSeleccionado).not.toBe(null);
+  });
+
+  it('cambia un string a un boolean', () => {
+    const res = component.booleanComp('1');
+    expect(res).toBe(true);
+  });
+
+  it('obitene la fecha del sistema', () => {
+    const res = component.fechaActual();
+    expect(res).not.toBe(null);
+  });
+
+  it('llena la lista de zonas', () => {
+    component.listarZonas();
+    expect(component.zonas.length).toBeGreaterThan(0);
+  });
+
+  it('llena la lista de AV', () => {
+    component.listarVentaArriendo();
+    expect(component.ventaArriendo.length).toBeGreaterThan(0);
+  });
 
 });

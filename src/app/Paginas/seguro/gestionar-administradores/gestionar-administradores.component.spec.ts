@@ -14,7 +14,7 @@ import { FormsModule } from '../../../../../node_modules/@angular/forms';
 import { prepareProfile } from '../../../../../node_modules/@types/selenium-webdriver/firefox';
 
 describe('GestionarAdministradoresComponent', () => {
-  console.log("ENTRO ADMIN PRUEBA");
+  // console.log('ENTRO ADMIN PRUEBA');
   /**
    * Componente de Gestionar Administradores
    */
@@ -43,14 +43,17 @@ describe('GestionarAdministradoresComponent', () => {
   });
 
   it('crear un administrador', () => {
-    // Rol que tendra la persona  
+    // Rol que tendra la persona
+    // tslint:disable-next-line:prefer-const
     let rol = new Rol();
     // persona asociada al usuario
+    // tslint:disable-next-line:prefer-const
     let persona = new Persona();
     // usuario que se registra con la persona
+    // tslint:disable-next-line:prefer-const
     let usuario = new Usuario();
 
-    //Datos del rol
+    // Datos del rol
     rol.id = 1;
     componente.rol.id = 1;
     // datos de la persona
@@ -62,32 +65,36 @@ describe('GestionarAdministradoresComponent', () => {
     persona.telefono = '315581';
     persona.direccion = 'Bayon';
     persona.rol = rol;
-    
+
     // datos del usuario
     usuario.persona = persona;
     usuario.username = 'Rosa';
     usuario.password = '1234';
     componente.usuario = usuario;
 
-    let registrar = componente.registrar(null);
+    const registrar = componente.registrar(null);
+    // tslint:disable-next-line:no-unused-expression
     expect(registrar).toBeTruthy;
   });
 
   /**
-     * Edita un administrador
-     */
+  * Edita un administrador
+  */
   it('editar un administrador', () => {
+    // tslint:disable-next-line:prefer-const
     let rol = new Rol();
     // persona asociada al usuario
+    // tslint:disable-next-line:prefer-const
     let persona = new Persona();
     // usuario que se registra con la persona
+     // tslint:disable-next-line:prefer-const
     let usuario = new Usuario();
-    //Datos del rol
+    // Datos del rol
     rol.id = 1;
     persona.id = 16;
     componente.persona.id = 16;
     // datos de la persona
-    persona.cedula = '4194'
+    persona.cedula = '4194';
     componente.persona.cedula = '4194';
     persona.nombre = 'Rosalba';
     persona.apellido = 'Cardona';
@@ -96,10 +103,11 @@ describe('GestionarAdministradoresComponent', () => {
     persona.direccion = 'Torre Horizonte';
     persona.rol = rol;
     // datos del usuario
-    componente.usuario.persona = persona
+    componente.usuario.persona = persona;
 
     // Usamos TestBed para poder usar el servicio http
-    let respuesta = componente.editar(null);
+    const respuesta = componente.editar(null);
+    // tslint:disable-next-line:no-unused-expression
     expect(respuesta).toBeTruthy;
   });
 
@@ -108,53 +116,60 @@ describe('GestionarAdministradoresComponent', () => {
   */
   it('buscar un administrador por cedula y rol', () => {
     // persona asociada al usuario
+    // tslint:disable-next-line:prefer-const
     let persona: Persona = new Persona();
     persona.cedula = '4194';
     componente.persona.cedula = '4194';
     persona.rol.id = 1;
     componente.rol.id = 1;
-    let buscarSiCedula = componente.buscar();
+    const buscarSiCedula = componente.buscar();
+    // tslint:disable-next-line:no-unused-expression
     expect(buscarSiCedula).toBeTruthy;
   });
 
   it('Ver la inormacion de un empleado de la tabla', () => {
+    // tslint:disable-next-line:prefer-const
     let persona: Persona = new Persona();
     persona.cedula = '10949';
-    let respuesta = componente.ver(persona);
+    const respuesta = componente.ver(persona);
+    // tslint:disable-next-line:no-unused-expression
     expect(respuesta).toBeTruthy;
   });
 
   it
     ('Buscar desde el formulario html verdadero', () => {
+      // tslint:disable-next-line:prefer-const
       let persona: Persona = new Persona();
       persona.cedula = '10949';
       componente.persona.cedula = '10949';
-      let respuesta = componente.fbuscar(event);
+      const respuesta = componente.fbuscar(event);
+      // tslint:disable-next-line:no-unused-expression
       expect(respuesta).toBeTruthy;
     });
-    
+
   it('Buscar desde el formulario html falso', () => {
+    // tslint:disable-next-line:prefer-const
     let persona: Persona = new Persona();
     persona.cedula = '109499999';
     componente.persona.cedula = '109499999';
     persona.rol.id = 1;
     componente.rol.id = 1;
-    let respuesta = componente.fbuscar(event);
+    const respuesta = componente.fbuscar(event);
+    // tslint:disable-next-line:no-unused-expression
     expect(respuesta).toBeFalsy;
   });
 
   /**
    *  Elimina un administrador
-   */
+  */
   it('Eliminar un administrador', () => {
+    // tslint:disable-next-line:prefer-const
     let persona: Persona = new Persona();
     persona.id = 2;
-    let eliminar = componente.eliminar(persona);
+    const eliminar = componente.eliminar(persona);
+    // tslint:disable-next-line:no-unused-expression
     expect(eliminar).toBeFalsy;
   });
-
-
-
 });
 
 

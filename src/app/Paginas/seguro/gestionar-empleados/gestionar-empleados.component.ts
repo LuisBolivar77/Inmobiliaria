@@ -39,11 +39,11 @@ export class GestionarEmpleadosComponent implements OnInit {
   // formacion del empleado
   formacion: Formacion =  new Formacion();
   // Archivo certiFicacion de la ormacion
-  archivoFormacion: File = null; 
+  archivoFormacion: File = null;
   // experiencia del empleado
   experiencia: Experiencia = new Experiencia();
   // Archivo certiFicacion de la experiencia
-  archivoExpeiencia: File = null; 
+  archivoExpeiencia: File = null;
   // Variables para los mensajes en la pagina
   show: number;
   msj: string;
@@ -58,7 +58,7 @@ export class GestionarEmpleadosComponent implements OnInit {
     this.empleado.cargo = this.cargo;
     this.empleado.usuario = this.usuario;
     this.empleado.usuario.persona = this.persona;
-    this.rol.id = 3; 
+    this.rol.id = 3;
     this.empleado.usuario.persona.rol = this.rol;
     // Actualizamos la tabla de empleados
     this.listar();
@@ -302,12 +302,13 @@ export class GestionarEmpleadosComponent implements OnInit {
    * @param event contiene el archivo que selecciono el usuario
    * @param tipo define si el tipo de archivo es para experiencia o formacion
    */
-  asignarArchivo(event,tipo) {
+  asignarArchivo(event, tipo) {
+    // tslint:disable-next-line:prefer-const
     let selectedFile = <File>event.target.files[0];
-    if(tipo == 1){
+    if (tipo === 1) {
       // Archivo Formacion
       this.archivoFormacion = selectedFile;
-    }else{
+    } else {
       // Archivo Experiencia
       this.archivoExpeiencia = selectedFile;
     }
@@ -323,13 +324,13 @@ export class GestionarEmpleadosComponent implements OnInit {
       // Asignamos el empleado a la formacion
       this.formacion.empleado = this.empleado;
       if (this.formacion.institucion != null && this.formacion.titulo != null && this.archivoFormacion != null) {
-        // Guardamos el archivo en el servidor y 
-        //Asignamos el nombre del archivo a la certificacion de la formacion
+        // Guardamos el archivo en el servidor y
+        // Asignamos el nombre del archivo a la certificacion de la formacion
         this.genericoServicio.cargarArchivo(this.archivoFormacion).subscribe(r => {
-          if(r.data === 'exito'){
+          if (r.data === 'exito') {
             this.formacion.file_certificacion = r.nombreArchivo;
-            //Usamos AuxiliarObjeto para no mandar los objetos dentro, solo las foraneas
-            //tslint:disable-next-line:prefer-const
+            // Usamos AuxiliarObjeto para no mandar los objetos dentro, solo las foraneas
+            // tslint:disable-next-line:prefer-const
             let auxiliar: AuxiliarObjeto = new AuxiliarObjeto();
             auxiliar.objeto = this.formacion;
             auxiliar.replaceValue('empleado', this.empleado.usuario.persona.id);
@@ -346,12 +347,12 @@ export class GestionarEmpleadosComponent implements OnInit {
               }
               window.alert(this.msj);
             });
-          }else{
-            this.msj = "No se pudo subir el archivo, intente de nuevo";
+          } else {
+            this.msj = 'No se pudo subir el archivo, intente de nuevo';
             this.show = 1;
             window.alert(this.msj);
           }
-        });      
+        });
       } else {
         this.msj = 'Ingrese los datos para registrar la Formacion Academica';
         this.show = 1;
@@ -456,10 +457,10 @@ export class GestionarEmpleadosComponent implements OnInit {
       // Asignamos el empleado a la experiencia
       this.experiencia.empleado = this.empleado;
       if (this.experiencia.empresa != null && this.experiencia.cargo != null && this.archivoExpeiencia != null) {
-        // Guardamos el archivo en el servidor y 
-        //Asignamos el nombre del archivo a la certificacion de la experiencia
+        // Guardamos el archivo en el servidor y
+        // Asignamos el nombre del archivo a la certificacion de la experiencia
         this.genericoServicio.cargarArchivo(this.archivoExpeiencia).subscribe(r => {
-          if(r.data === 'exito'){
+          if (r.data === 'exito') {
             this.experiencia.file_certificacion = r.nombreArchivo;
             // Usamos AuxiliarObjeto para no mandar los objetos dentro, solo las foraneas
             // tslint:disable-next-line:prefer-const
@@ -479,12 +480,12 @@ export class GestionarEmpleadosComponent implements OnInit {
               }
               window.alert(this.msj);
             });
-          }else{
-            this.msj = "No se pudo subir el archivo, intente de nuevo";
+          } else {
+            this.msj = 'No se pudo subir el archivo, intente de nuevo';
             this.show = 1;
             window.alert(this.msj);
           }
-        });  
+        });
       } else {
         this.msj = 'Ingrese los datos para registrar la experiencia laboral';
         this.show = 1;
