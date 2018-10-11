@@ -89,6 +89,7 @@ export class GestionVentasArriendosComponent implements OnInit {
    * Ver la inormacion del contrato
    */
   ver(i: Contrato) {
+    //ca
     this.contrato.id = i.id;
     this.buscarContrato();
   }
