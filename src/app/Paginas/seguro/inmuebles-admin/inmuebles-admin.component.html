@@ -36,9 +36,43 @@
           <div class="tabs">
             <div class="tabs_container">
               <div class="tabs d-flex flex-row align-items-center justify-content-start flex-wrap">
-                <div class="tab active">1. Registrar Inmueble</div>
-                <div class="tab">2. Gestion Archivos de un inmueble</div>
+                <div *ngIf="!selectedEditar" class="tab">1. Listado y localizacion de los inmuebles</div>
+                <div class="tab active">2. Registrar o Editar Inmueble</div>
+                <div *ngIf="!selectedEditar" class="tab">3. Gestion Archivos de un inmueble</div>
               </div>
+              <div class="tab_panel">
+                  <div class="tab_panel_content">
+                    <div class="tab_text">
+                      <!-- Aqui va la formaciones academicas -->
+                      <div class="col-lg-12">
+                                <br>
+                                <div class="section_subtitle"> Lista de inmuebles ({{inmuebles.length}})</div><br>
+                                <table class="table">
+                                    <thead>
+                                      <tr>
+                                        <th scope="col">Direccion</th>
+                                        <th scope="col">Numero de Matricula</th>
+                                        <th scope="col">Cedula del Propietario</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr *ngFor="let e of inmuebles">
+                                        <td>{{e.direccion}}</td>
+                                        <td>{{e.numero_matricula}}</td>
+                                        <td>{{e.usuario.persona.cedula}}</td>
+                                        <td><button class="btn" (click)="ver(e)">Editar</button><button class="btn" (click)="eliminar(e)" style="margin-left: 10px">Eliminar</button></td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                  <br>
+                                    <agm-map >
+                                      <agm-marker *ngFor="let e of inmuebles" [latitude]="e.latitud" [longitude]="e.longitud" ></agm-marker>
+                                    </agm-map>
+                    </div>
+                    <!-- Aqui termina la formaciones academicas -->
+                    </div>
+                  </div>
+                </div>
               <div class="tab_panels">
                 <div class="tab_panel active">
                   <div class="tab_panel_content">
@@ -209,6 +243,9 @@
                                       <input type="checkbox" [(ngModel)]="theCheckboxVistaExterios" name="VistaExterior" data-md-icheck style="margin-left: 10px"/>
                                     </div>
                             </div>
+                              <agm-map [latitude]="latSeleccion" [longitude]="longSeleccion" (mapClick)="onChoseLocation($event)">
+                                <agm-marker *ngIf="locationSelec" [latitude]="latSeleccion" [longitude]="longSeleccion"></agm-marker>
+                              </agm-map>
                             <div class="row">
                               <div class="col-lg-6">
                                 <button *ngIf="!busco" type="submit" (click)="buscarUsuario(datosForm)" style="width: 100%" class="contact_button button">Registrar Inmueble</button>
@@ -262,27 +299,7 @@
       </div>
     </div>
 
-    <div class="col-lg-12">
-        <br>
-        <div class="section_subtitle"> Lista de inmuebles ({{inmuebles.length}})</div><br>
-        <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Direccion</th>
-                <th scope="col">Numero de Matricula</th>
-                <th scope="col">Cedula del Propietario</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let e of inmuebles">
-                <td>{{e.direccion}}</td>
-                <td>{{e.numero_matricula}}</td>
-                <td>{{e.usuario.persona.cedula}}</td>
-                <td><button class="btn" (click)="ver(e)">ver</button><button class="btn" (click)="eliminar(e)" style="margin-left: 10px">Eliminar</button></td>
-              </tr>
-            </tbody>
-          </table>
-    </div>
+    
     </div>
    </div>
  </div>

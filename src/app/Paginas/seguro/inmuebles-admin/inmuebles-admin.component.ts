@@ -11,7 +11,6 @@ import { Ciudad } from './../../../Modelo/Ciudad';
 import { GenericoService } from './../../../Servicios/genericoServ.service';
 import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from '../../../Servicios/usuarioServ.service';
-import { AuxiliarObjeto } from '../../../Modelo/AuxiliarObjeto';
 import { Archivo } from '../../../Modelo/Archivo';
 
 @Component({
@@ -24,6 +23,11 @@ export class InmueblesAdminComponent implements OnInit {
   file: File[] = null;
   img;
   labelFile: string;
+  latSeleccion = 4.648908;
+  longSeleccion = -74.100449;
+  locationSelec = false;
+  selectedEditar = false;
+  zoom = 10;
 
   inmueble: Inmueble;
   ciudadSeleccionada: Ciudad = new Ciudad();
@@ -76,6 +80,7 @@ export class InmueblesAdminComponent implements OnInit {
   constructor(private generico: GenericoService, private usuarioServicio: UsuarioService) { }
 
   ngOnInit() {
+
     // Validamos si el usuario tiene acceso a la pagina
     this.usuarioServicio.esAccesible('administracion/gestion-inmuebles');
 
@@ -93,6 +98,8 @@ export class InmueblesAdminComponent implements OnInit {
   }
 
   registrar(form: NgForm) {
+
+      if (this.latSeleccion != null || this.longSeleccion != null) {
         this.llenarInmueble();
 
         this.generico.registrar('inmueble', this.inmueble).subscribe(res => {
@@ -100,12 +107,19 @@ export class InmueblesAdminComponent implements OnInit {
             this.msj = 'El inmueble se ha registrado correctamente';
             this.show = 2;
             this.listar();
+            this.latSeleccion = 4.648908;
+            this.longSeleccion = -74.100449;
+            this.locationSelec = false;
             form.reset();
           } else {
             this.msj = res.data;
             this.show = 1;
           }
         });
+      } else {
+        this.show = 1;
+        this.msj = 'error, debe seleccionar la localisacion del inmueble en el mapa';
+      }
   }
 
   /**
@@ -117,6 +131,7 @@ export class InmueblesAdminComponent implements OnInit {
           this.show = 1;
           this.msj = 'No existe el inmueble con ese numero de matricula: ' + this.numMatriculaBuscar;
         } else {
+          this.locationSelec = true;
           this.busco = true;
           this.inmuebleTemporal = rta.data;
           this.buscarCiudad(this.inmuebleTemporal);
@@ -155,9 +170,12 @@ export class InmueblesAdminComponent implements OnInit {
   }
 
   ver(e: InmuebleTemporal) {
+
+    this.selectedEditar = true;
     for ( const i of this.inmuebles) {
       if (e.id === i.id) {
         this.busco = true;
+        this.locationSelec = true;
         this.buscarCiudad(i);
         this.llenarInmuebleBusqueda(i);
         return;
@@ -190,6 +208,10 @@ export class InmueblesAdminComponent implements OnInit {
         this.msj = 'el inmueble se edito correctamente';
         this.inmueble = new Inmueble();
         form.reset();
+        this.latSeleccion = 4.648908;
+        this.longSeleccion = -74.100449;
+        this.locationSelec = false;
+        this.selectedEditar = false;
         this.listar();
       } else {
         this.show = 1;
@@ -265,8 +287,11 @@ export class InmueblesAdminComponent implements OnInit {
   }
 
   llenarInmueble() {
+
     const fecha = this.fechaActual();
     this.inmueble.fechaAprobacion = fecha;
+    this.inmueble.latitud = this.latSeleccion;
+    this.inmueble.longitud = this.longSeleccion;
     this.inmueble.tipoAV = this.tipoAVSeleccionado.id;
     this.inmueble.zona = this.zonaSeleccionada.id;
     this.inmueble.ciudad = this.ciudadSeleccionada;
@@ -298,6 +323,8 @@ export class InmueblesAdminComponent implements OnInit {
     this.inmueble.zona = this.zonaSeleccionada.id;
     this.inmueble.ciudad = this.ciudadSeleccionada;
     this.inmueble.tipo = this.tipoInmuebleSeleccionado;
+    this.inmueble.latitud = this.latSeleccion;
+    this.inmueble.longitud = this.longSeleccion;
     this.inmueble.ascensor = this.cambio(this.theCheckboxAsensor);
     this.inmueble.canchasDepor = this.cambio(this.theCheckboxCanchasDepor);
     this.inmueble.zonasHumedas = this.cambio(this.theCheckboxZonasHumedas);
@@ -319,6 +346,8 @@ export class InmueblesAdminComponent implements OnInit {
   llenarInmuebleBusqueda(inmuebleTemporal: InmuebleTemporal) {
 
     this.usuarioCliente = inmuebleTemporal.usuario;
+    this.latSeleccion = inmuebleTemporal.latitud;
+    this.longSeleccion = inmuebleTemporal.longitud;
     this.getTipoInmueble(inmuebleTemporal);
     this.zonaSeleccionada.id = inmuebleTemporal.zona;
     this.tipoAVSeleccionado.id = inmuebleTemporal.tipoAV;
@@ -369,8 +398,12 @@ export class InmueblesAdminComponent implements OnInit {
   }
 
   limpiarCampos(form: NgForm) {
+    this.selectedEditar = false;
     this.busco = false;
     this.numMatriculaBuscar = '';
+    this.latSeleccion = 4.648908;
+    this.longSeleccion = -74.100449;
+    this.locationSelec = false;
     form.reset();
   }
 
@@ -483,6 +516,12 @@ export class InmueblesAdminComponent implements OnInit {
       });
     };
     myReader.readAsDataURL(file);
+  }
+
+  onChoseLocation(event) {
+    this.latSeleccion = event.coords.lat;
+    this.longSeleccion = event.coords.lng;
+    this.locationSelec = true;
   }
 
   /**

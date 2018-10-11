@@ -22,6 +22,7 @@ import { VerInmuebleComponent } from './Paginas/publico/ver-inmueble/ver-inmuebl
 import { AprobacionInmueblesComponent } from './Paginas/seguro/aprobacion-inmuebles/aprobacion-inmuebles.component';
 import { FileSelectDirective } from 'ng2-file-upload';
 import { InmuebleClienteComponent } from './Paginas/seguro/inmueble-cliente/inmueble-cliente.component';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,9 @@ import { InmuebleClienteComponent } from './Paginas/seguro/inmueble-cliente/inmu
     MatListModule,
     HttpClientModule,
     FormsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyB0WP4oGVaDXx-3HZDqzwNsbUi6yS6lEk8'
+    }),
     RouterModule.forRoot([
       {
         path: 'cliente/gestion-inmuebles',
