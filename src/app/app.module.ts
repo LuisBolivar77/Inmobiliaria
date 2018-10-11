@@ -23,6 +23,7 @@ import { AprobacionInmueblesComponent } from './Paginas/seguro/aprobacion-inmueb
 import { FileSelectDirective } from 'ng2-file-upload';
 import { InmuebleClienteComponent } from './Paginas/seguro/inmueble-cliente/inmueble-cliente.component';
 import { AgmCoreModule } from '@agm/core';
+import { GestionVentasArriendosComponent } from './paginas/seguro/gestion-ventas-arriendos/gestion-ventas-arriendos.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { AgmCoreModule } from '@agm/core';
     VerInmuebleComponent,
     AprobacionInmueblesComponent,
     FileSelectDirective,
-    InmuebleClienteComponent
+    InmuebleClienteComponent,
+    GestionVentasArriendosComponent
   ],
   imports: [
     BrowserModule,
@@ -101,6 +103,10 @@ import { AgmCoreModule } from '@agm/core';
       {
         path: 'registrousuario',
         component: RegistroUsuarioComponent
+      },
+      {
+        path: 'administracion/gestion-ventas-arriendos',
+        component: GestionVentasArriendosComponent
       },
       {
         path: 'login', // http://localhost:4200/login
