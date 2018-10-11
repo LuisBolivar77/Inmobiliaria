@@ -1,3 +1,75 @@
-<p>
-  gestion-ventas-arriendos works!
-</p>
+<div class="contact">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="row">
+          <!-- Tabla de aprovaciones deinmuebles -->
+          <div class="aviso alert alert-danger" style="margin: 15px 0 0 0;" *ngIf="show == 1">
+            <div id="close" title="Cerrar">×</div>{{msj}}
+          </div>
+          <div class="aviso alert alert-success" style="margin: 15px 0 0 0;" *ngIf="show == 2">
+            <div id="close" title="Cerrar">×</div>{{msj}}
+          </div>
+          <div class="col-lg-8">
+            <br>
+            <div class="section_subtitle"> Lista de Contratos a finalizar ({{contratos.length}})</div><br>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Id</th>
+                  <th scope="col">Cliente</th>
+                  <th scope="col">Empleado</th>
+                  <th scope="col">Fecha Solicitud</th>
+                  <th scope="col">Accion</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let i of contratos">
+                  <td>{{i.id}}</td>
+                  <td>{{i.cliente}}</td>
+                  <td>{{i.empleado}}</td>
+                  <td>{{i.fecha_solicitud}}</td>
+                  <td><button class="btn"  (click)="ver(i)">finalizar Contrato</button></td>
+                 
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+
+
+        <div class="row">
+          <div class="elements_accordions">
+            <div class="accordions">
+              <div class="accordion_container">              
+                
+                <div class="accordion d-flex flex-row align-items-center" id="abrir">
+                  <div>Clic para registrar, editar o ver informacion de un Inmueble </div>
+                </div>
+                <div class="accordion_panel" id="abrir">
+                  <!-- contenido del acordion -->
+                  <!-- Form -->
+                 
+                  <div class="contact_form_container">
+                    <form #datosForm="ngForm" class="contact_form" id="contact_form">
+                      <div class="section_subtitle"> Datos Cliente </div>
+                      <div><input type="text" [(ngModel)]="contrato.id" name="id" class="contact_input" placeholder="Id" required="required"></div>
+                      <div><input type="text" [(ngModel)]="contrato.descripcion" name="descripcion" class="contact_input" placeholder="descripcion" required="required"></div>
+                      <div><input type="text" [(ngModel)]="contrato.empleado" name="empleado" class="contact_input" placeholder="empleado" required="required"></div>
+                      <div><input type="text" [(ngModel)]="contrato.cliente" name="cliente" class="contact_input" placeholder="cliente" required="required"></div>
+                      <div><input type="date" [(ngModel)]="contrato.fecha_solicitud" name="fecha_solicitud" class="contact_input" placeholder="Fecha de solicitud" required="required" max="2000-01-01" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"></div>
+                      <div><input type="date" [(ngModel)]="contrato.fecha_finalizacion" name="fecha_finalizacion" class="contact_input" placeholder="Fecha Finalizacion" required="required" max="2000-01-01" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"></div>
+                    </form>
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
