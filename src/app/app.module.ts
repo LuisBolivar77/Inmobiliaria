@@ -22,6 +22,7 @@ import { VerInmuebleComponent } from './Paginas/publico/ver-inmueble/ver-inmuebl
 import { AprobacionInmueblesComponent } from './Paginas/seguro/aprobacion-inmuebles/aprobacion-inmuebles.component';
 import { FileSelectDirective } from 'ng2-file-upload';
 import { InmuebleClienteComponent } from './Paginas/seguro/inmueble-cliente/inmueble-cliente.component';
+import { GestionVentasArriendosComponent } from './paginas/seguro/gestion-ventas-arriendos/gestion-ventas-arriendos.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { InmuebleClienteComponent } from './Paginas/seguro/inmueble-cliente/inmu
     VerInmuebleComponent,
     AprobacionInmueblesComponent,
     FileSelectDirective,
-    InmuebleClienteComponent
+    InmuebleClienteComponent,
+    GestionVentasArriendosComponent
   ],
   imports: [
     BrowserModule,
@@ -97,6 +99,10 @@ import { InmuebleClienteComponent } from './Paginas/seguro/inmueble-cliente/inmu
       {
         path: 'registrousuario',
         component: RegistroUsuarioComponent
+      },
+      {
+        path: 'administracion/gestion-ventas-arriendos',
+        component: GestionVentasArriendosComponent
       },
       {
         path: 'login', // http://localhost:4200/login
