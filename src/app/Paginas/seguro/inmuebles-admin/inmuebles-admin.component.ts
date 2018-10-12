@@ -23,11 +23,15 @@ export class InmueblesAdminComponent implements OnInit {
   file: File[] = null;
   img;
   labelFile: string;
-  latSeleccion = 4.648908;
-  longSeleccion = -74.100449;
+  latSeleccion = 4.540130;
+  longSeleccion = -75.665193;
   locationSelec = false;
   selectedEditar = false;
-  zoom = 10;
+  verInmueble = false;
+  zoom = 6;
+  zoomMapaLista = 10;
+  latSelectedLista = 0;
+  longSelectedLista = 0;
 
   inmueble: Inmueble;
   ciudadSeleccionada: Ciudad = new Ciudad();
@@ -167,6 +171,27 @@ export class InmueblesAdminComponent implements OnInit {
       this.show = 1;
       this.msj = 'error, debe ingresar la cedula del propietaria';
     }
+  }
+
+  limpiarCampos(form: NgForm) {
+    this.selectedEditar = false;
+    this.busco = false;
+    this.numMatriculaBuscar = '';
+    this.latSeleccion = 4.648908;
+    this.longSeleccion = -74.100449;
+    this.locationSelec = false;
+    form.reset();
+  }
+
+  verUnInmuebleEnMap(e: InmuebleTemporal) {
+    this.verInmueble = true;
+    this.latSelectedLista = e.latitud;
+    this.longSelectedLista = e.longitud;
+
+  }
+
+  mostrarTodosInmueblesEnMap() {
+    this.verInmueble = false;
   }
 
   ver(e: InmuebleTemporal) {
@@ -395,16 +420,6 @@ export class InmueblesAdminComponent implements OnInit {
       return true;
     }
     return null;
-  }
-
-  limpiarCampos(form: NgForm) {
-    this.selectedEditar = false;
-    this.busco = false;
-    this.numMatriculaBuscar = '';
-    this.latSeleccion = 4.648908;
-    this.longSeleccion = -74.100449;
-    this.locationSelec = false;
-    form.reset();
   }
 
   fechaActual(): string {
