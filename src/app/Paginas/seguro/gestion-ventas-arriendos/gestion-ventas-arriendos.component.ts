@@ -6,29 +6,29 @@ import { Contrato } from 'src/app/Modelo/Contrato';
 import { Empleado } from 'src/app/Modelo/Empleado';
 import { Persona } from 'src/app/Modelo/Persona';
 
-@Component({
+@Component ({
   selector: 'app-gestion-ventas-arriendos',
   templateUrl: './gestion-ventas-arriendos.component.html',
   styleUrls: ['./gestion-ventas-arriendos.component.css']
 })
 export class GestionVentasArriendosComponent implements OnInit {
 
-  //listado de contratos para finalizar
-  contratos: Array<Contrato>=[];
-  usuario:Usuario=new Usuario();
-  persona:Persona= new Persona();
-  empleados:Empleado=new Empleado();
-  contrato:Contrato= new Contrato();
+  // listado de contratos para finalizar
+  contratos: Array<Contrato> = [];
+  usuario: Usuario = new Usuario();
+  persona: Persona = new Persona();
+  empleados: Empleado = new Empleado();
+  contrato: Contrato = new Contrato();
 
-  //usuario en sesion 
-  usuarioSesion:Usuario = new Usuario();
+  // usuario en sesion
+  usuarioSesion: Usuario = new Usuario();
 
   // Variables para los mensajes en la pagina
   show: number;
   msj: string;
-  idContrato:number;
+  idContrato: number;
   busco: boolean;
-  
+
   constructor(private generico: GenericoService, private usuarioServicio: UsuarioService) { }
 
   ngOnInit() {
@@ -41,31 +41,25 @@ export class GestionVentasArriendosComponent implements OnInit {
   /**
    * lista los contratos de estado "0" para llegar a su finalizacion
    */
-  listar(){
-    this.generico.listar('contrato', {"estado":0}).subscribe(res => {
+  listar() {
+    this.generico.listar('contrato', {'estado': 0}).subscribe(res => {
       this.contratos = res.data;
-      this.agregarObjetos(this.contratos);
+      // this.agregarObjetos(this.contratos);
     });
   }
 
-  agregarObjetos(lista){
-    for(let i of lista){
-      //obtenemos el cliente
-      this.generico.buscar("personas",{"id":i.persona}).subscribe(r1 => {
-        //Seteamos la persona
+  agregarObjetos(lista) {
+    for (const i of lista) {
+      // obtenemos el cliente
+      this.generico.buscar('personas', {'id': i.persona}).subscribe(r1 => {
+        // Seteamos la persona
         i.persona = this.persona; // creamos un objeto usuario y lo seteamos
         i.persona = r1.data;
 
-          
-
-           this.generico.buscar("contrato",{"id":i.contrato}).subscribe(rt3=>{
-            i.contrato=rt3.data;
-           
-          });
-        
+        this.generico.buscar('contrato', {'id': i.contrato}).subscribe(rt3 => {
+          i.contrato = rt3.data;
         });
-
-      
+      });
     }
   }
 
@@ -84,16 +78,10 @@ export class GestionVentasArriendosComponent implements OnInit {
      });
  }
 
-  
   /**
    * Ver la inormacion del contrato
    */
   ver(i: Contrato) {
-    //ca
-    this.contrato.id = i.id;
-    this.buscarContrato();
+    this.contrato = i;
   }
-
-  
-
 }

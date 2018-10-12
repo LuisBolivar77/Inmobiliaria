@@ -1,22 +1,21 @@
-import { Empleado } from "./Empleado";
-import { Persona } from "./Persona";
-import { Usuario } from "./Usuario";
+import { Empleado } from './Empleado';
+import { Usuario } from './Usuario';
 
 export class Contrato {
 
     id: number;
     descripcion: string;
     empleado: Empleado;
-    cliente:Usuario;
-    visita:string;
+    cliente: Usuario;
+    visita: string;
     /**
      * 0=pendiente
      * 1=finalizado
      */
-    estado:number;
-    fechaAprobacion: string;
-    fechaSolicitud: string;
-    archivo:string;
+    estado: number;
+    fecha_finalizacion: string;
+    fecha_solicitud: string;
+    file_certificacion: string;
 
     /**
      * retorna el valor texto de un estado

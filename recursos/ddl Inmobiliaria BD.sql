@@ -72,7 +72,7 @@ CREATE TABLE contrato (
     estado               INTEGER NOT NULL,
     fecha_finalizacion   DATE,
     fecha_solicitud      DATE NOT NULL,
-    file_certificacion   VARCHAR(300) NOT NULL
+    file_certificacion   LONGTEXT
 );
 
 ALTER TABLE contrato ADD CONSTRAINT contrato_pk PRIMARY KEY ( id );
@@ -183,8 +183,8 @@ CREATE TABLE personas (
     nombre             VARCHAR(40) NOT NULL,
     apellido           VARCHAR(40) NOT NULL,
     fecha_nacimiento   DATE NOT NULL,
-    latitud            DOUBLE,
-    longitud           DOUBLE,
+    latitud            DOUBLE NOT NULL,
+    longitud           DOUBLE NOT NULL,
     telefono           VARCHAR(10) NOT NULL,
     direccion          VARCHAR(50) NOT NULL,
     rol                INTEGER NOT NULL

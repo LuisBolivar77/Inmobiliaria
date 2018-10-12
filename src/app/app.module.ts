@@ -23,7 +23,7 @@ import { AprobacionInmueblesComponent } from './Paginas/seguro/aprobacion-inmueb
 import { FileSelectDirective } from 'ng2-file-upload';
 import { InmuebleClienteComponent } from './Paginas/seguro/inmueble-cliente/inmueble-cliente.component';
 import { AgmCoreModule } from '@agm/core';
-import { GestionVentasArriendosComponent } from './paginas/seguro/gestion-ventas-arriendos/gestion-ventas-arriendos.component';
+import { GestionVentasArriendosComponent } from './Paginas/seguro/gestion-ventas-arriendos/gestion-ventas-arriendos.component';
 
 @NgModule({
   declarations: [
