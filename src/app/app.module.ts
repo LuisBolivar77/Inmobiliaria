@@ -24,6 +24,7 @@ import { FileSelectDirective } from 'ng2-file-upload';
 import { InmuebleClienteComponent } from './Paginas/seguro/inmueble-cliente/inmueble-cliente.component';
 import { AgmCoreModule } from '@agm/core';
 import { GestionVentasArriendosComponent } from './Paginas/seguro/gestion-ventas-arriendos/gestion-ventas-arriendos.component';
+import { GestionarPromocionesComponent } from './Paginas/seguro/gestionar-promociones/gestionar-promociones.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { GestionVentasArriendosComponent } from './Paginas/seguro/gestion-ventas
     AprobacionInmueblesComponent,
     FileSelectDirective,
     InmuebleClienteComponent,
-    GestionVentasArriendosComponent
+    GestionVentasArriendosComponent,
+    GestionarPromocionesComponent
   ],
   imports: [
     BrowserModule,
@@ -60,6 +62,10 @@ import { GestionVentasArriendosComponent } from './Paginas/seguro/gestion-ventas
       apiKey: 'AIzaSyB0WP4oGVaDXx-3HZDqzwNsbUi6yS6lEk8'
     }),
     RouterModule.forRoot([
+      {
+        path: 'administrador/gestionar-promociones',
+        component: GestionarPromocionesComponent
+      },
       {
         path: 'cliente/gestion-inmuebles',
         component: InmuebleClienteComponent
