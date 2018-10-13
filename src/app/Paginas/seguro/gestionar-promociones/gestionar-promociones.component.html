@@ -1,3 +1,83 @@
-<p>
-  gestionar-promociones works! y holiii
-</p>
+<div class="contact">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="row">
+          <!-- Form -->
+          <div class="col-lg-4">
+            <div class="section_title"> Gestion de promociones </div>
+            <div class="section_subtitle"> Ingrese los datos para Buscar, crear y/o editar </div><br>
+            <div class="aviso alert alert-danger" style="margin: 15px 0 0 0;" *ngIf="show == 1">
+              <div id="close" title="Cerrar">×</div>{{msj}}
+            </div>
+            <div class="aviso alert alert-success" style="margin: 15px 0 0 0;" *ngIf="show == 2">
+              <div id="close" title="Cerrar">×</div>{{msj}}
+            </div>
+            <div class="contact_form_container">
+              <div class="section_subtitle"> Buscar promocion </div><br>
+              <form (ngSubmit)="fbuscar($event)" class="contact_form" id="contact_form">
+                <div class="row">
+                  <div class="col-lg-8">
+                    <div><input [(ngModel)]="promocion.id" name="Id Promoción" type="text" class="contact_input"
+                        placeholder="Id Promoción" required></div>
+                  </div>
+                  <div class="col-lg-4" style="padding-left: 0">
+                    <button style="height: 48px;margin: 0;width: 100%" class="contact_button button">Buscar</button></div>
+                </div>
+              </form>
+            </div>
+            <div class="contact_form_container">
+              <form #datosForm="ngForm" class="contact_form" id="contact_form">
+
+                <div class="section_subtitle"> Registro de promociones </div>
+                <div><input type="text" [(ngModel)]="promocion.descripcion" name="Descripción" class="contact_input"
+                    placeholder="Descripción" required="required"></div>
+                <div><input type="text" [(ngModel)]="promocion.porcentaje" name="Porcentaje descuento" class="contact_input"
+                    placeholder="Porcentaje descuento" required="required"></div>
+                <div><input type="date" [(ngModel)]="promocion.fecha_inicio" name="Fecha inicio" class="contact_input"
+                    placeholder="Fecha inicio" required="required"></div>
+                <div><input type="date" [(ngModel)]="promocion.fecha_fin" name="Fecha fin" class="contact_input"
+                    placeholder="Fecha fin" required="required"></div>
+
+                <button (click)="registrar(datosForm)" style="width: 100%" class="contact_button button">Registrar
+                  Promoción</button>
+                <button (click)="editar(datosForm)" style="width: 100%" class="contact_button button">Editar Promoción</button>
+              </form>
+            </div>
+          </div>
+          <!-- End Form -->
+          <div class="col-lg-8">
+            <br>
+            <div class="section_subtitle"> Lista de promociones ({{promocion.length}})</div><br>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Descripción</th>
+                  <th scope="col">Porcentaje</th>
+                  <th scope="col">Fecha de Inicio</th>
+                  <th scope="col">Fecha de Finalización</th>
+                  <th scope="col">Acciones</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let p of listPromociones">
+                  <th scope="row">{{p.id}}</th>
+                  <td>{{p.descripcion}}</td>
+                  <td>{{p.porcentaje}}</td>
+                  <td>{{p.fecha_inicio}}</td>
+                  <td>{{p.fecha_fin}}</td>
+                  <td>
+                    <button class="btn" (click)="eliminar(p)">Eliminar</button><br>
+                    <button style="margin-left: 10px" class="btn" (click)="ver(p)">ver</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
