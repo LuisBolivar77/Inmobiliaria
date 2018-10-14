@@ -21,6 +21,8 @@ var rolServicio = require('./servicios/RolServicio')
 var inmublesServicio = require('./servicios/InmublesServicio')
 // servicios genericos
 var genericoServicio = require('./servicios/genericoServicio')
+// servicios promocion
+var promocionServicio = require('./servicios/promocionServicio')
 
 // -------------END --------------- //
 
@@ -79,7 +81,7 @@ app.use(
         
         host: 'localhost', //'localhost',
         user: 'root',
-        password : 'admin',
+        password : '1234',
         port : 3306, //port mysql
         database:'inmobiliaria'
 
@@ -118,6 +120,7 @@ app.post('/generico/guardar', genericoServicio.guardar);
 app.post('/generico/editar', genericoServicio.editar);
 app.post('/generico/buscar', genericoServicio.buscar);
 app.post('/generico/eliminar', genericoServicio.eliminar);
+app.get('/promocion/listar', promocionServicio.listar);
 //------------------ Archivos -------------------- //
 app.post('/archivo/subir', genericoServicio.cargarArchivo);
 // ------------ END -----------------------------------//

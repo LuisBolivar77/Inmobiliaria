@@ -25,6 +25,8 @@ INSERT INTO `inmobiliaria`.`accesos` (`id`, `nombre`, `url`) VALUES ('5', 'Gesti
 INSERT INTO `inmobiliaria`.`accesos` (`id`, `nombre`, `url`) VALUES ('6', 'Aprobar Inmuebles', 'administracion/aprobar-inmueble');
 INSERT INTO `inmobiliaria`.`accesos` (`id`, `nombre`, `url`) VALUES ('7','Gestion Inmueble-Cliente', 'cliente/gestion-inmuebles');
 INSERT INTO `inmobiliaria`.`accesos` (`id`, `nombre`, `url`) VALUES ('9','Gestion Ventas-Arriendos', 'administracion/gestion-ventas-arriendos');
+INSERT INTO `inmobiliaria`.`accesos` (`id`, `nombre`, `url`) VALUES ('10','Gestion Promociones', 'administrador/gestionar-promociones');
+
 
 -- Rol_Accesos --
 INSERT INTO `inmobiliaria`.`rol_accesos` (`rol`, `acceso`) VALUES ('1', '1');
@@ -35,6 +37,7 @@ INSERT INTO `inmobiliaria`.`rol_accesos` (`rol`, `acceso`) VALUES ('3', '3');
 INSERT INTO `inmobiliaria`.`rol_accesos` (`rol`, `acceso`) VALUES ('1', '6');
 INSERT INTO `inmobiliaria`.`rol_accesos` (`rol`, `acceso`) VALUES ('2', '7');
 INSERT INTO `inmobiliaria`.`rol_accesos` (`rol`, `acceso`) VALUES ('1', '9');
+INSERT INTO `inmobiliaria`.`rol_accesos` (`rol`, `acceso`) VALUES ('1', '10');
 
 -- Cargos --
 INSERT INTO `inmobiliaria`.`cargos` (`id`, `nombre`, `descripcion`) VALUES ('1', 'Contador', 'es el que cuenta');
