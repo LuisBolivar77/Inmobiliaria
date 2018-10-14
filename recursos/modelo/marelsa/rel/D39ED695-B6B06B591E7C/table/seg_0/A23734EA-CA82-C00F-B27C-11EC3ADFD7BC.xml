@@ -39,9 +39,19 @@
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="fecha" id="34FE6577-5D22-5B80-A188-599B89596901">
+<Column name="fecha_inicio" id="34FE6577-5D22-5B80-A188-599B89596901">
 <createdBy>Laura Posada</createdBy>
 <createdTime>2018-08-31 14:32:08 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="fecha_fin" id="2ADEE56A-4940-13C6-D44D-66016291DE0E">
+<createdBy>JULIAN CAMILO</createdBy>
+<createdTime>2018-10-14 00:18:13 UTC</createdTime>
 <ownerDesignName>marelsa</ownerDesignName>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>

@@ -1,5 +1,5 @@
 /**
- * Lista de roles
+ * Lista de promociones
  */
 exports.listar = function(req, res){
     req.getConnection(function(err,connection){

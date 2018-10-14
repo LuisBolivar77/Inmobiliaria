@@ -1,5 +1,5 @@
 -- Generado por Oracle SQL Developer Data Modeler 4.2.0.921
---   en:        2018-10-09 22:02:35 COT
+--   en:        2018-10-13 19:18:38 COT
 --   sitio:      Oracle Database 11g
 --   tipo:      Oracle Database 11g
 
@@ -7,8 +7,8 @@
 
 CREATE TABLE accesos (
     id       INTEGER NOT NULL,
-    nombre   VARCHAR(60) NOT NULL,
-    url      VARCHAR(200) NOT NULL
+    nombre   VARCHAR2(60) NOT NULL,
+    url      VARCHAR2(200) NOT NULL
 );
 
 ALTER TABLE accesos ADD CONSTRAINT accesos_pk PRIMARY KEY ( id );
@@ -16,7 +16,7 @@ ALTER TABLE accesos ADD CONSTRAINT accesos_pk PRIMARY KEY ( id );
 CREATE TABLE archivo_inmueble (
     id         INTEGER NOT NULL,
     tipo       INTEGER NOT NULL,
-    nombre     VARCHAR(300) NOT NULL,
+    nombre     VARCHAR2(300) NOT NULL,
     inmueble   INTEGER NOT NULL
 );
 
@@ -32,15 +32,15 @@ ALTER TABLE arriendo ADD CONSTRAINT arriendo_pk PRIMARY KEY ( id );
 
 CREATE TABLE cargos (
     id            INTEGER NOT NULL,
-    nombre        VARCHAR(100) NOT NULL,
-    descripcion   VARCHAR(300) NOT NULL
+    nombre        VARCHAR2(100) NOT NULL,
+    descripcion   VARCHAR2(300) NOT NULL
 );
 
 ALTER TABLE cargos ADD CONSTRAINT cargos_pk PRIMARY KEY ( id );
 
 CREATE TABLE caucion (
     id            INTEGER NOT NULL,
-    descripcion   VARCHAR(1000) NOT NULL,
+    descripcion   VARCHAR2(1000) NOT NULL,
     arriendo      INTEGER NOT NULL
 );
 
@@ -57,7 +57,7 @@ ALTER TABLE cita_desalojo ADD CONSTRAINT cita_desalojo_pk PRIMARY KEY ( id );
 
 CREATE TABLE ciudades (
     id             INTEGER NOT NULL,
-    nombre         VARCHAR(100) NOT NULL,
+    nombre         VARCHAR2(100) NOT NULL,
     departamento   INTEGER NOT NULL
 );
 
@@ -65,28 +65,28 @@ ALTER TABLE ciudades ADD CONSTRAINT ciudades_pk PRIMARY KEY ( id );
 
 CREATE TABLE contrato (
     id                   INTEGER NOT NULL,
-    descripcion          VARCHAR(1000),
+    descripcion          VARCHAR2(1000),
     empleado             INTEGER NOT NULL,
     cliente              INTEGER NOT NULL,
     visita               INTEGER NOT NULL,
     estado               INTEGER NOT NULL,
     fecha_finalizacion   DATE,
     fecha_solicitud      DATE NOT NULL,
-    file_certificacion   LONGTEXT
+    file_certificacion   VARCHAR2(300) NOT NULL
 );
 
 ALTER TABLE contrato ADD CONSTRAINT contrato_pk PRIMARY KEY ( id );
 
 CREATE TABLE departamentos (
     id       INTEGER NOT NULL,
-    nombre   VARCHAR(100) NOT NULL
+    nombre   VARCHAR2(100) NOT NULL
 );
 
 ALTER TABLE departamentos ADD CONSTRAINT departamentos_pk PRIMARY KEY ( id );
 
 CREATE TABLE empleados (
     usuario   INTEGER NOT NULL,
-    salario   INTEGER NOT NULL,
+    salario   NUMBER NOT NULL,
     cargo     INTEGER NOT NULL
 );
 
@@ -94,13 +94,13 @@ ALTER TABLE empleados ADD CONSTRAINT empleados_pk PRIMARY KEY ( usuario );
 
 CREATE TABLE experiencias (
     id                   INTEGER NOT NULL,
-    empresa              VARCHAR(200) NOT NULL,
-    empresa_direccion    VARCHAR(100) NOT NULL,
-    empresa_telefono     VARCHAR(100) NOT NULL,
-    cargo                VARCHAR(100) NOT NULL,
+    empresa              VARCHAR2(200) NOT NULL,
+    empresa_direccion    VARCHAR2(100) NOT NULL,
+    empresa_telefono     VARCHAR2(100) NOT NULL,
+    cargo                VARCHAR2(100) NOT NULL,
     fecha_inicio         DATE NOT NULL,
     fecha_fin            DATE NOT NULL,
-    file_certificacion   VARCHAR(200) NOT NULL,
+    file_certificacion   VARCHAR2(200) NOT NULL,
     empleado             INTEGER NOT NULL
 );
 
@@ -108,9 +108,9 @@ ALTER TABLE experiencias ADD CONSTRAINT experiencias_pk PRIMARY KEY ( id );
 
 CREATE TABLE formaciones (
     id                   INTEGER NOT NULL,
-    institucion          VARCHAR(100) NOT NULL,
-    titulo               VARCHAR(100) NOT NULL,
-    file_certificacion   VARCHAR(300) NOT NULL,
+    institucion          VARCHAR2(100) NOT NULL,
+    titulo               VARCHAR2(100) NOT NULL,
+    file_certificacion   VARCHAR2(300) NOT NULL,
     empleado             INTEGER NOT NULL
 );
 
@@ -128,7 +128,7 @@ ALTER TABLE formato_ventas ADD CONSTRAINT formato_ventas_pk PRIMARY KEY ( id );
 CREATE TABLE informe (
     id            INTEGER NOT NULL,
     fecha         DATE NOT NULL,
-    descripcion   VARCHAR(1000) NOT NULL,
+    descripcion   VARCHAR2(1000) NOT NULL,
     arriendo_id   INTEGER NOT NULL
 );
 
@@ -136,16 +136,16 @@ ALTER TABLE informe ADD CONSTRAINT informe_pk PRIMARY KEY ( id );
 
 CREATE TABLE inmueble (
     id                           INTEGER NOT NULL,
-    direccion                    VARCHAR(100) NOT NULL,
-    area                         INTEGER NOT NULL,
-    valor                        INTEGER NOT NULL,
+    direccion                    VARCHAR2(100) NOT NULL,
+    area                         NUMBER NOT NULL,
+    valor                        NUMBER NOT NULL,
     banios                       INTEGER NOT NULL,
     estado                       INTEGER NOT NULL,
     tipoav                       INTEGER NOT NULL,
     garajes                      INTEGER NOT NULL,
     habitaciones                 INTEGER NOT NULL,
-    detalles                     VARCHAR(400) NOT NULL,
-    aÒoconstruccion              VARCHAR(20) NOT NULL,
+    detalles                     VARCHAR2(400) NOT NULL,
+    añoconstruccion              VARCHAR2(20) NOT NULL,
     ascensor                     CHAR(1) NOT NULL,
     canchas_deportivas           CHAR(1) NOT NULL,
     zonas_humedas                CHAR(1) NOT NULL,
@@ -157,16 +157,14 @@ CREATE TABLE inmueble (
     parqueadero                  CHAR(1) NOT NULL,
     deposito                     CHAR(1) NOT NULL,
     estudio                      CHAR(1),
-    tipo_cortinas                VARCHAR(100) NOT NULL,
+    tipo_cortinas                VARCHAR2(100) NOT NULL,
     cuarto_servicio              CHAR(1) NOT NULL,
     chimenea                     CHAR(1) NOT NULL,
     cocinaac                     CHAR(1) NOT NULL,
-    comedorIndependiente         CHAR(1) NOT NULL,
+    "comedorIndependiente:"      CHAR(1) NOT NULL,
     vista_exterior_interior      CHAR(1) NOT NULL,
     zona                         INTEGER NOT NULL,
-    numero_matricula             VARCHAR(100) NOT NULL,
-    latitud                      DOUBLE NOT NULL,
-    longitud                     DOUBLE NOT NULL,
+    numero_matricula             VARCHAR2(100) NOT NULL,
     aprobacion_fecha             DATE,
     tipo                         INTEGER NOT NULL,
     ciudad                       INTEGER NOT NULL,
@@ -179,14 +177,12 @@ ALTER TABLE inmueble ADD CONSTRAINT inmueble_pk PRIMARY KEY ( id );
 
 CREATE TABLE personas (
     id                 INTEGER NOT NULL,
-    cedula             VARCHAR(20) NOT NULL,
-    nombre             VARCHAR(40) NOT NULL,
-    apellido           VARCHAR(40) NOT NULL,
+    cedula             VARCHAR2(20) NOT NULL,
+    nombre             VARCHAR2(40) NOT NULL,
+    apellido           VARCHAR2(40) NOT NULL,
     fecha_nacimiento   DATE NOT NULL,
-    latitud            DOUBLE NOT NULL,
-    longitud           DOUBLE NOT NULL,
-    telefono           VARCHAR(10) NOT NULL,
-    direccion          VARCHAR(50) NOT NULL,
+    telefono           VARCHAR2(10) NOT NULL,
+    direccion          VARCHAR2(50) NOT NULL,
     rol                INTEGER NOT NULL
 );
 
@@ -195,10 +191,11 @@ ALTER TABLE personas ADD CONSTRAINT personas_pk PRIMARY KEY ( id );
 ALTER TABLE personas ADD CONSTRAINT personas__un UNIQUE ( cedula );
 
 CREATE TABLE promocion (
-    id            INTEGER NOT NULL,
-    descripcion   VARCHAR(100) NOT NULL,
-    porcentaje    INTEGER NOT NULL,
-    fecha         DATE NOT NULL
+    id             INTEGER NOT NULL,
+    descripcion    VARCHAR2(100) NOT NULL,
+    porcentaje     INTEGER NOT NULL,
+    fecha_inicio   DATE NOT NULL,
+    fecha_fin      DATE NOT NULL
 );
 
 ALTER TABLE promocion ADD CONSTRAINT promocion_pk PRIMARY KEY ( id );
@@ -214,7 +211,7 @@ ALTER TABLE reportes_visitas ADD CONSTRAINT reportes_visitas_pk PRIMARY KEY ( id
 
 CREATE TABLE reservar_visita (
     id         INTEGER NOT NULL,
-    mensaje    VARCHAR(600) NOT NULL,
+    mensaje    VARCHAR2(600) NOT NULL,
     fecha      DATE,
     estado     INTEGER NOT NULL,
     inmueble   INTEGER NOT NULL,
@@ -227,7 +224,7 @@ ALTER TABLE reservar_visita ADD CONSTRAINT reservar_visita_pk PRIMARY KEY ( id )
 CREATE TABLE reunion (
     id            INTEGER NOT NULL,
     fecha         DATE NOT NULL,
-    descripcion   VARCHAR(1000) NOT NULL,
+    descripcion   VARCHAR2(1000) NOT NULL,
     persona       INTEGER NOT NULL
 );
 
@@ -242,24 +239,24 @@ ALTER TABLE rol_accesos ADD CONSTRAINT rol_accesos_pk PRIMARY KEY ( rol,acceso )
 
 CREATE TABLE roles (
     id            INTEGER NOT NULL,
-    nombre        VARCHAR(30) NOT NULL,
-    descripcion   VARCHAR(200) NOT NULL
+    nombre        VARCHAR2(30) NOT NULL,
+    descripcion   VARCHAR2(200) NOT NULL
 );
 
 ALTER TABLE roles ADD CONSTRAINT tipo_personal_pk PRIMARY KEY ( id );
 
 CREATE TABLE tipo_inmueble (
     id            INTEGER NOT NULL,
-    nombre        VARCHAR(50) NOT NULL,
-    descripcion   VARCHAR(300) NOT NULL
+    nombre        VARCHAR2(50) NOT NULL,
+    descripcion   VARCHAR2(300) NOT NULL
 );
 
 ALTER TABLE tipo_inmueble ADD CONSTRAINT tipo_inmueble_pk PRIMARY KEY ( id );
 
 CREATE TABLE usuarios (
     persona    INTEGER NOT NULL,
-    username   VARCHAR(100) NOT NULL,
-    password   VARCHAR(100) NOT NULL
+    username   VARCHAR2(100) NOT NULL,
+    password   VARCHAR2(100) NOT NULL
 );
 
 ALTER TABLE usuarios ADD CONSTRAINT usuario_pk PRIMARY KEY ( persona );
@@ -271,7 +268,7 @@ CREATE TABLE venta (
     contrato      INTEGER NOT NULL,
     empleado      INTEGER NOT NULL,
     fecha         DATE NOT NULL,
-    descripcion   VARCHAR(400) NOT NULL
+    descripcion   VARCHAR2(400) NOT NULL
 );
 
 ALTER TABLE venta ADD CONSTRAINT venta_pk PRIMARY KEY ( id );
