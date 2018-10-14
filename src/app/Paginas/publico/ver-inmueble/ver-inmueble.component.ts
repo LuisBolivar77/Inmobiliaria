@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { GenericoService } from '../../../Servicios/genericoServ.service';
 import { Inmueble } from '../../../Modelo/Inmueble';
 import { UsuarioService } from '../../../Servicios/usuarioServ.service';
@@ -6,12 +6,68 @@ import { Archivo } from '../../../Modelo/Archivo';
 import { Ciudad } from '../../../Modelo/Ciudad';
 import { Departamento } from '../../../Modelo/Departamento';
 import { TipoInmueble } from '../../../Modelo/TipoInmueble';
+import { Usuario } from 'src/app/Modelo/Usuario';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+
+export interface DialogData {
+  animal: string;
+  name: string;
+}
+
+/**
+ * @title Dialog Overview
+ */
+@Component({
+  selector: 'app-ver-inmueble',
+  templateUrl: './ver-inmueble.component.html',
+  styleUrls: ['./ver-inmueble.component.css']
+})
+
+export class DialogOverviewExample {
+
+  animal: string;
+  name: string;
+
+  constructor(public dialog: MatDialog) {}
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
+      width: '250px',
+      data: {name: this.name, animal: this.animal}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.animal = result;
+    });
+  }
+
+}
+
+@Component({
+  selector: './dialog-overview-example-dialog',
+  templateUrl: './dialog-overview-example-dialog.html',
+})
+
+export class DialogOverviewExampleDialog {
+
+  constructor(
+    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+}
 
 @Component({
   selector: 'app-ver-inmueble',
   templateUrl: './ver-inmueble.component.html',
   styleUrls: ['./ver-inmueble.component.css']
 })
+
+
 export class VerInmuebleComponent implements OnInit {
 
   // El inmueble que se mostrara
@@ -22,6 +78,15 @@ export class VerInmuebleComponent implements OnInit {
   fotos: Array<Archivo> = [];
   // Año actual
   anio = new Date().getFullYear();
+
+  usuarioSesion:Usuario = new Usuario();
+
+   // Variables para los mensajes en la pagina
+   show: number;
+   msj: string;
+
+   //Datos de la reserva
+
 
   constructor(private genericoServicio: GenericoService, private usuarioServicio: UsuarioService) { }
 
@@ -79,6 +144,28 @@ export class VerInmuebleComponent implements OnInit {
       }
     });
   }
+
+
+
+ 
+
+  /**
+   * Metodo que permite reservar una visita al inmueble seleccionado
+   
+  reservarVista(){
+    //Validamos si ha iniciado sesion para que se pueda hacer la reserva del inmueble
+    this.usuarioSesion = this.usuarioServicio.getUsuario();
+    if(this.usuarioSesion==null){
+      this.msj= "Se requiere inicio de sesion para reservar visita";
+      window.alert(this.msj);
+      this.show=1;
+      return;
+     }else{
+      window.alert("Si funciona");
+      return;
+     }
+  }
+  */
 
   /**
    * Obtiene la zona apartir del numero de zona asignado en el inmueble
