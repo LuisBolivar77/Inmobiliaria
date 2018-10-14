@@ -40,10 +40,12 @@ describe('Gestionar cliente', () => {
 
   it('crear un ciente', () => {
 
+    // tslint:disable-next-line:prefer-const
     let rol: Rol = new Rol;
-    let usuario: Usuario = new Usuario;    
+    // tslint:disable-next-line:prefer-const
+    let usuario: Usuario = new Usuario;
+    // tslint:disable-next-line:prefer-const
     let persona: Persona = new Persona;
-    
 
     rol.id = 2;
     component.rol.id = 2;
@@ -64,7 +66,7 @@ describe('Gestionar cliente', () => {
     component.persona.telefono = '698349295';
     component.persona.direccion = 'Madrid';
     component.persona.rol = rol;
-   
+
     usuario.password = '9876';
     usuario.username = 'mile24';
     usuario.persona = persona;
@@ -73,46 +75,53 @@ describe('Gestionar cliente', () => {
     component.usuario.username = 'mile24';
     component.usuario.persona = persona;
 
-    persona.rol = rol;  
+    persona.rol = rol;
 
     component.persona = persona;
 
     component.usuario = usuario;
 
-    component.usuario.persona = persona
+    component.usuario.persona = persona;
 
-    let respuesta = component.registrar(null);
+    const respuesta = component.registrar(null);
 
+    // tslint:disable-next-line:no-unused-expression
     expect(respuesta).toBeTruthy;
 
   });
 
   it('buscar ciente', () => {
+    // tslint:disable-next-line:prefer-const
     let persona: Persona = new Persona();
     component.persona.id = 1;
     component.persona.cedula = '1094';
     component.usuario.persona = persona;
 
-    let respuesta = component.buscar();
+    const respuesta = component.buscar();
 
+    // tslint:disable-next-line:no-unused-expression
     expect(respuesta).toBeTruthy;
   });
 
   it('buscar ciente no existe', () => {
 
+    // tslint:disable-next-line:prefer-const
     let persona: Persona = new Persona();
 
     component.persona.cedula = '1094555';
 
     component.usuario.persona = persona;
-    let respuesta = component.buscar();
+    const respuesta = component.buscar();
+    // tslint:disable-next-line:no-unused-expression
     expect(respuesta).toBeFalsy;
   });
 
   it('editar ciente', () => {
 
+    // tslint:disable-next-line:prefer-const
     let rol: Rol = new Rol();
     rol.id = 3;
+    // tslint:disable-next-line:prefer-const
     let persona: Persona = new Persona();
     persona.cedula = '1090';
     persona.nombre = 'Sandra';
@@ -124,8 +133,9 @@ describe('Gestionar cliente', () => {
 
     component.usuario.persona = persona;
 
-    let respuesta = component.editar(null);
+    const respuesta = component.editar(null);
 
+    // tslint:disable-next-line:no-unused-expression
     expect(respuesta).toBeTruthy;
 
   });
@@ -133,49 +143,56 @@ describe('Gestionar cliente', () => {
 
   it('editar ciente usuario no existe', () => {
 
-    let respuesta = component.editar(null);
+    const respuesta = component.editar(null);
 
+    // tslint:disable-next-line:no-unused-expression
     expect(respuesta).toBeFalsy;
 
   });
 
   it('Ver la inormacion de un empleado de la tabla', () => {
+    // tslint:disable-next-line:prefer-const
     let persona: Persona = new Persona();
     persona.cedula = '1094';
-    let respuesta = component.ver(persona);
+
+    const respuesta = component.ver(persona);
+    // tslint:disable-next-line:no-unused-expression
     expect(respuesta).toBeTruthy;
   });
 
   it('Buscar desde el formulario html verdadero', () => {
+    // tslint:disable-next-line:prefer-const
     let persona: Persona = new Persona();
     persona.cedula = '1094';
 
     component.persona.cedula = '1094';
     component.persona = persona;
 
-    let respuesta = component.fbuscar(null);
+    const respuesta = component.fbuscar(null);
+    // tslint:disable-next-line:no-unused-expression
     expect(respuesta).toBeTruthy;
   });
 
   it('Buscar desde el formulario html falso', () => {
+    // tslint:disable-next-line:prefer-const
     let persona: Persona = new Persona();
     persona.cedula = null;
 
     component.persona.cedula = null;
     component.persona = persona;
 
-    let respuesta = component.fbuscar(null);
+    const respuesta = component.fbuscar(null);
+    // tslint:disable-next-line:no-unused-expression
     expect(respuesta).toBeFalsy;
   });
 
 
   it('eliminar cliente', () => {
+    // tslint:disable-next-line:prefer-const
     let persona: Persona = new Persona();
     persona.id = 20;
-    let respuesta = component.eliminar(persona);
+    const respuesta = component.eliminar(persona);
+    // tslint:disable-next-line:no-unused-expression
     expect(respuesta).toBeFalsy;
   });
-
-
-
 });

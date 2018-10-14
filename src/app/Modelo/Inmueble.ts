@@ -51,6 +51,8 @@ export class Inmueble {
      */
     zona: number;
     fechaAprobacion: string;
+    latitud: number;
+    longitud: number;
     tipo: TipoInmueble;
     ciudad: Ciudad;
     usuario: Usuario;

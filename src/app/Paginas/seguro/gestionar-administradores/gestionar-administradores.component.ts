@@ -138,7 +138,7 @@ export class GestionarAdministradoresComponent implements OnInit {
       this.buscar();
     }
   }
-  
+
   /**
    * Lista todas los administradores registradas
    */
@@ -153,7 +153,7 @@ export class GestionarAdministradoresComponent implements OnInit {
    * Eliminar administrador con su usuario de la base de datos
    */
   eliminar(p: Persona) {
-    this.genericoServicio.eliminar("personas", { "id": p.id }).subscribe(rta => {
+    this.genericoServicio.eliminar('personas', { 'id': p.id }).subscribe(rta => {
       if (rta.data === 'exito') {
         this.msj = 'Se ha eliminado el cliente correctamente';
         this.show = 2;

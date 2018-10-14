@@ -51,6 +51,8 @@ export class InmuebleTemporal {
      */
     zona: number;
     fechaAprobacion: string;
+    latitud: number;
+    longitud: number;
     tipo: TipoInmueble;
     ciudad: Ciudad;
     usuario: Usuario;

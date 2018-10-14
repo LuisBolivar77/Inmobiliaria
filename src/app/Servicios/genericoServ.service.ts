@@ -30,6 +30,18 @@ export class GenericoService {
     }
 
     /**
+     * Obtenemos la lista de roles
+     */
+    listarDirect () {
+        return this.http.get<any>(this.domain + 'promocion/listar')
+        .pipe(
+            map(res => {
+                return res;
+            })
+        );
+    }
+
+    /**
      * Registrar en una determinada tabla
      * @param tabla la tabla de donde se traera los registros
      * @param objeto el objeto a registrar
@@ -50,6 +62,21 @@ export class GenericoService {
      * @param objeto el objeto a editar
      */
     editar (table: string, object: object, pk: string) {
+        var data = {'tabla' : table, 'objeto' : object, 'pk' : pk};
+        return this.http.post<any>(this.domain + 'generico/editar', data)
+        .pipe(
+            map(res => {
+                return res;
+            })
+        );
+    }
+
+    /**
+     * Editar en una determinada tabla
+     * @param tabla la tabla de donde se traera los registros
+     * @param objeto el objeto a editar
+     */
+    editarEntero (table: string, object: object, pk: number) {
         var data = {'tabla' : table, 'objeto' : object, 'pk' : pk};
         return this.http.post<any>(this.domain + 'generico/editar', data)
         .pipe(

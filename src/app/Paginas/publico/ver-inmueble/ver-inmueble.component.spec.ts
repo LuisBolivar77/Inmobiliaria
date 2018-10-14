@@ -46,18 +46,22 @@ describe('VerInmuebleComponent', () => {
    *  probando el ngOnInit cuando existe el parametro GET
    */
   it('ngOnInit Existe parametro GET', () => {
+    // tslint:disable-next-line:prefer-const
     let ver = componente.ngOnInit();
     // toBeTruthy cuando es verdadero
-    expect(ver).toBeTruthy; 
+    // tslint:disable-next-line:no-unused-expression
+    expect(ver).toBeTruthy;
   });
 // ----------------------------------------------------------------------------------
   /**
    *  probando el ngOnInit cuando no existe el parametro GET
    */
   it('ngOnInit No existe parametro GET', () => {
+    // tslint:disable-next-line:prefer-const
     let ver = componente.ngOnInit();
     // toBeFalsy cuando es Falso
-    expect(ver).toBeFalsy; 
+    // tslint:disable-next-line:no-unused-expression
+    expect(ver).toBeFalsy;
   });
 // ----------------------------------------------------------------------------------
   /**
@@ -66,9 +70,11 @@ describe('VerInmuebleComponent', () => {
   it('Cargar Inmueble', () => {
     // id del inmueble a buscar y cargar
     componente.inmueble.id = 2;
+    // tslint:disable-next-line:prefer-const
     let ver = componente.cargarInmueble();
     // toBeTruthy cuando es verdadero
-    expect(ver).toBeTruthy; 
+    // tslint:disable-next-line:no-unused-expression
+    expect(ver).toBeTruthy;
     console.log(componente.inmueble);
   });
 // ----------------------------------------------------------------------------------
@@ -78,54 +84,61 @@ describe('VerInmuebleComponent', () => {
   it('No Cargar Inmueble', () => {
     // id del inmueble a buscar y a no cargar, este inmueble no debe existir en la bd
     componente.inmueble.id = 200;
+    // tslint:disable-next-line:prefer-const
     let ver = componente.cargarInmueble();
     // toBeFalsy cuando es Falso
-    expect(ver).toBeFalsy; 
+    // tslint:disable-next-line:no-unused-expression
+    expect(ver).toBeFalsy;
   });
 // ----------------------------------------------------------------------------------
   /**
    * obtener zona
    */
-  it('Obtener Zona', ()=> {
+  it('Obtener Zona', () => {
+    // tslint:disable-next-line:prefer-const
     let zona = componente.getZona(0);
     // validamos si la respuesta concuerda con la esparada
-    expect(zona).toContain("Norte");
+    expect(zona).toContain('Norte');
   });
 // ----------------------------------------------------------------------------------
   /**
    * obtener tipo AV
    */
-  it('Obtener TipoAV', ()=> {
+  it('Obtener TipoAV', () => {
+    // tslint:disable-next-line:prefer-const
     let tipoav = componente.getTipoAV(0);
     // validamos si la respuesta concuerda con la esparada
-    expect(tipoav).toContain("Arriendo");
+    expect(tipoav).toContain('Arriendo');
   });
 // ----------------------------------------------------------------------------------
   /**
    * Agregar punto a un numero
    */
-  it('addComa', ()=> {
+  it('addComa', () => {
+    // tslint:disable-next-line:prefer-const
     let valor = componente.addComa(100000);
     // validamos si la respuesta concuerda con la esparada
-    expect(valor).toContain("100.000");
+    expect(valor).toContain('100.000');
   });
 // ----------------------------------------------------------------------------------
   /**
    * probar si un boolean nos devuelve si o no
    */
-  it('siNo cuando devuelve Si', ()=> {
+  it('siNo cuando devuelve Si', () => {
+    // tslint:disable-next-line:prefer-const
     let valor = componente.siNo(1);
     // validamos si la respuesta concuerda con la esparada
-    expect(valor).toContain("Si");
+    expect(valor).toContain('Si');
   });
 // ----------------------------------------------------------------------------------
   /**
    * probar si un boolean nos devuelve si o no
    */
-  it('siNo cuando devuelve NO', ()=> {
+  it('siNo cuando devuelve NO', () => {
+    // tslint:disable-next-line:prefer-const
     let valor = componente.siNo(0);
     // validamos si la respuesta concuerda con la esparada
-    expect(valor).toContain("No");
+    expect(valor).toContain('No');
   });
 // ---------------------------------------------------------------------------------
 });
