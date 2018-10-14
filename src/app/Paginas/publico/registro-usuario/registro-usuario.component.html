@@ -1,7 +1,7 @@
 <div class="contact">
   <div class="container">
     <div class="row">
-      <!-- Contact Form -->
+      <!-- Contact Form  -->
       <div class="col-lg-12">
       <div class="col-lg-6" style="margin:0 auto">
         <div class="section_title"> Registrate, es gratis. </div>  
@@ -19,6 +19,10 @@
             <div class="section_subtitle"> Datos usurio </div>
             <div><input type="tel"  [(ngModel)]="usuario.username" name="username" class="contact_input" placeholder="Nombre de usuario" required="required"></div>
             <div><input type="text" [(ngModel)]="usuario.password" name="password" class="contact_input" placeholder="Contraseña" required="required"></div>
+            <div class="section_subtitle"> Seleccion Localizacion </div>
+            <agm-map [zoom]="zoom" [latitude]="latSelected" [longitude]="longSelected" (mapClick)="onChoseLocation($event)">
+              <agm-marker *ngIf="locationSelec" [latitude]="latSelected" [longitude]="longSelected"></agm-marker>
+            </agm-map>
             <button (click)="registrar(datosForm)" style="width: 100%" class="contact_button button">Registrarme</button>
           </form>
         </div>
