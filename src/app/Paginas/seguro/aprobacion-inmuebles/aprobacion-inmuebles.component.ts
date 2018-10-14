@@ -43,6 +43,10 @@ export class AprobacionInmueblesComponent implements OnInit {
    });
   }
 
+  /**
+   * Metodo que permite agregar los objetos a el inmueble
+   * @param lista la lista a la que le le van a llenar objetos
+   */
   agregarObjetos(lista){
     for(let i of lista){
       // Obtenemos el tipo de inmueble
@@ -69,6 +73,10 @@ export class AprobacionInmueblesComponent implements OnInit {
     }
   }
 
+  /**
+   * Metodo que permite aprobar un inmueble registrado por un cliente
+   * @param inmueble el inmueble que se desea aprobar
+   */
   aprobarInmueble(inmueble:Inmueble){
     inmueble.estado = 1;
     inmueble.administrador = this.usuarioSesion;

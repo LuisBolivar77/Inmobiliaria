@@ -25,6 +25,7 @@ import { InmuebleClienteComponent } from './Paginas/seguro/inmueble-cliente/inmu
 import { AgmCoreModule } from '@agm/core';
 import { GestionVentasArriendosComponent } from './Paginas/seguro/gestion-ventas-arriendos/gestion-ventas-arriendos.component';
 import { GestionarPromocionesComponent } from './Paginas/seguro/gestionar-promociones/gestionar-promociones.component';
+import { AsignarVentasContratosComponent } from './paginas/seguro/asignar-ventas-contratos/asignar-ventas-contratos.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { GestionarPromocionesComponent } from './Paginas/seguro/gestionar-promoc
     FileSelectDirective,
     InmuebleClienteComponent,
     GestionVentasArriendosComponent,
-    GestionarPromocionesComponent
+    GestionarPromocionesComponent,
+    AsignarVentasContratosComponent
   ],
   imports: [
     BrowserModule,
@@ -113,6 +115,10 @@ import { GestionarPromocionesComponent } from './Paginas/seguro/gestionar-promoc
       {
         path: 'administracion/gestion-ventas-arriendos',
         component: GestionVentasArriendosComponent
+      },
+      {
+        path: 'administracion/asignar-ventas-contratos',
+        component: AsignarVentasContratosComponent
       },
       {
         path: 'login', // http://localhost:4200/login
