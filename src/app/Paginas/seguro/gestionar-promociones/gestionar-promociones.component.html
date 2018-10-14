@@ -48,7 +48,7 @@
           <!-- End Form -->
           <div class="col-lg-8">
             <br>
-            <div class="section_subtitle"> Lista de promociones ({{promocion.length}})</div><br>
+            <div class="section_subtitle"> Lista de promociones ({{listPromociones.length}})</div><br>
             <table class="table">
               <thead>
                 <tr>
@@ -69,8 +69,8 @@
                   <td>{{p.fecha_inicio}}</td>
                   <td>{{p.fecha_fin}}</td>
                   <td>
-                    <button class="btn" (click)="eliminar(p)">Eliminar</button><br>
-                    <button style="margin-left: 10px" class="btn" (click)="ver(p)">ver</button></td>
+                    <button class="btn" (click)="eliminar(p)" style="padding: 5%">Eliminar</button>
+                    <button style="margin-left: 10px" class="btn" style="padding: 5%"(click)="ver(p)">ver</button></td>
                 </tr>
               </tbody>
             </table>

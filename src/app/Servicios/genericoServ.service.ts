@@ -72,6 +72,21 @@ export class GenericoService {
     }
 
     /**
+     * Editar en una determinada tabla
+     * @param tabla la tabla de donde se traera los registros
+     * @param objeto el objeto a editar
+     */
+    editarEntero (table: string, object: object, pk: number) {
+        var data = {'tabla' : table, 'objeto' : object, 'pk' : pk};
+        return this.http.post<any>(this.domain + 'generico/editar', data)
+        .pipe(
+            map(res => {
+                return res;
+            })
+        );
+    }
+
+    /**
      * Buscar en una determinada tabla
      * @param tabla la tabla de donde se traera los registros
      * @param objeto los parametros dado el caso que vaya a iltrar
