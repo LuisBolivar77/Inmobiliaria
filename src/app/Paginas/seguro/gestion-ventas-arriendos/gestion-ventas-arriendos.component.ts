@@ -45,7 +45,7 @@ export class GestionVentasArriendosComponent implements OnInit {
   listar() {
     this.generico.listar('contrato', {'estado': 0}).subscribe(res => {
       this.contratos = res.data;
-      // this.agregarObjetos(this.contratos);
+       this.agregarObjetos(this.contratos);
     });
   }
 
@@ -59,6 +59,10 @@ export class GestionVentasArriendosComponent implements OnInit {
 
         this.generico.buscar('contrato', {'id': i.contrato}).subscribe(rt3 => {
           i.contrato = rt3.data;
+
+          /**this.generico.buscar('contrato', {'id': i.contrato}).subscribe(rt4 => {
+            i.contrato.fecha_solicitud =rt4.data;
+          }); */
         });
       });
     }
@@ -108,18 +112,30 @@ export class GestionVentasArriendosComponent implements OnInit {
    */
   editar(form: NgForm) {
 
+    this.contrato.estado=1;
+    const fecha = this.fechaActual();
+    this.contrato.fecha_finalizacion= fecha;
+
     this.generico.editar('contrato', this.contrato, 'id').subscribe(res => {
       if (res.data === 'exito') {
-        this.busco = false;
+        this.msj = 'el contrato se edito correctamente';
         this.show = 2;
-        this.msj = 'el inmueble se edito correctamente';
-        this.contrato = new Contrato();
         form.reset();
       } else {
         this.show = 1;
         this.msj = res.data;
       }
     });
+  }
+
+  fechaActual(): string {
+
+    // tslint:disable-next-line:prefer-const
+    let dateFormat = require('dateformat');
+    // tslint:disable-next-line:prefer-const
+    let now = new Date();
+    return dateFormat(now, 'yyyy/mm/dd');
+
   }
 
  

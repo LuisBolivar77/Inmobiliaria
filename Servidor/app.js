@@ -81,7 +81,7 @@ app.use(
         
         host: 'localhost', //'localhost',
         user: 'root',
-        password : '1234',
+        password : 'admin',
         port : 3306, //port mysql
         database:'inmobiliaria'
 
