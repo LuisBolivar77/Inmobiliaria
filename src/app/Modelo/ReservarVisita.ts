@@ -1,6 +1,7 @@
 import { Inmueble } from "./Inmueble";
 import { Usuario } from "./Usuario";
 import { Empleado } from "./Empleado";
+import { Persona } from "./Persona";
 
 export class ReservarVisita{
 
@@ -8,29 +9,14 @@ export class ReservarVisita{
     mensaje: String;
     fecha: String;
      /**
-     * 0=pendiente
-     * 1=finalizado
+     * Pendiete (para visitar)
+     * Visitado
      */
-    estado: number;
+    estado: String;
+
     inmueble:Inmueble;
-    cliente:Usuario;
-    empleado:Empleado;
-
-
-      /**
-     * retorna el valor texto de un estado
-     * @param estado el numero del indice a retornar
-     */
-    getEstado(estado: number) {
-        const estados = [
-            'pendiente para Visitar',
-            'finalizado'
-        ];
-        if (estado == null) {
-            // Retornamos todo el listado de estados
-            return estados;
-        } else {
-            return estados[estado];
-        }
-    }
+    cliente:Persona;
+    empleado:Persona;
+    comentario:String;// El comentario que hace el cliente despues de haber realizado su visita
+    
 }
