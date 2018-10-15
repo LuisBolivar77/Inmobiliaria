@@ -46,7 +46,6 @@ export class GestionarClientesComponent implements OnInit {
    * Registra un cliente con su usuario
    */
   registrar(form: NgForm) {
-   // console.log('paso por aqui');
     this.usuario.persona = this.persona;
     this.personaServicio.registrar(this.usuario).subscribe(rta => {
       if (rta.data === 'exito') {

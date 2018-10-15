@@ -69,15 +69,12 @@ export class GestionarEmpleadosComponent implements OnInit {
  /**
    * Registra un empleado con su usuario
    */
-  registrar(form: NgForm) {this.rol.id = this.persona.rol.id;
-    this.persona.rol= this.rol;
-    this.usuario.persona.cedula = this.persona.cedula;
+  registrar(form: NgForm) {
     if (this.empleado.usuario.username != null && this.empleado.usuario.persona.apellido != null) {
       // Validamos si ya hay una persona con esta cedula
       this.genericoServicio.buscar('personas', {'cedula': this.empleado.usuario.persona.cedula}).subscribe(valida => {
         if (valida.data == null) {
           // Validamos si ya hay un usuario con el username
-          // tslint:disable-next-line:quotemark
           this.genericoServicio.buscar('usuarios', {'username': "'" + this.empleado.usuario.username + "'"}).subscribe(valida2 => {
             if (valida2.data == null) {
               // Guardamos la persona asociada al empleado

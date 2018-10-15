@@ -13,8 +13,8 @@
 							<ul *ngIf="!usuario">
 								<li class="active"><a href="index.html">Inicio</a></li>
 								<li><a href="/promociones">Promociones</a></li>
-								<li><a href="properties.html">Properties</a></li>
-								<li><a href="news.html">News</a></li>
+								<li><a href='/?objeto=%7B"tipoAV":"1"%7D'>Venta</a></li>
+								<li><a href='/?objeto=%7B"tipoAV":"0"%7D'>Arriendo</a></li>
 								<li ><a href="/registrousuario">Registrarme</a></li>	
 							</ul>
 							<!-- Menu usuario logeado -->
@@ -23,7 +23,9 @@
 							        <ul>
 								        <li *ngFor="let acceso of accesos"><a href="{{acceso.url}}">{{acceso.nombre}}</a></li>							
 								    </ul>
-							    </li>
+								</li>
+								<li><a href='/?objeto=%7B"tipoAV":"1"%7D'>Venta</a></li>
+								<li><a href='/?objeto=%7B"tipoAV":"0"%7D'>Arriendo</a></li>
 								<li><a (click)="logout($event)" href="">Salir</a></li>
 						    </ul>
 						</nav>
@@ -65,8 +67,8 @@
 				<!-- Menu visitante -->
 				<ul *ngIf="!usuario">
 					<li class="menu_item"><a href="index.html">Inicio</a></li>
-					<li class="menu_item"><a href="about.html">About us</a></li>
-					<li class="menu_item"><a href="properties.html">Properties</a></li>
+					<li class="menu_item"><a href='/?objeto=%7B"tipoAV":"1"%7D'>Venta</a></li>
+					<li class="menu_item"><a href='/?objeto=%7B"tipoAV":"0"%7D'>Arriendo</a></li>
 					<li class="menu_item"><a href="news.html">News</a></li>
 					<li class="menu_item"><a href="/registrousuario">Registrarme</a></li>
 				</ul>

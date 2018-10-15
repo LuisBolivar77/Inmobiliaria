@@ -35,7 +35,7 @@ export class GestionarPersonasComponent implements OnInit {
 
   ngOnInit() {
     // Validamos si el usuario tiene acceso a la pagina
-   // this.usuarioServicio.esAccesible('administracion/gestionar-personas');
+    this.usuarioServicio.esAccesible('administracion/gestionar-personas');
     this.persona.rol = this.rol;
     // Obtenemos la lista de roles
     this.rolServicio.listar().subscribe(rta => {
@@ -52,11 +52,8 @@ export class GestionarPersonasComponent implements OnInit {
     this.rol.id = this.persona.rol.id;
     this.persona.rol = this.rol;
     this.usuario.persona = this.persona;
-    console.log(this.usuario);    
     this.personaServicio.registrar(this.usuario).subscribe(rta => {
       if (rta.data === 'exito') {
-        console.log('REGISTROOOOOOOO');
-        
         this.msj = 'Se ha registrado correctamente';
         this.show = 2;
         window.alert(this.msj);
@@ -148,7 +145,6 @@ export class GestionarPersonasComponent implements OnInit {
     this.personaServicio.listar().subscribe(rta => {
       this.personas = rta.data;
       // obtenemos la informacion del rol de cada persona
-      // tslint:disable-next-line:prefer-const
       for (let p of this.personas) {
         this.rolServicio.buscarRolPersona(p).subscribe(rta2 => {
           p.rol = rta2.data;
