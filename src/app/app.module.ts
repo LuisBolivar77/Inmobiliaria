@@ -25,6 +25,7 @@ import { InmuebleClienteComponent } from './Paginas/seguro/inmueble-cliente/inmu
 import { AgmCoreModule } from '@agm/core';
 import { GestionVentasArriendosComponent } from './Paginas/seguro/gestion-ventas-arriendos/gestion-ventas-arriendos.component';
 import { GestionarPromocionesComponent } from './Paginas/seguro/gestionar-promociones/gestionar-promociones.component';
+import { VisitasClienteComponent } from './Paginas/seguro/visitas-cliente/visitas-cliente.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { GestionarPromocionesComponent } from './Paginas/seguro/gestionar-promoc
     FileSelectDirective,
     InmuebleClienteComponent,
     GestionVentasArriendosComponent,
-    GestionarPromocionesComponent
+    GestionarPromocionesComponent,
+    VisitasClienteComponent
   ],
   imports: [
     BrowserModule,
@@ -62,6 +64,11 @@ import { GestionarPromocionesComponent } from './Paginas/seguro/gestionar-promoc
       apiKey: 'AIzaSyB0WP4oGVaDXx-3HZDqzwNsbUi6yS6lEk8'
     }),
     RouterModule.forRoot([
+      {
+      path: 'cliente/visitas-cliente',
+      component: VisitasClienteComponent
+      },
+     
       {
         path: 'administrador/gestionar-promociones',
         component: GestionarPromocionesComponent
