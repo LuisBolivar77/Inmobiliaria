@@ -73,7 +73,7 @@
                                     </tbody>
                                   </table>
                                   <br>
-                                  <h4>localizacion de los inmuebles <button *ngIf="verInmueble" class="contact_button button" (click)="mostrarTodosInmueblesEnMap()" style="width: 5%; margin-right: 1px">Mostrar todos los inmuebles en el mapa</button></h4>
+                                  <h4>localizacion de los inmuebles <button *ngIf="verInmueble" class="btn" (click)="mostrarTodosInmueblesEnMap()" style="margin-right: 10px; color: red">Mostrar todos los inmuebles en el mapa</button></h4>
                                   <agm-map [zoom]="zoom" [latitude]="latSeleccion" [longitude]="longSeleccion" >
                                     <ng-container *ngIf="!verInmueble">
                                       <agm-marker *ngFor="let e of inmuebles" [latitude]="e.latitud" [longitude]="e.longitud" >

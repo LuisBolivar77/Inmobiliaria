@@ -11,6 +11,8 @@ export class Persona {
     fecha_nacimiento: string;
     telefono: string;
     direccion: string;
+    latitud: number;
+    longitud: number;
     rol: Rol;
 
 }

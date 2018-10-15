@@ -26,6 +26,7 @@ import { AgmCoreModule } from '@agm/core';
 import { GestionVentasArriendosComponent } from './Paginas/seguro/gestion-ventas-arriendos/gestion-ventas-arriendos.component';
 import { GestionarPromocionesComponent } from './Paginas/seguro/gestionar-promociones/gestionar-promociones.component';
 import { VisitasClienteComponent } from './Paginas/seguro/visitas-cliente/visitas-cliente.component';
+import { AsignarVentasContratosComponent } from './paginas/seguro/asignar-ventas-contratos/asignar-ventas-contratos.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { VisitasClienteComponent } from './Paginas/seguro/visitas-cliente/visita
     InmuebleClienteComponent,
     GestionVentasArriendosComponent,
     GestionarPromocionesComponent,
-    VisitasClienteComponent
+    VisitasClienteComponent,
+    AsignarVentasContratosComponent
   ],
   imports: [
     BrowserModule,
@@ -120,6 +122,10 @@ import { VisitasClienteComponent } from './Paginas/seguro/visitas-cliente/visita
       {
         path: 'administracion/gestion-ventas-arriendos',
         component: GestionVentasArriendosComponent
+      },
+      {
+        path: 'administracion/asignar-ventas-contratos',
+        component: AsignarVentasContratosComponent
       },
       {
         path: 'login', // http://localhost:4200/login
