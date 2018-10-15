@@ -29,7 +29,22 @@ export class GestionarClientesComponent implements OnInit {
   show: number;
   msj: string;
 
-  constructor(private genericoServicio: GenericoService, private personaServicio: PersonaService, private usuarioServicio: UsuarioService) { }
+  verInmueble = false;
+  selectedVer = false;
+  locationSelecER = false;
+
+  zoom = 6;
+  zoomMapaLista = 10;
+  latSelectedLista = 0;
+  longSelectedLista = 0;
+  latSeleccion = 4.540130;
+  longSeleccion = -75.665193;
+
+  latSeleccionER = 4.540130;
+  longSeleccionER = -75.665193;
+
+  constructor(private genericoServicio: GenericoService, private personaServicio: PersonaService,
+    private usuarioServicio: UsuarioService) { }
 
   ngOnInit() {
     // Asignamos el rol cliente con id 2
@@ -40,6 +55,23 @@ export class GestionarClientesComponent implements OnInit {
     this.usuarioServicio.esAccesible('administracion/gestionar-clientes');
     // Actualizamos la tabla de personas
     this.listar();
+  }
+
+  verUnInmuebleEnMap(p: Persona) {
+    this.verInmueble = true;
+    this.latSelectedLista = p.latitud;
+    this.longSelectedLista = p.longitud;
+
+  }
+
+  mostrarTodosInmueblesEnMap() {
+    this.verInmueble = false;
+  }
+
+  onChoseLocation(event) {
+    console.log(event);
+    this.latSeleccion = event.coords.lat;
+    this.longSeleccion = event.coords.lng;
   }
 
   /**
@@ -53,6 +85,8 @@ export class GestionarClientesComponent implements OnInit {
         this.show = 2;
         window.alert(this.msj);
         // limpiamos los campos
+        this.locationSelecER = false;
+        this.selectedVer = false;
         form.reset();
         // Actualizamos la lista de clientes
         this.listar();
@@ -71,24 +105,26 @@ export class GestionarClientesComponent implements OnInit {
    */
   editar(form: NgForm) {
     if (this.usuario.persona != null && this.persona != null) {
-    this.usuario.persona = this.persona;
-    this.personaServicio.editar(this.usuario).subscribe(rta => {
-      if (rta.data === 'exito') {
-        this.msj = 'Se ha editado correctamente';
-        this.show = 2;
-        window.alert(this.msj);
-        // limpiamos los campos
-        form.reset();
-        // Actualizamos la lista de clientes
-        this.listar();
-        return true;
-      } else {
-        this.msj = rta.data;
-        this.show = 1;
-        window.alert(rta.data);
-        return false;
-      }
-    });
+      this.usuario.persona = this.persona;
+      this.personaServicio.editar(this.usuario).subscribe(rta => {
+        if (rta.data === 'exito') {
+          this.msj = 'Se ha editado correctamente';
+          this.show = 2;
+          window.alert(this.msj);
+          // limpiamos los campos
+          this.locationSelecER = false;
+          this.selectedVer = false;
+          form.reset();
+          // Actualizamos la lista de clientes
+          this.listar();
+          return true;
+        } else {
+          this.msj = rta.data;
+          this.show = 1;
+          window.alert(rta.data);
+          return false;
+        }
+      });
     } else {
       this.msj = 'Primero busque el cliente que va a editar';
       this.show = 1;
@@ -124,6 +160,11 @@ export class GestionarClientesComponent implements OnInit {
    * Ver la inormacion de un empleado de la tabla
    */
   ver(p: Persona) {
+    this.locationSelecER = true;
+    this.verInmueble = true;
+    this.selectedVer = true;
+    this.latSeleccionER = p.latitud;
+    this.longSeleccionER = p.longitud;
     this.persona.cedula = p.cedula;
     this.buscar();
   }
@@ -133,6 +174,7 @@ export class GestionarClientesComponent implements OnInit {
   fbuscar(event) {
     event.preventDefault();
     if (this.persona.cedula != null) {
+      this.selectedVer = true;
       this.buscar();
       return true;
     }
@@ -151,7 +193,7 @@ export class GestionarClientesComponent implements OnInit {
    * Eliminar cliente con su usuario de la base de datos
    */
   eliminar(p: Persona) {
-    this.genericoServicio.eliminar("personas", {"id": p.id}).subscribe(rta => {
+    this.genericoServicio.eliminar('personas', {'id': p.id}).subscribe(rta => {
       if (rta.data === 'exito') {
         this.msj = 'Se ha eliminado el cliente correctamente';
         this.show = 2;
@@ -162,5 +204,11 @@ export class GestionarClientesComponent implements OnInit {
       }
       window.alert(this.msj);
     });
+  }
+
+  limpiarCampos(form: NgForm) {
+    this.verInmueble = false;
+    this.selectedVer = false;
+    form.reset();
   }
 }

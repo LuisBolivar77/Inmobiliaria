@@ -34,8 +34,9 @@
             <div class="section_subtitle"> Datos usurio </div>
             <div><input type="tel"  [(ngModel)]="usuario.username" name="username" class="contact_input" placeholder="Nombre de usuario" required="required"></div>
             <div><input type="text" [(ngModel)]="usuario.password" name="password" class="contact_input" placeholder="Contraseña" required="required"></div>
-            <button (click)="registrar(datosForm)" style="width: 100%" class="contact_button button">Registrar Cliente</button>
-            <button (click)="editar(datosForm)" style="width: 100%" class="contact_button button">Editar Cliente</button>
+            <button *ngIf="!selectedVer" (click)="registrar(datosForm)" style="width: 100%" class="contact_button button">Registrar Cliente</button>
+            <button *ngIf="selectedVer" (click)="editar(datosForm)" style="width: 100%" class="contact_button button">Editar Cliente</button>
+            <button *ngIf="selectedVer" (click)="limpiarCampos(datosForm)" style="width: 100%" class="contact_button button">Limpiar Campos</button>
           </form>
         </div>
       </div>
@@ -61,10 +62,35 @@
                   <td>{{p.apellido}}</td>
                   <td>{{p.telefono}}</td>
                   <td>{{p.direccion}}</td>
-                  <td><button class="btn" (click)="eliminar(p)">Eliminar</button><button style="margin-left: 10px" class="btn" (click)="ver(p)">ver</button></td>
+                  <td>
+                    <button *ngIf="!selectedVer" class="btn" (click)="verUnInmuebleEnMap(p)">localizar en mapa</button>
+                    <button style="margin-left: 10px" class="btn" (click)="ver(p)">ver</button>
+                    <button class="btn" (click)="eliminar(p)">Eliminar</button>
+                  </td>
                 </tr>
               </tbody>
             </table>
+            <br>
+            <div *ngIf="!selectedVer">
+              <h4>localizacion de las personas <button *ngIf="verInmueble" class="btn" (click)="mostrarTodosInmueblesEnMap()" style="margin-right: 10px; color: red">Mostrar todos los inmuebles en el mapa</button></h4>
+              <agm-map [zoom]="zoom" [latitude]="latSeleccion" [longitude]="longSeleccion" >
+                <ng-container *ngIf="!verInmueble">
+                  <agm-marker *ngFor="let p of personas" [latitude]="p.latitud" [longitude]="p.longitud" >
+                    <agm-info-window>
+                      <strong>Direccion: {{p.direccion}}</strong>
+                      <strong> ------- Nombre de la persona: {{p.nombre}}</strong>
+                    </agm-info-window>
+                  </agm-marker>
+                </ng-container>
+                <agm-marker *ngIf="verInmueble" [latitude]="latSelectedLista" [longitude]="longSelectedLista"></agm-marker>
+              </agm-map>
+            </div>
+            <div *ngIf="selectedVer">
+                <h4>Seleccione en el mapa la localizacion del inmueble</h4>
+                <agm-map [zoom]="zoom" [latitude]="latSeleccionER" [longitude]="longSeleccionER" (mapClick)="onChoseLocation($event)">
+                  <agm-marker [latitude]="latSeleccionER" [longitude]="longSeleccionER"></agm-marker>
+                </agm-map>
+            </div>
       </div>
       </div>
       </div>

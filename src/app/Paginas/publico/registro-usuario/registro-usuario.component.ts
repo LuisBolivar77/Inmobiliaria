@@ -4,12 +4,9 @@ import { Usuario } from './../../../Modelo/Usuario';
 import { Rol } from './../../../Modelo/Rol';
 import { Component, OnInit } from '@angular/core';
 import { Persona } from '../../../Modelo/Persona';
-import { Date } from '../../../Modelo/date';
-import { Router } from '@angular/router';
 import { UsuarioService } from '../../../Servicios/usuarioServ.service';
 import { NgForm } from '@angular/forms';
 import { RolService } from '../../../Servicios/rolServ.service';
-import { GenericoService } from '../../../Servicios/genericoServ.service';
 
 @Component({
   selector: 'app-registro-usuario',
@@ -31,6 +28,11 @@ export class RegistroUsuarioComponent implements OnInit {
   show: number;
   msj: string;
 
+  latSelected = 4.540130;
+  longSelected = -75.665193;
+  locationSelec = false;
+  zoom = 6;
+
   constructor( private rolServicio: RolService,
     private personaServicio: PersonaService, private servicios: UsuarioService) { }
 
@@ -49,23 +51,47 @@ export class RegistroUsuarioComponent implements OnInit {
    * Registra un cliente con su usuario
    */
   registrar(form: NgForm) {
-    // Asignamos el rol a la persona
-    this.persona.rol = this.rol;
-    // Asignamos la persona al usuario
-    this.usuario.persona = this.persona;
-    this.personaServicio.registrar(this.usuario).subscribe(rta => {
-      if (rta.data === 'exito') {
-        this.msj = 'Se ha registrado correctamente';
-        this.show = 2;
-        window.alert(this.msj);
-        // limpiamos los campos
-        form.reset();
-      } else {
-        this.msj = rta.data;
-        this.show = 1;
-        window.alert(rta.data);
-      }
-    });
+
+    if (this.locationSelec) {
+      // Asignamos el rol a la persona
+      this.persona.rol = this.rol;
+      this.persona.latitud = this.latSelected;
+      this.persona.longitud = this.longSelected;
+      console.log('localizacion -- ' + this.persona);
+      // Asignamos la persona al usuario
+      this.usuario.persona = this.persona;
+      this.personaServicio.registrar(this.usuario).subscribe(rta => {
+        if (rta.data === 'exito') {
+          this.msj = 'Se ha registrado correctamente';
+          this.show = 2;
+          window.alert(this.msj);
+          // limpiamos los campos
+          this.limpiarMapa();
+          form.reset();
+        } else {
+          this.msj = rta.data;
+          this.show = 1;
+          window.alert(rta.data);
+        }
+      });
+  } else {
+    this.msj = 'Debe seleccionar una localizacio en el mapa';
+    this.show = 1;
+    window.alert('Debe seleccionar una localizacio en el mapa');
+  }
+  }
+
+  limpiarMapa() {
+    this.latSelected = 4.540130;
+    this.longSelected = -75.665193;
+    this.zoom = 6;
+    this.locationSelec = false;
+  }
+
+  onChoseLocation(event) {
+    this.latSelected = event.coords.lat;
+    this.longSelected = event.coords.lng;
+    this.locationSelec = true;
   }
 
 }

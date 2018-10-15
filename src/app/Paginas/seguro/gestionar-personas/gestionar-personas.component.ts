@@ -31,7 +31,7 @@ export class GestionarPersonasComponent implements OnInit {
   show: number;
   msj: string;
 
-  constructor(private rolServicio: RolService, private personaServicio: PersonaService, private usuarioServicio: UsuarioService, private genericoServicio:GenericoService) { }
+  constructor(private rolServicio: RolService, private personaServicio: PersonaService, private usuarioServicio: UsuarioService, private genericoServicio: GenericoService) { }
 
   ngOnInit() {
     // Validamos si el usuario tiene acceso a la pagina
@@ -73,25 +73,25 @@ export class GestionarPersonasComponent implements OnInit {
    * Registra una persona con su usuario
    */
   editar(form: NgForm) {
-    if (this.usuario.persona != null && this.persona != null) {
+    if (this.usuario.persona.cedula != null && this.persona.cedula != null) {
       this.rol.id = this.persona.rol.id;
       this.persona.rol = this.rol;
-      this.usuario.persona = this.persona;
-    this.personaServicio.editar(this.usuario).subscribe(rta => {
-      if (rta.data === 'exito') {
-        this.msj = 'Se ha editado correctamente';
-        this.show = 2;
-        window.alert(this.msj);
-        // limpiamos los campos
-        form.reset();
-        // Actualizamos la lista de personas
-        this.listar();
-      } else {
-        this.msj = rta.data;
-        this.show = 1;
-        window.alert(rta.data);
-      }
-    });
+      this.usuario.persona.cedula = this.persona.cedula;
+      this.personaServicio.editar(this.usuario).subscribe(rta => {
+        if (rta.data === 'exito') {
+          this.msj = 'Se ha editado correctamente';
+          this.show = 2;
+          window.alert(this.msj);
+          // limpiamos los campos
+          form.reset();
+          // Actualizamos la lista de personas
+          this.listar();
+        } else {
+          this.msj = rta.data;
+          this.show = 1;
+          window.alert(rta.data);
+        }
+      });
     } else {
       this.msj = 'Primero busque la persona que va a editar';
       this.show = 1;
@@ -157,7 +157,7 @@ export class GestionarPersonasComponent implements OnInit {
    * Eliminar persona con su usuario de la base de datos
    */
   eliminar(p: Persona) {
-    this.genericoServicio.eliminar("personas", {"id": p.id}).subscribe(rta => {
+    this.genericoServicio.eliminar("personas", { "id": p.id }).subscribe(rta => {
       if (rta.data === 'exito') {
         this.msj = 'Se ha eliminado la persona correctamente';
         this.show = 2;

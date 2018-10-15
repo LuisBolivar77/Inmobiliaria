@@ -101,6 +101,12 @@ exports.editar = function(req, res){
                   objeto[key] = elObjeto[key];
             }
       }
+
+      console.log('LOG1: ' + data);
+      console.log('LOG2: ' + tabla);
+      console.log('LOG3: ' + pk);
+      console.log('LOG4: ' + elObjeto);
+      console.log('LOG5: ' + objeto);
       // La consulta a ejecutar
       var sql = "UPDATE "+tabla+" set ? WHERE "+pk+" = ?";
       // Imprimimos en consola la peticion y el origen
@@ -195,13 +201,13 @@ function obtenerId(objeto){
             // Validamos si es un objeto
             if(typeof objeto[key] === "object"){
                   for (var key2 in objeto[key]) {
-                        if(key2 == "id" || key2 == "persona" || key2 == "inmueble"){
+                        if(key2 == "id" || key2 == "persona" || key2 == "inmueble" || key2 == "cliente" || key2 == "empleado"){
                               id = objeto[key][key2];
                         }
                   }
             }else{
                   // Validamos si el atributo es un objeto
-                  if(key == "id" || key == "persona" || key == "inmueble"){
+                  if(key == "id" || key == "persona" || key == "inmueble" || key2 == "cliente" || key2 == "empleado"){
                         id = objeto[key];
                   }
             }

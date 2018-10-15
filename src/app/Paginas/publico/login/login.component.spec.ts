@@ -36,16 +36,17 @@ describe('Login', () => {
     component.usuario.username = 'adminu';
     component.usuario.password = '1234';
 
-    let respuestaLogin = component.login(null);
+    const respuestaLogin = component.login(null);
 
-    //console.log(component.usuario.username + component.usuario.password );
+    // console.log(component.usuario.username + component.usuario.password );
+    // tslint:disable-next-line:no-unused-expression
     expect(respuestaLogin).toBeFalsy;
 
   });
 
-  
   it('Acceso Login onInit', () => {
-    let res = component.ngOnInit();
+    const res = component.ngOnInit();
+    // tslint:disable-next-line:no-unused-expression
     expect(res).toBeNull;
 
   });
@@ -55,11 +56,11 @@ describe('Login', () => {
     component.usuario.username = 'admin';
     component.usuario.password = '123';
 
-    let respuestaLogin = component.login(null);
+    const respuestaLogin = component.login(null);
 
+    // tslint:disable-next-line:no-unused-expression
     expect(respuestaLogin).toBeNaN;
 
   });
-  
 });
 
