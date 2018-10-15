@@ -25,12 +25,8 @@ import { InmuebleClienteComponent } from './Paginas/seguro/inmueble-cliente/inmu
 import { AgmCoreModule } from '@agm/core';
 import { GestionVentasArriendosComponent } from './Paginas/seguro/gestion-ventas-arriendos/gestion-ventas-arriendos.component';
 import { GestionarPromocionesComponent } from './Paginas/seguro/gestionar-promociones/gestionar-promociones.component';
-<<<<<<< HEAD
 import { AsignarVentasContratosComponent } from './Paginas/seguro/asignar-ventas-contratos/asignar-ventas-contratos.component';
-=======
 import { VisitasClienteComponent } from './Paginas/seguro/visitas-cliente/visitas-cliente.component';
-import { AsignarVentasContratosComponent } from './paginas/seguro/asignar-ventas-contratos/asignar-ventas-contratos.component';
->>>>>>> 1888cb40a029a0747b650f00ec3d425fd502cd0d
 
 @NgModule({
   declarations: [
