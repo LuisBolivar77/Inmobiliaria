@@ -1,9 +1,9 @@
-import { Inmueble } from "./Inmueble";
-import { Usuario } from "./Usuario";
-import { Empleado } from "./Empleado";
-import { Persona } from "./Persona";
+import { Inmueble } from './Inmueble';
+import { Usuario } from './Usuario';
+import { Empleado } from './Empleado';
+import { Persona } from './Persona';
 
-export class ReservarVisita{
+export class ReservarVisita {
 
     id: number;
     mensaje: String;
@@ -14,9 +14,8 @@ export class ReservarVisita{
      */
     estado: String;
 
-    inmueble:Inmueble;
-    cliente:Persona;
-    empleado:Persona;
-    comentario:String;// El comentario que hace el cliente despues de haber realizado su visita
-    
+    inmueble: Inmueble;
+    cliente: Persona;
+    empleado: Persona;
+    comentario: String; // El comentario que hace el cliente despues de haber realizado su visita
 }
