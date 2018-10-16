@@ -31,7 +31,10 @@ export class GestionarClientesComponent implements OnInit {
 
   verInmueble = false;
   selectedVer = false;
-  locationSelecER = false;
+  locationSelecE = false;
+  locationSelecR = false;
+  selectedReg = false;
+  selecterTodos = true;
 
   zoom = 6;
   zoomMapaLista = 10;
@@ -40,8 +43,11 @@ export class GestionarClientesComponent implements OnInit {
   latSeleccion = 4.540130;
   longSeleccion = -75.665193;
 
-  latSeleccionER = 4.540130;
-  longSeleccionER = -75.665193;
+  latSeleccionE = 4.540130;
+  longSeleccionE = -75.665193;
+
+  latSeleccionR = 4.540130;
+  longSeleccionR = -75.665193;
 
   constructor(private genericoServicio: GenericoService, private personaServicio: PersonaService,
     private usuarioServicio: UsuarioService) { }
@@ -68,10 +74,29 @@ export class GestionarClientesComponent implements OnInit {
     this.verInmueble = false;
   }
 
+  mostrarTodosInmueblesEnMapR() {
+    this.selectedReg = false;
+    this.verInmueble = false;
+    this.persona.nombre = null;
+    this.persona.apellido = null;
+    this.persona.cedula = null;
+    this.persona.direccion = null;
+    this.persona.fecha_nacimiento = null;
+    this.persona.telefono = null;
+    this.usuario.username = null;
+    this.usuario.password = null;
+    this.selecterTodos = true;
+  }
+
   onChoseLocation(event) {
-    console.log(event);
-    this.latSeleccion = event.coords.lat;
-    this.longSeleccion = event.coords.lng;
+    this.latSeleccionE = event.coords.lat;
+    this.longSeleccionE = event.coords.lng;
+  }
+
+  onChoseLocationR(event) {
+    this.locationSelecR = true;
+    this.latSeleccionR = event.coords.lat;
+    this.longSeleccionR = event.coords.lng;
   }
 
   /**
@@ -85,7 +110,7 @@ export class GestionarClientesComponent implements OnInit {
         this.show = 2;
         window.alert(this.msj);
         // limpiamos los campos
-        this.locationSelecER = false;
+        this.locationSelecE = false;
         this.selectedVer = false;
         form.reset();
         // Actualizamos la lista de clientes
@@ -112,7 +137,7 @@ export class GestionarClientesComponent implements OnInit {
           this.show = 2;
           window.alert(this.msj);
           // limpiamos los campos
-          this.locationSelecER = false;
+          this.locationSelecE = false;
           this.selectedVer = false;
           form.reset();
           // Actualizamos la lista de clientes
@@ -130,6 +155,13 @@ export class GestionarClientesComponent implements OnInit {
       this.show = 1;
       window.alert(this.msj);
       return false;
+    }
+  }
+
+  onChangeInputCed() {
+    if (!this.selectedVer) {
+      this.selecterTodos = false;
+      this.selectedReg = true;
     }
   }
 
@@ -160,11 +192,12 @@ export class GestionarClientesComponent implements OnInit {
    * Ver la inormacion de un empleado de la tabla
    */
   ver(p: Persona) {
-    this.locationSelecER = true;
-    this.verInmueble = true;
+    this.locationSelecE = true;
+    this.selecterTodos = false;
     this.selectedVer = true;
-    this.latSeleccionER = p.latitud;
-    this.longSeleccionER = p.longitud;
+    this.verInmueble = false;
+    this.latSeleccionE = p.latitud;
+    this.longSeleccionE = p.longitud;
     this.persona.cedula = p.cedula;
     this.buscar();
   }
@@ -206,9 +239,17 @@ export class GestionarClientesComponent implements OnInit {
     });
   }
 
-  limpiarCampos(form: NgForm) {
+  limpiarCampos() {
     this.verInmueble = false;
     this.selectedVer = false;
-    form.reset();
+    this.persona.nombre = null;
+    this.persona.apellido = null;
+    this.persona.cedula = null;
+    this.persona.direccion = null;
+    this.persona.fecha_nacimiento = null;
+    this.persona.telefono = null;
+    this.usuario.username = null;
+    this.usuario.password = null;
+    this.selecterTodos = true;
   }
 }
