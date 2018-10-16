@@ -43,7 +43,6 @@ export class AsignarVentasContratosComponent implements OnInit {
     this.generico.listar('contrato', {'estado': 1}).subscribe(res => {
       this.contratos = res.data;
       this.agregarObjetos();
-      this.listadoFinal();
     });
   }
 
@@ -63,11 +62,11 @@ export class AsignarVentasContratosComponent implements OnInit {
               c.empleado.usuario = res2.data;
               this.generico.buscar('personas', {'id': c.empleado.usuario.persona}).subscribe(res4 => {
                 c.empleado.usuario.persona = res4.data;
-                this.generico.buscar('reservar_visita', {'id':c.visita}).subscribe(res6 =>{
+                this.generico.buscar('reservar_visita', {'id': c.visita}).subscribe(res6 => {
                   c.visita = res6.data;
-                  this.generico.buscar('inmueble', {'id':c.visita.inmueble}).subscribe(res7 =>{
+                  this.generico.buscar('inmueble', {'id': c.visita.inmueble}).subscribe(res7 => {
                     c.visita.inmueble = res7.data;
-                    
+                    this.listadoFinal();
                   });
                 });
               });
@@ -80,6 +79,7 @@ export class AsignarVentasContratosComponent implements OnInit {
 
   listadoFinal() {
     for (const c of this.contratos) {
+      console.log(c.descripcion);
       if (c.visita.inmueble.tipoAV === 1) {
         this.constratosFinales.push(c);
       }

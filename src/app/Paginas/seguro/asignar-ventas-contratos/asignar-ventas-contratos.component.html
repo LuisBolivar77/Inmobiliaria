@@ -12,7 +12,7 @@
           </div>
           <div class="col-lg-8">
             <br>
-            <div class="section_subtitle"> Lista de Contratos a finalizar ({{contratosFinales.length}})</div><br>
+            <div class="section_subtitle"> Lista de Contratos a finalizar ({{constratosFinales.length}})</div><br>
             <table class="table">
               <thead>
                 <tr>
@@ -23,7 +23,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let i of contratosFinales">
+                <tr *ngFor="let i of constratosFinales">
                   <td>{{i.id}}</td>
                   <td>{{i.cliente.persona.cedula}}</td>
                   <td>{{i.empleado.usuario.persona.cedula}}</td>
