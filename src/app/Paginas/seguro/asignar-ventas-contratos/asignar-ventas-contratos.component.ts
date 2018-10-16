@@ -13,6 +13,7 @@ import { Contrato } from 'src/app/Modelo/Contrato';
 export class AsignarVentasContratosComponent implements OnInit {
 
   contratos: Array<Contrato> = [];
+  constratosFinales: Array<Contrato> = [];
   venta: Array<Venta> = [];
   contrato: Contrato = new Contrato();
 
@@ -42,6 +43,7 @@ export class AsignarVentasContratosComponent implements OnInit {
     this.generico.listar('contrato', {'estado': 1}).subscribe(res => {
       this.contratos = res.data;
       this.agregarObjetos();
+      this.listadoFinal();
     });
   }
 
@@ -61,11 +63,26 @@ export class AsignarVentasContratosComponent implements OnInit {
               c.empleado.usuario = res2.data;
               this.generico.buscar('personas', {'id': c.empleado.usuario.persona}).subscribe(res4 => {
                 c.empleado.usuario.persona = res4.data;
+                this.generico.buscar('reservar_visita', {'id':c.visita}).subscribe(res6 =>{
+                  c.visita = res6.data;
+                  this.generico.buscar('inmueble', {'id':c.visita.inmueble}).subscribe(res7 =>{
+                    c.visita.inmueble = res7.data;
+                    
+                  });
+                });
               });
             });
           });
         });
       });
+    }
+  }
+
+  listadoFinal() {
+    for (const c of this.contratos) {
+      if (c.visita.inmueble.tipoAV === 1) {
+        this.constratosFinales.push(c);
+      }
     }
   }
 

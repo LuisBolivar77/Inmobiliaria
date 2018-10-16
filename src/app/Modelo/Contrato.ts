@@ -1,5 +1,6 @@
 import { Empleado } from './Empleado';
 import { Usuario } from './Usuario';
+import { ReservarVisita } from './ReservarVisita';
 
 export class Contrato {
 
@@ -7,7 +8,7 @@ export class Contrato {
     descripcion: string;
     empleado: Empleado;
     cliente: Usuario;
-    visita: string;
+    visita: ReservarVisita;
     /**
      * 0=pendiente
      * 1=finalizado
