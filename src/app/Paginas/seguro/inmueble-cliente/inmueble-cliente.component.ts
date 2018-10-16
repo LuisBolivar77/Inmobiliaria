@@ -1,5 +1,5 @@
+import { Inmueble } from './../../../Modelo/Inmueble';
 import { Component, OnInit } from '@angular/core';
-import { Inmueble } from 'src/app/Modelo/Inmueble';
 import { Ciudad } from 'src/app/Modelo/Ciudad';
 import { TipoInmueble } from 'src/app/Modelo/TipoInmueble';
 import { Zona } from 'src/app/Modelo/Zona';
@@ -23,6 +23,16 @@ export class InmuebleClienteComponent implements OnInit {
   file: File[] = null;
   img;
   labelFile: string;
+
+  latSeleccion = 4.540130;
+  longSeleccion = -75.665193;
+  locationSelec = false;
+  selectedEditar = false;
+  verInmueble = false;
+  zoom = 6;
+  zoomMapaLista = 10;
+  latSelectedLista = 0;
+  longSelectedLista = 0;
 
   inmueble: Inmueble = new Inmueble();
   ciudadSeleccionada: Ciudad = new Ciudad();
@@ -56,6 +66,7 @@ export class InmuebleClienteComponent implements OnInit {
   tiposInmueble: Array<TipoInmueble> = [];
   zonas: Array<Zona> = [];
   ventaArriendo: Array<VentaArriendo> = [];
+  inmuebles: Array<Inmueble> = [];
   inmueblesAprobados: Array<InmuebleTemporal> = [];
   inmueblesNoAprobados: Array<InmuebleTemporal> = [];
   departamentos: Array<Departamento> = [];
@@ -71,6 +82,7 @@ export class InmuebleClienteComponent implements OnInit {
   ngOnInit(): void {
     this.usuarioServicio.esAccesible('cliente/gestion-inmuebles');
     this.usuarioSesion = this.usuarioServicio.getUsuario();
+    this.listar();
     this.listarInmueblesAprobados();
     this.listarInmueblesNoAprobados();
     this.listarDepartamentos();
@@ -94,6 +106,10 @@ export class InmuebleClienteComponent implements OnInit {
         this.show = 2;
         this.listarInmueblesAprobados();
         this.listarInmueblesNoAprobados();
+        this.listar();
+        this.latSeleccion = 4.648908;
+        this.longSeleccion = -74.100449;
+        this.locationSelec = false;
         form.reset();
       } else {
         this.msj = res.data;
@@ -112,6 +128,7 @@ export class InmuebleClienteComponent implements OnInit {
         this.msj = 'No existe el inmueble con ese numero de matricula: ' + this.numMatriculaBuscar;
       } else {
         this.busco = true;
+        this.locationSelec = true;
         this.inmuebleTemporal = rta.data;
         this.buscarCiudad(this.inmuebleTemporal);
         this.llenarInmuebleBusqueda(this.inmuebleTemporal);
@@ -134,6 +151,11 @@ export class InmuebleClienteComponent implements OnInit {
         this.msj = 'el inmueble se edito correctamente';
         this.inmueble = new Inmueble();
         form.reset();
+        this.latSeleccion = 4.648908;
+        this.longSeleccion = -74.100449;
+        this.locationSelec = false;
+        this.selectedEditar = false;
+        this.listar();
         this.listarInmueblesAprobados();
         this.listarInmueblesNoAprobados();
       } else {
@@ -149,9 +171,11 @@ export class InmuebleClienteComponent implements OnInit {
    * @param e el inmueble al cual se le quiere ver la info
    */
   verAprobados(e: InmuebleTemporal) {
+    this.selectedEditar = true;
     for ( const i of this.inmueblesAprobados) {
       if (e.id === i.id) {
         this.busco = true;
+        this.locationSelec = true;
         this.buscarCiudad(i);
         this.llenarInmuebleBusqueda(i);
         return;
@@ -165,9 +189,11 @@ export class InmuebleClienteComponent implements OnInit {
    * @param e el inmueble al cual se le quiere ver la info
    */
   verNoAprobados(e: InmuebleTemporal) {
+    this.selectedEditar = true;
     for ( const i of this.inmueblesNoAprobados) {
       if (e.id === i.id) {
         this.busco = true;
+        this.locationSelec = true;
         this.buscarCiudad(i);
         this.llenarInmuebleBusqueda(i);
         return;
@@ -213,6 +239,12 @@ export class InmuebleClienteComponent implements OnInit {
     });
   }
 
+  listar() {
+    this.generico.listar('inmueble', {'usuario': this.usuarioSesion.persona.id}).subscribe(res => {
+      this.inmuebles = res.data;
+    });
+  }
+
   /**
    * Lista los inmuebles de el ususario logeado y que ya estan
    * publicados
@@ -251,6 +283,28 @@ export class InmuebleClienteComponent implements OnInit {
       }
     }
     });
+  }
+
+  onChoseLocation(event) {
+    this.latSeleccion = event.coords.lat;
+    this.longSeleccion = event.coords.lng;
+
+    console.log('lat: ' + this.latSeleccion);
+    console.log('long: ' + this.longSeleccion);
+
+    this.locationSelec = true;
+  }
+
+  verUnInmuebleEnMap(e: InmuebleTemporal) {
+    this.verInmueble = true;
+    this.latSelectedLista = e.latitud;
+    this.longSelectedLista = e.longitud;
+
+  }
+
+
+  mostrarTodosInmueblesEnMap() {
+    this.verInmueble = false;
   }
 
   /**
@@ -308,6 +362,8 @@ export class InmuebleClienteComponent implements OnInit {
     this.inmueble.ciudad = this.ciudadSeleccionada;
     this.inmueble.tipo = this.tipoInmuebleSeleccionado;
     this.inmueble.usuario = this.usuarioSesion;
+    this.inmueble.latitud = this.latSeleccion;
+    this.inmueble.longitud = this.longSeleccion;
     this.inmueble.estado = 0;
     this.inmueble.ascensor = this.cambio(this.theCheckboxAsensor);
     this.inmueble.canchasDepor = this.cambio(this.theCheckboxCanchasDepor);
@@ -333,6 +389,8 @@ export class InmuebleClienteComponent implements OnInit {
    */
   llenarInmuebleEditar() {
     this.inmueble.usuario = this.usuarioSesion;
+    this.inmueble.latitud = this.latSeleccion;
+    this.inmueble.longitud = this.longSeleccion;
     this.inmueble.tipoAV = this.tipoAVSeleccionado.id;
     this.inmueble.zona = this.zonaSeleccionada.id;
     this.inmueble.ciudad = this.ciudadSeleccionada;
@@ -363,6 +421,8 @@ export class InmuebleClienteComponent implements OnInit {
    */
   llenarInmuebleBusqueda(inmuebleTemporal: InmuebleTemporal) {
 
+    this.latSeleccion = inmuebleTemporal.latitud;
+    this.longSeleccion = inmuebleTemporal.longitud;
     this.getTipoInmueble(inmuebleTemporal);
     this.zonaSeleccionada.id = inmuebleTemporal.zona;
     this.tipoAVSeleccionado.id = inmuebleTemporal.tipoAV;
@@ -439,6 +499,10 @@ export class InmuebleClienteComponent implements OnInit {
   limpiarCampos(form: NgForm) {
     this.busco = false;
     this.numMatriculaBuscar = '';
+    this.latSeleccion = 4.648908;
+    this.longSeleccion = -74.100449;
+    this.locationSelec = false;
+    this.selectedEditar = false;
     form.reset();
   }
 

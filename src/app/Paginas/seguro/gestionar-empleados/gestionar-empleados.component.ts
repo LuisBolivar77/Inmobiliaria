@@ -53,7 +53,7 @@ export class GestionarEmpleadosComponent implements OnInit {
 
   ngOnInit() {
     // Validamos si el usuario tiene acceso a la pagina
-   // this.usuarioServicio.esAccesible('administracion/gestionar-empleados');
+    this.usuarioServicio.esAccesible('administracion/gestionar-empleados');
     // Construimos el objeto Empleado, inicialmente vacio
     this.empleado.cargo = this.cargo;
     this.empleado.usuario = this.usuario;
@@ -78,7 +78,6 @@ export class GestionarEmpleadosComponent implements OnInit {
       this.genericoServicio.buscar('personas', {'cedula': this.empleado.usuario.persona.cedula}).subscribe(valida => {
         if (valida.data == null) {
           // Validamos si ya hay un usuario con el username
-          // tslint:disable-next-line:quotemark
           this.genericoServicio.buscar('usuarios', {'username': "'" + this.empleado.usuario.username + "'"}).subscribe(valida2 => {
             if (valida2.data == null) {
               // Guardamos la persona asociada al empleado

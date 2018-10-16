@@ -22,10 +22,10 @@ export class AprobacionInmueblesComponent implements OnInit {
   show: number;
   msj: string;
 
-  constructor(private servicioGenerico:GenericoService, private usuarioServicio:UsuarioService) { }
+  constructor(private servicioGenerico: GenericoService, private usuarioServicio: UsuarioService) { }
 
   ngOnInit() {
-    this.usuarioServicio.esAccesible("administracion/aprobar-inmueble");
+    this.usuarioServicio.esAccesible('administracion/aprobar-inmueble');
     this.usuarioSesion = this.usuarioServicio.getUsuario();
     this.listar();
   }
@@ -34,10 +34,10 @@ export class AprobacionInmueblesComponent implements OnInit {
    * Lista todos los inmuebles que necesiten ser aprobados
    */
   listar() {
-   this.servicioGenerico.listar("inmueble", {"estado":"0"}).subscribe(rta=>{
-     if(rta.data!=null){
-       
-       this.inmuebles=rta.data;
+   this.servicioGenerico.listar('inmueble', {'estado': '0'}).subscribe(rta => {
+     if (rta.data != null) {
+
+      this.inmuebles = rta.data;
       this.agregarObjetos(this.inmuebles);
      }
    });
@@ -77,7 +77,7 @@ export class AprobacionInmueblesComponent implements OnInit {
    * Metodo que permite aprobar un inmueble registrado por un cliente
    * @param inmueble el inmueble que se desea aprobar
    */
-  aprobarInmueble(inmueble:Inmueble){
+  aprobarInmueble(inmueble: Inmueble) {
     inmueble.estado = 1;
     inmueble.administrador = this.usuarioSesion;
     var aux: AuxiliarObjeto = new AuxiliarObjeto();

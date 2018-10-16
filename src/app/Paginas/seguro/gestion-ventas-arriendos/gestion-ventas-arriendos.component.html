@@ -25,8 +25,8 @@
               <tbody>
                 <tr *ngFor="let i of contratos">
                   <td>{{i.id}}</td>
-                  <td>{{i.cliente}}</td>
-                  <td>{{i.empleado}}</td>
+                  <td>{{i.cliente.persona.cedula}}</td>
+                  <td>{{i.empleado.usuario.persona.cedula}}</td>
                   <td><button class="btn"  (click)="ver(i)">finalizar Contrato</button></td>
                  
                 </tr>
@@ -54,8 +54,8 @@
                       <div class="section_subtitle"> Datos Cliente </div>
                       <div><input type="text" [(ngModel)]="contrato.id" name="id" class="contact_input" placeholder="Id" required="required"></div>
                       <div><input type="text" [(ngModel)]="contrato.descripcion" name="descripcion" class="contact_input" placeholder="descripcion" required="required"></div>
-                      <div><input type="text" [(ngModel)]="contrato.empleado" name="empleado" class="contact_input" placeholder="empleado" required="required"></div>
-                      <div><input type="text" [(ngModel)]="contrato.cliente" name="cliente" class="contact_input" placeholder="cliente" required="required"></div>
+                      <div><input *ngIf="verSelec" type="text" [(ngModel)]="contrato.empleado.usuario.persona.nombre" name="empleado" class="contact_input" placeholder="empleado" required="required"></div>
+                      <div><input *ngIf="verSelec" type="text" [(ngModel)]="contrato.cliente.persona.nombre" name="cliente" class="contact_input" placeholder="cliente" required="required"></div>
                       <div><input type="date" [(ngModel)]="contrato.fecha_solicitud" name="fecha_solicitud" class="contact_input" placeholder="Fecha Solicitud" required="required" max="2000-01-01"  ></div>
 
                       <div class="col-lg-6">

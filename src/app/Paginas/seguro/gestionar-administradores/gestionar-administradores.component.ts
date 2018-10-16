@@ -73,7 +73,10 @@ export class GestionarAdministradoresComponent implements OnInit {
    * Edita un administrador con su usuario
    */
   editar(form: NgForm) {
-    if (this.usuario.persona != null && this.persona.cedula != null) {
+    this.rol.id = this.persona.rol.id;
+    this.persona.rol = this.rol;
+    this.usuario.persona = this.persona;
+    if (this.usuario.persona.cedula != null && this.persona.cedula != null) {
       this.usuario.persona.cedula = this.persona.cedula;
       this.personaServicio.editar(this.usuario).subscribe(rta => {
         if (rta.data === 'exito') {

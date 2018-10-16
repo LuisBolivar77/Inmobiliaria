@@ -6,6 +6,7 @@ import { Contrato } from 'src/app/Modelo/Contrato';
 import { Empleado } from 'src/app/Modelo/Empleado';
 import { Persona } from 'src/app/Modelo/Persona';
 import { NgForm } from '@angular/forms';
+import { AuxiliarObjeto } from 'src/app/Modelo/AuxiliarObjeto';
 
 @Component ({
   selector: 'app-gestion-ventas-arriendos',
@@ -29,6 +30,7 @@ export class GestionVentasArriendosComponent implements OnInit {
   msj: string;
   idContrato: number;
   busco: boolean;
+  verSelec = false;
 
   constructor(private generico: GenericoService, private usuarioServicio: UsuarioService) { }
 
@@ -45,24 +47,29 @@ export class GestionVentasArriendosComponent implements OnInit {
   listar() {
     this.generico.listar('contrato', {'estado': 0}).subscribe(res => {
       this.contratos = res.data;
-       this.agregarObjetos(this.contratos);
+      this.agregarObjetos();
     });
   }
 
-  agregarObjetos(lista) {
-    for (const i of lista) {
-      // obtenemos el cliente
-      this.generico.buscar('personas', {'id': i.usuario}).subscribe(r1 => {
-        // Seteamos la persona
-        i.usuario = this.usuario; // creamos un objeto usuario y lo seteamos
-        i.usuario.persona = r1.data;
+  agregarObjetos() {
+    for (const c of this.contratos) {
+      const fields = c.fecha_solicitud.split('T');
+      const fechaSoli = fields[0];
+      c.fecha_solicitud = fechaSoli;
 
-        this.generico.buscar('contrato', {'id': i.contrato}).subscribe(rt3 => {
-          i.contrato = rt3.data;
-
-          /**this.generico.buscar('contrato', {'id': i.contrato}).subscribe(rt4 => {
-            i.contrato.fecha_solicitud =rt4.data;
-          }); */
+      this.generico.buscar('usuarios', {'persona': c.cliente}).subscribe(res1 => {
+        c.cliente = res1.data;
+        this.generico.buscar('personas', {'id': c.cliente.persona}).subscribe(res5 => {
+          c.cliente.persona = res5.data;
+          this.generico.buscar('empleados', {'usuario': c.empleado}).subscribe(res3 => {
+            c.empleado = res3.data;
+            this.generico.buscar('usuarios', {'persona': c.empleado.usuario}).subscribe(res2 => {
+              c.empleado.usuario = res2.data;
+              this.generico.buscar('personas', {'id': c.empleado.usuario.persona}).subscribe(res4 => {
+                c.empleado.usuario.persona = res4.data;
+              });
+            });
+          });
         });
       });
     }
@@ -87,12 +94,13 @@ export class GestionVentasArriendosComponent implements OnInit {
    * Ver la inormacion del contrato
    */
   ver(i: Contrato) {
+    this.verSelec = true;
     this.contrato = i;
   }
 
 
   registrar(form: NgForm) {
-   
+
     this.generico.registrar('contrato', this.contrato).subscribe(res => {
       if (res.data === 'exito') {
         this.msj = 'El contrato se ha registrado correctamente';
@@ -112,15 +120,23 @@ export class GestionVentasArriendosComponent implements OnInit {
    */
   editar(form: NgForm) {
 
-    this.contrato.estado=1;
     const fecha = this.fechaActual();
-    this.contrato.fecha_finalizacion= fecha;
+    this.contrato.fecha_finalizacion = fecha;
+    this.contrato.estado = 1;
+    // tslint:disable-next-line:prefer-const
+    var aux: AuxiliarObjeto = new AuxiliarObjeto();
+    aux.objeto = this.contrato;
+    aux.replaceValue('cliente', this.contrato.cliente.persona.id);
+    aux.replaceValue('empleado', this.contrato.empleado.usuario.persona.id);
+    console.log(aux.objeto);
 
-    this.generico.editar('contrato', this.contrato, 'id').subscribe(res => {
+    this.generico.editar('contrato', aux.objeto, 'id').subscribe(res => {
       if (res.data === 'exito') {
         this.msj = 'el contrato se edito correctamente';
         this.show = 2;
+        this.verSelec = false;
         form.reset();
+        this.listar();
       } else {
         this.show = 1;
         this.msj = res.data;
@@ -137,7 +153,4 @@ export class GestionVentasArriendosComponent implements OnInit {
     return dateFormat(now, 'yyyy/mm/dd');
 
   }
-
- 
-
 }

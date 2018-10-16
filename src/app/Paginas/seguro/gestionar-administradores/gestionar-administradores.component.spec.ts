@@ -57,8 +57,8 @@ describe('GestionarAdministradoresComponent', () => {
     rol.id = 1;
     componente.rol.id = 1;
     // datos de la persona
-    persona.cedula = '4194';
-    componente.persona.cedula = '4194';
+    persona.cedula = '453';
+    componente.persona.cedula = '453';
     persona.nombre = 'Rosa';
     persona.apellido = 'Cardona';
     persona.fecha_nacimiento = '1978-03-30';
@@ -91,15 +91,20 @@ describe('GestionarAdministradoresComponent', () => {
     let usuario = new Usuario();
     // Datos del rol
     rol.id = 1;
-    persona.id = 16;
-    componente.persona.id = 16;
+    persona.id = 19;
+    componente.persona.id = 19;
     // datos de la persona
+<<<<<<< HEAD
+    persona.cedula = '453'
+    componente.persona.cedula = '453';
+=======
     persona.cedula = '4194';
     componente.persona.cedula = '4194';
+>>>>>>> bbb2d7c4e7167107dfc8e3cee1af2fbf9e669d6b
     persona.nombre = 'Rosalba';
     persona.apellido = 'Cardona';
     persona.fecha_nacimiento = '1978-03-30';
-    persona.telefono = '3155819215';
+    persona.telefono = '315581915';
     persona.direccion = 'Torre Horizonte';
     persona.rol = rol;
     // datos del usuario
@@ -118,8 +123,8 @@ describe('GestionarAdministradoresComponent', () => {
     // persona asociada al usuario
     // tslint:disable-next-line:prefer-const
     let persona: Persona = new Persona();
-    persona.cedula = '4194';
-    componente.persona.cedula = '4194';
+    persona.cedula = '2500';
+    componente.persona.cedula = '2500';
     persona.rol.id = 1;
     componente.rol.id = 1;
     const buscarSiCedula = componente.buscar();
@@ -165,11 +170,19 @@ describe('GestionarAdministradoresComponent', () => {
   it('Eliminar un administrador', () => {
     // tslint:disable-next-line:prefer-const
     let persona: Persona = new Persona();
+<<<<<<< HEAD
+    persona.id = 7;
+    let eliminar = componente.eliminar(persona);
+    expect(eliminar).toBeFalsy;
+  });
+
+=======
     persona.id = 2;
     const eliminar = componente.eliminar(persona);
     // tslint:disable-next-line:no-unused-expression
     expect(eliminar).toBeFalsy;
   });
+>>>>>>> bbb2d7c4e7167107dfc8e3cee1af2fbf9e669d6b
 });
 
 
