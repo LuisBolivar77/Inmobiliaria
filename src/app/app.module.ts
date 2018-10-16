@@ -6,7 +6,7 @@ import { RegistroUsuarioComponent } from './Paginas/publico/registro-usuario/reg
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
+import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatFormField } from '@angular/material';
 import { LoginComponent } from './Paginas/publico/login/login.component';
 import { IndexComponent } from './Paginas/publico/index/index.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -27,6 +27,7 @@ import { GestionVentasArriendosComponent } from './Paginas/seguro/gestion-ventas
 import { GestionarPromocionesComponent } from './Paginas/seguro/gestionar-promociones/gestionar-promociones.component';
 import { AsignarVentasContratosComponent } from './Paginas/seguro/asignar-ventas-contratos/asignar-ventas-contratos.component';
 import { VisitasClienteComponent } from './Paginas/seguro/visitas-cliente/visitas-cliente.component';
+import { AsignarVisitasComponent } from './Paginas/seguro/asignar-visitas/asignar-visitas.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { VisitasClienteComponent } from './Paginas/seguro/visitas-cliente/visita
     GestionVentasArriendosComponent,
     GestionarPromocionesComponent,
     VisitasClienteComponent,
-    AsignarVentasContratosComponent
+    AsignarVentasContratosComponent,
+    AsignarVisitasComponent
   ],
   imports: [
     BrowserModule,
@@ -66,6 +68,10 @@ import { VisitasClienteComponent } from './Paginas/seguro/visitas-cliente/visita
       apiKey: 'AIzaSyB0WP4oGVaDXx-3HZDqzwNsbUi6yS6lEk8'
     }),
     RouterModule.forRoot([
+      {
+        path: 'administracion/asignar-visitas',
+        component: AsignarVisitasComponent
+      },     
       {
       path: 'cliente/visitas-cliente',
       component: VisitasClienteComponent
