@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Promocion } from 'src/app/Modelo/Promocion';
 import { GenericoService } from 'src/app/Servicios/genericoServ.service';
 import { NgForm } from '@angular/forms';
+import { UsuarioService } from 'src/app/Servicios/usuarioServ.service';
 
 
 @Component({
@@ -21,11 +22,11 @@ export class GestionarPromocionesComponent implements OnInit {
   show: number;
   msj: string;
 
-  constructor(private genericoServicio: GenericoService) { }
+  constructor(private genericoServicio: GenericoService, private usuarioServicio: UsuarioService) { }
 
   ngOnInit() {
+    this.usuarioServicio.esAccesible('administracion/gestionar-personas');
     this.listar();
-
   }
 
   registrar(form: NgForm) {

@@ -70,7 +70,6 @@ import { VisitasClienteComponent } from './Paginas/seguro/visitas-cliente/visita
       path: 'cliente/visitas-cliente',
       component: VisitasClienteComponent
       },
-     
       {
         path: 'administrador/gestionar-promociones',
         component: GestionarPromocionesComponent

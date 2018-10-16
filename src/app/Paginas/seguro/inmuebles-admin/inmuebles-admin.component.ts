@@ -180,6 +180,7 @@ export class InmueblesAdminComponent implements OnInit {
     this.latSeleccion = 4.648908;
     this.longSeleccion = -74.100449;
     this.locationSelec = false;
+    this.selectedEditar = false;
     form.reset();
   }
 

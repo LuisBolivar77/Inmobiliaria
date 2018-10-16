@@ -179,11 +179,9 @@ exports.eliminar = function(req, res){
       var sql = "DELETE FROM "+tabla+" WHERE "+pk+" = ?";
       // Imprimimos en consola la peticion y el origen
       indicaOrigin(req,sql);
-      console.log('sql: ' + sql);
       // Ejecutamos la consulta y retornamos
       req.getConnection(function(err,connection){
             var query = connection.query(sql,objeto[pk],function(err,rows){
-                  console.log(objeto[pk]);
                   if(err){
                         res.send({data:err.code});
                   }else{
@@ -218,7 +216,7 @@ function obtenerId(objeto){
 }
 
 /**
- * Nos indica el origen de la peticion del servicio
+ * Nos indica el origen de la peticion al servicio
  */
 function indicaOrigin(req,sql){
       console.log("Origen: "+req.headers.origin+" - Peticion: "+sql);
