@@ -64,7 +64,7 @@ exports.guardar = function(req, res){
       var sql = "INSERT INTO "+tabla+" set ? ";
       // Imprimimos en consola la peticion y el origen
       indicaOrigin(req,sql);
-      // Ejecutamos la consulta y retornamos
+      // Ejecutamos  la consulta y retornamos
       req.getConnection(function(err,connection){
             connection.query(sql,objeto,function(err,rows){
                 if(err){
@@ -101,12 +101,6 @@ exports.editar = function(req, res){
                   objeto[key] = elObjeto[key];
             }
       }
-
-      console.log('LOG1: ' + data);
-      console.log('LOG2: ' + tabla);
-      console.log('LOG3: ' + pk);
-      console.log('LOG4: ' + elObjeto);
-      console.log('LOG5: ' + objeto);
       // La consulta a ejecutar
       var sql = "UPDATE "+tabla+" set ? WHERE "+pk+" = ?";
       // Imprimimos en consola la peticion y el origen
