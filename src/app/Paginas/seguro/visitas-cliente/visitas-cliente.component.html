@@ -6,11 +6,12 @@
         <!-- Tabla de Visitas a inmuebles -->
         <div class="col-lg-8">
             <br>
-            <div class="section_subtitle"> Lista de Inmuebles aprovar ({{visitas.length}})</div><br>
+            <div class="section_subtitle"> Lista de Visitas: ({{visitas.length}})</div><br>
             <table class="table" style="margin-left: 200px">
                 <thead>
                   <tr>
                     <th scope="col">Fecha de visita</th>
+                    <th scope="col">Hora</th>
                     <th scope="col">Estado</th>
                     <th scope="col">Matricula</th>
                     <th scope="col">tipo</th>
@@ -21,6 +22,7 @@
                 <tbody>
                   <tr *ngFor="let v of visitas">
                     <th scope="row">{{v.fecha}}</th>
+                    <td >{{v.hora_visita}}</td>
                     <td >{{v.estado}}</td>
                     <td>{{v.inmueble.numero_matricula}}</td>
                     <td>{{v.inmueble.detalles}}</td>

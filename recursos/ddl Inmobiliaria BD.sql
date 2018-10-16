@@ -372,7 +372,8 @@ ALTER TABLE reservar_visita ADD CONSTRAINT visita_personas_fk FOREIGN KEY ( clie
 ALTER TABLE `reservar_visita`
 modify column `empleado` INT(11) DEFAULT NULL,
 modify column `estado` varchar(10),
-ADD COLUMN `comentario` VARCHAR(1000);
+ADD COLUMN `comentario` VARCHAR(1000),
+ADD COLUMN `hora_visita` INT(10);
 
 
 
