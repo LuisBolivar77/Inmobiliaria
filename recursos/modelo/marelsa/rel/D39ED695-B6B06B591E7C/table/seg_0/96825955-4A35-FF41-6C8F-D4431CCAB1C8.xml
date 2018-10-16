@@ -46,6 +46,27 @@
 <colAssociation fkAssociation="A354B1E9-C79B-D285-C1F9-A2A81A621AA5" referredColumn="040397FC-9801-FC64-FD85-0A7E17C74478"/>
 </associations>
 </Column>
+<Column name="fecha" id="1F8611CB-423E-9D20-BF1B-AF415817FD86">
+<createdBy>JULIAN CAMILO</createdBy>
+<createdTime>2018-10-10 00:28:40 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="descripcion" id="7815A92D-E230-E6BC-DFE4-CFAFCAF7C0DB">
+<createdBy>JULIAN CAMILO</createdBy>
+<createdTime>2018-10-10 00:36:24 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>400</dataTypeSize>
+<ownDataTypeParameters>400,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
 <ind_PK_UK id="3070720F-9800-9A50-F085-B5834A034B03" name="VENTA_PK">

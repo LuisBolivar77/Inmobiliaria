@@ -21,6 +21,12 @@ import { InmueblesAdminComponent } from './Paginas/seguro/inmuebles-admin/inmueb
 import { VerInmuebleComponent } from './Paginas/publico/ver-inmueble/ver-inmueble.component';
 import { AprobacionInmueblesComponent } from './Paginas/seguro/aprobacion-inmuebles/aprobacion-inmuebles.component';
 import { FileSelectDirective } from 'ng2-file-upload';
+import { InmuebleClienteComponent } from './Paginas/seguro/inmueble-cliente/inmueble-cliente.component';
+import { AgmCoreModule } from '@agm/core';
+import { GestionVentasArriendosComponent } from './Paginas/seguro/gestion-ventas-arriendos/gestion-ventas-arriendos.component';
+import { GestionarPromocionesComponent } from './Paginas/seguro/gestionar-promociones/gestionar-promociones.component';
+import { AsignarVentasContratosComponent } from './Paginas/seguro/asignar-ventas-contratos/asignar-ventas-contratos.component';
+import { VisitasClienteComponent } from './Paginas/seguro/visitas-cliente/visitas-cliente.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +44,12 @@ import { FileSelectDirective } from 'ng2-file-upload';
     InmueblesAdminComponent,
     VerInmuebleComponent,
     AprobacionInmueblesComponent,
-    FileSelectDirective
+    FileSelectDirective,
+    InmuebleClienteComponent,
+    GestionVentasArriendosComponent,
+    GestionarPromocionesComponent,
+    VisitasClienteComponent,
+    AsignarVentasContratosComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +62,22 @@ import { FileSelectDirective } from 'ng2-file-upload';
     MatListModule,
     HttpClientModule,
     FormsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyB0WP4oGVaDXx-3HZDqzwNsbUi6yS6lEk8'
+    }),
     RouterModule.forRoot([
+      {
+      path: 'cliente/visitas-cliente',
+      component: VisitasClienteComponent
+      },
+      {
+        path: 'administrador/gestionar-promociones',
+        component: GestionarPromocionesComponent
+      },
+      {
+        path: 'cliente/gestion-inmuebles',
+        component: InmuebleClienteComponent
+      },
       {
         path: 'administracion/aprobar-inmueble',
         component: AprobacionInmueblesComponent
@@ -91,6 +117,14 @@ import { FileSelectDirective } from 'ng2-file-upload';
       {
         path: 'registrousuario',
         component: RegistroUsuarioComponent
+      },
+      {
+        path: 'administracion/gestion-ventas-arriendos',
+        component: GestionVentasArriendosComponent
+      },
+      {
+        path: 'administracion/asignar-ventas-contratos',
+        component: AsignarVentasContratosComponent
       },
       {
         path: 'login', // http://localhost:4200/login

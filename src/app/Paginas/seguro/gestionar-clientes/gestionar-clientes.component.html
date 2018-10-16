@@ -25,7 +25,7 @@
         <div class="contact_form_container">
           <form #datosForm="ngForm" class="contact_form" id="contact_form">
             <div class="section_subtitle"> Datos Cliente </div>
-            <div><input type="text" [(ngModel)]="persona.cedula" name="cedula" class="contact_input" placeholder="Cedula" required="required"></div>
+            <div><input type="text" [(ngModel)]="persona.cedula" name="cedula" class="contact_input" placeholder="Cedula" required="required" (ngModelChange)="onChangeInputCed()"></div>
             <div><input type="text" [(ngModel)]="persona.nombre" name="nombre" class="contact_input" placeholder="Nombre" required="required"></div>
             <div><input type="text" [(ngModel)]="persona.apellido" name="apellido" class="contact_input" placeholder="Apellido" required="required"></div>
             <div><input type="date" [(ngModel)]="persona.fecha_nacimiento" name="fecha" class="contact_input" placeholder="Fecha de nacimiento" required="required" max="2000-01-01" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"></div>
@@ -34,8 +34,11 @@
             <div class="section_subtitle"> Datos usurio </div>
             <div><input type="tel"  [(ngModel)]="usuario.username" name="username" class="contact_input" placeholder="Nombre de usuario" required="required"></div>
             <div><input type="text" [(ngModel)]="usuario.password" name="password" class="contact_input" placeholder="Contraseña" required="required"></div>
-            <button (click)="registrar(datosForm)" style="width: 100%" class="contact_button button">Registrar Cliente</button>
-            <button (click)="editar(datosForm)" style="width: 100%" class="contact_button button">Editar Cliente</button>
+            <button *ngIf="!selectedVer" (click)="registrar(datosForm)" style="width: 100%" class="contact_button button">Registrar Cliente</button>
+            <button *ngIf="selectedVer" (click)="editar(datosForm)" style="width: 100%" class="contact_button button">Editar Cliente</button>
+            <button *ngIf="selectedVer" (click)="limpiarCampos(datosForm)" style="width: 100%" class="contact_button button">Limpiar Campos</button>
+            <button *ngIf="selectedReg" (click)="mostrarTodosInmueblesEnMapR()" style="width: 100%" class="contact_button button">Limpiar Campos</button>
+
           </form>
         </div>
       </div>
@@ -61,10 +64,40 @@
                   <td>{{p.apellido}}</td>
                   <td>{{p.telefono}}</td>
                   <td>{{p.direccion}}</td>
-                  <td><button class="btn" (click)="eliminar(p)">Eliminar</button><button style="margin-left: 10px" class="btn" (click)="ver(p)">ver</button></td>
+                  <td>
+                    <button *ngIf="!selectedVer" class="btn" (click)="verUnInmuebleEnMap(p)">localizar en mapa</button>
+                    <button style="margin-left: 10px" class="btn" (click)="ver(p)">ver</button>
+                    <button class="btn" (click)="eliminar(p)">Eliminar</button>
+                  </td>
                 </tr>
               </tbody>
             </table>
+            <br>
+            <div *ngIf="selecterTodos">
+              <h4>localizacion de las personas <button *ngIf="verInmueble" class="btn" (click)="mostrarTodosInmueblesEnMap()" style="margin-right: 10px; color: red">Mostrar todos los inmuebles en el mapa</button></h4>
+              <agm-map [zoom]="zoom" [latitude]="latSeleccion" [longitude]="longSeleccion" >
+                <ng-container *ngIf="!verInmueble">
+                  <agm-marker *ngFor="let p of personas" [latitude]="p.latitud" [longitude]="p.longitud" >
+                    <agm-info-window>
+                      <strong>Direccion: {{p.direccion}}</strong>
+                      <strong> ------- Nombre de la persona: {{p.nombre}}</strong>
+                    </agm-info-window>
+                  </agm-marker>
+                </ng-container>
+                <agm-marker *ngIf="verInmueble" [latitude]="latSelectedLista" [longitude]="longSelectedLista"></agm-marker>
+              </agm-map>
+            </div>
+            <div *ngIf="selectedVer">
+                <h4>Seleccione en el mapa la localizacion del inmueble</h4>
+                <agm-map [zoom]="zoom" [latitude]="latSeleccionE" [longitude]="longSeleccionE" (mapClick)="onChoseLocation($event)">
+                  <agm-marker [latitude]="latSeleccionE" [longitude]="longSeleccionE"></agm-marker>
+                </agm-map>
+            </div>
+            <div *ngIf="selectedReg">
+                <agm-map [zoom]="zoom" [latitude]="latSeleccionR" [longitude]="longSeleccionR" (mapClick)="onChoseLocationR($event)">
+                    <agm-marker *ngIf="locationSelecR" [latitude]="latSeleccionR" [longitude]="longSeleccionR"></agm-marker>
+                </agm-map>
+            </div>
       </div>
       </div>
       </div>

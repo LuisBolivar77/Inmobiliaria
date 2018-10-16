@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { GenericoService } from '../../../Servicios/genericoServ.service';
 import { Inmueble } from '../../../Modelo/Inmueble';
 import { UsuarioService } from '../../../Servicios/usuarioServ.service';
@@ -6,12 +6,20 @@ import { Archivo } from '../../../Modelo/Archivo';
 import { Ciudad } from '../../../Modelo/Ciudad';
 import { Departamento } from '../../../Modelo/Departamento';
 import { TipoInmueble } from '../../../Modelo/TipoInmueble';
+import { Usuario } from 'src/app/Modelo/Usuario';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { ReservarVisita } from 'src/app/Modelo/ReservarVisita';
+import { NgForm } from '@angular/forms';
+import { Persona } from 'src/app/Modelo/Persona';
+import { AuxiliarObjeto } from 'src/app/Modelo/AuxiliarObjeto';
 
 @Component({
   selector: 'app-ver-inmueble',
   templateUrl: './ver-inmueble.component.html',
   styleUrls: ['./ver-inmueble.component.css']
 })
+
+
 export class VerInmuebleComponent implements OnInit {
 
   // El inmueble que se mostrara
@@ -22,6 +30,16 @@ export class VerInmuebleComponent implements OnInit {
   fotos: Array<Archivo> = [];
   // Año actual
   anio = new Date().getFullYear();
+
+  usuarioSesion:Usuario = new Usuario();
+
+   // Variables para los mensajes en la pagina
+   show: number;
+   msj: string;
+
+   //La reserva de visita del inmueble
+   reservaVisita:ReservarVisita = new ReservarVisita();
+
 
   constructor(private genericoServicio: GenericoService, private usuarioServicio: UsuarioService) { }
 
@@ -41,7 +59,7 @@ export class VerInmuebleComponent implements OnInit {
       this.cargarInmueble();
       return true;
     }
-  }z
+  }
 
   /**
    * Busca el inmueble y carga la informacion
@@ -79,6 +97,65 @@ export class VerInmuebleComponent implements OnInit {
       }
     });
   }
+
+
+
+ 
+
+  /**
+   * Metodo que permite reservar una visita al inmueble seleccionado
+   */
+  reservarVisita(form: NgForm){
+    //Validamos si ha iniciado sesion para que se pueda hacer la reserva del inmueble
+    this.usuarioSesion = this.usuarioServicio.getUsuario();
+    if(this.usuarioSesion==null){
+      this.msj= "Se requiere inicio de sesion para reservar visita";
+      window.alert(this.msj);
+      this.show=1;
+      return;
+     }else{
+       if(this.reservaVisita.mensaje==null || this.reservaVisita.fecha==null){
+        this.msj= "Por favor llene los campos";
+        window.alert(this.msj);
+        this.show=1;
+        return;
+       }
+       //Asignamos el inmueble
+       this.reservaVisita.inmueble=this.inmueble;
+       //Asignamos el usuario a la persona tipo cliente
+      this.reservaVisita.cliente= this.usuarioSesion.persona;
+      //Seteamos los valores por defecto
+      //Valor por defecto del estado (Por atender = 'PENDIENTE')
+      this.reservaVisita.estado="PENDIENTE";
+       //el comentario despues de la visita (null ya que no se ha realizado la visita)
+       this.reservaVisita.comentario=null;
+
+       var aux: AuxiliarObjeto = new AuxiliarObjeto();
+       aux.objeto = this.reservaVisita;
+       aux.replaceValue("inmueble",this.reservaVisita.inmueble.id);
+       aux.replaceValue("cliente",this.reservaVisita.cliente.id);
+       aux.replaceValue("empleado",null);
+
+      this.genericoServicio.registrar("reservar_visita",aux.objeto).subscribe(res=>{
+        if(res.data=="exito"){
+          this.msj= "Se registrado su solicitud con exito";
+          this.show=2;
+          form.reset;
+          window.alert("Se ha registrado la peticion correctamente");
+          
+        }else{
+          this.msj= "Error en la solicitud :"+res.data;
+          this.show=1;
+        }
+      });
+     }
+  }
+
+  limpiarCampos():void{
+
+
+  }
+  
 
   /**
    * Obtiene la zona apartir del numero de zona asignado en el inmueble

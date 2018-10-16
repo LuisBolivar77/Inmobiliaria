@@ -151,6 +151,8 @@ exports.registrarPersona = function(req, res){
             fecha_nacimiento: data.persona.fecha_nacimiento,
             telefono: data.persona.telefono,
             direccion: data.persona.direccion,
+            latitud: data.persona.latitud,
+            longitud: data.persona.longitud,
             rol: data.persona.rol.id,
         };
         // Validamos si ya existe una persona con el numero de cedula o telefono

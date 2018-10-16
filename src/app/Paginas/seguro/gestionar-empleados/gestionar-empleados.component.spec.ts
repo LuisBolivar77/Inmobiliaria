@@ -39,11 +39,13 @@ describe('Gestionar un empeleado', () => {
   });
 
   it('crear un empleado', () => {
-    
+
+    // tslint:disable-next-line:prefer-const
     let rol: Rol = new Rol();
     rol.id = 3;
-    component.rol.id =3;
+    component.rol.id = 3;
 
+    // tslint:disable-next-line:prefer-const
     let persona: Persona = new Persona();
     persona.id = 11111;
     persona.cedula = '109129';
@@ -55,24 +57,28 @@ describe('Gestionar un empeleado', () => {
     persona.rol = rol;
     component.persona.cedula = '109129';
 
+    // tslint:disable-next-line:prefer-const
     let usuario: Usuario = new Usuario();
     usuario.password = 'valen';
     usuario.username = 'valen123';
     usuario.persona = persona;
     component.usuario = usuario;
 
+    // tslint:disable-next-line:prefer-const
     let cargo: Cargo = new Cargo();
-    cargo.id=2;
-    component.cargo.id=2;
-    
+    cargo.id = 2;
+    component.cargo.id = 2;
+
+    // tslint:disable-next-line:prefer-const
     let empleado: Empleado = new Empleado();
     empleado.usuario = usuario;
     empleado.salario = 12345;
-    empleado.cargo= cargo;
+    empleado.cargo = cargo;
     component.empleado = empleado;
 
-    let respuesta = component.registrar(null);
+    const respuesta = component.registrar(null);
 
+    // tslint:disable-next-line:no-unused-expression
     expect(respuesta).toBeTruthy;
 
   });
@@ -80,10 +86,12 @@ describe('Gestionar un empeleado', () => {
 
   it('buscar empleado GESTIONAR EMPLEADO', () => {
 
+    // tslint:disable-next-line:prefer-const
     let rol: Rol = new Rol();
     rol.id = 3;
-    component.rol.id =3;
+    component.rol.id = 3;
 
+    // tslint:disable-next-line:prefer-const
     let persona: Persona = new Persona();
     persona.id = 16;
     persona.cedula = '4194';
@@ -95,32 +103,38 @@ describe('Gestionar un empeleado', () => {
     persona.rol = rol;
     component.persona.cedula = '4194';
 
+    // tslint:disable-next-line:prefer-const
     let usuario: Usuario = new Usuario();
     usuario.username = 'Rosa';
-    usuario.password = '1234';    
+    usuario.password = '1234';
     usuario.persona = persona;
     component.usuario = usuario;
 
+    // tslint:disable-next-line:prefer-const
     let cargo: Cargo = new Cargo();
-    cargo.id=1;
-    component.cargo.id=1;
-    
+    cargo.id = 1;
+    component.cargo.id = 1;
+
+    // tslint:disable-next-line:prefer-const
     let empleado: Empleado = new Empleado();
     empleado.usuario = usuario;
     empleado.salario = 12345;
-    empleado.cargo= cargo;
+    empleado.cargo = cargo;
     component.empleado = empleado;
 
-    let respuesta = component.buscar();
+    const respuesta = component.buscar();
+    // tslint:disable-next-line:no-unused-expression
     expect(respuesta).toBeTruthy;
   });
 
   it('editar empleado', () => {
 
+    // tslint:disable-next-line:prefer-const
     let rol: Rol = new Rol();
     rol.id = 3;
-    component.rol.id =3;
+    component.rol.id = 3;
 
+    // tslint:disable-next-line:prefer-const
     let persona: Persona = new Persona();
     persona.id = 2;
     persona.cedula = '1090';
@@ -132,24 +146,28 @@ describe('Gestionar un empeleado', () => {
     persona.rol = rol;
     component.persona.cedula = '1090';
 
+    // tslint:disable-next-line:prefer-const
     let usuario: Usuario = new Usuario();
     usuario.password = 'valen';
     usuario.username = 'valen123';
     usuario.persona = persona;
     component.usuario = usuario;
 
+    // tslint:disable-next-line:prefer-const
     let cargo: Cargo = new Cargo();
-    cargo.id=2;
-    component.cargo.id=2;
-    
+    cargo.id = 2;
+    component.cargo.id = 2;
+
+    // tslint:disable-next-line:prefer-const
     let empleado: Empleado = new Empleado();
     empleado.usuario = usuario;
     empleado.salario = 12345;
-    empleado.cargo= cargo;
+    empleado.cargo = cargo;
     component.empleado = empleado;
 
-    let respuesta = component.editar(null);
+    const respuesta = component.editar(null);
 
+    // tslint:disable-next-line:no-unused-expression
     expect(respuesta).toBeTruthy;
 
   });
@@ -158,11 +176,12 @@ describe('Gestionar un empeleado', () => {
   it('Ver la inormacion de un empleado de la tabla', () => {
 
     console.log('verrrrrrrrrr');
-    
+    // tslint:disable-next-line:prefer-const
     let rol: Rol = new Rol();
     rol.id = 3;
-    component.rol.id =3;
+    component.rol.id = 3;
 
+    // tslint:disable-next-line:prefer-const
     let persona: Persona = new Persona();
     persona.id = 27;
     persona.cedula = '1096';
@@ -174,20 +193,25 @@ describe('Gestionar un empeleado', () => {
     persona.rol = rol;
     component.persona.cedula = '1090';
 
+    // tslint:disable-next-line:prefer-const
     let usuario: Usuario = new Usuario();
     usuario.password = 'valen';
     usuario.username = 'valen123';
     usuario.persona = persona;
     component.usuario = usuario;
 
+    // tslint:disable-next-line:prefer-const
     let cargo: Cargo = new Cargo();
-    cargo.id=3;
-    component.cargo.id=3;
+    cargo.id = 3;
+    component.cargo.id = 3;
 
+    // tslint:disable-next-line:prefer-const
     let empleado: Empleado = new Empleado();
-    empleado.usuario= usuario;
+    empleado.usuario = usuario;
     component.empleado.usuario.persona.nombre = 'Valentina';
-    let respuesta = component.ver(empleado);
+
+    const respuesta = component.ver(empleado);
+    // tslint:disable-next-line:no-unused-expression
     expect(respuesta).toBeTruthy;
   });
 
@@ -201,13 +225,15 @@ describe('Gestionar un empeleado', () => {
    */
 
   it('crear una informacion del empleado', () => {
-    
+
     console.log('formacionnnn');
-    
+
+    // tslint:disable-next-line:prefer-const
     let rol: Rol = new Rol();
     rol.id = 1;
-    component.rol.id =1;
+    component.rol.id = 1;
 
+    // tslint:disable-next-line:prefer-const
     let persona: Persona = new Persona();
     persona.id = 12;
     persona.cedula = '10901';
@@ -219,33 +245,37 @@ describe('Gestionar un empeleado', () => {
     persona.rol = rol;
     component.persona.cedula = '10901';
 
+    // tslint:disable-next-line:prefer-const
     let usuario: Usuario = new Usuario();
     usuario.password = 'camila';
     usuario.username = 'torres123';
     usuario.persona = persona;
     component.usuario = usuario;
 
+    // tslint:disable-next-line:prefer-const
     let cargo: Cargo = new Cargo();
-    cargo.id=3;
-    component.cargo.id=3;
-    
+    cargo.id = 3;
+    component.cargo.id = 3;
+
+    // tslint:disable-next-line:prefer-const
     let empleado: Empleado = new Empleado();
     empleado.usuario = usuario;
     empleado.salario = 1200000;
-    empleado.cargo= cargo;
+    empleado.cargo = cargo;
     component.empleado = empleado;
 
+    // tslint:disable-next-line:prefer-const
     let formacion: Formacion = new Formacion();
-   //formacion.id= ;
-    formacion.institucion='Uniquindio';
-    formacion.titulo='universitario';
-    formacion.file_certificacion='ninguno';
+   // formacion.id= ;
+    formacion.institucion = 'Uniquindio';
+    formacion.titulo = 'universitario';
+    formacion.file_certificacion = 'ninguno';
     formacion.empleado = empleado;
     component.formacion.institucion = 'Uniquindio';
 
-    let respuesta = component.registrarFormacion(null);
+    const respuesta = component.registrarFormacion(null);
 
+    // tslint:disable-next-line:no-unused-expression
     expect(respuesta).toBeTruthy;
-
   });
 });

@@ -72,6 +72,48 @@
 <colAssociation fkAssociation="536D16D6-D6F8-83E0-49A7-286C0ED974F8" referredColumn="36364656-A0B3-4C9A-527D-D2A4A5D68CB7"/>
 </associations>
 </Column>
+<Column name="estado" id="8FDA6109-CB82-2EE7-E002-E158F6045C05">
+<createdBy>JULIAN CAMILO</createdBy>
+<createdTime>2018-10-10 00:23:17 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="fecha_finalizacion" id="9F481B11-9F4A-93FD-62D4-20C982C782CF">
+<createdBy>JULIAN CAMILO</createdBy>
+<createdTime>2018-10-10 00:26:30 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="fecha_solicitud" id="56FBD201-7DFB-ED18-37A4-86AF57EC8A9E">
+<createdBy>JULIAN CAMILO</createdBy>
+<createdTime>2018-10-10 00:26:30 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="file_certificacion" id="0C3772D4-AE63-BC66-DE6B-A1CC70C96592">
+<createdBy>JULIAN CAMILO</createdBy>
+<createdTime>2018-10-10 00:37:15 UTC</createdTime>
+<ownerDesignName>marelsa</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>300</dataTypeSize>
+<ownDataTypeParameters>300,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
 <ind_PK_UK id="1B305DCB-6154-FC46-8D23-156ADECA3828" name="CONTRATO_PK">

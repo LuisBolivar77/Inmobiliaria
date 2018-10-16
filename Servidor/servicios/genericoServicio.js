@@ -59,7 +59,7 @@ exports.guardar = function(req, res){
             }else{
                   objeto[key] = elObjeto[key];
             }
-      };
+      }
       // La consulta a ejecutar
       var sql = "INSERT INTO "+tabla+" set ? ";
       // Imprimimos en consola la peticion y el origen
@@ -101,6 +101,12 @@ exports.editar = function(req, res){
                   objeto[key] = elObjeto[key];
             }
       }
+
+      console.log('LOG1: ' + data);
+      console.log('LOG2: ' + tabla);
+      console.log('LOG3: ' + pk);
+      console.log('LOG4: ' + elObjeto);
+      console.log('LOG5: ' + objeto);
       // La consulta a ejecutar
       var sql = "UPDATE "+tabla+" set ? WHERE "+pk+" = ?";
       // Imprimimos en consola la peticion y el origen
@@ -173,11 +179,9 @@ exports.eliminar = function(req, res){
       var sql = "DELETE FROM "+tabla+" WHERE "+pk+" = ?";
       // Imprimimos en consola la peticion y el origen
       indicaOrigin(req,sql);
-      console.log('sql: ' + sql);
       // Ejecutamos la consulta y retornamos
       req.getConnection(function(err,connection){
             var query = connection.query(sql,objeto[pk],function(err,rows){
-                  console.log(objeto[pk]);
                   if(err){
                         res.send({data:err.code});
                   }else{
@@ -197,13 +201,13 @@ function obtenerId(objeto){
             // Validamos si es un objeto
             if(typeof objeto[key] === "object"){
                   for (var key2 in objeto[key]) {
-                        if(key2 == "id" || key2 == "persona" || key2 == "inmueble"){
+                        if(key2 == "id" || key2 == "persona" || key2 == "inmueble" || key2 == "cliente" || key2 == "empleado"){
                               id = objeto[key][key2];
                         }
                   }
             }else{
                   // Validamos si el atributo es un objeto
-                  if(key == "id" || key == "persona" || key == "inmueble"){
+                  if(key == "id" || key == "persona" || key == "inmueble" || key2 == "cliente" || key2 == "empleado"){
                         id = objeto[key];
                   }
             }
@@ -212,7 +216,7 @@ function obtenerId(objeto){
 }
 
 /**
- * Nos indica el origen de la peticion del servicio
+ * Nos indica el origen de la peticion al servicio
  */
 function indicaOrigin(req,sql){
       console.log("Origen: "+req.headers.origin+" - Peticion: "+sql);
