@@ -101,29 +101,28 @@ export class InmueblesAdminComponent implements OnInit {
 
   }
 
+  /**
+   * Metodo que permite despues de buscar al usuario propietario
+   * registrar un inmueble
+   * @param form el formulario de los datos en el html
+   */
   registrar(form: NgForm) {
+    this.llenarInmueble();
 
-      if (this.latSeleccion != null || this.longSeleccion != null) {
-        this.llenarInmueble();
-
-        this.generico.registrar('inmueble', this.inmueble).subscribe(res => {
-          if (res.data === 'exito') {
-            this.msj = 'El inmueble se ha registrado correctamente';
-            this.show = 2;
-            this.listar();
-            this.latSeleccion = 4.648908;
-            this.longSeleccion = -74.100449;
-            this.locationSelec = false;
-            form.reset();
-          } else {
-            this.msj = res.data;
-            this.show = 1;
-          }
-        });
+    this.generico.registrar('inmueble', this.inmueble).subscribe(res => {
+      if (res.data === 'exito') {
+        this.msj = 'El inmueble se ha registrado correctamente';
+        this.show = 2;
+        this.listar();
+        this.latSeleccion = 4.648908;
+        this.longSeleccion = -74.100449;
+        this.locationSelec = false;
+        form.reset();
       } else {
+        this.msj = res.data;
         this.show = 1;
-        this.msj = 'error, debe seleccionar la localisacion del inmueble en el mapa';
       }
+    });
   }
 
   /**
@@ -150,10 +149,13 @@ export class InmueblesAdminComponent implements OnInit {
   buscarUsuario(form: NgForm) {
     if (this.cedula != null) {
       this.generico.buscar('personas', {'cedula': this.cedula}).subscribe(rta => {
+        console.log(rta.data);
         if (rta.data == null) {
+          console.log('entro null');
           this.show = 1;
           this.msj = rta.data;
         } else {
+          console.log('entro no null');
           // Guardamos el resultado en persona
           this.persona = rta.data;
           this.generico.buscar('usuarios', {'persona': this.persona.id}).subscribe(res => {

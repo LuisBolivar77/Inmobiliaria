@@ -288,6 +288,10 @@ export class InmuebleClienteComponent implements OnInit {
   onChoseLocation(event) {
     this.latSeleccion = event.coords.lat;
     this.longSeleccion = event.coords.lng;
+
+    console.log('lat: ' + this.latSeleccion);
+    console.log('long: ' + this.longSeleccion);
+
     this.locationSelec = true;
   }
 
@@ -358,6 +362,8 @@ export class InmuebleClienteComponent implements OnInit {
     this.inmueble.ciudad = this.ciudadSeleccionada;
     this.inmueble.tipo = this.tipoInmuebleSeleccionado;
     this.inmueble.usuario = this.usuarioSesion;
+    this.inmueble.latitud = this.latSeleccion;
+    this.inmueble.longitud = this.longSeleccion;
     this.inmueble.estado = 0;
     this.inmueble.ascensor = this.cambio(this.theCheckboxAsensor);
     this.inmueble.canchasDepor = this.cambio(this.theCheckboxCanchasDepor);
