@@ -96,6 +96,9 @@ export class GestionVentasArriendosComponent implements OnInit {
   ver(i: Contrato) {
     this.verSelec = true;
     this.contrato = i;
+    for (const c of this.contratos) {
+      console.log(c);
+    }
   }
 
 
