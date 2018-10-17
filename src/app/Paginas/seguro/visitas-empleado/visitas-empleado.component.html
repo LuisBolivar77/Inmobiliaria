@@ -7,7 +7,7 @@
         <div class="col-lg-8">
             <br>
             <div class="section_subtitle"> Lista de Visitas: ({{visitas.length}})</div><br>
-            <table class="table" style="margin-left: 100px">
+            <table class="table" style="margin-left: 200px">
                 <thead>
                   <tr>
                     <th scope="col">Fecha de visita</th>
@@ -15,9 +15,8 @@
                     <th scope="col">Estado</th>
                     <th scope="col">Matricula</th>
                     <th scope="col">tipo</th>
-                    <th scope="col">Empleado Asignado</th>
+                    <th scope="col">Cliente Asignado</th>
                     <th scope="col">Accion</th>
-                    <th scope="col">Comprar/Arrendar</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -27,15 +26,10 @@
                     <td >{{v.estado}}</td>
                     <td>{{v.inmueble.numero_matricula}}</td>
                     <td>{{v.inmueble.detalles}}</td>
-                    <td>{{v.empleado.nombre}}</td>
-                    <td>
-                      <button style="background-color: rgb(9, 85, 146)" class="btn" (click)="verVisita(v)">Ver visita</button>
-                      <button style="margin-left: 100px;margin-top: -55px;background-color: red" class="btn" (click)="quitarVisita(v)">Cancelar Reserva</button>
-                   </td>
-                   <td>
-                      <button *ngIf="v.inmueble.tipoAV===0" style="background-color: rgb(206, 159, 57)" class="btn" (click)="arredar()">Arrendar</button>
-                      <button *ngIf="v.inmueble.tipoAV===1" style="margin-left: 100px;margin-top: -55px;background-color: rgb(22, 155, 104)" class="btn" (click)="comprar()">Comprar</button>
-                   </td>
+                    <td>{{v.cliente.nombre}}</td>
+                    <td style="width: 1000px">
+                      <button style="background-color: lightseagreen" class="btn" (click)="verVisita(v)">Ver visita</button>
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -51,14 +45,14 @@
           <div class="sidebar_search_form_container">
             <form #datosForm="ngForm" class="contact_form" id="contact_form">
               
-              <div><textarea style="background-color: white;height:200px;" type="text" [(ngModel)]="visitaSeleccionada.comentario" name="comentario" id="comentario" disabled="true" class="contact_input" placeholder="Comentario de la visita" required="required"></textarea></div>
+              <div><textarea  style="background-color: white;height:200px;" type="text" [(ngModel)]="visitaSeleccionada.comentario" name="comentario" class="contact_input" placeholder="Ingrese el comentario de la visita" required="required"></textarea></div>
               <div><input type="text" style="background-color:lightslategray; width:300px;margin-left: 350px" [(ngModel)]="matriculaInmueble" name="matricula" class="contact_input" placeholder="Matricula de inmueble"></div>	
               <div style="margin-top: -65px"><input type="text" style="background-color:lightslategray; width:300px;margin-left: 700px" [(ngModel)]="detalleInmueble" name="detalles" class="contact_input" placeholder="Detalles de inmueble"></div>	
               <div style="margin-top: -65px"><input type="date" style="background-color:white; width:300px" [(ngModel)]="visitaSeleccionada.fecha" name="fecha" class="contact_input" placeholder="Fecha Visita"></div>	
               
-              <button class="sidebar_search_button search_form_button" style="width:200px;margin-top: 20px;margin-left:450px!important"
-               (click)="editarVisita(datosForm)">Editar Fecha</button>
-
+              <button class="sidebar_search_button search_form_button" style="width:400px;margin-top:30px!important"
+               (click)="comentarVisita(datosForm)">Comentar Visita</button>
+              
             </form>
           </div>
         </div>

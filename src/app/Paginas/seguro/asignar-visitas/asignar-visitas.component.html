@@ -7,11 +7,12 @@
         <div class="col-lg-8">
             <br>
             <div class="section_subtitle" style="margin-left: -130px"> Lista de visitas a asignar: ({{visitas.length}})</div><br>
-            <div style="overflow: auto; border: 1px solid #ccc; height: 300px;margin-left: -130px;width: 700px">
+            <div style="overflow: auto; border: 1px solid #ccc; height: 300px;margin-left: -130px;width: 720px">
             <table class="table" style="width: 50%">
                 <thead>
                   <tr>
                     <th scope="col">Fecha de visita</th>
+                    <th scope="col">Hora</th>
                     <th scope="col">Estado</th>
                     <th scope="col">Matricula</th>
                     <th scope="col">tipo</th>
@@ -23,6 +24,7 @@
                 <tbody>
                   <tr *ngFor="let v of visitas">
                     <th scope="row">{{v.fecha}}</th>
+                    <td >{{v.hora_visita}}</td>
                     <td >{{v.estado}}</td>
                     <td>{{v.inmueble.numero_matricula}}</td>
                     <td>{{v.inmueble.detalles}}</td>
