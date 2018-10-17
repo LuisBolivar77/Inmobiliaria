@@ -27,12 +27,8 @@ import { GestionVentasArriendosComponent } from './Paginas/seguro/gestion-ventas
 import { GestionarPromocionesComponent } from './Paginas/seguro/gestionar-promociones/gestionar-promociones.component';
 import { AsignarVentasContratosComponent } from './Paginas/seguro/asignar-ventas-contratos/asignar-ventas-contratos.component';
 import { VisitasClienteComponent } from './Paginas/seguro/visitas-cliente/visitas-cliente.component';
-<<<<<<< HEAD
 import { AsignarArriendoContratoComponent } from './Paginas/seguro/asignar-arriendo-contrato/asignar-arriendo-contrato.component';
 import { AsignarVisitasComponent } from './Paginas/seguro/asignar-visitas/asignar-visitas.component';
-=======
-import { AsignarVisitasComponent } from './Paginas/seguro/asignar-visitas/asignar-visitas.component';
->>>>>>> 5b5f73b25fc88459cf569d4dd3e2a94c7d2ad2a6
 
 @NgModule({
   declarations: [
@@ -56,11 +52,7 @@ import { AsignarVisitasComponent } from './Paginas/seguro/asignar-visitas/asigna
     GestionarPromocionesComponent,
     VisitasClienteComponent,
     AsignarVentasContratosComponent,
-<<<<<<< HEAD
-    AsignarArriendoContratoComponent
-=======
     AsignarVisitasComponent
->>>>>>> 5b5f73b25fc88459cf569d4dd3e2a94c7d2ad2a6
   ],
   imports: [
     BrowserModule,
