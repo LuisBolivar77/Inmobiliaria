@@ -52,6 +52,9 @@ export class VerInmuebleComponent implements OnInit {
 
   usuarioSesion:Usuario = new Usuario();
 
+   // Listado de visitas del cliente para validae
+   visitas: Array<ReservarVisita> = [];
+
    // Variables para los mensajes en la pagina
    show: number;
    msj: string;
@@ -62,10 +65,10 @@ export class VerInmuebleComponent implements OnInit {
   //hora de la visita
   horaVisita:number;
 
-
   constructor(private genericoServicio: GenericoService, private usuarioServicio: UsuarioService) { }
 
   ngOnInit() {
+    
     this.inmueble.tipo = new TipoInmueble();
     this.inmueble.ciudad = new Ciudad();
     this.inmueble.ciudad.departamento = new Departamento();
@@ -81,6 +84,8 @@ export class VerInmuebleComponent implements OnInit {
       this.cargarInmueble();
       return true;
     }
+    //Listamos para validar las visitas
+    this.listar();
   }
 
   /**
@@ -136,12 +141,21 @@ export class VerInmuebleComponent implements OnInit {
       this.show=1;
       return;
      }else{
-       if(this.reservaVisita.mensaje==null || this.reservaVisita.fecha==null || this.horaVisita==null){
+      
+      if(this.reservaVisita.mensaje==null || this.reservaVisita.fecha==null || this.horaVisita==null){
         this.msj= "Por favor llene los campos";
-        window.alert(this.msj);
         this.show=1;
+        window.alert(this.msj);
         return;
        }
+      //Validamos que ya no tenga visitas asignadas a este inmueble
+       if(this.validacionVisitaInmueble(this.inmueble.id)==1){
+        this.msj= "Usted ya tiene una visita agragada a este inmueble";
+        this.show=1;
+        window.alert(this.msj);
+        return;
+       }
+
        //asignamos la hora de la visita
       this.reservaVisita.hora_visita = this.horaVisita;
        //Asignamos el inmueble
@@ -181,7 +195,43 @@ export class VerInmuebleComponent implements OnInit {
   limpiarCampos(){
     this.reservaVisita.mensaje="";
     this.reservaVisita.fecha="";
+    this.horaVisita=0;
+  }
 
+  validacionVisitaInmueble(inmuebleID:number):number{
+    let value:number=0;
+    for(let i of this.visitas){
+      console.log(inmuebleID);
+      console.log(i.inmueble.id);
+      if(inmuebleID==i.inmueble.id){
+       value =1;
+       console.log(inmuebleID);
+       console.log(i.inmueble.id);
+       console.log("TRUE?? "+value);
+      }
+    }
+   return value;
+  }
+
+  listar(){
+    this.genericoServicio.listar("reservar_visita",{'cliente':this.usuarioSesion.persona.id}).subscribe(rta=>{
+      if(rta.data!=null){
+        this.visitas=rta.data;
+       this.agregarObjetos(this.visitas);
+      }
+    });
+  }
+
+  agregarObjetos(lista){
+    for(let i of lista){
+      this.genericoServicio.buscar("inmueble",{"id":i.inmueble}).subscribe(r2 => {
+        i.inmueble = r2.data;
+        this.genericoServicio.buscar("personas",{"id":i.empleado}).subscribe(r3 => {
+          i.empleado = r3.data;
+        });
+      });
+    }
+    
   }
   
 

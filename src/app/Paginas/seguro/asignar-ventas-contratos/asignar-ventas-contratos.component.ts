@@ -109,4 +109,7 @@ export class AsignarVentasContratosComponent implements OnInit {
     this.contrato = i;
   }
 
+  editar() {
+  }
+
 }

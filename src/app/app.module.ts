@@ -29,6 +29,7 @@ import { AsignarVentasContratosComponent } from './Paginas/seguro/asignar-ventas
 import { VisitasClienteComponent } from './Paginas/seguro/visitas-cliente/visitas-cliente.component';
 import { AsignarArriendoContratoComponent } from './Paginas/seguro/asignar-arriendo-contrato/asignar-arriendo-contrato.component';
 import { AsignarVisitasComponent } from './Paginas/seguro/asignar-visitas/asignar-visitas.component';
+import { VisitasEmpleadoComponent } from './Paginas/seguro/visitas-empleado/visitas-empleado.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,9 @@ import { AsignarVisitasComponent } from './Paginas/seguro/asignar-visitas/asigna
     GestionarPromocionesComponent,
     VisitasClienteComponent,
     AsignarVentasContratosComponent,
-    AsignarVisitasComponent
+    AsignarVisitasComponent,
+    VisitasEmpleadoComponent,
+    AsignarArriendoContratoComponent
   ],
   imports: [
     BrowserModule,
@@ -69,6 +72,10 @@ import { AsignarVisitasComponent } from './Paginas/seguro/asignar-visitas/asigna
       apiKey: 'AIzaSyB0WP4oGVaDXx-3HZDqzwNsbUi6yS6lEk8'
     }),
     RouterModule.forRoot([
+      {
+        path: 'empleado/visitas-empleado',
+        component: VisitasEmpleadoComponent
+      },       
       {
         path: 'administracion/asignar-visitas',
         component: AsignarVisitasComponent
