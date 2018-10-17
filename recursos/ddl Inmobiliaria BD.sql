@@ -25,7 +25,9 @@ ALTER TABLE archivo_inmueble ADD CONSTRAINT fotos_inmueble_pk PRIMARY KEY ( id )
 CREATE TABLE arriendo (
     id         INTEGER NOT NULL,
     contrato   INTEGER NOT NULL,
-    empleado   INTEGER NOT NULL
+    empleado   INTEGER NOT NULL,
+    fecha         DATE NOT NULL,
+    descripcion   VARCHAR(400) NOT NULL
 );
 
 ALTER TABLE arriendo ADD CONSTRAINT arriendo_pk PRIMARY KEY ( id );

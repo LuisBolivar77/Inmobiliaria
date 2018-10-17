@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { GenericoService } from 'src/app/Servicios/genericoServ.service';
-import { UsuarioService } from 'src/app/Servicios/usuarioServ.service';
-import { Usuario } from 'src/app/Modelo/Usuario';
-import { Venta } from 'src/app/Modelo/Venta';
-import { Contrato } from 'src/app/Modelo/Contrato';
+import { Contrato } from '../../../Modelo/Contrato';
+import { Venta } from '../../../Modelo/Venta';
+import { Usuario } from '../../../Modelo/Usuario';
+import { GenericoService } from '../../../Servicios/genericoServ.service';
+import { UsuarioService } from '../../../Servicios/usuarioServ.service';
 
 @Component({
-  selector: 'app-asignar-ventas-contratos',
-  templateUrl: './asignar-ventas-contratos.component.html',
-  styleUrls: ['./asignar-ventas-contratos.component.css']
+  selector: 'app-asignar-arriendo-contrato',
+  templateUrl: './asignar-arriendo-contrato.component.html',
+  styleUrls: ['./asignar-arriendo-contrato.component.css']
 })
-export class AsignarVentasContratosComponent implements OnInit {
+export class AsignarArriendoContratoComponent implements OnInit {
 
   contratos: Array<Contrato> = [];
   constratosFinales: Array<Contrato> = [];
@@ -31,13 +31,13 @@ export class AsignarVentasContratosComponent implements OnInit {
 
   ngOnInit() {
     // Validamos si el usuario tiene acceso a la pagina
-    this.usuarioServicio.esAccesible('administracion/asignar-ventas-contratos');
+    this.usuarioServicio.esAccesible('administracion/asignar-arriendo-contrato');
     this.usuarioSesion = this.usuarioServicio.getUsuario();
     this.listar();
   }
 
-  /**
-   * lista los contratos de estado "0" para llegar a su finalizacion
+    /**
+   * lista los contratos de estado "1" para llegar a su finalizacion
    */
   listar() {
     this.generico.listar('contrato', {'estado': 1}).subscribe(res => {
@@ -77,10 +77,13 @@ export class AsignarVentasContratosComponent implements OnInit {
     }
   }
 
+   /**
+   * lista los contratos finalizados de tipo arriendo
+   */
   listadoFinal() {
     for (const c of this.contratos) {
       console.log(c.descripcion);
-      if (c.visita.inmueble.tipoAV === 1) {
+      if (c.visita.inmueble.tipoAV === 0) {
         this.constratosFinales.push(c);
       }
     }
@@ -107,9 +110,6 @@ export class AsignarVentasContratosComponent implements OnInit {
   ver(i: Contrato) {
     this.verSelec = true;
     this.contrato = i;
-  }
-
-  editar() {
   }
 
 }

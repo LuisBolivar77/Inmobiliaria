@@ -1,12 +1,12 @@
-import { Contrato } from "./Contrato";
-import { Empleado } from "./Empleado";
+import { Contrato } from './Contrato';
+import { Empleado } from './Empleado';
 
-export class Venta{
+export class Venta {
 
     id: number;
     contrato: Contrato;
     empleado: Empleado;
-    fecha:string;
-    descripcion:string;
+    fecha: string;
+    descripcion: string;
 
 }

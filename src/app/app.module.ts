@@ -27,6 +27,7 @@ import { GestionVentasArriendosComponent } from './Paginas/seguro/gestion-ventas
 import { GestionarPromocionesComponent } from './Paginas/seguro/gestionar-promociones/gestionar-promociones.component';
 import { AsignarVentasContratosComponent } from './Paginas/seguro/asignar-ventas-contratos/asignar-ventas-contratos.component';
 import { VisitasClienteComponent } from './Paginas/seguro/visitas-cliente/visitas-cliente.component';
+import { AsignarArriendoContratoComponent } from './Paginas/seguro/asignar-arriendo-contrato/asignar-arriendo-contrato.component';
 import { AsignarVisitasComponent } from './Paginas/seguro/asignar-visitas/asignar-visitas.component';
 import { VisitasEmpleadoComponent } from './Paginas/seguro/visitas-empleado/visitas-empleado.component';
 
@@ -53,7 +54,8 @@ import { VisitasEmpleadoComponent } from './Paginas/seguro/visitas-empleado/visi
     VisitasClienteComponent,
     AsignarVentasContratosComponent,
     AsignarVisitasComponent,
-    VisitasEmpleadoComponent
+    VisitasEmpleadoComponent,
+    AsignarArriendoContratoComponent
   ],
   imports: [
     BrowserModule,
@@ -77,7 +79,7 @@ import { VisitasEmpleadoComponent } from './Paginas/seguro/visitas-empleado/visi
       {
         path: 'administracion/asignar-visitas',
         component: AsignarVisitasComponent
-      },     
+      },
       {
       path: 'cliente/visitas-cliente',
       component: VisitasClienteComponent
@@ -137,6 +139,10 @@ import { VisitasEmpleadoComponent } from './Paginas/seguro/visitas-empleado/visi
       {
         path: 'administracion/asignar-ventas-contratos',
         component: AsignarVentasContratosComponent
+      },
+      {
+        path: 'administracion/asignar-arriendo-contrato',
+        component: AsignarArriendoContratoComponent
       },
       {
         path: 'login', // http://localhost:4200/login

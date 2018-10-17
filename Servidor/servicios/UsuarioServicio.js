@@ -238,6 +238,8 @@ exports.editarPersona = function(req, res){
             fecha_nacimiento: data.persona.fecha_nacimiento,
             telefono: data.persona.telefono,
             direccion: data.persona.direccion,
+            latitud: data.persona.latitud,
+            longitud: data.persona.longitud,
             rol: data.persona.rol.id,
         };
         // Construimos el objeto usuario para editar en la bd
