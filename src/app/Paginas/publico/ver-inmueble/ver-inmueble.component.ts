@@ -7,11 +7,16 @@ import { Ciudad } from '../../../Modelo/Ciudad';
 import { Departamento } from '../../../Modelo/Departamento';
 import { TipoInmueble } from '../../../Modelo/TipoInmueble';
 import { Usuario } from 'src/app/Modelo/Usuario';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatFormField} from '@angular/material';
 import { ReservarVisita } from 'src/app/Modelo/ReservarVisita';
 import { NgForm } from '@angular/forms';
 import { Persona } from 'src/app/Modelo/Persona';
 import { AuxiliarObjeto } from 'src/app/Modelo/AuxiliarObjeto';
+
+export interface Horas {
+  valor: number;
+  hora: string;
+}
 
 @Component({
   selector: 'app-ver-inmueble',
@@ -21,6 +26,20 @@ import { AuxiliarObjeto } from 'src/app/Modelo/AuxiliarObjeto';
 
 
 export class VerInmuebleComponent implements OnInit {
+
+  //LLenamos el combo de horas
+ horas: Horas[] = [
+  {valor: 8, hora: '8:00 (AM)'},
+  {valor: 9, hora: '9:00 (AM)'},
+  {valor: 10, hora: '10:00 (AM)'},
+  {valor: 11, hora: '11:00 (AM)'},
+  {valor: 12, hora: '12:00 (AM)'},
+  {valor: 14, hora: '2:00 (PM)'},
+  {valor: 15, hora: '3:00 (PM)'},
+  {valor: 16, hora: '4:00 (AM)'},
+  {valor: 17, hora: '5:00 (PM)'},
+  {valor: 18, hora: '6:00 (PM)'}
+];
 
   // El inmueble que se mostrara
   inmueble: Inmueble = new Inmueble();
@@ -39,6 +58,9 @@ export class VerInmuebleComponent implements OnInit {
 
    //La reserva de visita del inmueble
    reservaVisita:ReservarVisita = new ReservarVisita();
+
+  //hora de la visita
+  horaVisita:number;
 
 
   constructor(private genericoServicio: GenericoService, private usuarioServicio: UsuarioService) { }
@@ -114,12 +136,14 @@ export class VerInmuebleComponent implements OnInit {
       this.show=1;
       return;
      }else{
-       if(this.reservaVisita.mensaje==null || this.reservaVisita.fecha==null){
+       if(this.reservaVisita.mensaje==null || this.reservaVisita.fecha==null || this.horaVisita==null){
         this.msj= "Por favor llene los campos";
         window.alert(this.msj);
         this.show=1;
         return;
        }
+       //asignamos la hora de la visita
+      this.reservaVisita.hora_visita = this.horaVisita;
        //Asignamos el inmueble
        this.reservaVisita.inmueble=this.inmueble;
        //Asignamos el usuario a la persona tipo cliente
@@ -129,6 +153,8 @@ export class VerInmuebleComponent implements OnInit {
       this.reservaVisita.estado="PENDIENTE";
        //el comentario despues de la visita (null ya que no se ha realizado la visita)
        this.reservaVisita.comentario=null;
+
+       console.log(this.reservaVisita);
 
        var aux: AuxiliarObjeto = new AuxiliarObjeto();
        aux.objeto = this.reservaVisita;
@@ -140,6 +166,7 @@ export class VerInmuebleComponent implements OnInit {
         if(res.data=="exito"){
           this.msj= "Se registrado su solicitud con exito";
           this.show=2;
+          this.limpiarCampos();
           form.reset;
           window.alert("Se ha registrado la peticion correctamente");
           
@@ -151,8 +178,9 @@ export class VerInmuebleComponent implements OnInit {
      }
   }
 
-  limpiarCampos():void{
-
+  limpiarCampos(){
+    this.reservaVisita.mensaje="";
+    this.reservaVisita.fecha="";
 
   }
   
