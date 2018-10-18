@@ -29,6 +29,7 @@ import { AsignarVentasContratosComponent } from './Paginas/seguro/asignar-ventas
 import { VisitasClienteComponent } from './Paginas/seguro/visitas-cliente/visitas-cliente.component';
 import { AsignarArriendoContratoComponent } from './Paginas/seguro/asignar-arriendo-contrato/asignar-arriendo-contrato.component';
 import { AsignarVisitasComponent } from './Paginas/seguro/asignar-visitas/asignar-visitas.component';
+import { VisitasEmpleadoComponent } from './Paginas/seguro/visitas-empleado/visitas-empleado.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,10 @@ import { AsignarVisitasComponent } from './Paginas/seguro/asignar-visitas/asigna
     VisitasClienteComponent,
     AsignarVentasContratosComponent,
     AsignarVisitasComponent,
+<<<<<<< HEAD
+=======
+    VisitasEmpleadoComponent,
+>>>>>>> 08d4efcf2c8dc300c901e7bb8711d62a69ba35ee
     AsignarArriendoContratoComponent
   ],
   imports: [
@@ -71,12 +76,16 @@ import { AsignarVisitasComponent } from './Paginas/seguro/asignar-visitas/asigna
     }),
     RouterModule.forRoot([
       {
+        path: 'empleado/visitas-empleado',
+        component: VisitasEmpleadoComponent
+      },       
+      {
         path: 'administracion/asignar-visitas',
         component: AsignarVisitasComponent
-      },     
+      },
       {
-      path: 'cliente/visitas-cliente',
-      component: VisitasClienteComponent
+        path: 'cliente/visitas-cliente',
+        component: VisitasClienteComponent
       },
       {
         path: 'administrador/gestionar-promociones',

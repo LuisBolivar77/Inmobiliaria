@@ -33,7 +33,6 @@ export class VisitasClienteComponent implements OnInit {
   constructor(private servicioGenerico:GenericoService, private usuarioServicio:UsuarioService) { }
 
   ngOnInit() {
- 
     this.usuarioServicio.esAccesible("cliente/visitas-cliente");
     this.usuarioSesion = this.usuarioServicio.getUsuario();
     this.listar();
@@ -52,11 +51,10 @@ export class VisitasClienteComponent implements OnInit {
     for(let i of lista){
       this.servicioGenerico.buscar("inmueble",{"id":i.inmueble}).subscribe(r2 => {
         i.inmueble = r2.data;
-        this.servicioGenerico.buscar("persona",{"id":i.empleado}).subscribe(r3 => {
+        this.servicioGenerico.buscar("personas",{"id":i.empleado}).subscribe(r3 => {
           i.empleado = r3.data;
         });
       });
-      console.log(i)
     }
     
   }
@@ -71,40 +69,6 @@ export class VisitasClienteComponent implements OnInit {
 
   }
 
-  comentarVisita(form:NgForm):void{
-    if(this.visitaSeleccionada.id==null){
-      this.msj = "Por favor seleccione una visita";
-      this.show = 1;
-      return;
-    }
-    if(this.visitaSeleccionada.comentario==null){
-      this.msj = "Ingrese los comentarios de la visita por favor";
-      this.show = 1;
-      return;
-    }  
-    this.visitaSeleccionada.estado="ATENDIDA"
-    var aux: AuxiliarObjeto = new AuxiliarObjeto();
-       aux.objeto = this.visitaSeleccionada;
-       aux.replaceValue("inmueble",this.visitaSeleccionada.inmueble.id);
-       aux.replaceValue("cliente",this.visitaSeleccionada.cliente.id);
-       aux.replaceValue("empleado",this.visitaSeleccionada.empleado.id);
-       
-    this.servicioGenerico.editar('reservar_visita',aux.objeto,'id').subscribe(rta=>{
-      if (rta.data === 'exito') {
-        this.msj = 'Se ha Registrado el comentario exitosamente !';
-        this.show = 2;
-        this.limpiarCampos();
-        this.listar();
-      } else {
-        this.msj = 'No se ha podido registrar el comentario: ' + rta.data;
-        this.show = 1;
-      }
-      window.alert(this.msj);
-    });
-
-   
-  }
-
   limpiarCampos(){
     this.visitaSeleccionada.comentario="";
     this.visitaSeleccionada.fecha= "";
@@ -114,7 +78,41 @@ export class VisitasClienteComponent implements OnInit {
 
   editarVisita(form:NgForm){
 
+    if(this.visitaSeleccionada.id==null){
+      this.msj = "Por favor seleccione una visita";
+      this.show = 1;
+      return;
+    }
+    if(this.visitaSeleccionada.fecha==null){
+      this.msj = "Ingrese la fecha de la visita por favor";
+      this.show = 1;
+      return;
+    } 
+    if(this.visitaSeleccionada.estado=="ATENDIDA"){
+      this.msj = "Esta visita no se puede editar la fecha ya se encuentra 'ATENDIDA'";
+      this.show = 1;
+      return;
+    }  
+    var aux: AuxiliarObjeto = new AuxiliarObjeto();
+       aux.objeto = this.visitaSeleccionada;
+       aux.replaceValue("inmueble",this.visitaSeleccionada.inmueble.id);
+       aux.replaceValue("cliente",this.visitaSeleccionada.cliente.id);
+       aux.replaceValue("empleado",this.visitaSeleccionada.empleado.id);
+       
+    this.servicioGenerico.editar('reservar_visita',aux.objeto,'id').subscribe(rta=>{
+      if (rta.data === 'exito') {
+        this.msj = 'Se ha editado la fecha exitosamente !';
+        this.show = 2;
+        this.limpiarCampos();
+        this.listar();
+      } else {
+        this.msj = 'No se ha podido editar la fecha ' + rta.data;
+        this.show = 1;
+      }
+      window.alert(this.msj);
+    });
 
+   
   }
 
   quitarVisita(visita:ReservarVisita){
@@ -137,5 +135,13 @@ export class VisitasClienteComponent implements OnInit {
       window.alert(this.msj);
     });
   }
+
+arrendar(){
+
+}
+
+comprar(){
+
+}
 
 }

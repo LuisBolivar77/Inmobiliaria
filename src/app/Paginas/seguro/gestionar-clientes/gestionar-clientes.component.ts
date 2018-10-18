@@ -104,15 +104,16 @@ export class GestionarClientesComponent implements OnInit {
    */
   registrar(form: NgForm) {
     this.usuario.persona = this.persona;
+    this.usuario.persona.latitud = this.latSeleccionR;
+    this.usuario.persona.longitud = this.longSeleccionR;
     this.personaServicio.registrar(this.usuario).subscribe(rta => {
       if (rta.data === 'exito') {
         this.msj = 'Se ha registrado correctamente';
         this.show = 2;
         window.alert(this.msj);
+        this.limpiarCampos();
         // limpiamos los campos
-        this.locationSelecE = false;
-        this.selectedVer = false;
-        form.reset();
+        // form.reset();
         // Actualizamos la lista de clientes
         this.listar();
         return true;
@@ -131,15 +132,19 @@ export class GestionarClientesComponent implements OnInit {
   editar(form: NgForm) {
     if (this.usuario.persona != null && this.persona != null) {
       this.usuario.persona = this.persona;
+      this.usuario.persona.latitud = this.latSeleccionE;
+      this.usuario.persona.longitud = this.longSeleccionE;
+
+      console.log('lat editar --- ' + this.usuario.persona.latitud + 'lat --- '  + this.latSeleccionE);
+      console.log('long editar --- ' + this.usuario.persona.longitud + 'lat --- '  + this.longSeleccionE);
       this.personaServicio.editar(this.usuario).subscribe(rta => {
         if (rta.data === 'exito') {
           this.msj = 'Se ha editado correctamente';
           this.show = 2;
+          this.limpiarCampos();
           window.alert(this.msj);
           // limpiamos los campos
-          this.locationSelecE = false;
-          this.selectedVer = false;
-          form.reset();
+          // form.reset();
           // Actualizamos la lista de clientes
           this.listar();
           return true;
@@ -192,7 +197,6 @@ export class GestionarClientesComponent implements OnInit {
    * Ver la inormacion de un empleado de la tabla
    */
   ver(p: Persona) {
-    this.locationSelecE = true;
     this.selecterTodos = false;
     this.selectedVer = true;
     this.verInmueble = false;
@@ -230,6 +234,7 @@ export class GestionarClientesComponent implements OnInit {
       if (rta.data === 'exito') {
         this.msj = 'Se ha eliminado el cliente correctamente';
         this.show = 2;
+        this.limpiarCampos();
         this.listar();
       } else {
         this.msj = 'No se ha podido eliminar el cliente: ' + rta.data;
@@ -241,6 +246,7 @@ export class GestionarClientesComponent implements OnInit {
 
   limpiarCampos() {
     this.verInmueble = false;
+    this.selectedReg = false;
     this.selectedVer = false;
     this.persona.nombre = null;
     this.persona.apellido = null;
