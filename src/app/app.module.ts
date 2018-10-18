@@ -52,7 +52,8 @@ import { AsignarVisitasComponent } from './Paginas/seguro/asignar-visitas/asigna
     GestionarPromocionesComponent,
     VisitasClienteComponent,
     AsignarVentasContratosComponent,
-    AsignarVisitasComponent
+    AsignarVisitasComponent,
+    AsignarArriendoContratoComponent
   ],
   imports: [
     BrowserModule,

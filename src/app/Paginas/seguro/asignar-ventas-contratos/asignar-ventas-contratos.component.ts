@@ -4,6 +4,8 @@ import { UsuarioService } from 'src/app/Servicios/usuarioServ.service';
 import { Usuario } from 'src/app/Modelo/Usuario';
 import { Venta } from 'src/app/Modelo/Venta';
 import { Contrato } from 'src/app/Modelo/Contrato';
+import { NgForm } from '@angular/forms';
+
 
 @Component({
   selector: 'app-asignar-ventas-contratos',
@@ -14,7 +16,8 @@ export class AsignarVentasContratosComponent implements OnInit {
 
   contratos: Array<Contrato> = [];
   constratosFinales: Array<Contrato> = [];
-  venta: Array<Venta> = [];
+  ventas: Array<Venta> = [];
+  venta: Venta= new Venta();
   contrato: Contrato = new Contrato();
 
   // usuario en sesion
@@ -37,12 +40,13 @@ export class AsignarVentasContratosComponent implements OnInit {
   }
 
   /**
-   * lista los contratos de estado "0" para llegar a su finalizacion
+   * lista los contratos de estado "1" para llegar a su finalizacion
    */
   listar() {
     this.generico.listar('contrato', {'estado': 1}).subscribe(res => {
       this.contratos = res.data;
       this.agregarObjetos();
+      
     });
   }
 
@@ -79,7 +83,6 @@ export class AsignarVentasContratosComponent implements OnInit {
 
   listadoFinal() {
     for (const c of this.contratos) {
-      console.log(c.descripcion);
       if (c.visita.inmueble.tipoAV === 1) {
         this.constratosFinales.push(c);
       }
@@ -109,7 +112,31 @@ export class AsignarVentasContratosComponent implements OnInit {
     this.contrato = i;
   }
 
-  editar() {
+  registrar(form: NgForm) {
+
+    const fecha = this.fechaActual();
+    this.venta.fecha = fecha;
+
+    this.generico.registrar('venta', this.contrato).subscribe(res => {
+      if (res.data === 'exito') {
+        this.msj = 'la venta se ha registrado correctamente';
+        this.show = 2;
+        form.reset();
+      } else {
+        this.msj = res.data;
+        this.show = 1;
+      }
+    });
+  }
+
+  fechaActual(): string {
+
+    // tslint:disable-next-line:prefer-const
+    let dateFormat = require('dateformat');
+    // tslint:disable-next-line:prefer-const
+    let now = new Date();
+    return dateFormat(now, 'yyyy/mm/dd');
+
   }
 
 }
