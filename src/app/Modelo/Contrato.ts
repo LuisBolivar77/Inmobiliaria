@@ -9,6 +9,7 @@ export class Contrato {
     empleado: Empleado;
     cliente: Usuario;
     visita: ReservarVisita;
+    valorFinalInmueble: number;
     /**
      * 0=pendiente
      * 1=finalizado

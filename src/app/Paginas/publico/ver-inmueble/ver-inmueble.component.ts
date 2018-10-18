@@ -85,7 +85,11 @@ export class VerInmuebleComponent implements OnInit {
       return true;
       
     }
+<<<<<<< HEAD
 
+=======
+    //Listamos para validar las visitas
+>>>>>>> 676db5ae4776f3e87824ec29f0676b74ba129eb1
     //this.listar();
   }
 

@@ -27,8 +27,8 @@
                   <td>{{i.id}}</td>
                   <td>{{i.cliente.persona.cedula}}</td>
                   <td>{{i.empleado.usuario.persona.cedula}}</td>
-                  <td><button class="btn" (click)="ver(i)">finalizar venta</button></td>
-
+                  <td><button class="btn"  (click)="ver(i)">finalizar venta</button></td>
+                 
                 </tr>
               </tbody>
             </table>
@@ -40,34 +40,34 @@
         <div class="row">
           <div class="elements_accordions">
             <div class="accordions">
-              <div class="accordion_container">
-
+              <div class="accordion_container">              
+                
                 <div class="accordion d-flex flex-row align-items-center" id="abrir">
                   <div>Clic para registrar, editar o ver informacion de un Inmueble </div>
                 </div>
                 <div class="accordion_panel" id="abrir">
                   <!--<contenido del acordion 
-                   Form-->
-
-                  <div class="contact_form_container">
-                    <form #datosForm="ngForm" class="contact_form" id="contact_form">
-                      <div class="section_subtitle"> Datos Cliente </div>
-                      <div><input type="text" [(ngModel)]="contrato.id" name="id" class="contact_input" placeholder="Id"
-                          required="required"></div>
-                      <div class="col-lg-6">
-                        <button type="submit" (click)="registrar(datosForm)" style="width: 100%" class="contact_button button">Asignar
-                          Venta</button>
+                   Form--> 
+                 
+                   <div class="contact_form_container">
+                      <form #datosForm="ngForm" class="contact_form" id="contact_form">
+                        <div class="section_subtitle"> Datos de la venta </div>
+                        <div><input type="text" [(ngModel)]="contrato.id" name="id" class="contact_input" placeholder="Id"
+                            required="required"></div>
+                      </form>
+                    </div>
+  
+                    <div>
+                        <form #datosForm="ngForm" class="contact_form" id="contact_form">
+                          <div><input type="text" [(ngModel)]="venta.descripcion" name="descripcion" class="contact_input"
+                              placeholder="descripcion para la venta final" required="required"></div>
+    
+                          <div class="col-lg-6">
+                            <button type="submit" (click)="registrar(datosForm)"  style="width: 100%" class="contact_button button">Asignar
+                              Venta</button>
+                          </div>
+                        </form>
                       </div>
-                    </form>
-                  </div>
-
-                  <div>
-                    <div><input type="text" [(ngModel)]="venta.descripcion" name="descripcion" class="contact_input"
-                        placeholder="descripcion" required="required"></div>
-                    <div><input type="text" [(ngModel)]="venta.empleado" name="empleado" class="contact_input"
-                        placeholder="empleado" required="required"></div>
-
-                  </div>
 
 
                 </div>

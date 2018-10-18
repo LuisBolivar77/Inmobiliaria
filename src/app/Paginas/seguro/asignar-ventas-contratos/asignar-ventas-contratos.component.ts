@@ -5,6 +5,7 @@ import { Usuario } from 'src/app/Modelo/Usuario';
 import { Venta } from 'src/app/Modelo/Venta';
 import { Contrato } from 'src/app/Modelo/Contrato';
 import { NgForm } from '@angular/forms';
+import { AuxiliarObjeto } from 'src/app/Modelo/AuxiliarObjeto';
 
 
 @Component({
@@ -110,14 +111,20 @@ export class AsignarVentasContratosComponent implements OnInit {
   ver(i: Contrato) {
     this.verSelec = true;
     this.contrato = i;
+    console.log(this.contrato.id);
   }
 
   registrar(form: NgForm) {
 
     const fecha = this.fechaActual();
     this.venta.fecha = fecha;
+    this.venta.empleado = this.usuarioServicio.getUsuario();
+    this.venta.contrato = this.contrato;
+    const aux: AuxiliarObjeto = new AuxiliarObjeto();
+    aux.objeto = this.venta;
+    aux.replaceValue('contrato', this.contrato.id);
 
-    this.generico.registrar('venta', this.contrato).subscribe(res => {
+    this.generico.registrar('venta', aux.objeto).subscribe(res => {
       if (res.data === 'exito') {
         this.msj = 'la venta se ha registrado correctamente';
         this.show = 2;
@@ -127,6 +134,28 @@ export class AsignarVentasContratosComponent implements OnInit {
         this.show = 1;
       }
     });
+  }
+
+  /**
+   * edita el estado del contrato con valor '2' para saber que esta finalizado
+   */
+  editarEstado(form: NgForm){
+    
+    this.contrato.estado=2;
+
+    this.generico.editar('contrato',this.contrato,'id').subscribe(res => {
+      if (res.data === 'exito') {
+        this.msj = 'el contrato se edito correctamente';
+        this.show = 2;
+        this.verSelec = false;
+        form.reset();
+        this.listar();
+      } else {
+        this.show = 1;
+        this.msj = res.data;
+      }
+    });
+
   }
 
   fechaActual(): string {

@@ -57,6 +57,7 @@
                       <div><input *ngIf="verSelec" type="text" [(ngModel)]="contrato.empleado.usuario.persona.nombre" name="empleado" class="contact_input" placeholder="empleado" required="required"></div>
                       <div><input *ngIf="verSelec" type="text" [(ngModel)]="contrato.cliente.persona.nombre" name="cliente" class="contact_input" placeholder="cliente" required="required"></div>
                       <div><input type="date" [(ngModel)]="contrato.fecha_solicitud" name="fecha_solicitud" class="contact_input" placeholder="Fecha Solicitud" required="required" max="2000-01-01"  ></div>
+                      <div><input type="number" [(ngModel)]="contrato.valorFinalInmueble" name="valorFinalInmueble" class="contact_input" placeholder="valorFinalInmueble" required="required"></div>
 
                       <div class="col-lg-6">
                         <button type="submit" (click)="editar(datosForm)" style="width: 100%" class="contact_button button">Finalizar Contrato</button>
