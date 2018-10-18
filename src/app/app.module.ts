@@ -54,10 +54,9 @@ import { VisitasEmpleadoComponent } from './Paginas/seguro/visitas-empleado/visi
     VisitasClienteComponent,
     AsignarVentasContratosComponent,
     AsignarVisitasComponent,
-<<<<<<< HEAD
-=======
+    
     VisitasEmpleadoComponent,
->>>>>>> 08d4efcf2c8dc300c901e7bb8711d62a69ba35ee
+    
     AsignarArriendoContratoComponent
   ],
   imports: [

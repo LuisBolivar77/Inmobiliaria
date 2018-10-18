@@ -83,9 +83,10 @@ export class VerInmuebleComponent implements OnInit {
       this.inmueble.id = id;
       this.cargarInmueble();
       return true;
+      
     }
-    //Listamos para validar las visitas
-    this.listar();
+
+    //this.listar();
   }
 
   /**
