@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Contrato } from '../../../Modelo/Contrato';
-import { Venta } from '../../../Modelo/Venta';
+import { Arriendo } from '../../../Modelo/Arriendo';
 import { Usuario } from '../../../Modelo/Usuario';
 import { GenericoService } from '../../../Servicios/genericoServ.service';
 import { UsuarioService } from '../../../Servicios/usuarioServ.service';
+import { NgForm } from '../../../../../node_modules/@angular/forms';
+import { AuxiliarObjeto } from '../../../Modelo/AuxiliarObjeto';
+
 
 @Component({
   selector: 'app-asignar-arriendo-contrato',
@@ -14,7 +17,8 @@ export class AsignarArriendoContratoComponent implements OnInit {
 
   contratos: Array<Contrato> = [];
   constratosFinales: Array<Contrato> = [];
-  venta: Array<Venta> = [];
+  arriendos: Array<Arriendo> = [];
+  arriendo: Arriendo= new Arriendo();
   contrato: Contrato = new Contrato();
 
   // usuario en sesion
@@ -36,13 +40,14 @@ export class AsignarArriendoContratoComponent implements OnInit {
     this.listar();
   }
 
-    /**
+  /**
    * lista los contratos de estado "1" para llegar a su finalizacion
    */
   listar() {
     this.generico.listar('contrato', {'estado': 1}).subscribe(res => {
       this.contratos = res.data;
       this.agregarObjetos();
+      
     });
   }
 
@@ -77,12 +82,9 @@ export class AsignarArriendoContratoComponent implements OnInit {
     }
   }
 
-   /**
-   * lista los contratos finalizados de tipo arriendo
-   */
+
   listadoFinal() {
     for (const c of this.contratos) {
-      console.log(c.descripcion);
       if (c.visita.inmueble.tipoAV === 0) {
         this.constratosFinales.push(c);
       }
@@ -110,6 +112,61 @@ export class AsignarArriendoContratoComponent implements OnInit {
   ver(i: Contrato) {
     this.verSelec = true;
     this.contrato = i;
+    console.log(this.contrato.id);
+  }
+
+  registrar(form: NgForm) {
+
+    const fecha = this.fechaActual();
+    this.arriendo.fecha = fecha;
+    this.arriendo.empleado = this.usuarioServicio.getUsuario();
+    this.arriendo.contrato = this.contrato;
+    const aux: AuxiliarObjeto = new AuxiliarObjeto();
+    aux.objeto = this.arriendo;
+    aux.replaceValue('contrato', this.contrato.id);
+
+    this.generico.registrar('arriendo', aux.objeto).subscribe(res => {
+      if (res.data === 'exito') {
+        this.msj = 'El arriendo se ha registrado correctamente';
+        this.show = 2;
+        form.reset();
+      } else {
+        this.msj = res.data;
+        this.show = 1;
+      }
+    });
+  }
+
+  /**
+   * edita el estado del contrato con valor '2' para saber que esta finalizado
+   */
+  editarEstado(form: NgForm){
+    
+    this.contrato.estado=2;
+
+    this.generico.editar('contrato',this.contrato,'id').subscribe(res => {
+      if (res.data === 'exito') {
+        this.msj = 'el contrato de arriendo se edito correctamente';
+        this.show = 2;
+        this.verSelec = false;
+        form.reset();
+        this.listar();
+      } else {
+        this.show = 1;
+        this.msj = res.data;
+      }
+    });
+
+  }
+
+  fechaActual(): string {
+
+    // tslint:disable-next-line:prefer-const
+    let dateFormat = require('dateformat');
+    // tslint:disable-next-line:prefer-const
+    let now = new Date();
+    return dateFormat(now, 'yyyy/mm/dd');
+
   }
 
 }
