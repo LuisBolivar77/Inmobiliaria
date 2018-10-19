@@ -126,6 +126,7 @@ export class GestionVentasArriendosComponent implements OnInit {
     const fecha = this.fechaActual();
     this.contrato.fecha_finalizacion = fecha;
     this.contrato.estado = 1;
+    
     // tslint:disable-next-line:prefer-const
     var aux: AuxiliarObjeto = new AuxiliarObjeto();
     aux.objeto = this.contrato;

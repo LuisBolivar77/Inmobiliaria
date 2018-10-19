@@ -75,14 +75,14 @@ import { VisitasEmpleadoComponent } from './Paginas/seguro/visitas-empleado/visi
       {
         path: 'empleado/visitas-empleado',
         component: VisitasEmpleadoComponent
-      },       
+      },
       {
         path: 'administracion/asignar-visitas',
         component: AsignarVisitasComponent
       },
       {
-      path: 'cliente/visitas-cliente',
-      component: VisitasClienteComponent
+        path: 'cliente/visitas-cliente',
+        component: VisitasClienteComponent
       },
       {
         path: 'administrador/gestionar-promociones',

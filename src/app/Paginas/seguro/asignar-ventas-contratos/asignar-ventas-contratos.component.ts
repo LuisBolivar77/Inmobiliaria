@@ -4,6 +4,9 @@ import { UsuarioService } from 'src/app/Servicios/usuarioServ.service';
 import { Usuario } from 'src/app/Modelo/Usuario';
 import { Venta } from 'src/app/Modelo/Venta';
 import { Contrato } from 'src/app/Modelo/Contrato';
+import { NgForm } from '@angular/forms';
+import { AuxiliarObjeto } from 'src/app/Modelo/AuxiliarObjeto';
+
 
 @Component({
   selector: 'app-asignar-ventas-contratos',
@@ -14,7 +17,8 @@ export class AsignarVentasContratosComponent implements OnInit {
 
   contratos: Array<Contrato> = [];
   constratosFinales: Array<Contrato> = [];
-  venta: Array<Venta> = [];
+  ventas: Array<Venta> = [];
+  venta: Venta= new Venta();
   contrato: Contrato = new Contrato();
 
   // usuario en sesion
@@ -37,12 +41,13 @@ export class AsignarVentasContratosComponent implements OnInit {
   }
 
   /**
-   * lista los contratos de estado "0" para llegar a su finalizacion
+   * lista los contratos de estado "1" para llegar a su finalizacion
    */
   listar() {
     this.generico.listar('contrato', {'estado': 1}).subscribe(res => {
       this.contratos = res.data;
       this.agregarObjetos();
+      
     });
   }
 
@@ -79,7 +84,6 @@ export class AsignarVentasContratosComponent implements OnInit {
 
   listadoFinal() {
     for (const c of this.contratos) {
-      console.log(c.descripcion);
       if (c.visita.inmueble.tipoAV === 1) {
         this.constratosFinales.push(c);
       }
@@ -107,9 +111,61 @@ export class AsignarVentasContratosComponent implements OnInit {
   ver(i: Contrato) {
     this.verSelec = true;
     this.contrato = i;
+    console.log(this.contrato.id);
   }
 
-  editar() {
+  registrar(form: NgForm) {
+
+    const fecha = this.fechaActual();
+    this.venta.fecha = fecha;
+    this.venta.empleado = this.usuarioServicio.getUsuario();
+    this.venta.contrato = this.contrato;
+    const aux: AuxiliarObjeto = new AuxiliarObjeto();
+    aux.objeto = this.venta;
+    aux.replaceValue('contrato', this.contrato.id);
+
+    this.generico.registrar('venta', aux.objeto).subscribe(res => {
+      if (res.data === 'exito') {
+        this.msj = 'la venta se ha registrado correctamente';
+        this.show = 2;
+        form.reset();
+      } else {
+        this.msj = res.data;
+        this.show = 1;
+      }
+    });
+  }
+
+  /**
+   * edita el estado del contrato con valor '2' para saber que esta finalizado
+   */
+  editarEstado(form: NgForm){
+    
+    this.contrato.estado=2;
+
+    this.generico.editar('contrato',this.contrato,'id').subscribe(res => {
+      if (res.data === 'exito') {
+        this.msj = 'el contrato se edito correctamente';
+        this.show = 2;
+        this.verSelec = false;
+        form.reset();
+        this.listar();
+      } else {
+        this.show = 1;
+        this.msj = res.data;
+      }
+    });
+
+  }
+
+  fechaActual(): string {
+
+    // tslint:disable-next-line:prefer-const
+    let dateFormat = require('dateformat');
+    // tslint:disable-next-line:prefer-const
+    let now = new Date();
+    return dateFormat(now, 'yyyy/mm/dd');
+
   }
 
 }

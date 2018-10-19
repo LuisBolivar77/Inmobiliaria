@@ -211,6 +211,7 @@ CREATE TABLE reportes_visitas (
 
 ALTER TABLE reportes_visitas ADD CONSTRAINT reportes_visitas_pk PRIMARY KEY ( id );
 
+
 CREATE TABLE reservar_visita (
     id         INTEGER NOT NULL,
     mensaje    VARCHAR(600) NOT NULL,
@@ -219,7 +220,8 @@ CREATE TABLE reservar_visita (
     inmueble   INTEGER NOT NULL,
     cliente    INTEGER NOT NULL,
     empleado   INTEGER(11) NOT NULL,
-    comentario VARCHAR(1000)
+    comentario VARCHAR(1000),
+    hora_visita int(10)
 );
 
 ALTER TABLE reservar_visita ADD CONSTRAINT reservar_visita_pk PRIMARY KEY ( id );
@@ -372,11 +374,7 @@ ALTER TABLE usuarios ADD CONSTRAINT usuario_personas_fk FOREIGN KEY ( persona )
 ALTER TABLE reservar_visita ADD CONSTRAINT visita_personas_fk FOREIGN KEY ( cliente )
     REFERENCES personas ( id );
 
-ALTER TABLE `reservar_visita`
-modify column `empleado` INT(11) DEFAULT NULL,
-modify column `estado` varchar(10),
-ADD COLUMN `comentario` VARCHAR(1000),
-ADD COLUMN `hora_visita` INT(10);
+
 
 
 

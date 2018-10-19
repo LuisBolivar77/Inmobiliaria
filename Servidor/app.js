@@ -7,8 +7,6 @@ var express = require('express');
 var servicios = require('./servicios');
 var http = require('http');
 var path = require('path');
-const multer = require('multer');
-const bodyParser = require('body-parser');
 
 
 // --------- SERVICIOS ------------ //
@@ -81,7 +79,7 @@ app.use(
         
         host: 'localhost', //'localhost',
         user: 'root',
-        password : '1234',
+        password : 'root',
         port : 3306, //port mysql
         database:'inmobiliaria'
 

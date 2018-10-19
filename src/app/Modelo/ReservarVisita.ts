@@ -13,7 +13,6 @@ export class ReservarVisita {
      * Visitado
      */
     estado: String;
-
     inmueble: Inmueble;
     cliente: Persona;
     empleado: Persona;

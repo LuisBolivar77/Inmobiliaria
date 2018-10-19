@@ -17,6 +17,7 @@
                     <th scope="col">tipo</th>
                     <th scope="col">Empleado Asignado</th>
                     <th scope="col">Accion</th>
+                    <th scope="col"></th>
                     <th scope="col">Comprar/Arrendar</th>
                   </tr>
                 </thead>
@@ -29,12 +30,14 @@
                     <td>{{v.inmueble.detalles}}</td>
                     <td>{{v.empleado.nombre}}</td>
                     <td>
-                      <button style="background-color: rgb(9, 85, 146)" class="btn" (click)="verVisita(v)">Ver visita</button>
-                      <button style="margin-left: 100px;margin-top: -55px;background-color: red" class="btn" (click)="quitarVisita(v)">Cancelar Reserva</button>
+                      <button style="background-color: rgb(66, 125, 235)" class="btn" (click)="verVisita(v)">Ver visita</button>
                    </td>
                    <td>
-                      <button *ngIf="v.inmueble.tipoAV===0" style="background-color: rgb(206, 159, 57)" class="btn" (click)="arredar()">Arrendar</button>
-                      <button *ngIf="v.inmueble.tipoAV===1" style="background-color: rgb(22, 155, 104)" class="btn" (click)="comprar()">Comprar</button>
+                      <button  style="background-color: rgba(192, 68, 51, 0.836)"  *ngIf="validarEstado(v.estado) == false" class="btn" (click)="quitarVisita(v)">Cancelar Reserva</button>
+                   </td>
+                   <td>
+                      <button style="background-color: rgb(177, 138, 55)" *ngIf="v.inmueble.tipoAV === 0 && validarEstado(v.estado) == true" class="btn" (click)="crearContrato(v)">Arrendar</button>
+                      <button style="background-color: rgba(45, 187, 128, 0.836)" *ngIf="v.inmueble.tipoAV === 1 && validarEstado(v.estado) == true" class="btn" (click)="crearContrato(v)">Comprar</button>
                    </td>
                   </tr>
                 </tbody>
