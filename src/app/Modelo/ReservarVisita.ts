@@ -13,15 +13,9 @@ export class ReservarVisita {
      * Visitado
      */
     estado: String;
-
-    
-    inmueble:Inmueble;
-    cliente:Persona;
-    empleado:Persona;
-    comentario:String;// El comentario que hace el cliente despues de haber realizado su visita
-    hora_visita:number; // la hora de la visita
-
-
-
-    
+    inmueble: Inmueble;
+    cliente: Persona;
+    empleado: Persona;
+    comentario: String; // El comentario que hace el cliente despues de haber realizado su visita
+    hora_visita: number; // la hora de la visita
 }
