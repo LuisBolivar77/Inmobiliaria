@@ -28,6 +28,7 @@ export class AsignarArriendoContratoComponent implements OnInit {
    show: number;
    msj: string;
    idContrato: number;
+   valorFinal: number;
    busco: boolean;
    verSelec = false;
 
@@ -56,7 +57,6 @@ export class AsignarArriendoContratoComponent implements OnInit {
       const fields = c.fecha_solicitud.split('T');
       const fechaSoli = fields[0];
       c.fecha_solicitud = fechaSoli;
-
       this.generico.buscar('usuarios', {'persona': c.cliente}).subscribe(res1 => {
         c.cliente = res1.data;
         this.generico.buscar('personas', {'id': c.cliente.persona}).subscribe(res5 => {

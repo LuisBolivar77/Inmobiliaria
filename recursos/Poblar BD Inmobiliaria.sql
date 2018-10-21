@@ -26,7 +26,7 @@ INSERT INTO `inmobiliaria`.`accesos` (`id`, `nombre`, `url`) VALUES ('6', 'Aprob
 INSERT INTO `inmobiliaria`.`accesos` (`id`, `nombre`, `url`) VALUES ('7','Gestion Inmueble-Cliente', 'cliente/gestion-inmuebles');
 INSERT INTO `inmobiliaria`.`accesos` (`id`, `nombre`, `url`) VALUES ('9','Gestion Ventas-Arriendos', 'administracion/gestion-ventas-arriendos');
 INSERT INTO `inmobiliaria`.`accesos` (`id`, `nombre`, `url`) VALUES ('10','Gestion Promociones', 'administrador/gestionar-promociones');
-INSERT INTO `inmobiliaria`.`accesos` (`id`, `nombre`, `url`) VALUES ('11','Reservar Visita', 'cliente/visitas-cliente');
+INSERT INTO `inmobiliaria`.`accesos` (`id`, `nombre`, `url`) VALUES ('11','Listado de Visitas', 'cliente/visitas-cliente');
 INSERT INTO `inmobiliaria`.`accesos` (`id`, `nombre`, `url`) VALUES ('12','Asignar Visitas', 'administracion/asignar-visitas');
 INSERT INTO `inmobiliaria`.`accesos` (`id`, `nombre`, `url`) VALUES ('13','Visitas Asignadas', 'empleado/visitas-empleado');
 INSERT INTO `inmobiliaria`.`accesos` (`id`, `nombre`, `url`) VALUES ('14', 'Finalizacion Arriendo', 'administracion/asignar-arriendo-contrato');

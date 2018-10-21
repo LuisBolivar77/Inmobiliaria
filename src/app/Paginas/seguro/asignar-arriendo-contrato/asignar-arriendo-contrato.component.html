@@ -61,10 +61,12 @@
                         <form #datosForm="ngForm" class="contact_form" id="contact_form">
                           <div><input type="text" [(ngModel)]="arriendo.descripcion" name="descripcion" class="contact_input"
                               placeholder="descripcion para el arrendamiento" required="required"></div>
-    
+
+                          <div><input type="text" [(ngModel)]="arriendo.valorFinal" name="Valor Final" class="contact_input"
+                                placeholder="Valor final arrendamiento" required="required"></div>
+
                           <div class="col-lg-6">
-                            <button type="submit" (click)="registrar(datosForm)"  style="width: 100%" class="contact_button button">Asignar
-                              Venta</button>
+                            <button type="submit" (click)="registrar(datosForm)"  style="width: 100%" class="contact_button button">Asignar Arriendo</button>
                           </div>
                         </form>
                       </div>
