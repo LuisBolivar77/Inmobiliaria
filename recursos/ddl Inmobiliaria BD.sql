@@ -72,6 +72,7 @@ CREATE TABLE contrato (
     cliente              INTEGER NOT NULL,
     visita               INTEGER NOT NULL,
     estado               INTEGER NOT NULL,
+    valorFinalInmueble   INTEGER NOT NULL,
     fecha_finalizacion   DATE,
     fecha_solicitud      DATE NOT NULL,
     file_certificacion   VARCHAR(300) NOT NULL

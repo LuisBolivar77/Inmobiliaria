@@ -41,6 +41,15 @@ export class GenericoService {
         );
     }
 
+    listarInmuebesPromociones () {
+        return this.http.get<any>(this.domain + 'promocion/listarInmuPromo')
+        .pipe(
+            map(res => {
+                return res;
+            })
+        );
+    }
+
     /**
      * Registrar en una determinada tabla
      * @param tabla la tabla de donde se traera los registros
@@ -63,6 +72,7 @@ export class GenericoService {
      */
     editar (table: string, object: object, pk: string) {
         var data = {'tabla' : table, 'objeto' : object, 'pk' : pk};
+        console.log(data);
         return this.http.post<any>(this.domain + 'generico/editar', data)
         .pipe(
             map(res => {
