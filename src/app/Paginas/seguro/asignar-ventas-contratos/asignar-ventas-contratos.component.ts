@@ -117,6 +117,7 @@ export class AsignarVentasContratosComponent implements OnInit {
     this.contrato = i;
   }
 
+  
   registrar(form: NgForm) {
     const empleado: Empleado = new Empleado();
 
