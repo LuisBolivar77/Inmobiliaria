@@ -46,7 +46,8 @@
             <form #datosForm="ngForm" class="contact_form" id="contact_form">
               
               <div><textarea  style="background-color: white;height:200px;" type="text" [(ngModel)]="visitaSeleccionada.comentario" name="comentario" class="contact_input" placeholder="Ingrese el comentario de la visita" required="required"></textarea></div>
-              <div><input type="text" style="background-color:lightslategray; width:300px;margin-left: 350px" [(ngModel)]="matriculaInmueble" name="matricula" class="contact_input" placeholder="Matricula de inmueble"></div>	
+              <div><textarea  disabled="true" style="background-color: white;height:200px;" type="text" [(ngModel)]="visitaSeleccionada.mensaje" name="mensaje" class="contact_input" placeholder="Mensaje del cliente"></textarea></div>
+              <div><input disabled="true" type="text" style="background-color:lightslategray; width:300px;margin-left: 350px" [(ngModel)]="matriculaInmueble" name="matricula" class="contact_input" placeholder="Matricula de inmueble"></div>	
               <div style="margin-top: -65px"><input type="text" style="background-color:lightslategray; width:300px;margin-left: 700px" [(ngModel)]="detalleInmueble" name="detalles" class="contact_input" placeholder="Detalles de inmueble"></div>	
               <div style="margin-top: -65px"><input type="date" style="background-color:white; width:300px" [(ngModel)]="visitaSeleccionada.fecha" name="fecha" class="contact_input" placeholder="Fecha Visita"></div>	
               

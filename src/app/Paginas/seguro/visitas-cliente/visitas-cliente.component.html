@@ -7,7 +7,8 @@
         <div class="col-lg-8">
             <br>
             <div class="section_subtitle"> Lista de Visitas: ({{visitas.length}})</div><br>
-            <table class="table" style="margin-left: 100px">
+            <div style="overflow: auto; border: 1px solid #ccc; height: 340px;width:1000px;margin-left: 100px">
+            <table class="table" >
                 <thead>
                   <tr>
                     <th scope="col">Fecha de visita</th>
@@ -37,11 +38,12 @@
                    </td>
                    <td>
                       <button style="background-color: rgb(177, 138, 55)" *ngIf="v.inmueble.tipoAV === 0 && validarEstado(v.estado) == true" class="btn" (click)="crearContrato(v)">Arrendar</button>
-                      <button style="background-color: rgba(45, 187, 128, 0.836)" *ngIf="v.inmueble.tipoAV === 1 && validarEstado(v.estado) == true" class="btn" (click)="crearContrato(v)">Comprar</button>
+                      <button style="background-color: rgba(43, 173, 119, 0.836)" *ngIf="v.inmueble.tipoAV === 1 && validarEstado(v.estado) == true" class="btn" (click)="crearContrato(v)">Comprar</button>
                    </td>
                   </tr>
                 </tbody>
               </table>
+            </div>
         </div>
         </div>
         </div>

@@ -72,6 +72,7 @@ export class VerInmuebleComponent implements OnInit {
     this.inmueble.tipo = new TipoInmueble();
     this.inmueble.ciudad = new Ciudad();
     this.inmueble.ciudad.departamento = new Departamento();
+
     // Obtenemos el id del inmueble, que se paso por get (url)
     const id = this.genericoServicio.getUrlParameter('id');
     if (id === undefined || id === '') {
@@ -82,10 +83,11 @@ export class VerInmuebleComponent implements OnInit {
       // Cargamos el inmueble
       this.inmueble.id = id;
       this.cargarInmueble();
+       // Listamos para validar las visitas
+      this.listar();
       return true;
     }
-    // Listamos para validar las visitas
-    // this.listar();
+    
   }
 
   /**
@@ -144,13 +146,6 @@ export class VerInmuebleComponent implements OnInit {
         window.alert(this.msj);
         return;
        }
-      // Validamos que ya no tenga visitas asignadas a este inmueble
-       if (this.validacionVisitaInmueble(this.inmueble.id) === 1) {
-        this.msj = 'Usted ya tiene una visita agragada a este inmueble';
-        this.show = 1;
-        window.alert(this.msj);
-        return;
-       }
 
        // asignamos la hora de la visita
       this.reservaVisita.hora_visita = this.horaVisita;
@@ -164,7 +159,13 @@ export class VerInmuebleComponent implements OnInit {
        // el comentario despues de la visita (null ya que no se ha realizado la visita)
        this.reservaVisita.comentario = null;
 
-       console.log(this.reservaVisita);
+        // Validamos que que no tenga fecha ni hora ya asignada 
+        if (this.validacionFechaHora(this.reservaVisita.fecha,this.reservaVisita.hora_visita) == true) {
+          this.msj = 'Usted ya tiene una visita agragada a este inmueble';
+          this.show = 1;
+          window.alert(this.msj);
+          return;
+         }
 
        const aux: AuxiliarObjeto = new AuxiliarObjeto();
        aux.objeto = this.reservaVisita;
@@ -194,25 +195,29 @@ export class VerInmuebleComponent implements OnInit {
     this.horaVisita = 0;
   }
 
-  validacionVisitaInmueble(inmuebleID: number): number {
-    let value = 0;
-    for (const i of this.visitas) {
-      console.log(inmuebleID);
-      console.log(i.inmueble.id);
-      if (inmuebleID === i.inmueble.id) {
-       value = 1;
-       console.log(inmuebleID);
-       console.log(i.inmueble.id);
+  validacionFechaHora(fecha: String, hora:number): boolean {
+    let value = false;
+    console.log(fecha +" hora:"+hora);
+    console.log(this.visitas);
+    console.log('TRUE?? ' + value);
+    for (let i=0; i< this.visitas.length;i++) {
+      console.log(i);
+      console.log(this.visitas[i].fecha +" === fecha");
+      console.log(this.visitas[i].hora_visita + "//// hora");
+      if (fecha == this.visitas[i].fecha && hora == this.visitas[i].hora_visita) {
+       value = true;
+       console.log(fecha +" hora:"+hora);
+       console.log(i);
        console.log('TRUE?? ' + value);
       }
     }
    return value;
   }
 
-  listar() {
-    this.genericoServicio.listar('reservar_visita', {'cliente': this.usuarioSesion.persona.id}).subscribe(rta => {
-      if (rta.data != null) {
-        this.visitas = rta.data;
+  listar(){
+    this.genericoServicio.listar("reservar_visita",{'cliente':this.usuarioSesion.persona.id}).subscribe(rta=>{
+      if(rta.data!=null){
+        this.visitas=rta.data;
        this.agregarObjetos(this.visitas);
       }
     });
@@ -224,6 +229,9 @@ export class VerInmuebleComponent implements OnInit {
         i.inmueble = r2.data;
         this.genericoServicio.buscar('personas', {'id': i.empleado}).subscribe(r3 => {
           i.empleado = r3.data;
+          this.genericoServicio.buscar('personas', {'id': i.empleado}).subscribe(r4 => {
+            i.cliente = r4.data;
+          });
         });
       });
     }
