@@ -61,7 +61,7 @@
               <div style="margin-top: -65px"><input type="text" style="background-color:lightslategray; width:300px;margin-left: 700px" [(ngModel)]="detalleInmueble" name="detalles" class="contact_input" placeholder="Detalles de inmueble"></div>	
               <div style="margin-top: -65px"><input type="date" style="background-color:white; width:300px" [(ngModel)]="visitaSeleccionada.fecha" name="fecha" class="contact_input" placeholder="Fecha Visita"></div>	
               
-              <button class="sidebar_search_button search_form_button" style="width:200px;margin-top: 20px;margin-left:450px!important"
+              <button *ngIf="habilitarEditar" class="sidebar_search_button search_form_button" style="width:200px;margin-top: 20px;margin-left:450px!important"
                (click)="editarVisita(datosForm)">Editar Fecha</button>
 
             </form>

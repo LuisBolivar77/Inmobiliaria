@@ -34,6 +34,7 @@ export class VisitasClienteComponent implements OnInit {
   detalleInmueble: String;
 
   estadoVerificar = 'ATENDIDA';
+  habilitarEditar = false;
 
   constructor(private servicioGenerico: GenericoService, private usuarioServicio: UsuarioService) { }
 
@@ -78,6 +79,12 @@ export class VisitasClienteComponent implements OnInit {
   }
 
   verVisita(visita: ReservarVisita) {
+    const estado = this.validarEstado(visita.estado);
+    if (estado === false) {
+      this.habilitarEditar = true;
+    } else {
+      this.habilitarEditar = false;
+    }
     this.visitaSeleccionada = visita;
     this.matriculaInmueble = this.visitaSeleccionada.inmueble.numero_matricula;
     this.detalleInmueble = this.visitaSeleccionada.inmueble.detalles;
