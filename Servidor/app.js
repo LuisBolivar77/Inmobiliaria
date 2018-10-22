@@ -79,7 +79,7 @@ app.use(
         
         host: 'localhost', //'localhost',
         user: 'root',
-        password : 'admin',
+        password : '1234',
         port : 3306, //port mysql
         database:'inmobiliaria'
 
@@ -119,6 +119,7 @@ app.post('/generico/editar', genericoServicio.editar);
 app.post('/generico/buscar', genericoServicio.buscar);
 app.post('/generico/eliminar', genericoServicio.eliminar);
 app.get('/promocion/listar', promocionServicio.listar);
+app.get('/promocion/listarInmuPromo', promocionServicio.listarInmuPromo);
 //------------------ Archivos -------------------- //
 app.post('/archivo/subir', genericoServicio.cargarArchivo);
 // ------------ END -----------------------------------//

@@ -74,13 +74,14 @@
                   <div class="sidebar_search_form_container">
                     <form #datosForm="ngForm" class="contact_form" id="contact_form">
                     
+                       <div><textarea  disabled="true" style="background-color: white;height:200px;margin-bottom: 15px" type="text" [(ngModel)]="visitaSeleccionada.mensaje" name="mensaje" class="contact_input" placeholder="Mensaje del cliente"></textarea></div>
+                     
                       <div>
                         <div style="margin-left: 10px;margin-top: -30px"><h5>Numero de visita</h5></div>
                         <div style="margin-left: 360px;margin-top: -25px"><h5>Cliente</h5></div>
                         <div style="margin-left: 710px;margin-top: -25px"><h5>Empleado</h5></div>
                       </div>
 
-                      
                       <div style="margin-top: -65px"><input type="text" style="background-color:white; width:300px;margin-left: 350px;margin-top: 60px" [(ngModel)]="nombreCliente" name="cliente" class="contact_input" placeholder="Seleccione..."></div>	
                       <div style="margin-top: -65px"><input type="text" style="background-color:white; width:300px;margin-left: 700px" [(ngModel)]="nombreEmpleado" name="empleado" class="contact_input" placeholder="Seleccione..."></div>	
                       <div style="margin-top: -65px"><input type="text" style="background-color:white; width:300px" [(ngModel)]="numeroVisita" name="numeroVisita" class="contact_input" placeholder="Seleccione..."></div>	

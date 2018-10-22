@@ -6,6 +6,7 @@ import { Venta } from 'src/app/Modelo/Venta';
 import { Contrato } from 'src/app/Modelo/Contrato';
 import { NgForm } from '@angular/forms';
 import { AuxiliarObjeto } from 'src/app/Modelo/AuxiliarObjeto';
+import { Empleado } from 'src/app/Modelo/Empleado';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class AsignarVentasContratosComponent implements OnInit {
   contratos: Array<Contrato> = [];
   constratosFinales: Array<Contrato> = [];
   ventas: Array<Venta> = [];
-  venta: Venta= new Venta();
+  venta: Venta = new Venta();
   contrato: Contrato = new Contrato();
 
   // usuario en sesion
@@ -30,6 +31,7 @@ export class AsignarVentasContratosComponent implements OnInit {
    idContrato: number;
    busco: boolean;
    verSelec = false;
+   descripcionSel: string;
 
   constructor(private generico: GenericoService, private usuarioServicio: UsuarioService) { }
 
@@ -47,7 +49,6 @@ export class AsignarVentasContratosComponent implements OnInit {
     this.generico.listar('contrato', {'estado': 1}).subscribe(res => {
       this.contratos = res.data;
       this.agregarObjetos();
-      
     });
   }
 
@@ -85,6 +86,9 @@ export class AsignarVentasContratosComponent implements OnInit {
   listadoFinal() {
     for (const c of this.contratos) {
       if (c.visita.inmueble.tipoAV === 1) {
+        const dato = c.fecha_finalizacion.split('T');
+        const fecha = dato[0];
+        c.fecha_finalizacion = fecha;
         this.constratosFinales.push(c);
       }
     }
@@ -111,51 +115,48 @@ export class AsignarVentasContratosComponent implements OnInit {
   ver(i: Contrato) {
     this.verSelec = true;
     this.contrato = i;
-    console.log(this.contrato.id);
   }
 
   registrar(form: NgForm) {
+    const empleado: Empleado = new Empleado();
 
     const fecha = this.fechaActual();
     this.venta.fecha = fecha;
-    this.venta.empleado = this.usuarioServicio.getUsuario();
+    this.venta.descripcion = this.descripcionSel;
+    this.venta.empleado = empleado;
     this.venta.contrato = this.contrato;
     const aux: AuxiliarObjeto = new AuxiliarObjeto();
     aux.objeto = this.venta;
     aux.replaceValue('contrato', this.contrato.id);
+    aux.replaceValue('empleado', this.usuarioSesion.persona.id);
 
     this.generico.registrar('venta', aux.objeto).subscribe(res => {
       if (res.data === 'exito') {
-        this.msj = 'la venta se ha registrado correctamente';
-        this.show = 2;
-        form.reset();
+        this.contrato.estado = 2;
+        const aux2: AuxiliarObjeto = new AuxiliarObjeto();
+        aux2.objeto = this.contrato;
+        aux2.replaceValue('cliente', this.contrato.cliente.persona.id);
+        aux2.replaceValue('empleado', this.contrato.empleado.usuario.persona.id);
+        aux2.replaceValue('visita', this.contrato.visita.id);
+
+        this.generico.editar('contrato', aux2.objeto, 'id').subscribe(res2 => {
+          if (res2.data === 'exito') {
+            this.msj = 'la venta se ha registrado correctamente';
+            this.show = 2;
+            this.descripcionSel = '';
+            this.constratosFinales = new Array<Contrato>();
+            this.listar();
+            form.reset();
+          } else {
+            this.msj = res2.data;
+            this.show = 1;
+          }
+        });
       } else {
         this.msj = res.data;
         this.show = 1;
       }
     });
-  }
-
-  /**
-   * edita el estado del contrato con valor '2' para saber que esta finalizado
-   */
-  editarEstado(form: NgForm){
-    
-    this.contrato.estado=2;
-
-    this.generico.editar('contrato',this.contrato,'id').subscribe(res => {
-      if (res.data === 'exito') {
-        this.msj = 'el contrato se edito correctamente';
-        this.show = 2;
-        this.verSelec = false;
-        form.reset();
-        this.listar();
-      } else {
-        this.show = 1;
-        this.msj = res.data;
-      }
-    });
-
   }
 
   fechaActual(): string {

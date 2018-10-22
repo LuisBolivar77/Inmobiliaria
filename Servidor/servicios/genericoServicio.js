@@ -101,11 +101,6 @@ exports.editar = function(req, res){
                   objeto[key] = elObjeto[key];
             }
       }
-      console.log(data);
-      console.log(tabla);
-      console.log(pk);
-      console.log(elObjeto);
-      console.log(objeto);
       // La consulta a ejecutar
       var sql = "UPDATE "+tabla+" set ? WHERE "+pk+" = ?";
       // Imprimimos en consola la peticion y el origen

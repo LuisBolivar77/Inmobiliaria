@@ -12,13 +12,15 @@
           </div>
           <div class="col-lg-8">
             <br>
-            <div class="section_subtitle"> Lista de Contratos a finalizar ({{constratosFinales.length}})</div><br>
+            <div class="section_subtitle"> Numero de contratos finalizados para registar en ventas ({{constratosFinales.length}})</div><br>
             <table class="table">
               <thead>
                 <tr>
-                  <th scope="col">Id</th>
+                  <th scope="col">Id del contrato</th>
                   <th scope="col">Cliente</th>
-                  <th scope="col">Empleado</th>
+                  <th scope="col">Empleado que finalizo el contrato</th>
+                  <th scope="col">Matriucla del inmueble</th>
+                  <th scope="col">Fecha de finalizacion del contrato</th>
                   <th scope="col">Accion</th>
                 </tr>
               </thead>
@@ -27,6 +29,8 @@
                   <td>{{i.id}}</td>
                   <td>{{i.cliente.persona.cedula}}</td>
                   <td>{{i.empleado.usuario.persona.cedula}}</td>
+                  <td>{{i.visita.inmueble.numero_matricula}}</td>
+                  <td>{{i.fecha_finalizacion}}</td>
                   <td><button class="btn"  (click)="ver(i)">finalizar venta</button></td>
                  
                 </tr>
@@ -43,7 +47,7 @@
               <div class="accordion_container">              
                 
                 <div class="accordion d-flex flex-row align-items-center" id="abrir">
-                  <div>Clic para registrar, editar o ver informacion de un Inmueble </div>
+                  <div>Clic para registrar el contrato como venta </div>
                 </div>
                 <div class="accordion_panel" id="abrir">
                   <!--<contenido del acordion 
@@ -51,19 +55,15 @@
                  
                    <div class="contact_form_container">
                       <form #datosForm="ngForm" class="contact_form" id="contact_form">
-                        <div class="section_subtitle"> Datos de la venta </div>
-                        <div><input type="text" [(ngModel)]="contrato.id" name="id" class="contact_input" placeholder="Id"
-                            required="required"></div>
+                        <div class="section_subtitle"> Datos necesarios para finalizar la venta </div>
+                        <div><input type="text" [(ngModel)]="descripcionSel" name="descripcion" class="contact_input"
+                          placeholder="descripcion de la venta" required="required"></div>
                       </form>
-                    </div>
-  
+                    </div>            
                     <div>
-                        <form #datosForm="ngForm" class="contact_form" id="contact_form">
-                          <div><input type="text" [(ngModel)]="venta.descripcion" name="descripcion" class="contact_input"
-                              placeholder="descripcion para la venta final" required="required"></div>
-    
+                        <form #datosForm="ngForm" class="contact_form" id="contact_form">              
                           <div class="col-lg-6">
-                            <button type="submit" (click)="registrar(datosForm)"  style="width: 100%" class="contact_button button">Asignar
+                            <button *ngIf="verSelec" type="submit" (click)="registrar(datosForm)"  style="width: 100%" class="contact_button button">Asignar
                               Venta</button>
                           </div>
                         </form>

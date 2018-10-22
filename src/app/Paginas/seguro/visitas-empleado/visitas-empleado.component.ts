@@ -113,6 +113,7 @@ detalleInmueble:String;
 
   limpiarCampos(){
     this.visitaSeleccionada.comentario="";
+    this.visitaSeleccionada.mensaje="";
     this.visitaSeleccionada.fecha= "";
     this.matriculaInmueble="";
     this.detalleInmueble=""

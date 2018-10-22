@@ -37,7 +37,7 @@ export class AsignarVisitasComponent implements OnInit {
   //mostradores
   numeroVisita:number;
   nombreCliente:String;
-  nombreEmpleado:String;
+  nombreEmpleado:String; 
 
   //arreglo de horas
   horas:Array<String> = []
@@ -64,7 +64,7 @@ export class AsignarVisitasComponent implements OnInit {
   }
 
   asignarVisita():void{
-    console.log(this.visitaSeleccionada);
+    console.log("*/////////-- "+this.visitaSeleccionada);
     if(this.visitaSeleccionada.id==null || this.empleadoSeleccionado.usuario==null){
       this.msj = "Por favor seleccione una visita y un empleado";
       this.show = 1;
@@ -98,6 +98,7 @@ export class AsignarVisitasComponent implements OnInit {
     this.numeroVisita=null;
     this.nombreCliente="";
     this.nombreEmpleado="";
+    this.visitaSeleccionada.mensaje="";
   }
 
 
