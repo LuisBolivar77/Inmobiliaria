@@ -82,10 +82,10 @@ export class VerInmuebleComponent implements OnInit {
       // Cargamos el inmueble
       this.inmueble.id = id;
       this.cargarInmueble();
+      this.listar();
       return true;
     }
     // Listamos para validar las visitas
-    // this.listar();
   }
 
   /**

@@ -50,7 +50,8 @@ export class VisitasClienteComponent implements OnInit {
   }
 
   listar() {
-    this.servicioGenerico.listar('reservar_visita', {'cliente': this.usuarioSesion.persona.id}).subscribe(rta => {
+    this.servicioGenerico.listar('reservar_visita', {'cliente': this.usuarioSesion.persona.id, 'estado': 'PENDIENTE'})
+    .subscribe(rta => {
       if (rta.data != null) {
         this.visitas = rta.data;
        this.agregarObjetos(this.visitas);
@@ -144,10 +145,53 @@ export class VisitasClienteComponent implements OnInit {
     });
   }
 
+  fechaActual(): string {
+
+    // tslint:disable-next-line:prefer-const
+    let dateFormat = require('dateformat');
+    // tslint:disable-next-line:prefer-const
+    let now = new Date();
+    return dateFormat(now, 'yyyy/mm/dd');
+
+  }
+
+  tipoAV(tipo: number): string {
+    if (tipo === 0) {
+      return 'arrendar';
+    }
+    return 'comprar';
+  }
+
 
   crearContrato(v: ReservarVisita) {
+    const fecha = this.fechaActual();
+    v.estado  = 'PROCESOVENTA-ARRENDO';
+
     const contrato: Contrato = new Contrato();
     contrato.estado = 0;
+    contrato.fecha_solicitud = fecha;
+    contrato.cliente = this.usuarioSesion;
+    contrato.visita = v;
+
+    const aux: AuxiliarObjeto = new AuxiliarObjeto();
+    aux.objeto = contrato;
+    aux.replaceValue('cliente', this.usuarioSesion.persona.id);
+    aux.replaceValue('visita', v.id);
+
+    this.servicioGenerico.registrar('contrato', aux.objeto).subscribe(res => {
+      if (res.data === 'exito') {
+        this.show = 2;
+        this.msj = 'Su petecion de ' + this.tipoAV(v.inmueble.tipoAV) + ' el inmueble esta siendo procesada';
+        this.servicioGenerico.editar('reservar_visita', v, 'id').subscribe(res2 => {
+          console.log(res2.data);
+          this.listar();
+        });
+      } else {
+        this.show = 1;
+        this.msj = res.data;
+      }
+    });
+
   }
 
 }
