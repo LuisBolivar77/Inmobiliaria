@@ -18,7 +18,7 @@ export class AsignarArriendoContratoComponent implements OnInit {
   contratos: Array<Contrato> = [];
   constratosFinales: Array<Contrato> = [];
   arriendos: Array<Arriendo> = [];
-  arriendo: Arriendo= new Arriendo();
+  arr: Arriendo= new Arriendo();
   contrato: Contrato = new Contrato();
 
   // usuario en sesion
@@ -28,7 +28,6 @@ export class AsignarArriendoContratoComponent implements OnInit {
    show: number;
    msj: string;
    idContrato: number;
-   valorFinal: number;
    busco: boolean;
    verSelec = false;
 
@@ -118,13 +117,14 @@ export class AsignarArriendoContratoComponent implements OnInit {
   registrar(form: NgForm) {
 
     const fecha = this.fechaActual();
-    this.arriendo.fecha = fecha;
-    this.arriendo.empleado = this.usuarioServicio.getUsuario();
-    this.arriendo.contrato = this.contrato;
+    this.arr.fecha = fecha;
+    this.arr.empleado = this.usuarioServicio.getUsuario();
+    this.arr.contrato = this.contrato;
     const aux: AuxiliarObjeto = new AuxiliarObjeto();
-    aux.objeto = this.arriendo;
-    aux.replaceValue('contrato', this.contrato.id);
+    aux.objeto = this.arr;
+    aux.replaceValue('arriendo', this.arr.id);
 
+    
     this.generico.registrar('arriendo', aux.objeto).subscribe(res => {
       if (res.data === 'exito') {
         this.msj = 'El arriendo se ha registrado correctamente';
