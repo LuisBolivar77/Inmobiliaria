@@ -41,6 +41,15 @@ export class GenericoService {
         );
     }
 
+    listarInmuebesPromociones () {
+        return this.http.get<any>(this.domain + 'promocion/listarInmuPromo')
+        .pipe(
+            map(res => {
+                return res;
+            })
+        );
+    }
+
     /**
      * Registrar en una determinada tabla
      * @param tabla la tabla de donde se traera los registros

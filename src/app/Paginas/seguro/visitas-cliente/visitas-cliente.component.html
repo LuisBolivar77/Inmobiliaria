@@ -30,14 +30,14 @@
                     <td>{{v.inmueble.detalles}}</td>
                     <td>{{v.empleado.nombre}}</td>
                     <td>
-                      <button class="btn" (click)="verVisita(v)">Ver visita</button>
+                      <button style="background-color: rgb(66, 125, 235)" class="btn" (click)="verVisita(v)">Ver visita</button>
                    </td>
                    <td>
-                      <button *ngIf="validarEstado(v.estado) == false" class="btn" (click)="quitarVisita(v)">Cancelar Reserva</button>
+                      <button  style="background-color: rgba(192, 68, 51, 0.836)"  *ngIf="validarEstado(v.estado) == false" class="btn" (click)="quitarVisita(v)">Cancelar Reserva</button>
                    </td>
                    <td>
-                      <button *ngIf="v.inmueble.tipoAV === 0 && validarEstado(v.estado) == true" class="btn" (click)="crearContrato(v)">Arrendar</button>
-                      <button *ngIf="v.inmueble.tipoAV === 1 && validarEstado(v.estado) == true" class="btn" (click)="crearContrato(v)">Comprar</button>
+                      <button style="background-color: rgb(177, 138, 55)" *ngIf="v.inmueble.tipoAV === 0 && validarEstado(v.estado) == true" class="btn" (click)="crearContrato(v)">Arrendar</button>
+                      <button style="background-color: rgba(45, 187, 128, 0.836)" *ngIf="v.inmueble.tipoAV === 1 && validarEstado(v.estado) == true" class="btn" (click)="crearContrato(v)">Comprar</button>
                    </td>
                   </tr>
                 </tbody>
