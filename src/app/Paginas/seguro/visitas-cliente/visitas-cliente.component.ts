@@ -6,7 +6,6 @@ import { UsuarioService } from 'src/app/Servicios/usuarioServ.service';
 import { Usuario } from 'src/app/Modelo/Usuario';
 import { NgForm } from '@angular/forms';
 import { AuxiliarObjeto } from 'src/app/Modelo/AuxiliarObjeto';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-visitas-cliente',
@@ -17,6 +16,8 @@ export class VisitasClienteComponent implements OnInit {
 
    // Listado de visitas para comentar / editar
    visitas: Array<ReservarVisita> = [];
+
+   visitasFinal: Array<ReservarVisita> = [];
 
    // Visita seleccionada para comentar
    visitaSeleccionada: ReservarVisita = new ReservarVisita();
@@ -50,7 +51,7 @@ export class VisitasClienteComponent implements OnInit {
   }
 
   listar() {
-    this.servicioGenerico.listar('reservar_visita', {'cliente': this.usuarioSesion.persona.id, 'estado': 'PENDIENTE'})
+    this.servicioGenerico.listar('reservar_visita', {'cliente': this.usuarioSesion.persona.id})
     .subscribe(rta => {
       if (rta.data != null) {
         this.visitas = rta.data;
@@ -61,15 +62,18 @@ export class VisitasClienteComponent implements OnInit {
 
   agregarObjetos(lista) {
     for (const i of lista) {
-      const fields = i.fecha.split('T');
-      const fechaVisi = fields[0];
-      i.fecha = fechaVisi;
-      this.servicioGenerico.buscar('inmueble', {'id': i.inmueble}).subscribe(r2 => {
-        i.inmueble = r2.data;
-        this.servicioGenerico.buscar('personas', {'id': i.empleado}).subscribe(r3 => {
-          i.empleado = r3.data;
+      if (i.estado === 'ATENDIDA' || i.estado === 'PENDIENTE') {
+        const fields = i.fecha.split('T');
+        const fechaVisi = fields[0];
+        i.fecha = fechaVisi;
+        this.servicioGenerico.buscar('inmueble', {'id': i.inmueble}).subscribe(r2 => {
+          i.inmueble = r2.data;
+          this.servicioGenerico.buscar('personas', {'id': i.empleado}).subscribe(r3 => {
+            i.empleado = r3.data;
+            this.visitasFinal.push(i);
+          });
         });
-      });
+      }
     }
   }
 
@@ -164,8 +168,9 @@ export class VisitasClienteComponent implements OnInit {
 
 
   crearContrato(v: ReservarVisita) {
+
+    const tipoC = this.tipoAV(v.inmueble.tipoAV);
     const fecha = this.fechaActual();
-    v.estado  = 'PROCESOVENTA-ARRENDO';
 
     const contrato: Contrato = new Contrato();
     contrato.estado = 0;
@@ -177,14 +182,16 @@ export class VisitasClienteComponent implements OnInit {
     aux.objeto = contrato;
     aux.replaceValue('cliente', this.usuarioSesion.persona.id);
     aux.replaceValue('visita', v.id);
+    console.log(aux.objeto);
 
     this.servicioGenerico.registrar('contrato', aux.objeto).subscribe(res => {
       if (res.data === 'exito') {
-        this.show = 2;
-        this.msj = 'Su petecion de ' + this.tipoAV(v.inmueble.tipoAV) + ' el inmueble esta siendo procesada';
+        v.estado  = 'PROCESO-' + tipoC;
         this.servicioGenerico.editar('reservar_visita', v, 'id').subscribe(res2 => {
-          console.log(res2.data);
+          this.visitasFinal = new Array<ReservarVisita>();
           this.listar();
+          this.show = 2;
+          this.msj = 'Su petecion de ' + tipoC + ' el inmueble esta siendo procesada';
         });
       } else {
         this.show = 1;
