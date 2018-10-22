@@ -61,13 +61,13 @@ export class GestionVentasArriendosComponent implements OnInit {
         c.cliente = res1.data;
         this.generico.buscar('personas', {'id': c.cliente.persona}).subscribe(res5 => {
           c.cliente.persona = res5.data;
-          this.generico.buscar('empleados', {'usuario': c.empleado}).subscribe(res3 => {
-            c.empleado = res3.data;
-            this.generico.buscar('usuarios', {'persona': c.empleado.usuario}).subscribe(res2 => {
-              c.empleado.usuario = res2.data;
-              this.generico.buscar('personas', {'id': c.empleado.usuario.persona}).subscribe(res4 => {
-                c.empleado.usuario.persona = res4.data;
-              });
+          this.generico.buscar('reservar_visita', {'id': c.visita}).subscribe(res3 => {
+            c.visita = res3.data;
+            const data = c.visita.fecha.split('T');
+            const fecha = data[0];
+            c.visita.fecha = fecha;
+            this.generico.buscar('inmueble', {'id': c.visita.inmueble}).subscribe(res2 => {
+              c.visita.inmueble = res2.data;
             });
           });
         });
@@ -76,7 +76,7 @@ export class GestionVentasArriendosComponent implements OnInit {
   }
 
   /*
-  * Buscar contrato
+  * Buscar  contrato
   */
  buscarContrato() {
      this.generico.buscar('contrato', {'id': this.idContrato}).subscribe(rta => {
@@ -96,9 +96,6 @@ export class GestionVentasArriendosComponent implements OnInit {
   ver(i: Contrato) {
     this.verSelec = true;
     this.contrato = i;
-    for (const c of this.contratos) {
-      console.log(c);
-    }
   }
 
 
@@ -126,12 +123,13 @@ export class GestionVentasArriendosComponent implements OnInit {
     const fecha = this.fechaActual();
     this.contrato.fecha_finalizacion = fecha;
     this.contrato.estado = 1;
-    
+
     // tslint:disable-next-line:prefer-const
-    var aux: AuxiliarObjeto = new AuxiliarObjeto();
+    const aux: AuxiliarObjeto = new AuxiliarObjeto();
     aux.objeto = this.contrato;
     aux.replaceValue('cliente', this.contrato.cliente.persona.id);
-    aux.replaceValue('empleado', this.contrato.empleado.usuario.persona.id);
+    aux.replaceValue('empleado', this.usuarioSesion.persona.id);
+    aux.replaceValue('visita', this.contrato.visita.id);
     console.log(aux.objeto);
 
     this.generico.editar('contrato', aux.objeto, 'id').subscribe(res => {

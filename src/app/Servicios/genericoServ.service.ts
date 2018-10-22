@@ -73,6 +73,7 @@ export class GenericoService {
      */
     editar (table: string, object: object, pk: string) {
         var data = {'tabla' : table, 'objeto' : object, 'pk' : pk};
+        console.log(data);
         return this.http.post<any>(this.domain + 'generico/editar', data)
         .pipe(
             map(res => {
