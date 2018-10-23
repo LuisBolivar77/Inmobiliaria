@@ -30,6 +30,7 @@ import { VisitasClienteComponent } from './Paginas/seguro/visitas-cliente/visita
 import { AsignarArriendoContratoComponent } from './Paginas/seguro/asignar-arriendo-contrato/asignar-arriendo-contrato.component';
 import { AsignarVisitasComponent } from './Paginas/seguro/asignar-visitas/asignar-visitas.component';
 import { VisitasEmpleadoComponent } from './Paginas/seguro/visitas-empleado/visitas-empleado.component';
+import { GestionReunionesComponent } from './Paginas/seguro/gestion-reuniones/gestion-reuniones.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { VisitasEmpleadoComponent } from './Paginas/seguro/visitas-empleado/visi
     AsignarVentasContratosComponent,
     AsignarVisitasComponent,
     VisitasEmpleadoComponent,
-    AsignarArriendoContratoComponent
+    AsignarArriendoContratoComponent,
+    GestionReunionesComponent
   ],
   imports: [
     BrowserModule,
