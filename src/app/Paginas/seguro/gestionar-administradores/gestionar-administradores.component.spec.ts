@@ -94,13 +94,8 @@ describe('GestionarAdministradoresComponent', () => {
     persona.id = 19;
     componente.persona.id = 19;
     // datos de la persona
-<<<<<<< HEAD
-    persona.cedula = '453'
-    componente.persona.cedula = '453';
-=======
     persona.cedula = '4194';
     componente.persona.cedula = '4194';
->>>>>>> bbb2d7c4e7167107dfc8e3cee1af2fbf9e669d6b
     persona.nombre = 'Rosalba';
     persona.apellido = 'Cardona';
     persona.fecha_nacimiento = '1978-03-30';
@@ -170,19 +165,11 @@ describe('GestionarAdministradoresComponent', () => {
   it('Eliminar un administrador', () => {
     // tslint:disable-next-line:prefer-const
     let persona: Persona = new Persona();
-<<<<<<< HEAD
-    persona.id = 7;
-    let eliminar = componente.eliminar(persona);
-    expect(eliminar).toBeFalsy;
-  });
-
-=======
     persona.id = 2;
     const eliminar = componente.eliminar(persona);
     // tslint:disable-next-line:no-unused-expression
     expect(eliminar).toBeFalsy;
   });
->>>>>>> bbb2d7c4e7167107dfc8e3cee1af2fbf9e669d6b
 });
 
 
