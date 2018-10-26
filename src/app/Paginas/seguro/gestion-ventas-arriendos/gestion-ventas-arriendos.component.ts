@@ -25,6 +25,9 @@ export class GestionVentasArriendosComponent implements OnInit {
   // usuario en sesion
   usuarioSesion: Usuario = new Usuario();
 
+  // Archivo certiFicacion de la ormacion
+  archivosContratos: File = null;
+
   // Variables para los mensajes en la pagina
   show: number;
   msj: string;
@@ -124,24 +127,29 @@ export class GestionVentasArriendosComponent implements OnInit {
     this.contrato.fecha_finalizacion = fecha;
     this.contrato.estado = 1;
 
-    // tslint:disable-next-line:prefer-const
-    const aux: AuxiliarObjeto = new AuxiliarObjeto();
-    aux.objeto = this.contrato;
-    aux.replaceValue('cliente', this.contrato.cliente.persona.id);
-    aux.replaceValue('empleado', this.usuarioSesion.persona.id);
-    aux.replaceValue('visita', this.contrato.visita.id);
-    console.log(aux.objeto);
+    this.generico.cargarArchivo(this.archivosContratos).subscribe(resC => {
+      if (resC.data === 'exito') {
 
-    this.generico.editar('contrato', aux.objeto, 'id').subscribe(res => {
-      if (res.data === 'exito') {
-        this.msj = 'el contrato se edito correctamente';
-        this.show = 2;
-        this.verSelec = false;
-        form.reset();
-        this.listar();
-      } else {
-        this.show = 1;
-        this.msj = res.data;
+        this.contrato.file_certificacion = resC.nombreArchivo;
+
+        const aux: AuxiliarObjeto = new AuxiliarObjeto();
+        aux.objeto = this.contrato;
+        aux.replaceValue('cliente', this.contrato.cliente.persona.id);
+        aux.replaceValue('empleado', this.usuarioSesion.persona.id);
+        aux.replaceValue('visita', this.contrato.visita.id);
+
+        this.generico.editar('contrato', aux.objeto, 'id').subscribe(res => {
+          if (res.data === 'exito') {
+            this.msj = 'el contrato se edito correctamente';
+            this.show = 2;
+            this.verSelec = false;
+            form.reset();
+            this.listar();
+          } else {
+            this.show = 1;
+            this.msj = res.data;
+          }
+        });
       }
     });
   }
@@ -154,5 +162,16 @@ export class GestionVentasArriendosComponent implements OnInit {
     let now = new Date();
     return dateFormat(now, 'yyyy/mm/dd');
 
+  }
+
+  /**
+   * Asigna el archivo seleccionado del input en certificacion de experiencia o formacion
+   * @param event contiene el archivo que selecciono el usuario
+   * @param tipo define si el tipo de archivo es para experiencia o formacion
+   */
+  asignarArchivo(event, tipo) {
+    // tslint:disable-next-line:prefer-const
+    let selectedFile = <File>event.target.files[0];
+    this.archivosContratos = selectedFile;
   }
 }

@@ -18,7 +18,7 @@
               <form (ngSubmit)="fbuscar($event)" class="contact_form" id="contact_form">
                 <div class="row">
                   <div class="col-lg-8">
-                    <div><input [(ngModel)]="promocion.id" name="Id Promoción" type="text" class="contact_input"
+                    <div><input [(ngModel)]="idSelected" name="Id Promoción" type="text" class="contact_input"
                         placeholder="Id Promoción" required></div>
                   </div>
                   <div class="col-lg-4" style="padding-left: 0">
@@ -39,16 +39,17 @@
                 <div><input type="date" [(ngModel)]="promocion.fecha_fin" name="Fecha fin" class="contact_input"
                     placeholder="Fecha fin" required="required"></div>
 
-                <button (click)="registrar(datosForm)" style="width: 100%" class="contact_button button">Registrar
+                <button *ngIf="!verSelected" (click)="registrar(datosForm)" style="width: 100%" class="contact_button button">Registrar
                   Promoción</button>
-                <button (click)="editar(datosForm)" style="width: 100%" class="contact_button button">Editar Promoción</button>
+                <button *ngIf="verSelected" (click)="editar(datosForm)" style="width: 100%" class="contact_button button">Editar Promoción</button>
+                <button (click)="limpiarCampos(datosForm)" style="width: 100%" class="contact_button button">Limpiar Campos</button>  
               </form>
             </div>
           </div>
           <!-- End Form -->
           <div class="col-lg-8">
             <br>
-            <div class="section_subtitle"> Lista de promociones ({{listPromociones.length}})</div><br>
+            <div class="section_subtitle"> Lista de promociones ({{listPromocionesFinal.length}})</div><br>
             <table class="table">
               <thead>
                 <tr>
@@ -62,7 +63,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let p of listPromociones">
+                <tr *ngFor="let p of listPromocionesFinal">
                   <th scope="row">{{p.id}}</th>
                   <td>{{p.descripcion}}</td>
                   <td>{{p.porcentaje}}</td>

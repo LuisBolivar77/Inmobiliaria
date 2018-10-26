@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-lg-12">
         <div class="row">
-          <!-- Tabla de aprovaciones deinmuebles -->
+          <!-- Tabla de aprobaciones deinmuebles -->
           <div class="aviso alert alert-danger" style="margin: 15px 0 0 0;" *ngIf="show == 1">
             <div id="close" title="Cerrar">×</div>{{msj}}
           </div>
@@ -12,23 +12,26 @@
           </div>
           <div class="col-lg-8">
             <br>
-            <div class="section_subtitle"> Lista de Contratos a finalizar ({{constratosFinales.length}})</div><br>
+            <div class="section_subtitle"> Numero de contratos finalizados para registar en arriendo ({{constratosFinales.length}})</div><br>
             <table class="table">
               <thead>
                 <tr>
-                  <th scope="col">Id</th>
-                  <th scope="col">Cliente</th>
-                  <th scope="col">Empleado</th>
+                  <th scope="col">Id del contrato</th>
+                  <th scope="col">Matriucla del inmueble</th>
+                  <th scope="col">Fecha de finalizacion del contrato</th>
+                  <th scope="col">Cliente(Arrendatario)</th>
+                  <th scope="col">Empleado que finalizo el contrato</th>
                   <th scope="col">Accion</th>
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let i of constratosFinales">
                   <td>{{i.id}}</td>
+                  <td>{{i.visita.inmueble.numero_matricula}}</td>
+                  <td>{{i.fecha_finalizacion}}</td>
                   <td>{{i.cliente.persona.cedula}}</td>
                   <td>{{i.empleado.usuario.persona.cedula}}</td>
-                  <td><button class="btn"  (click)="ver(i)">finalizar Arrendamiento</button></td>
-                 
+                  <td><button class="btn"  (click)="ver(i)">finalizar Arriendo</button></td>
                 </tr>
               </tbody>
             </table>
@@ -43,7 +46,7 @@
               <div class="accordion_container">              
                 
                 <div class="accordion d-flex flex-row align-items-center" id="abrir">
-                  <div>Clic para finalizar diligenciamiento del contrato de arrendamiento </div>
+                  <div>Clic para registrar el contrato de arriendo </div>
                 </div>
                 <div class="accordion_panel" id="abrir">
                   <!--<contenido del acordion 
@@ -51,28 +54,48 @@
                  
                    <div class="contact_form_container">
                       <form #datosForm="ngForm" class="contact_form" id="contact_form">
-                        <div class="section_subtitle"> Datos del Arriendo Inmueble  </div>
-                        <div><input type="text" [(ngModel)]="contrato.id" name="id" class="contact_input" placeholder="Id"
-                            required="required"></div>
+                        <div class="section_subtitle"> Datos necesarios para finalizar el arriendo </div>
+                        <div><input type="text" [(ngModel)]="descripcionSel" name="descripcion" class="contact_input"
+                          placeholder="descripcion del arriendo" required="required"></div>
                       </form>
-                    </div>
-  
+                    </div>            
                     <div>
-                        <form #datosForm="ngForm" class="contact_form" id="contact_form">
-                          <div><input type="text" [(ngModel)]="descripcionSel" name="descripcion" class="contact_input"
-                              placeholder="descripcion para el arrendamiento" required="required"></div>
-                              
+                        <form #datosForm="ngForm" class="contact_form" id="contact_form">              
                           <div class="col-lg-6">
-                            <button type="submit" (click)="registrar(datosForm)"  style="width: 100%" class="contact_button button">Finalizar Contrato Arriendo</button>
+                            <button *ngIf="verSelec" type="submit" (click)="registrar(datosForm)"  style="width: 100%" class="contact_button button">Asignar
+                              Venta</button>
                           </div>
                         </form>
                       </div>
-
-
                 </div>
               </div>
             </div>
           </div>
+        </div>
+        <div class="col-lg-8">
+          <br>
+          <div class="section_subtitle"> Listado de los arriendos de inmuebles que se han realizado en la inmobiliaria</div><br>
+          <div class="section_subtitle"> Numero de ventas: ({{arriendos.length}})</div><br>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Id del arriendo</th>
+                <th scope="col">Cliente</th>
+                <th scope="col">Fecha de finalizacion del arriendo</th>
+                <th scope="col">Matriucla del inmueble arrendado</th>
+                <th scope="col">Empleado que finalizo el arriendo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let v of arriendos">
+                <td>{{v.id}}</td>
+                <td>{{v.contrato.cliente.persona.cedula}}</td>
+                <td>{{v.fecha}}</td>
+                <td>{{v.contrato.visita.inmueble.numero_matricula}}</td> 
+                <td>{{v.empleado.usuario.persona.cedula}}</td>                             
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

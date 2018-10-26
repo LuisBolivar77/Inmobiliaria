@@ -36,7 +36,7 @@ export class VerInmuebleComponent implements OnInit {
   {valor: 12, hora: '12:00 (AM)'},
   {valor: 14, hora: '2:00 (PM)'},
   {valor: 15, hora: '3:00 (PM)'},
-  {valor: 16, hora: '4:00 (AM)'},
+  {valor: 16, hora: '4:00 (PM)'},
   {valor: 17, hora: '5:00 (PM)'},
   {valor: 18, hora: '6:00 (PM)'}
 ];
@@ -87,7 +87,6 @@ export class VerInmuebleComponent implements OnInit {
       this.listar();
       return true;
     }
-    
   }
 
   /**
@@ -147,6 +146,15 @@ export class VerInmuebleComponent implements OnInit {
         return;
        }
 
+       const fechaAct = new Date;
+       const fechaSel = new Date(this.reservaVisita.fecha);
+       if (fechaSel <= fechaAct) {
+        this.msj = 'Por favor seleccione un fecha despues de ' + fechaAct;
+        this.show = 1;
+        window.alert(this.msj);
+        return;
+       }
+
        // asignamos la hora de la visita
       this.reservaVisita.hora_visita = this.horaVisita;
        // Asignamos el inmueble
@@ -159,8 +167,8 @@ export class VerInmuebleComponent implements OnInit {
        // el comentario despues de la visita (null ya que no se ha realizado la visita)
        this.reservaVisita.comentario = null;
 
-        // Validamos que que no tenga fecha ni hora ya asignada 
-        if (this.validacionFechaHora(this.reservaVisita.fecha,this.reservaVisita.hora_visita) == true) {
+        // Validamos que que no tenga fecha ni hora ya asignada
+        if (this.validacionFechaHora(this.reservaVisita.fecha, this.reservaVisita.hora_visita) === true) {
           this.msj = 'Usted ya tiene una visita agragada a este inmueble';
           this.show = 1;
           window.alert(this.msj);
@@ -195,18 +203,18 @@ export class VerInmuebleComponent implements OnInit {
     this.horaVisita = 0;
   }
 
-  validacionFechaHora(fecha: String, hora:number): boolean {
+  validacionFechaHora(fecha: String, hora: number): boolean {
     let value = false;
-    console.log(fecha +" hora:"+hora);
+    console.log(fecha + 'hora: ' + hora);
     console.log(this.visitas);
     console.log('TRUE?? ' + value);
-    for (let i=0; i< this.visitas.length;i++) {
+    for (let i = 0; i < this.visitas.length; i++) {
       console.log(i);
-      console.log(this.visitas[i].fecha +" === fecha");
-      console.log(this.visitas[i].hora_visita + "//// hora");
-      if (fecha == this.visitas[i].fecha && hora == this.visitas[i].hora_visita) {
+      console.log(this.visitas[i].fecha + '=== fecha');
+      console.log(this.visitas[i].hora_visita + '//// hora');
+      if (fecha === this.visitas[i].fecha && hora === this.visitas[i].hora_visita) {
        value = true;
-       console.log(fecha +" hora:"+hora);
+       console.log(fecha + ' hora:' + hora);
        console.log(i);
        console.log('TRUE?? ' + value);
       }
@@ -214,10 +222,10 @@ export class VerInmuebleComponent implements OnInit {
    return value;
   }
 
-  listar(){
-    this.genericoServicio.listar("reservar_visita",{'cliente':this.usuarioSesion.persona.id}).subscribe(rta=>{
-      if(rta.data!=null){
-        this.visitas=rta.data;
+  listar() {
+    this.genericoServicio.listar('reservar_visita', {'cliente': this.usuarioSesion.persona.id}).subscribe(rta => {
+      if (rta.data != null) {
+        this.visitas = rta.data;
        this.agregarObjetos(this.visitas);
       }
     });
@@ -263,7 +271,7 @@ export class VerInmuebleComponent implements OnInit {
    * Apartir de un booleano nos devuelve si, si o no
    */
   siNo(boolean) {
-    if (boolean === 1) {
+    if (boolean === '1') {
       return 'Si';
     } else {
       return 'No';

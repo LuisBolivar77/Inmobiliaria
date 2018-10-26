@@ -64,11 +64,11 @@ export class PromocionesComponent implements OnInit {
                 const fechaFin = new Date(j.fecha_fin);
                 const fechaActual = new Date;
                // alert(inmu +" = " +promo);
-               // if ((inmu === promo) && // Sale error por el objeto que compara con el number (FUNCIONA)
-               // (fechaIni <= fechaActual) &&  (fechaFin >= fechaActual)) {
-                 // alert("Entro al final del for");
-                  // this.inmuebles.push(i);
-               // }
+               if ((inmu === promo) && // Sale error por el objeto que compara con el number (FUNCIONA)
+               (fechaIni <= fechaActual) &&  (fechaFin >= fechaActual)) {
+                 alert('Entro al final del for');
+                 this.inmuebles.push(i);
+               }
               }
             }
 

@@ -15,11 +15,12 @@ export class AsignarVisitasComponent implements OnInit {
 
   // Listado de visitas
   visitas: Array<ReservarVisita> = [];
+  visitasFinales: Array<ReservarVisita> = [];
    // Listado de empleados
   empleados: Array<Empleado> = [];
 
-   // Visita seleccionada para comentar
-   visitaSeleccionada: ReservarVisita = new ReservarVisita();
+  // Visita seleccionada para comentar
+  visitaSeleccionada: ReservarVisita = new ReservarVisita();
 
    // Empleado seleccionado para asignarlo a la visita
   empleadoSeleccionado: Empleado = new Empleado();
@@ -81,6 +82,8 @@ export class AsignarVisitasComponent implements OnInit {
     if (rta.data === 'exito') {
       this.msj = 'Se ha asignado el empleado exitosamente !';
       this.show = 2;
+      this.visitasFinales = Array<ReservarVisita>();
+      this.listarVisitas();
       this.limpiarCampos();
     } else {
       this.msj = 'No se ha podido asignar el empleado: ' + rta.data;
@@ -111,18 +114,21 @@ export class AsignarVisitasComponent implements OnInit {
 
   agregarObjetosVisitas(lista: Array<ReservarVisita>) {
     for (const i of lista) {
-      const data = i.fecha.split('T');
-      const fecha = data[0];
-      i.fecha = fecha;
-      this.servicioGenerico.buscar('inmueble', {'id': i.inmueble}).subscribe(r2 => {
-        i.inmueble = r2.data;
-        this.servicioGenerico.buscar('personas', {'id': i.empleado}).subscribe(r3 => {
-          i.empleado = r3.data;
-          this.servicioGenerico.buscar('personas', {'id': i.cliente}).subscribe(r4 => {
-            i.cliente = r4.data;
+      if (i.empleado == null) {
+        const data = i.fecha.split('T');
+        const fecha = data[0];
+        i.fecha = fecha;
+        this.servicioGenerico.buscar('inmueble', {'id': i.inmueble}).subscribe(r2 => {
+          i.inmueble = r2.data;
+          this.servicioGenerico.buscar('personas', {'id': i.empleado}).subscribe(r3 => {
+            i.empleado = r3.data;
+            this.servicioGenerico.buscar('personas', {'id': i.cliente}).subscribe(r4 => {
+              i.cliente = r4.data;
+              this.visitasFinales.push(i);
+            });
           });
         });
-      });
+      }
     }
   }
 
