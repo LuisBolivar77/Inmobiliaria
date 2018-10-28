@@ -43,7 +43,7 @@ export class AsignarArriendoContratoComponent implements OnInit {
   }
 
   listarArriendos() {
-    this.generico.listar('venta', null).subscribe(res => {
+    this.generico.listar('arriendo', null).subscribe(res => {
       this.arriendos = res.data;
       this.agregarObjetosArriendos();
     });

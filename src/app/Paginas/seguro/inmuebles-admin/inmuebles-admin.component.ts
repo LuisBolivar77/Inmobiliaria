@@ -90,7 +90,7 @@ export class InmueblesAdminComponent implements OnInit {
 
   ngOnInit() {
 
-    // Validamos si el usuario tiene acceso a la pagina
+    //  Validamos si el usuario tiene acceso a la pagina
     this.usuarioServicio.esAccesible('administracion/gestion-inmuebles');
 
     this.inmueble = new Inmueble();

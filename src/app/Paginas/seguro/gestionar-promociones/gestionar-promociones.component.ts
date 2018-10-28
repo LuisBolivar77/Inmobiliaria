@@ -29,7 +29,7 @@ export class GestionarPromocionesComponent implements OnInit {
   constructor(private genericoServicio: GenericoService, private usuarioServicio: UsuarioService) { }
 
   ngOnInit() {
-    this.usuarioServicio.esAccesible('administracion/gestionar-personas');
+    this.usuarioServicio.esAccesible('administrador/gestionar-promociones');
     this.listar();
   }
 
@@ -91,7 +91,7 @@ export class GestionarPromocionesComponent implements OnInit {
           // window.alert(this.msj);
           // limpiamos los campos
           form.reset();
-          // Actualizamos la lista de personas
+          //  Actualizamos la lista de personas
           this.listar();
         } else {
           this.msj = rta.data;

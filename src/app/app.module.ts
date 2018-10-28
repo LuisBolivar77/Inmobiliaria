@@ -75,6 +75,10 @@ import { GestionReunionesComponent } from './Paginas/seguro/gestion-reuniones/ge
     }),
     RouterModule.forRoot([
       {
+        path: 'administrador/reuniones',
+        component: GestionReunionesComponent
+      },
+      {
         path: 'empleado/visitas-empleado',
         component: VisitasEmpleadoComponent
       },
