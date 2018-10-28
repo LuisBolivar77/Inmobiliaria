@@ -31,6 +31,7 @@ import { AsignarArriendoContratoComponent } from './Paginas/seguro/asignar-arrie
 import { AsignarVisitasComponent } from './Paginas/seguro/asignar-visitas/asignar-visitas.component';
 import { VisitasEmpleadoComponent } from './Paginas/seguro/visitas-empleado/visitas-empleado.component';
 import { GestionReunionesComponent } from './Paginas/seguro/gestion-reuniones/gestion-reuniones.component';
+import { GenerarReportesComponent } from './Paginas/seguro/generar-reportes/generar-reportes.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { GestionReunionesComponent } from './Paginas/seguro/gestion-reuniones/ge
     AsignarVisitasComponent,
     VisitasEmpleadoComponent,
     AsignarArriendoContratoComponent,
-    GestionReunionesComponent
+    GestionReunionesComponent,
+    GenerarReportesComponent
   ],
   imports: [
     BrowserModule,
@@ -74,6 +76,10 @@ import { GestionReunionesComponent } from './Paginas/seguro/gestion-reuniones/ge
       apiKey: 'AIzaSyB0WP4oGVaDXx-3HZDqzwNsbUi6yS6lEk8'
     }),
     RouterModule.forRoot([
+      {
+        path: 'administracion/generar-reportes',
+        component: GenerarReportesComponent
+      },
       {
         path: 'empleado/visitas-empleado',
         component: VisitasEmpleadoComponent
