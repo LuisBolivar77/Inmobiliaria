@@ -1,13 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { GenericoService } from 'src/app/Servicios/genericoServ.service';
 import { UsuarioService } from 'src/app/Servicios/usuarioServ.service';
-import * as FileSaver from 'file-saver';
-import * as XLSX from 'xlsx';
 import { ReservarVisita } from 'src/app/Modelo/ReservarVisita';
 import { Inmueble } from 'src/app/Modelo/Inmueble';
-
-const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
-const EXCEL_EXTENSION = '.xlsx';
 
 @Component({
   selector: 'app-generar-reportes',
@@ -166,6 +161,7 @@ export class GenerarReportesComponent implements OnInit {
       });
 
       // Obtenemos la promocion
+      // if (i.promocion != '' || i.promocion!= null ) {
       if (i.promocion.id != '' || i.promocion.id != null ) {
         this.servicioGenerico.buscar('promocion', { 'id': i.promocion }).subscribe(r4 => {
           // Setteamos la promocion
@@ -173,8 +169,6 @@ export class GenerarReportesComponent implements OnInit {
             i.promocion = r4.data;
           }
         });
-      }else{
-        i.promocion = null;
       }
        
       this.inmueblesFinal.push(i);
