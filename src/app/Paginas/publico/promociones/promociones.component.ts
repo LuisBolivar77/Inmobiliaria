@@ -58,7 +58,7 @@ export class PromocionesComponent implements OnInit {
             this.promociones = r.data;
             for (const i of this.inmuebleFiltro) {
               for (const j of this.promociones) {
-                const inmu = i.promocion;
+                const inmu = i.promocion.id;
                 const promo = j.id;
                 const fechaIni = new Date(j.fecha_inicio);
                 const fechaFin = new Date(j.fecha_fin);
