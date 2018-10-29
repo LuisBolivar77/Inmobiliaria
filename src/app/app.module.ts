@@ -32,6 +32,7 @@ import { AsignarVisitasComponent } from './Paginas/seguro/asignar-visitas/asigna
 import { VisitasEmpleadoComponent } from './Paginas/seguro/visitas-empleado/visitas-empleado.component';
 import { GestionReunionesComponent } from './Paginas/seguro/gestion-reuniones/gestion-reuniones.component';
 import { GenerarReportesComponent } from './Paginas/seguro/generar-reportes/generar-reportes.component';
+import { MatExpansionModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { GenerarReportesComponent } from './Paginas/seguro/generar-reportes/gene
     MatIconModule,
     MatListModule,
     HttpClientModule,
+    MatExpansionModule,
     FormsModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyB0WP4oGVaDXx-3HZDqzwNsbUi6yS6lEk8'
