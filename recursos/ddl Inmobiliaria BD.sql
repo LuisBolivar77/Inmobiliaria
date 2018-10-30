@@ -231,7 +231,9 @@ CREATE TABLE reunion (
     id            INTEGER NOT NULL,
     fecha         DATE NOT NULL,
     descripcion   VARCHAR(1000) NOT NULL,
-    persona       INTEGER NOT NULL
+    estado        INTEGER NOT NULL,
+    cliente       INTEGER NOT NULL,
+    empleado      INTEGER NOT NULL
 );
 
 ALTER TABLE reunion ADD CONSTRAINT reunion_pk PRIMARY KEY ( id );
@@ -278,6 +280,12 @@ CREATE TABLE venta (
 );
 
 ALTER TABLE venta ADD CONSTRAINT venta_pk PRIMARY KEY ( id );
+
+ALTER TABLE reunion ADD CONSTRAINT persona FOREIGN KEY ( cliente )
+  REFERENCES usuarios ( persona );
+
+ALTER TABLE reunion ADD CONSTRAINT usuario FOREIGN KEY ( empleado )
+  REFERENCES empleados ( usuario );
 
 ALTER TABLE rol_accesos ADD CONSTRAINT acceso FOREIGN KEY ( acceso )
     REFERENCES accesos ( id );

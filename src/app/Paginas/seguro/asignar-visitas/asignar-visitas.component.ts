@@ -3,9 +3,7 @@ import { ReservarVisita } from 'src/app/Modelo/ReservarVisita';
 import { Usuario } from 'src/app/Modelo/Usuario';
 import { GenericoService } from 'src/app/Servicios/genericoServ.service';
 import { UsuarioService } from 'src/app/Servicios/usuarioServ.service';
-import { Persona } from 'src/app/Modelo/Persona';
 import { Empleado } from 'src/app/Modelo/Empleado';
-import { NgForm } from '@angular/forms';
 import { AuxiliarObjeto } from 'src/app/Modelo/AuxiliarObjeto';
 
 @Component({
@@ -15,117 +13,123 @@ import { AuxiliarObjeto } from 'src/app/Modelo/AuxiliarObjeto';
 })
 export class AsignarVisitasComponent implements OnInit {
 
-  
-   // Listado de visitas
-   visitas: Array<ReservarVisita> = [];
-   //Listado de empleados
+  // Listado de visitas
+  visitas: Array<ReservarVisita> = [];
+  visitasFinales: Array<ReservarVisita> = [];
+   // Listado de empleados
   empleados: Array<Empleado> = [];
 
-   // Visita seleccionada para comentar 
-   visitaSeleccionada: ReservarVisita = new ReservarVisita();
+  // Visita seleccionada para comentar
+  visitaSeleccionada: ReservarVisita = new ReservarVisita();
 
-   //Empleado seleccionado para asignarlo a la visita
+   // Empleado seleccionado para asignarlo a la visita
   empleadoSeleccionado: Empleado = new Empleado();
 
-   //usuario de session
-   usuarioSesion:Usuario = new Usuario();
+  // usuario de session
+  usuarioSesion: Usuario = new Usuario();
 
    // Variables para los mensajes en la pagina
   show: number;
   msj: string;
 
-  //mostradores
-  numeroVisita:number;
-  nombreCliente:String;
-  nombreEmpleado:String; 
+  // mostradores
+  numeroVisita: number;
+  nombreCliente: String;
+  nombreEmpleado: String;
 
-  //arreglo de horas
-  horas:Array<String> = []
+  // arreglo de horas
+  horas: Array<String> = [];
 
-  constructor(private servicioGenerico:GenericoService, private usuarioServicio:UsuarioService) { }
+  constructor(private servicioGenerico: GenericoService, private usuarioServicio: UsuarioService) { }
 
   ngOnInit() {
-    
-    this.usuarioServicio.esAccesible("administracion/asignar-visitas");
+
+    this.usuarioServicio.esAccesible('administracion/asignar-visitas');
     this.usuarioSesion = this.usuarioServicio.getUsuario();
     this.listarVisitas();
     this.listarEmpleados();
   }
 
-  seleccionarVisita(visita:ReservarVisita){
+  seleccionarVisita(visita: ReservarVisita) {
     this.visitaSeleccionada = visita;
-    this.numeroVisita=visita.id;
-    this.nombreCliente=visita.cliente.nombre;
+    this.numeroVisita = visita.id;
+    this.nombreCliente = visita.cliente.nombre;
   }
 
-  seleccionEmpleado(empleado:Empleado){
+  seleccionEmpleado(empleado: Empleado) {
     this.empleadoSeleccionado = empleado;
     this.nombreEmpleado = empleado.usuario.persona.nombre;
   }
 
-  asignarVisita():void{
-    console.log("*/////////-- "+this.visitaSeleccionada);
-    if(this.visitaSeleccionada.id==null || this.empleadoSeleccionado.usuario==null){
-      this.msj = "Por favor seleccione una visita y un empleado";
+  asignarVisita(): void {
+    console.log('*/////////-- ' + this.visitaSeleccionada);
+    if (this.visitaSeleccionada.id == null || this.empleadoSeleccionado.usuario == null) {
+      this.msj = 'Por favor seleccione una visita y un empleado';
       this.show = 1;
       window.alert(this.msj);
       return;
     }
-    this.visitaSeleccionada.empleado=this.empleadoSeleccionado.usuario.persona;
-    this.visitaSeleccionada.comentario="";
-    var aux: AuxiliarObjeto = new AuxiliarObjeto();
-       aux.objeto = this.visitaSeleccionada;
-       aux.replaceValue("inmueble",this.visitaSeleccionada.inmueble.id);
-       aux.replaceValue("cliente",this.visitaSeleccionada.cliente.id);
-       aux.replaceValue("empleado",this.visitaSeleccionada.empleado.id);
+    this.visitaSeleccionada.empleado = this.empleadoSeleccionado.usuario.persona;
+    this.visitaSeleccionada.comentario = '';
+    const aux: AuxiliarObjeto = new AuxiliarObjeto();
+    aux.objeto = this.visitaSeleccionada;
+    aux.replaceValue('inmueble', this.visitaSeleccionada.inmueble.id);
+    aux.replaceValue('cliente', this.visitaSeleccionada.cliente.id);
+    aux.replaceValue('empleado', this.visitaSeleccionada.empleado.id);
 
-       console.log(this.visitaSeleccionada);
-       this.servicioGenerico.editar('reservar_visita',aux.objeto,'id').subscribe(rta=>{
-        if (rta.data === 'exito') {
-          this.msj = 'Se ha asignado el empleado exitosamente !';
-          this.show = 2;
-          this.limpiarCampos();
-        } else {
-          this.msj = 'No se ha podido asignar el empleado: ' + rta.data;
-          this.show = 1;
-        }
-        window.alert(this.msj);
-      });
-  
-  }
- 
-  limpiarCampos(){
-    this.numeroVisita=null;
-    this.nombreCliente="";
-    this.nombreEmpleado="";
-    this.visitaSeleccionada.mensaje="";
+    console.log(this.visitaSeleccionada);
+    this.servicioGenerico.editar('reservar_visita', aux.objeto, 'id').subscribe(rta => {
+    if (rta.data === 'exito') {
+      this.msj = 'Se ha asignado el empleado exitosamente !';
+      this.show = 2;
+      this.visitasFinales = Array<ReservarVisita>();
+      this.listarVisitas();
+      this.limpiarCampos();
+    } else {
+      this.msj = 'No se ha podido asignar el empleado: ' + rta.data;
+      this.show = 1;
+    }
+      window.alert(this.msj);
+    });
   }
 
+  limpiarCampos() {
+    this.numeroVisita = null;
+    this.nombreCliente = '';
+    this.nombreEmpleado = '';
+    this.visitaSeleccionada.mensaje = '';
+  }
 
 
-  //Lista las visitas a las cuales estan pendientes
-  listarVisitas(){
-    this.servicioGenerico.listar("reservar_visita",{"estado":"'PENDIENTE'"}).subscribe(rta=>{
-      if(rta.data!=null){
-        this.visitas=rta.data;
+
+  // Lista las visitas a las cuales estan pendientes
+  listarVisitas() {
+    this.servicioGenerico.listar('reservar_visita', {'estado': "'PENDIENTE'"}).subscribe(rta => {
+      if (rta.data != null) {
+        this.visitas = rta.data;
        this.agregarObjetosVisitas(this.visitas);
       }
     });
   }
 
-  agregarObjetosVisitas(lista){
-    for(let i of lista){
-      this.servicioGenerico.buscar("inmueble",{"id":i.inmueble}).subscribe(r2 => {
-        i.inmueble = r2.data;
-        this.servicioGenerico.buscar("personas",{"id":i.empleado}).subscribe(r3 => {
-          i.empleado = r3.data;
-          this.servicioGenerico.buscar("personas",{"id":i.cliente}).subscribe(r4 => {
-            i.cliente = r4.data;
+  agregarObjetosVisitas(lista: Array<ReservarVisita>) {
+    for (const i of lista) {
+      if (i.empleado == null) {
+        const data = i.fecha.split('T');
+        const fecha = data[0];
+        i.fecha = fecha;
+        this.servicioGenerico.buscar('inmueble', {'id': i.inmueble}).subscribe(r2 => {
+          i.inmueble = r2.data;
+          this.servicioGenerico.buscar('personas', {'id': i.empleado}).subscribe(r3 => {
+            i.empleado = r3.data;
+            this.servicioGenerico.buscar('personas', {'id': i.cliente}).subscribe(r4 => {
+              i.cliente = r4.data;
+              this.visitasFinales.push(i);
+            });
           });
         });
-      });
+      }
     }
-    
   }
 
  /**

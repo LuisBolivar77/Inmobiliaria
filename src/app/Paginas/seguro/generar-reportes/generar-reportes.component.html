@@ -1,0 +1,144 @@
+<div class="contact">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="row">
+          <!-- Tabla de Visitas a inmuebles -->
+          <div class="col-lg-8">
+            <br>
+
+            <!-- Exportacion de Lista de promociones -->
+            <div class="accordion d-flex flex-row align-items-center" style="width: 90vw">
+              <div>Generar informe de visitas reservadas</div>
+            </div>
+            <div class="accordion_panel" style="width: 90vw">
+              <div class="section_subtitle"> Lista de promociones ({{reservarVista.length}})</div><br>
+
+              <input type="button" (click)="tableToExcel('testTable', 'EmployeeList')" value="Exportar a Excel">
+              <table class="table" id="testTable">
+                <thead>
+                  <tr>
+                    <th scope="col">Fecha de visita</th>
+                    <th scope="col">Mensaje
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">inmueble</th>
+                    <th scope="col">Cliente</th>
+                    <th scope="col">Empleado</th>
+                    <th scope="col">Comentario</th>
+                    <th scope="col">Hora Visita</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let v of reservarVista">
+                    <th scope="row">{{v.fecha}}</th>
+                    <td>{{v.mensaje}}</td>
+                    <td>{{v.estado}}</td>
+                    <td>{{v.inmueble.numero_matricula}}</td>
+                    <td>{{v.cliente.cedula}}</td>
+                    <td>{{v.empleado.nombre}}</td>
+                    <td>{{v.comentario}}</td>
+                    <td>{{v.hora_visita}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Exportacion de Lista de inmuebles -->
+            <div class="accordion d-flex flex-row align-items-center" style="width: 90vw;">
+              <div>Generar informe de inmuebles</div>
+            </div>
+            <div class="accordion_panel" style="width: 90vw;">
+              <div style="overflow-x: auto; width: 90vw;">
+                <div class="section_subtitle"> Lista de inmuebles({{inmueblesFinal.length}})</div><br>
+
+                <input type="button" (click)="tableToExcel('testTableInmueble', 'EmployeeList')" value="Exportar a Excel">
+                <table class="table" id="testTableInmueble">
+                  <thead>
+                    <tr>
+                      <th scope="col">Dirección</th>
+                      <th scope="col">Area M²</th>
+                      <th scope="col">Valor</th>
+                      <th scope="col"># de Baños</th>
+                      <th scope="col">Estado Actual</th>
+                      <th scope="col">Garaje</th>
+                      <th scope="col"># de Habitaciones</th>
+                      <th scope="col">Detalles</th>
+                      <th scope="col">Años de construccion</th>
+                      <th scope="col">Ascensor</th>
+                      <th scope="col">Canchas Deportivas</th>
+                      <th scope="col">Zonas Humedas</th>
+                      <th scope="col">Zonas Infantiles</th>
+                      <th scope="col">Jardines</th>
+                      <th scope="col">Transporte Cercano</th>
+                      <th scope="col">Precio negociable</th>
+                      <th scope="col">Zona de Ropa</th>
+                      <th scope="col">Parqueadero</th>
+                      <th scope="col">Deposito</th>
+                      <th scope="col">estudio</th>
+                      <th scope="col">Tipo de Cortinas</th>
+                      <th scope="col">CuartoServicio</th>
+                      <th scope="col">Chimenea</th>
+                      <th scope="col">Cocina AC</th>
+                      <th scope="col">Comedor Independiente</th>
+                      <th scope="col">Vista Exterior</th>
+                      <th scope="col">Zona (Ubicacion en la ciudad)</th>
+                      <th scope="col">Fecha de Aprobacion</th>
+                      <th scope="col">Latitud</th>
+                      <th scope="col">Longitud</th>
+                      <th scope="col">Tipo</th>
+                      <th scope="col">Ciudad</th>
+                      <th scope="col">Usuario</th>
+                      <th scope="col">promocion que aplica</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let vi of inmueblesFinal">
+                      <th scope="row">{{vi.direccion}}</th>
+                      <td>{{vi.area}}</td>
+                      <td>{{vi.valor}}</td>
+                      <td>{{vi.banios}}</td>
+                      <td>{{vi.estado}}</td>
+                      <td>{{vi.garaje}}</td>
+                      <td>{{vi.habitaciones}}</td>
+                      <td>{{vi.detalles}}</td>
+                      <td>{{vi.anoconstruccion}}</td>
+                      <td>{{vi.ascensor}}</td>
+                      <td>{{vi.canchasDepor}}</td>
+                      <td>{{vi.zonasHumedas}}</td>
+                      <td>{{vi.zonaInfantil}}</td>
+                      <td>{{vi.jardines}}</td>
+                      <td>{{vi.transporteCercano}}</td>
+                      <td>{{vi.precioNegociable}}</td>
+                      <td>{{vi.zonaRopas}}</td>
+                      <td>{{vi.parqueadero}}</td>
+                      <td>{{vi.deposito}}</td>
+                      <td>{{vi.estudio}}</td>
+                      <td>{{vi.tipoCortinas}}</td>
+                      <td>{{vi.cuartoServicio}}</td>
+                      <td>{{vi.chimenea}}</td>
+                      <td>{{vi.cocinaAC}}</td>
+                      <td>{{vi.comedorIndependiente}}</td>
+                      <td>{{vi.vistaExterior}}</td>
+                      <td>{{vi.zona}}</td>
+                      <td>{{vi.fechaAprobacion}}</td>
+                      <td>{{vi.latitud}}</td>
+                      <td>{{vi.longitud}}</td>
+                      <td>{{vi.tipo.nombre}}</td>
+                      <td>{{vi.ciudad.nombre}}</td>
+                      <td>{{vi.usuario.username}}</td>
+                      <td>{{vi.promocion.descripcion}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

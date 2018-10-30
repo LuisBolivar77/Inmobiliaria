@@ -6,6 +6,7 @@ import { GenericoService } from '../../../Servicios/genericoServ.service';
 import { UsuarioService } from '../../../Servicios/usuarioServ.service';
 import { NgForm } from '../../../../../node_modules/@angular/forms';
 import { AuxiliarObjeto } from '../../../Modelo/AuxiliarObjeto';
+import { Empleado } from 'src/app/Modelo/Empleado';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class AsignarArriendoContratoComponent implements OnInit {
   contratos: Array<Contrato> = [];
   constratosFinales: Array<Contrato> = [];
   arriendos: Array<Arriendo> = [];
-  arriendo: Arriendo= new Arriendo();
+  arr: Arriendo = new Arriendo();
   contrato: Contrato = new Contrato();
 
   // usuario en sesion
@@ -28,9 +29,9 @@ export class AsignarArriendoContratoComponent implements OnInit {
    show: number;
    msj: string;
    idContrato: number;
-   valorFinal: number;
    busco: boolean;
    verSelec = false;
+   descripcionSel: string;
 
   constructor(private generico: GenericoService, private usuarioServicio: UsuarioService) { }
 
@@ -41,6 +42,48 @@ export class AsignarArriendoContratoComponent implements OnInit {
     this.listar();
   }
 
+  listarArriendos() {
+    this.generico.listar('arriendo', null).subscribe(res => {
+      this.arriendos = res.data;
+      this.agregarObjetosArriendos();
+    });
+  }
+
+  agregarObjetosArriendos() {
+    for (const v of this.arriendos) {
+
+      const data = v.fecha.split('T');
+      const fecha = data[0];
+      v.fecha = fecha;
+
+      this.generico.buscar('contrato', {'id': v.contrato}).subscribe(res => {
+        v.contrato = res.data;
+        this.generico.buscar('reservar_visita', {'id': v.contrato.visita}).subscribe(res2 => {
+          v.contrato.visita = res2.data;
+          this.generico.buscar('inmueble', {'id': v.contrato.visita.inmueble}).subscribe(res3 => {
+            v.contrato.visita.inmueble = res3.data;
+            this.generico.buscar('usuarios', {'persona': v.contrato.cliente}).subscribe(res1 => {
+              v.contrato.cliente = res1.data;
+              this.generico.buscar('personas', {'id': v.contrato.cliente.persona}).subscribe(res5 => {
+                v.contrato.cliente.persona = res5.data;
+                this.generico.buscar('empleados', {'usuario': v.empleado}).subscribe(res4 => {
+                  v.empleado = res4.data;
+                  this.generico.buscar('usuarios', {'persona': v.empleado.usuario}).subscribe(res6 => {
+                    v.empleado.usuario = res6.data;
+                    this.generico.buscar('personas', {'id': v.empleado.usuario.persona}).subscribe(res7 => {
+                      v.empleado.usuario.persona = res7.data;
+                    });
+                  });
+                });
+              });
+            });
+          });
+        });
+      });
+    }
+  }
+
+
   /**
    * lista los contratos de estado "1" para llegar a su finalizacion
    */
@@ -48,7 +91,7 @@ export class AsignarArriendoContratoComponent implements OnInit {
     this.generico.listar('contrato', {'estado': 1}).subscribe(res => {
       this.contratos = res.data;
       this.agregarObjetos();
-      
+      this.listarArriendos();
     });
   }
 
@@ -116,47 +159,47 @@ export class AsignarArriendoContratoComponent implements OnInit {
   }
 
   registrar(form: NgForm) {
+    const empleado: Empleado = new Empleado();
 
     const fecha = this.fechaActual();
-    this.arriendo.fecha = fecha;
-    this.arriendo.empleado = this.usuarioServicio.getUsuario();
-    this.arriendo.contrato = this.contrato;
+    this.arr.fecha = fecha;
+    this.arr.empleado = empleado;
+    this.arr.contrato = this.contrato;
+    this.arr.descripcion = this.descripcionSel;
     const aux: AuxiliarObjeto = new AuxiliarObjeto();
-    aux.objeto = this.arriendo;
+    aux.objeto = this.arr;
     aux.replaceValue('contrato', this.contrato.id);
+    aux.replaceValue('empleado', this.usuarioSesion.persona.id);
+    console.log(aux.objeto);
+
 
     this.generico.registrar('arriendo', aux.objeto).subscribe(res => {
       if (res.data === 'exito') {
-        this.msj = 'El arriendo se ha registrado correctamente';
-        this.show = 2;
-        form.reset();
+        this.contrato.estado = 2;
+        const aux2: AuxiliarObjeto = new AuxiliarObjeto();
+        aux2.objeto = this.contrato;
+        aux2.replaceValue('cliente', this.contrato.cliente.persona.id);
+        aux2.replaceValue('empleado', this.contrato.empleado.usuario.persona.id);
+        aux2.replaceValue('visita', this.contrato.visita.id);
+
+        this.generico.editar('contrato', aux2.objeto, 'id').subscribe(res2 => {
+          if (res2.data === 'exito') {
+            this.msj = 'el arriendo se ha registrado correctamente';
+            this.show = 2;
+            this.descripcionSel = '';
+            this.constratosFinales = new Array<Contrato>();
+            this.listar();
+            form.reset();
+          } else {
+            this.msj = res2.data;
+            this.show = 1;
+          }
+        });
       } else {
         this.msj = res.data;
         this.show = 1;
       }
     });
-  }
-
-  /**
-   * edita el estado del contrato con valor '2' para saber que esta finalizado
-   */
-  editarEstado(form: NgForm){
-    
-    this.contrato.estado=2;
-
-    this.generico.editar('contrato',this.contrato,'id').subscribe(res => {
-      if (res.data === 'exito') {
-        this.msj = 'el contrato de arriendo se edito correctamente';
-        this.show = 2;
-        this.verSelec = false;
-        form.reset();
-        this.listar();
-      } else {
-        this.show = 1;
-        this.msj = res.data;
-      }
-    });
-
   }
 
   fechaActual(): string {

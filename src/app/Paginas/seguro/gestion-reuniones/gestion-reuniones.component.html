@@ -1,0 +1,87 @@
+<div class="contact">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+          <mat-accordion class="mat-expansion-demo-width">
+            <mat-expansion-panel [expanded]="step === 0">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Listado de reuniones
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <div class="col-lg-8">
+                  <br>
+                  <div class="section_subtitle"> Total de reuniones ({{reuniones.length}})</div><br>
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Id de la reunion</th>
+                        <th scope="col">fecha de la reunion</th>
+                        <th scope="col">descripcion</th>
+                        <th scope="col">estado de la reunion</th>
+                        <th scope="col">cedula del cliente</th>
+                        <th scope="col">cedula del empleado</th>
+                        <th scope="col">Accion</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let r of reuniones">
+                        <td>{{r.id}}</td>
+                        <td>{{r.fecha}}</td>
+                        <td>{{r.descripcion}}</td>
+                        <td>{{estadoReunion(r.estado)}}</td>
+                        <td>{{r.cliente.persona.cedula}}</td>
+                        <td>{{r.empleado.usuario.persona.cedula}}</td>
+                        <td><button *ngIf="valEstadoReunion(r.estado) === true" class="btn" (click)="ver(r)">Editar la reunion</button></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+            </mat-expansion-panel>
+            </mat-accordion>
+            <br>
+              <mat-expansion-panel [expanded]="step === 1">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Registro y edicion de reuniones
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="contact_form_container">
+                    <form #datosForm="ngForm" class="contact_form" id="contact_form">
+                      <div class="section_subtitle"> Datos necesarios para gestionar la reunion </div>
+                        <div class="row">
+                          <div class="col-lg-6">
+                            <label>Decripcion de la reunion:</label>
+                            <input type="number" min="1" [(ngModel)]="reunion.descripcion" name="descripcion" class="contact_input" placeholder="Descripcion de la reunion" required="required" >
+                          </div>
+                          <div class="col-lg-6">
+                              <label>fecha de la reunion:</label>
+                              <input type="date" [(ngModel)]="reunion.fecha" name="fechaReunion" class="contact_input" placeholder="Fecha de la reunion" required="required" max="2000-01-01" >
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-lg-6">
+                            <label>Empleado:</label>
+                            <select [(ngModel)]="empleadoSeleccionado.usuario" name="empleado"><option *ngFor="let e of empleados" value="{{e.id}}">{{e.nombre}}</option></select>
+                          </div>
+                          <div class="col-lg-6">
+                            <label>Cliente:</label>
+                            <select [(ngModel)]="clienteSeleccionado.id" name="cliente"><option *ngFor="let c of clientes" value="{{c.id}}">{{c.nombre}}</option></select>
+                          </div>
+                        </div>
+                    </form>
+                  </div>            
+                  <div>
+                      <form #datosForm="ngForm" class="contact_form" id="contact_form">              
+                        <div class="col-lg-6">
+                          <button *ngIf="!editarSelected" type="submit" (click)="registrar(datosForm)"  style="width: 100%" class="contact_button button">Registrar Reunion</button>
+                          <button *ngIf="editarSelected" type="submit" (click)="editar(datosForm)"  style="width: 100%" class="contact_button button">Editar Reunion</button>
+                          <button *ngIf="editarSelected" type="submit" (click)="limpiarCampos(datosForm)"  style="width: 100%" class="contact_button button">Limpiar Campos</button>
+                        </div>
+                      </form>
+                  </div>
+              </mat-expansion-panel>
+</div>
+</div>
+</div>
+</div>

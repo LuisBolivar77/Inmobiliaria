@@ -30,6 +30,9 @@ import { VisitasClienteComponent } from './Paginas/seguro/visitas-cliente/visita
 import { AsignarArriendoContratoComponent } from './Paginas/seguro/asignar-arriendo-contrato/asignar-arriendo-contrato.component';
 import { AsignarVisitasComponent } from './Paginas/seguro/asignar-visitas/asignar-visitas.component';
 import { VisitasEmpleadoComponent } from './Paginas/seguro/visitas-empleado/visitas-empleado.component';
+import { GestionReunionesComponent } from './Paginas/seguro/gestion-reuniones/gestion-reuniones.component';
+import { GenerarReportesComponent } from './Paginas/seguro/generar-reportes/generar-reportes.component';
+import { MatExpansionModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -55,7 +58,9 @@ import { VisitasEmpleadoComponent } from './Paginas/seguro/visitas-empleado/visi
     AsignarVentasContratosComponent,
     AsignarVisitasComponent,
     VisitasEmpleadoComponent,
-    AsignarArriendoContratoComponent
+    AsignarArriendoContratoComponent,
+    GestionReunionesComponent,
+    GenerarReportesComponent
   ],
   imports: [
     BrowserModule,
@@ -67,11 +72,20 @@ import { VisitasEmpleadoComponent } from './Paginas/seguro/visitas-empleado/visi
     MatIconModule,
     MatListModule,
     HttpClientModule,
+    MatExpansionModule,
     FormsModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyB0WP4oGVaDXx-3HZDqzwNsbUi6yS6lEk8'
     }),
     RouterModule.forRoot([
+      {
+        path: 'administrador/reuniones',
+        component: GestionReunionesComponent
+      },
+      {
+        path: 'administracion/generar-reportes',
+        component: GenerarReportesComponent
+      },
       {
         path: 'empleado/visitas-empleado',
         component: VisitasEmpleadoComponent

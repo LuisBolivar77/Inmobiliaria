@@ -60,6 +60,10 @@ exports.guardar = function(req, res){
                   objeto[key] = elObjeto[key];
             }
       }
+      console.log(data);
+      console.log(tabla);
+      console.log(elObjeto);
+      console.log(objeto);
       // La consulta a ejecutar
       var sql = "INSERT INTO "+tabla+" set ? ";
       // Imprimimos en consola la peticion y el origen

@@ -57,6 +57,7 @@ export class GenericoService {
      */
     registrar (table: string, object: object) {
         var data = {'tabla' : table, 'objeto' : object};
+        console.log(data);
         return this.http.post<any>(this.domain + 'generico/guardar', data)
         .pipe(
             map(res => {
@@ -171,9 +172,9 @@ export class GenericoService {
 
     /**
      * sube un archivo al servidor
-     * @param archivo 
+     * @param archivo
      */
-    cargarArchivo (archivo:File) {
+    cargarArchivo (archivo: File) {
         return this.http.post<any>(this.domain + 'archivo/subir', archivo)
         .pipe(
             map(res => {

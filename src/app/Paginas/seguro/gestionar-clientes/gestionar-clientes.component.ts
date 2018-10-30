@@ -58,7 +58,7 @@ export class GestionarClientesComponent implements OnInit {
     // Asignamos el rol a la persona
     this.persona.rol = this.rol;
     // Validamos si el usuario tiene acceso a la pagina
-    this.usuarioServicio.esAccesible('administracion/gestionar-clientes');
+    // this.usuarioServicio.esAccesible('administracion/gestionar-clientes');
     // Actualizamos la tabla de personas
     this.listar();
   }

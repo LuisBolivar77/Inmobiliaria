@@ -450,7 +450,7 @@ export class GestionarEmpleadosComponent implements OnInit {
    * Registra la experiencia del empleado
    */
   registrarExperiencia(form: NgForm) {
-    // Limpiamos el id, en caso de que hayan buscado una experiencia
+    // Limpiamos el id, en caso de    que hayan buscado una experiencia
     this.experiencia.id = null;
     if (this.empleado.usuario.persona.id != null) {
       // Asignamos el empleado a la experiencia
