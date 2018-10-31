@@ -37,7 +37,7 @@ export class AsignarVentasContratosComponent implements OnInit {
 
   ngOnInit() {
     // Validamos  si el usuario tiene acceso a la pagina
-    this.usuarioServicio.esAccesible('administracion/asignar-ventas-contratos');
+    // this.usuarioServicio.esAccesible('administracion/asignar-ventas-contratos');
     this.usuarioSesion = this.usuarioServicio.getUsuario();
     this.listar();
     console.log(this.usuarioSesion);

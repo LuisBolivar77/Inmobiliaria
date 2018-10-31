@@ -20,18 +20,21 @@ export class GestionReunionesComponent implements OnInit {
   clientes: Array<Persona> = [];
   empleados: Array<Persona> = [];
 
-  empleadoSeleccionado: Empleado = new Empleado();
+  empleadoSeleccionado: Persona = new Persona();
   clienteSeleccionado: Persona = new Persona();
   reunion: Reunion = new Reunion();
 
   editarSelected: boolean;
+  registrado = false;
+  editado = false;
+  eliminado = false;
 
   step: number;
 
   constructor(private generico: GenericoService, private usuarioServicio: UsuarioService) { }
 
   ngOnInit() {
-    this.usuarioServicio.esAccesible('administrador/reuniones');
+    // this.usuarioServicio.esAccesible('administrador/reuniones');
     this.listarReuniones();
     this.listarPersonas();
     this.step = 0;
@@ -52,42 +55,101 @@ export class GestionReunionesComponent implements OnInit {
     });
   }
 
-  registrar(form: NgForm) {
+  registrar() {
 
-    const empleadoTemp = new Empleado();
-    const personaTemp = new Usuario();
+    const fechaReunion = new Date(this.reunion.fecha);
+    const fechaActual = new Date;
 
-    this.reunion.estado = 0;
-    this.reunion.empleado = empleadoTemp;
-    this.reunion.cliente = personaTemp;
+    if (fechaActual < fechaReunion) {
 
-    const aux: AuxiliarObjeto = new AuxiliarObjeto();
-    aux.objeto = this.reunion;
-    aux.replaceValue('empleado', this.empleadoSeleccionado.usuario);
-    aux.replaceValue('cliente', this.clienteSeleccionado.id);
+      const empleadoTemp = new Empleado();
+      const personaTemp = new Usuario();
 
-    this.generico.registrar('reunion', aux.objeto).subscribe(res => {
+      this.reunion.estado = 0;
+      this.reunion.empleado = empleadoTemp;
+      this.reunion.cliente = personaTemp;
+
+      const aux: AuxiliarObjeto = new AuxiliarObjeto();
+      aux.objeto = this.reunion;
+      aux.replaceValue('empleado', this.empleadoSeleccionado.id);
+      aux.replaceValue('cliente', this.clienteSeleccionado.id);
+
+      this.generico.registrar('reunion', aux.objeto).subscribe(res => {
+        if (res.data === 'exito') {
+          this.limpiarCampos();
+          this.listarReuniones();
+          this.registrado = true;
+          window.alert('la reunion fue registrada exitosamente');
+        } else {
+          window.alert('ERROR, ' + res.data);
+        }
+      });
+    } else {
+      window.alert('debe seleccionar una fecha posterio a ' + fechaActual);
+    }
+  }
+
+  editar(form: NgForm) {
+
+    const fechaReunion = new Date(this.reunion.fecha);
+    const fechaActual = new Date;
+
+    if (fechaActual < fechaReunion) {
+
+      const aux: AuxiliarObjeto = new AuxiliarObjeto();
+      aux.objeto = this.reunion;
+      aux.replaceValue('empleado', this.empleadoSeleccionado.id);
+      aux.replaceValue('cliente', this.clienteSeleccionado.id);
+
+      this.generico.editar('reunion', aux.objeto, 'id').subscribe(res => {
+        if (res.data === 'exito') {
+          // form.reset();
+          this.step = 0;
+          this.listarReuniones();
+          this.editado = true;
+          window.alert('la reunion se edito exitosamente');
+        } else {
+          window.alert('ERROR, ' + res.data);
+        }
+      });
+    } else {
+      window.alert('debe seleccionar una fecha posterio a ' + fechaActual);
+    }
+
+  }
+
+  eliminar(id: string) {
+    this.generico.eliminar('reunion', {'id': id}).subscribe(res => {
       if (res.data === 'exito') {
-        window.alert('la reunion fue registrada exitosamente');
-        form.reset();
+        window.alert('La reunion fue eliminada');
+        this.eliminado = true;
+        this.listarReuniones();
       } else {
         window.alert('ERROR, ' + res.data);
       }
     });
   }
 
-  editar(form: NgForm) {
-
-  }
-
   ver(r: Reunion) {
+
     this.reunion = r;
+    this.empleadoSeleccionado.id = r.empleado.usuario.persona.id;
+    this.clienteSeleccionado.id = r.cliente.persona.id;
+
     this.editarSelected = true;
+    this.step = 1;
+
   }
 
-  limpiarCampos(form: NgForm) {
-    form.reset();
+  limpiarCampos() {
+    this.clienteSeleccionado.id = 0;
+    this.empleadoSeleccionado.id = 0;
+    this.reunion.descripcion = '';
+    this.reunion.fecha = '';
+    this.reunion.id = null;
     this.editarSelected = false;
+    this.listarReuniones();
+    this.step = 0;
   }
 
   agregarObjetos() {
@@ -101,13 +163,13 @@ export class GestionReunionesComponent implements OnInit {
 
       this.generico.buscar('usuarios', {'persona': r.cliente}).subscribe(res => {
         r.cliente = res.data;
-        this.generico.buscar('persona', {'id': r.cliente.persona}).subscribe(res2 => {
+        this.generico.buscar('personas', {'id': r.cliente.persona}).subscribe(res2 => {
           r.cliente.persona = res2.data;
           this.generico.buscar('empleados', {'usuario': r.empleado}).subscribe(res3 => {
             r.empleado = res3.data;
             this.generico.buscar('usuarios', {'persona': r.empleado.usuario}).subscribe(res4 => {
               r.empleado.usuario = res4.data;
-              this.generico.buscar('persona', {'id': r.empleado.usuario.persona}).subscribe(res5 => {
+              this.generico.buscar('personas', {'id': r.empleado.usuario.persona}).subscribe(res5 => {
                 r.empleado.usuario.persona = res5.data;
               });
             });
@@ -144,5 +206,18 @@ export class GestionReunionesComponent implements OnInit {
     }
     return false;
   }
+
+  validarRegistro(): boolean {
+    return this.registrado;
+  }
+
+  validarEdicion(): boolean {
+    return this.editado;
+  }
+
+  validarEliminacion(): boolean {
+    return this.eliminado;
+  }
+
 
 }
