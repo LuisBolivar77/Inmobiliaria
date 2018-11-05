@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PromocionesComponent } from './promociones.component';
+import { GenericoService } from 'src/app/Servicios/genericoServ.service';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterTestingModule } from '@angular/router/testing';
+import { Inmueble } from 'src/app/Modelo/Inmueble';
 
 describe('PromocionesComponent', () => {
   let component: PromocionesComponent;
@@ -8,6 +12,8 @@ describe('PromocionesComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      providers: [ GenericoService],
+      imports: [ HttpClientModule, RouterTestingModule],
       declarations: [ PromocionesComponent ]
     })
     .compileComponents();
@@ -18,8 +24,10 @@ describe('PromocionesComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
+/**
+  it('zona inmuebles', () => {
+    const respuesta = component.getZona;
+    expect(respuesta).toBeTruthy();
   });
+*/
 });

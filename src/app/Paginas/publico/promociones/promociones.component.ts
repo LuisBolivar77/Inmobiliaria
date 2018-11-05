@@ -66,8 +66,9 @@ export class PromocionesComponent implements OnInit {
                // alert(inmu +" = " +promo);
                if ((inmu === promo) && // Sale error por el objeto que compara con el number (FUNCIONA)
                (fechaIni <= fechaActual) &&  (fechaFin >= fechaActual)) {
-                 alert('Entro al final del for');
+                // alert('Entro al final del for');
                  this.inmuebles.push(i);
+                 return true;
                }
               }
             }
@@ -126,6 +127,7 @@ export class PromocionesComponent implements OnInit {
               // obtenemos las promosiones
               this.genericoServicio.buscar('promocion', { 'id': i.promocion }).subscribe(r6 => {
                 i.promocion = r6.data;
+                return true;
               });
             });
           });

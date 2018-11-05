@@ -10,15 +10,13 @@ import { Persona } from '../../../Modelo/Persona';
 import { Rol } from '../../../Modelo/Rol';
 import { FormsModule } from '../../../../../node_modules/@angular/forms';
 
-fdescribe('AsignarArriendoContratoComponent', () => {
+describe('AsignarArriendoContratoComponent', () => {
   let component: AsignarArriendoContratoComponent;
   let fixture: ComponentFixture<AsignarArriendoContratoComponent>;
   
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      providers: [ GenericoService],
-      imports: [HttpClientModule, FormsModule, RouterTestingModule],
       declarations: [ AsignarArriendoContratoComponent ]
     })
     .compileComponents();
