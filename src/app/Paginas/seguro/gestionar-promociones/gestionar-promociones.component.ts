@@ -167,19 +167,19 @@ export class GestionarPromocionesComponent implements OnInit {
   agregarObjetos() {
     for (const p of this.listPromociones) {
 
-    //  p.fecha_fin = this.cambiarFecha(p.fecha_fin);
-    //  p.fecha_inicio = this.cambiarFecha(p.fecha_inicio);
+      p.fecha_fin = this.cambiarFecha(p.fecha_fin);
+      p.fecha_inicio = this.cambiarFecha(p.fecha_inicio);
 
       this.listPromocionesFinal.push(p);
     }
   }
-/**
+
   cambiarFecha(fecha: string): string {
     const data = fecha.split('T');
     const fechaReturn = data[0];
 
     return fechaReturn;
-  }*/
+  }
 
   limpiarCampos(form: NgForm) {
     form.reset();
