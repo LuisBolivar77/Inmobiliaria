@@ -44,7 +44,7 @@ describe('AsignarArriendoContratoComponent', () => {
     expect(ver).toBeFalsy;
   });
 
-  it('editar un contrato arriendo', () => {
+  it('registrar', () => {
     // tslint:disable-next-line:prefer-const
     let contrato = new Contrato();
     // persona asociada al usuario
