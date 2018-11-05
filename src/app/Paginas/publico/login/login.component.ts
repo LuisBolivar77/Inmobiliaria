@@ -64,8 +64,8 @@ export class LoginComponent implements OnInit {
                     // una vez construido el objeto con el usuario, persona, rol, acceso
                     // procedemos a guardarlo como variable de sesion en angular 6
                     this.servicios.setUsuario(this.usuario);
-                    // Redirigimos el usuario al inicio
-                  //  window.location.reload();
+                  // Redirigimos el usuario al inicio
+                    window.location.reload();
                   });
                 }
               });

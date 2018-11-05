@@ -92,7 +92,7 @@ export class VisitasClienteComponent implements OnInit {
   }
 
   limpiarCampos() {
-    this.visitaSeleccionada.comentario = '';
+    this.visitaSeleccionada.mensaje = '';
     this.visitaSeleccionada.fecha = '';
     this.matriculaInmueble = '';
     this.detalleInmueble = '';
@@ -119,19 +119,27 @@ export class VisitasClienteComponent implements OnInit {
        aux.objeto = this.visitaSeleccionada;
        aux.replaceValue('inmueble', this.visitaSeleccionada.inmueble.id);
        aux.replaceValue('cliente', this.visitaSeleccionada.cliente.id);
-       aux.replaceValue('empleado', this.visitaSeleccionada.empleado.id);
+       if (this.visitaSeleccionada.empleado != null) {
+        aux.replaceValue('empleado', this.visitaSeleccionada.empleado.id);
+       }
+       console.log('antes del insertar');
 
     this.servicioGenerico.editar('reservar_visita', aux.objeto, 'id').subscribe(rta => {
+      console.log('despues del insertar antess del if');
       if (rta.data === 'exito') {
+        console.log('despues del if dentro del exito');
         this.msj = 'Se ha editado la fecha exitosamente !';
         this.show = 2;
+        window.alert(this.msj);
         this.limpiarCampos();
+        this.visitasFinal = new Array<ReservarVisita>();
         this.listar();
       } else {
+        console.log('despues del if dentro del exito');
         this.msj = 'No se ha podido editar la fecha ' + rta.data;
         this.show = 1;
+        window.alert(this.msj);
       }
-      window.alert(this.msj);
     });
   }
 
@@ -147,6 +155,7 @@ export class VisitasClienteComponent implements OnInit {
         this.msj = 'Se ha eliminado la visita correctamente';
         this.show = 2;
         this.limpiarCampos();
+        this.visitasFinal = new Array<ReservarVisita>();
         this.listar();
       } else {
         this.msj = 'No se ha podido eliminar la visita: ' + rta.data;

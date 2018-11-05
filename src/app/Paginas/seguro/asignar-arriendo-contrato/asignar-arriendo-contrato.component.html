@@ -67,12 +67,35 @@
                           </div>
                         </form>
                       </div>
-
-
                 </div>
               </div>
             </div>
           </div>
+        </div>
+        <div class="col-lg-8">
+          <br>
+          <div class="section_subtitle"> Listado de los arriendos de inmuebles que se han realizado en la inmobiliaria</div><br>
+          <div class="section_subtitle"> Numero de ventas: ({{arriendos.length}})</div><br>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Id del arriendo</th>
+                <th scope="col">Cliente</th>
+                <th scope="col">Fecha de finalizacion del arriendo</th>
+                <th scope="col">Matriucla del inmueble arrendado</th>
+                <th scope="col">Empleado que finalizo el arriendo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let v of arriendos">
+                <td>{{v.id}}</td>
+                <td>{{v.contrato.cliente.persona.cedula}}</td>
+                <td>{{v.fecha}}</td>
+                <td>{{v.contrato.visita.inmueble.numero_matricula}}</td> 
+                <td>{{v.empleado.usuario.persona.cedula}}</td>                             
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

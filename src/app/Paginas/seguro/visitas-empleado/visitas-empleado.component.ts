@@ -15,25 +15,25 @@ export class VisitasEmpleadoComponent implements OnInit {
 
  // Listado de visitas para comentar / editar
  visitas: Array<ReservarVisita> = [];
-  
- // Visita seleccionada para comentar 
+
+ // Visita seleccionada para comentar
  visitaSeleccionada: ReservarVisita = new ReservarVisita();
 
- //usuario de session
- usuarioSesion:Usuario = new Usuario();
+ // usuario de session
+ usuarioSesion: Usuario = new Usuario();
 
  // Variables para los mensajes en la pagina
 show: number;
 msj: string;
 
-//Variables de inmueble
-matriculaInmueble:String;
-detalleInmueble:String;
+// Variables de inmueble
+matriculaInmueble: String;
+detalleInmueble: String;
 
-  constructor(private servicioGenerico:GenericoService, private usuarioServicio:UsuarioService) { }
+  constructor(private servicioGenerico: GenericoService, private usuarioServicio: UsuarioService) { }
 
   ngOnInit() {
-    this.usuarioServicio.esAccesible("empleado/visitas-empleado");
+    this.usuarioServicio.esAccesible('empleado/visitas-empleado');
     this.usuarioSesion = this.usuarioServicio.getUsuario();
     this.listar();
   }
@@ -41,32 +41,34 @@ detalleInmueble:String;
   /**
    * Lisat las viitas del empleado que inicio sesion
    */
-  listar(){
-    this.servicioGenerico.listar("reservar_visita",{'empleado':this.usuarioSesion.persona.id,'estado':"'PENDIENTE'"}).subscribe(rta=>{
-      if(rta.data!=null){
-        this.visitas=rta.data;
+  listar() {
+    this.servicioGenerico.listar('reservar_visita', {'empleado': this.usuarioSesion.persona.id, 'estado': "'PENDIENTE'"}).subscribe(rta=>{
+      if (rta.data != null) {
+        this.visitas = rta.data;
        this.agregarObjetos(this.visitas);
       }
     });
   }
 
-  agregarObjetos(lista){
-    for(let i of lista){
-      this.servicioGenerico.buscar("inmueble",{"id":i.inmueble}).subscribe(r2 => {
+  agregarObjetos(lista: Array<ReservarVisita>) {
+    for (const i of lista) {
+      const data = i.fecha.split('T');
+      const fecha = data[0];
+      i.fecha = fecha;
+      this.servicioGenerico.buscar('inmueble', {'id': i.inmueble}).subscribe(r2 => {
         i.inmueble = r2.data;
-        this.servicioGenerico.buscar("persona",{"id":i.cliente}).subscribe(r3 => {
-        if(r3.data!=null){
+        this.servicioGenerico.buscar('persona', {'id': i.cliente}).subscribe(r3 => {
+        if (r3.data != null) {
           i.cliente = r3.data;
         }
-         
+
         });
       });
       console.log(i);
     }
-    
   }
 
-  verVisita(visita:ReservarVisita){
+  verVisita(visita: ReservarVisita) {
     const fields = visita.fecha.split('T');
     const fechaVisi = fields[0];
      visita.fecha = fechaVisi;
@@ -76,26 +78,26 @@ detalleInmueble:String;
 
   }
 
-  comentarVisita(form:NgForm):void{
-    if(this.visitaSeleccionada.id==null){
-      this.msj = "Por favor seleccione una visita";
+  comentarVisita(form: NgForm): void {
+    if (this.visitaSeleccionada.id == null) {
+      this.msj = 'Por favor seleccione una visita';
       this.show = 1;
       window.alert(this.msj);
       return;
     }
-    if(this.visitaSeleccionada.comentario==null){
-      this.msj = "Ingrese los comentarios de la visita por favor";
+    if (this.visitaSeleccionada.comentario == null) {
+      this.msj = 'Ingrese los comentarios de la visita por favor';
       this.show = 1;
       return;
-    }  
-    this.visitaSeleccionada.estado="ATENDIDA"
-    var aux: AuxiliarObjeto = new AuxiliarObjeto();
+    }
+    this.visitaSeleccionada.estado = 'ATENDIDA';
+    const aux: AuxiliarObjeto = new AuxiliarObjeto();
        aux.objeto = this.visitaSeleccionada;
-       aux.replaceValue("inmueble",this.visitaSeleccionada.inmueble.id);
-       aux.replaceValue("cliente",this.visitaSeleccionada.cliente.id);
-       aux.replaceValue("empleado",this.visitaSeleccionada.empleado.id);
-       
-    this.servicioGenerico.editar('reservar_visita',aux.objeto,'id').subscribe(rta=>{
+       aux.replaceValue('inmueble', this.visitaSeleccionada.inmueble.id);
+       aux.replaceValue('cliente', this.visitaSeleccionada.cliente.id);
+       aux.replaceValue('empleado', this.visitaSeleccionada.empleado.id);
+
+    this.servicioGenerico.editar('reservar_visita', aux.objeto, 'id').subscribe(rta => {
       if (rta.data === 'exito') {
         this.msj = 'Se ha Registrado el comentario exitosamente !';
         this.show = 2;
@@ -108,15 +110,15 @@ detalleInmueble:String;
       window.alert(this.msj);
     });
 
-   
+
   }
 
-  limpiarCampos(){
-    this.visitaSeleccionada.comentario="";
-    this.visitaSeleccionada.mensaje="";
-    this.visitaSeleccionada.fecha= "";
-    this.matriculaInmueble="";
-    this.detalleInmueble=""
+  limpiarCampos() {
+    this.visitaSeleccionada.comentario = '';
+    this.visitaSeleccionada.mensaje = '';
+    this.visitaSeleccionada.fecha = '';
+    this.matriculaInmueble = '';
+    this.detalleInmueble = '';
   }
 
 }

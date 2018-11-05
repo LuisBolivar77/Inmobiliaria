@@ -15,7 +15,6 @@
                     <th scope="col">Hora</th>
                     <th scope="col">Estado</th>
                     <th scope="col">Matricula</th>
-                    <th scope="col">tipo</th>
                     <th scope="col">Empleado Asignado</th>
                     <th scope="col">Accion</th>
                     <th scope="col"></th>
@@ -28,7 +27,6 @@
                     <td >{{v.hora_visita}}</td>
                     <td >{{v.estado}}</td>
                     <td>{{v.inmueble.numero_matricula}}</td>
-                    <td>{{v.inmueble.detalles}}</td>
                     <td>{{v.empleado.nombre}}</td>
                     <td>
                       <button style="background-color: rgb(66, 125, 235)" class="btn" (click)="verVisita(v)">Ver visita</button>
@@ -56,9 +54,7 @@
           <div class="sidebar_search_form_container">
             <form #datosForm="ngForm" class="contact_form" id="contact_form">
               
-              <div><textarea style="background-color: white;height:200px;" type="text" [(ngModel)]="visitaSeleccionada.comentario" name="comentario" id="comentario" disabled="true" class="contact_input" placeholder="Comentario de la visita" required="required"></textarea></div>
-              <div><input type="text" style="background-color:lightslategray; width:300px;margin-left: 350px" [(ngModel)]="matriculaInmueble" name="matricula" class="contact_input" placeholder="Matricula de inmueble"></div>	
-              <div style="margin-top: -65px"><input type="text" style="background-color:lightslategray; width:300px;margin-left: 700px" [(ngModel)]="detalleInmueble" name="detalles" class="contact_input" placeholder="Detalles de inmueble"></div>	
+              <div><textarea style="background-color: white;height:200px;" type="text" [(ngModel)]="visitaSeleccionada.mensaje" name="comentario" id="comentario" disabled="true" class="contact_input" placeholder="Comentario de la visita" required="required"></textarea></div>
               <div style="margin-top: -65px"><input type="date" style="background-color:white; width:300px" [(ngModel)]="visitaSeleccionada.fecha" name="fecha" class="contact_input" placeholder="Fecha Visita"></div>	
               
               <button *ngIf="habilitarEditar" class="sidebar_search_button search_form_button" style="width:200px;margin-top: 20px;margin-left:450px!important"

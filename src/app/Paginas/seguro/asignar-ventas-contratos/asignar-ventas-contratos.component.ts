@@ -36,10 +36,52 @@ export class AsignarVentasContratosComponent implements OnInit {
   constructor(private generico: GenericoService, private usuarioServicio: UsuarioService) { }
 
   ngOnInit() {
-    // Validamos si el usuario tiene acceso a la pagina
-    //this.usuarioServicio.esAccesible('administracion/asignar-ventas-contratos');
+    // Validamos  si el usuario tiene acceso a la pagina
+    // this.usuarioServicio.esAccesible('administracion/asignar-ventas-contratos');
     this.usuarioSesion = this.usuarioServicio.getUsuario();
     this.listar();
+    console.log(this.usuarioSesion);
+  }
+
+  listarVentas() {
+    this.generico.listar('venta', null).subscribe(res => {
+      this.ventas = res.data;
+      this.agregarObjetosVenta();
+    });
+  }
+
+  agregarObjetosVenta() {
+    for (const v of this.ventas) {
+
+      const data = v.fecha.split('T');
+      const fecha = data[0];
+      v.fecha = fecha;
+
+      this.generico.buscar('contrato', {'id': v.contrato}).subscribe(res => {
+        v.contrato = res.data;
+        this.generico.buscar('reservar_visita', {'id': v.contrato.visita}).subscribe(res2 => {
+          v.contrato.visita = res2.data;
+          this.generico.buscar('inmueble', {'id': v.contrato.visita.inmueble}).subscribe(res3 => {
+            v.contrato.visita.inmueble = res3.data;
+            this.generico.buscar('usuarios', {'persona': v.contrato.cliente}).subscribe(res1 => {
+              v.contrato.cliente = res1.data;
+              this.generico.buscar('personas', {'id': v.contrato.cliente.persona}).subscribe(res5 => {
+                v.contrato.cliente.persona = res5.data;
+                this.generico.buscar('empleados', {'usuario': v.empleado}).subscribe(res4 => {
+                  v.empleado = res4.data;
+                  this.generico.buscar('usuarios', {'persona': v.empleado.usuario}).subscribe(res6 => {
+                    v.empleado.usuario = res6.data;
+                    this.generico.buscar('personas', {'id': v.empleado.usuario.persona}).subscribe(res7 => {
+                      v.empleado.usuario.persona = res7.data;
+                    });
+                  });
+                });
+              });
+            });
+          });
+        });
+      });
+    }
   }
 
   /**
@@ -49,6 +91,7 @@ export class AsignarVentasContratosComponent implements OnInit {
     this.generico.listar('contrato', {'estado': 1}).subscribe(res => {
       this.contratos = res.data;
       this.agregarObjetos();
+      this.listarVentas();
     });
   }
 
@@ -118,7 +161,6 @@ export class AsignarVentasContratosComponent implements OnInit {
     this.contrato = i;
   }
 
-  
   registrar(form: NgForm) {
     const empleado: Empleado = new Empleado();
 
@@ -131,6 +173,8 @@ export class AsignarVentasContratosComponent implements OnInit {
     aux.objeto = this.venta;
     aux.replaceValue('contrato', this.contrato.id);
     aux.replaceValue('empleado', this.usuarioSesion.persona.id);
+
+    console.log(this.usuarioSesion.persona.id);
 
     this.generico.registrar('venta', aux.objeto).subscribe(res => {
       if (res.data === 'exito') {

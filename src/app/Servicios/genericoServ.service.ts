@@ -172,9 +172,9 @@ export class GenericoService {
 
     /**
      * sube un archivo al servidor
-     * @param archivo 
+     * @param archivo
      */
-    cargarArchivo (archivo:File) {
+    cargarArchivo (archivo: File) {
         return this.http.post<any>(this.domain + 'archivo/subir', archivo)
         .pipe(
             map(res => {

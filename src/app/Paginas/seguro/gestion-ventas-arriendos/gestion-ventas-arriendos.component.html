@@ -57,6 +57,10 @@
                       <div><input type="text" [(ngModel)]="contrato.id" name="id" class="contact_input" placeholder="Id" required="required"></div>
                       <div><input type="text" [(ngModel)]="contrato.descripcion" name="descripcion" class="contact_input" placeholder="descripcion" required="required"></div>
                       <div><input type="number" [(ngModel)]="contrato.valorFinalInmueble" name="valorFinalInmueble" class="contact_input" placeholder="valorFinalInmueble" required="required"></div>
+                      <div>
+                        <label for="docContrato">Documentos del contrato:</label>
+                        <input type="file" (change)="asignarArchivo($event,1)" name="docContrato" class="contact_input" required="required" accept="application/pdf">
+                      </div>
                       <div class="col-lg-6">
                         <button *ngIf="verSelec" type="submit" (click)="editar(datosForm)" style="width: 100%" class="contact_button button">Finalizar Contrato</button>
                       </div>

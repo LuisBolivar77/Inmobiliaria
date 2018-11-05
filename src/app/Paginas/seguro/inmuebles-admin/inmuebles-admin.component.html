@@ -158,7 +158,6 @@
                                   <label>Numero de baños:</label>
                                   <input type="number" min="1" [(ngModel)]="inmueble.banios" name="banios" class="contact_input" placeholder="Numero de baños" required="required" >
                                 </div>
-                                
                             </div>
                             <div class="row">
                                 <div class="col-lg-6">
@@ -179,6 +178,12 @@
                                   <label>Numero de garajes:</label>
                                   <input type="number" min="1" [(ngModel)]="inmueble.garajes" name="Garaje" class="contact_input" placeholder="Numero de garajes" required="required" >
                                 </div>
+                            </div>
+                            <div>
+                              <div class="col-lg-6">
+                                <label>Promociones:</label>
+                                <select [(ngModel)]="promocionSelected.id" name="promocion"><option *ngFor="let p of promocionesFinal" value="{{p.id}}">{{p.descripcion}} --- {{p.porcentaje}}%</option></select>
+                              </div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-6">
@@ -271,12 +276,12 @@
                                 <button *ngIf="!busco" type="submit" (click)="buscarUsuario(datosForm)" style="width: 100%" class="contact_button button">Registrar Inmueble</button>
                               </div>
                               <div class="col-lg-6">
-                                <button *ngIf="busco" (click)="editar(datosForm)" style="width: 100%" class="contact_button button">Editar Empleado</button>
+                                <button *ngIf="busco" (click)="editar(datosForm)" style="width: 100%" class="contact_button button">Editar Inmueble</button>
                               </div>
                             </div>
                             <div class="row">
                               <div class="col-lg-6">
-                                <button *ngIf="busco" (click)="limpiarCampos(datosForm)" style="width: 100%" class="contact_button button">Limpiar Campos</button>
+                                <button (click)="limpiarCampos(datosForm)" style="width: 100%" class="contact_button button">Limpiar Campos</button>
                               </div>
                             </div>
                           </form>

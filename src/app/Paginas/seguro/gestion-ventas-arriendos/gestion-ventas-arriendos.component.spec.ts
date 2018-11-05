@@ -10,7 +10,7 @@ import { Persona } from '../../../Modelo/Persona';
 import { ReservarVisita } from '../../../Modelo/ReservarVisita';
 import { Usuario } from '../../../Modelo/Usuario';
 
-fdescribe('GestionVentasArriendosComponent', () => {
+describe('GestionVentasArriendosComponent', () => {
   let component: GestionVentasArriendosComponent;
   let fixture: ComponentFixture<GestionVentasArriendosComponent>;
 
@@ -32,8 +32,6 @@ fdescribe('GestionVentasArriendosComponent', () => {
   });
 
   it('editar contrato', () => {
-
-    console.log("ENTRO editar CONTRATO gestion");
     
 
     let persona= new Persona();
@@ -42,8 +40,7 @@ fdescribe('GestionVentasArriendosComponent', () => {
     let empleado = new Usuario();
 
     let cliente = new Usuario();
-    cliente.persona = 
-
+    
     let visita = new ReservarVisita();
 
     component.usuarioSesion= component.usuarioSesion;

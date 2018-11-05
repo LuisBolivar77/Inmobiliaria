@@ -1,3 +1,5 @@
+import { AuxiliarObjeto } from 'src/app/Modelo/AuxiliarObjeto';
+import { Promocion } from 'src/app/Modelo/Promocion';
 import { InmuebleTemporal } from './../../../Modelo/InmuebleTemporal';
 import { Persona } from './../../../Modelo/Persona';
 import { Zona } from './../../../Modelo/Zona';
@@ -34,6 +36,7 @@ export class InmueblesAdminComponent implements OnInit {
   longSelectedLista = 0;
 
   inmueble: Inmueble;
+  promocionSelected: Promocion = new Promocion();
   ciudadSeleccionada: Ciudad = new Ciudad();
   tipoInmuebleSeleccionado: TipoInmueble = new TipoInmueble();
   zonaSeleccionada: Zona = new Zona;
@@ -72,6 +75,8 @@ export class InmueblesAdminComponent implements OnInit {
   ventaArriendo: Array<VentaArriendo> = [];
   inmuebles: Array<InmuebleTemporal> = [];
   departamentos: Array<Departamento> = [];
+  promociones: Array<Promocion> = [];
+  promocionesFinal: Array<Promocion> = [];
 
   show: number;
   msj: string;
@@ -85,7 +90,7 @@ export class InmueblesAdminComponent implements OnInit {
 
   ngOnInit() {
 
-    // Validamos si el usuario tiene acceso a la pagina
+    //  Validamos si el usuario tiene acceso a la pagina
     this.usuarioServicio.esAccesible('administracion/gestion-inmuebles');
 
     this.inmueble = new Inmueble();
@@ -97,6 +102,7 @@ export class InmueblesAdminComponent implements OnInit {
     this.listarTipoInmuebles();
     this.listarZonas();
     this.listarVentaArriendo();
+    this.listarPromociones();
     this.busco = false;
 
   }
@@ -109,7 +115,11 @@ export class InmueblesAdminComponent implements OnInit {
   registrar(form: NgForm) {
     this.llenarInmueble();
 
-    this.generico.registrar('inmueble', this.inmueble).subscribe(res => {
+    const aux: AuxiliarObjeto = new AuxiliarObjeto();
+    aux.objeto = this.inmueble;
+    aux.replaceValue('promocion', this.promocionSelected.id);
+
+    this.generico.registrar('inmueble', aux.objeto).subscribe(res => {
       if (res.data === 'exito') {
         this.msj = 'El inmueble se ha registrado correctamente';
         this.show = 2;
@@ -229,7 +239,11 @@ export class InmueblesAdminComponent implements OnInit {
 
     this.llenarInmuebleEditar();
 
-    this.generico.editar('inmueble', this.inmueble, 'id').subscribe(res => {
+    const aux: AuxiliarObjeto = new AuxiliarObjeto();
+    aux.objeto = this.inmueble;
+    aux.replaceValue('promocion', this.promocionSelected.id);
+
+    this.generico.editar('inmueble', aux.objeto, 'id').subscribe(res => {
       if (res.data === 'exito') {
         this.busco = false;
         this.show = 2;
@@ -269,6 +283,25 @@ export class InmueblesAdminComponent implements OnInit {
     }
     });
   }
+
+  listarPromociones() {
+    this.generico.listar('promocion', null).subscribe(res => {
+      this.promociones = res.data;
+      this.llenarListaFinalPromo();
+    });
+  }
+
+  llenarListaFinalPromo() {
+    for (const p of this.promociones) {
+      const fechaIni = new Date(p.fecha_inicio);
+      const fechaFin = new Date(p.fecha_fin);
+      const fechaAct = new Date;
+      if (fechaIni <= fechaAct && fechaFin >= fechaAct) {
+        this.promocionesFinal.push(p);
+      }
+    }
+  }
+
   /**
    * lista los departamentos
    */
@@ -316,6 +349,12 @@ export class InmueblesAdminComponent implements OnInit {
 
   llenarInmueble() {
 
+    if (this.promocionSelected != null) {
+      this.inmueble.promocion = this.promocionSelected;
+    } else {
+      const promocionLlenar = new Promocion();
+      this.inmueble.promocion = promocionLlenar;
+    }
     const fecha = this.fechaActual();
     this.inmueble.fechaAprobacion = fecha;
     this.inmueble.latitud = this.latSeleccion;
@@ -346,6 +385,12 @@ export class InmueblesAdminComponent implements OnInit {
   }
 
   llenarInmuebleEditar() {
+    if (this.promocionSelected != null) {
+      this.inmueble.promocion = this.promocionSelected;
+    } else {
+      const promocionLlenar = new Promocion();
+      this.inmueble.promocion = promocionLlenar;
+    }
     this.inmueble.usuario = this.usuarioCliente;
     this.inmueble.tipoAV = this.tipoAVSeleccionado.id;
     this.inmueble.zona = this.zonaSeleccionada.id;
