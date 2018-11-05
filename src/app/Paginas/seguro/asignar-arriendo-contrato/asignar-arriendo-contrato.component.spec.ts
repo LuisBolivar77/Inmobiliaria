@@ -10,7 +10,7 @@ import { Persona } from '../../../Modelo/Persona';
 import { Rol } from '../../../Modelo/Rol';
 import { FormsModule } from '../../../../../node_modules/@angular/forms';
 
-fdescribe('AsignarArriendoContratoComponent', () => {
+describe('AsignarArriendoContratoComponent', () => {
   let component: AsignarArriendoContratoComponent;
   let fixture: ComponentFixture<AsignarArriendoContratoComponent>;
   
@@ -69,7 +69,7 @@ fdescribe('AsignarArriendoContratoComponent', () => {
     // Usamos TestBed para poder usar el servicio http
     
     // tslint:disable-next-line:no-unused-expression
-    expect(respuesta).toBeTruthy;
+    //expect(respuesta).toBeTruthy;
   });
 
 
