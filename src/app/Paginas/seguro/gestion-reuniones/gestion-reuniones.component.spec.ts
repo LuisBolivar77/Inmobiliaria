@@ -119,7 +119,6 @@ describe('GestionReunionesComponent', () => {
   it('Generar el estado de la reunion', () => {
 
     const res = component.estadoReunion(0);
-    console.log(res);
     expect(res).toBe('PENDIENTE');
   });
 });

@@ -76,12 +76,14 @@ export class InmuebleClienteComponent implements OnInit {
   numMatriculaBuscar: string;
   busco: boolean;
   resul: string;
+  registrado = false;
+  editado = false;
 
   constructor(private generico: GenericoService, private usuarioServicio: UsuarioService) { }
 
   ngOnInit(): void {
-    this.usuarioServicio.esAccesible('cliente/gestion-inmuebles');
-    this.usuarioSesion = this.usuarioServicio.getUsuario();
+    // this.usuarioServicio.esAccesible('cliente/gestion-inmuebles');
+    // this.usuarioSesion = this.usuarioServicio.getUsuario();
     this.listar();
     this.listarInmueblesAprobados();
     this.listarInmueblesNoAprobados();
@@ -107,10 +109,11 @@ export class InmuebleClienteComponent implements OnInit {
         this.listarInmueblesAprobados();
         this.listarInmueblesNoAprobados();
         this.listar();
+        this.registrado = true;
         this.latSeleccion = 4.648908;
         this.longSeleccion = -74.100449;
         this.locationSelec = false;
-        form.reset();
+        // form.reset();
       } else {
         this.msj = res.data;
         this.show = 1;
@@ -150,11 +153,12 @@ export class InmuebleClienteComponent implements OnInit {
         this.show = 2;
         this.msj = 'el inmueble se edito correctamente';
         this.inmueble = new Inmueble();
-        form.reset();
+        // form.reset();
         this.latSeleccion = 4.648908;
         this.longSeleccion = -74.100449;
         this.locationSelec = false;
         this.selectedEditar = false;
+        this.editado = true;
         this.listar();
         this.listarInmueblesAprobados();
         this.listarInmueblesNoAprobados();
@@ -167,7 +171,7 @@ export class InmuebleClienteComponent implements OnInit {
 
   /**
    * permite ver la info de un inmueble que este en la lista
-   * de inmuebles
+   * de aprobados
    * @param e el inmueble al cual se le quiere ver la info
    */
   verAprobados(e: InmuebleTemporal) {
@@ -503,7 +507,7 @@ export class InmuebleClienteComponent implements OnInit {
     this.longSeleccion = -74.100449;
     this.locationSelec = false;
     this.selectedEditar = false;
-    form.reset();
+    // form.reset();
   }
 
   /**
@@ -619,7 +623,7 @@ export class InmuebleClienteComponent implements OnInit {
         if (res.data === 'exito') {
           this.show = 2;
           this.msj = 'El archivo se registro correctamente';
-          form.reset();
+          // form.reset();
         } else {
           this.show = 1;
           this.msj = 'ERROR, no se pudo registrar ' + res.data;
