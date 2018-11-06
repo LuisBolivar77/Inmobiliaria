@@ -45,6 +45,7 @@ describe('AsignarVentasContratosComponent', () => {
     expect(respuesta).toBeTruthy();
   });
 
+
   it('buscar una venta', () => {
     let venta: Venta = new Venta;
     component.venta.id = 1;
