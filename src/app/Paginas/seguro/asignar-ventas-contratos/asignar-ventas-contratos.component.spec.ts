@@ -66,8 +66,7 @@ describe('AsignarVentasContratosComponent', () => {
 
    it('ver info contrato', () => {
     // tslint:disable-next-line:prefer-const
-    let venta: Venta = new Venta;
-    venta.id = 1;
+    component.ventas;
     const respuesta = component.listarVentas();
     // tslint:disable-next-line:no-unused-expression
     expect(respuesta).toBeTruthy;
@@ -75,10 +74,17 @@ describe('AsignarVentasContratosComponent', () => {
 
   it('ver info contratosFinales', () => {
     // tslint:disable-next-line:prefer-const
-    let contrato: Contrato = new Contrato;
-    contrato.id = 2;
+    component.contratos;
     const respuesta = component.listadoFinal();
     // s tslint:disable-next-line:no-unused-expression
+    expect(respuesta).toBeTruthy;
+  });
+
+  it('Ver la info de la tabla venta', () => {
+    // tslint:disable-next-line:prefer-const
+    component.verSelec;
+    const respuesta = component.ver(null);
+    // tslint:disable-next-line:no-unused-expression
     expect(respuesta).toBeTruthy;
   });
 
