@@ -32,13 +32,14 @@ export class AsignarVentasContratosComponent implements OnInit {
    busco: boolean;
    verSelec = false;
    descripcionSel: string;
+   registrado = false;
 
   constructor(private generico: GenericoService, private usuarioServicio: UsuarioService) { }
 
   ngOnInit() {
     // Validamos  si el usuario tiene acceso a la pagina
     // this.usuarioServicio.esAccesible('administracion/asignar-ventas-contratos');
-    this.usuarioSesion = this.usuarioServicio.getUsuario();
+    // this.usuarioSesion = this.usuarioServicio.getUsuario();
     this.listar();
     console.log(this.usuarioSesion);
   }
@@ -137,22 +138,6 @@ export class AsignarVentasContratosComponent implements OnInit {
     }
   }
 
-  /*
-  * Buscar contrato
-  */
- buscarContrato() {
-     this.generico.buscar('contrato', {'id': this.idContrato}).subscribe(rta => {
-       if (rta.data == null) {
-         this.show = 1;
-         this.msj = 'No existe el contrato con ese numero de identificacion: ' + this.idContrato;
-       } else {
-         this.busco = true;
-         this.contrato = rta.data;
-         return true;
-       }
-     });
- }
-
   /**
    * Ver la inormacion del contrato
    */
@@ -171,6 +156,7 @@ export class AsignarVentasContratosComponent implements OnInit {
     this.venta.contrato = this.contrato;
     const aux: AuxiliarObjeto = new AuxiliarObjeto();
     aux.objeto = this.venta;
+    this.registrado = true;
     aux.replaceValue('contrato', this.contrato.id);
     aux.replaceValue('empleado', this.usuarioSesion.persona.id);
 
@@ -192,7 +178,7 @@ export class AsignarVentasContratosComponent implements OnInit {
             this.descripcionSel = '';
             this.constratosFinales = new Array<Contrato>();
             this.listar();
-            form.reset();
+           // form.reset();
           } else {
             this.msj = res2.data;
             this.show = 1;
