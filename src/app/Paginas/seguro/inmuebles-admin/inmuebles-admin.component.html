@@ -67,7 +67,7 @@
                                         <td>
                                           <button *ngIf="!selectedEditar" class="btn" (click)="verUnInmuebleEnMap(e)">localizar en mapa</button>
                                           <button *ngIf="!selectedEditar" class="btn" (click)="ver(e)" style="margin-left: 10px">Editar</button>
-                                          <button *ngIf="!selectedEditar" class="btn" (click)="eliminar(e)" style="margin-left: 10px">Eliminar</button>
+                                          <button *ngIf="!selectedEditar" class="btn" (click)="eliminar(e.id)" style="margin-left: 10px">Eliminar</button>
                                         </td>
                                       </tr>
                                     </tbody>
@@ -267,7 +267,7 @@
                             </div>
                             <br>
                             <h4>Seleccione en el mapa la localizacion del inmueble</h4>
-                            <agm-map [zoom]="zoom" [latitude]="latSeleccion" [longitude]="longSeleccion" (mapClick)="onChoseLocation($event)">
+                            <agm-map [zoom]="zoom" [latitude]="latSeleccion" [longitude]="longSeleccion" (mapClick)="onChoseLocation($event.coords.lat, $event.coords.lng)">
                               <agm-marker *ngIf="locationSelec" [latitude]="latSeleccion" [longitude]="longSeleccion"></agm-marker>
                             </agm-map>
                             <br>
@@ -304,8 +304,8 @@
             <div class="contact_form_container">
                 <form #formacionesForm="ngForm" class="contact_form">
                   <div *ngIf="busco" class="section_subtitle">Datos Archivos</div>
-                    <input *ngIf="busco" type="file" multiple name="myfile" (change)="onFileSelected($event)" />
-                    <button *ngIf="busco" type="submit" (click)="buscarInmuebleArchivo(datosForm)" style="width: 100%" class="contact_button button">Registrar Archivo</button>
+                    <input *ngIf="busco" type="file" multiple name="myfile" />
+                    <button *ngIf="busco" type="submit" style="width: 100%" class="contact_button button">Registrar Archivo</button>
                     <p *ngIf="!busco"> Debe buscar el inmueble primero para porder registrar un archivo</p>
                 </form>
               </div>

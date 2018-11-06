@@ -85,18 +85,27 @@ export class InmueblesAdminComponent implements OnInit {
   numMatriculaBuscar: string;
   busco: boolean;
   resul: string;
+  registrado = false;
+  listarCiudad = false;
+  lista = false;
+  listaDepartamento = false;
+  listaTipoInmueble = false;
+  buscoInmueble = false;
+  buscoUsuarioError = false;
+  editado = false;
+  eliminado = false;
 
   constructor(private generico: GenericoService, private usuarioServicio: UsuarioService) { }
 
   ngOnInit() {
 
     //  Validamos si el usuario tiene acceso a la pagina
-    this.usuarioServicio.esAccesible('administracion/gestion-inmuebles');
+    // this.usuarioServicio.esAccesible('administracion/gestion-inmuebles');
 
     this.inmueble = new Inmueble();
     this.inmuebleTemporal = new InmuebleTemporal();
 
-    this.usuarioSesion = this.usuarioServicio.getUsuario();
+    // this.usuarioSesion = this.usuarioServicio.getUsuario();
     this.listar();
     this.listarDepartamentos();
     this.listarTipoInmuebles();
@@ -139,6 +148,7 @@ export class InmueblesAdminComponent implements OnInit {
    * Buscar un inmueble
    */
   buscarInmueble() {
+      this.buscoInmueble = true;
       this.generico.buscar('inmueble', {'numero_matricula': this.numMatriculaBuscar}).subscribe(rta => {
         if (rta.data == null) {
           this.show = 1;
@@ -158,10 +168,12 @@ export class InmueblesAdminComponent implements OnInit {
    */
   buscarUsuario(form: NgForm) {
     if (this.cedula != null) {
+      console.log(this.cedula);
       this.generico.buscar('personas', {'cedula': this.cedula}).subscribe(rta => {
         console.log(rta.data);
         if (rta.data == null) {
           console.log('entro null');
+          this.buscoUsuarioError = true;
           this.show = 1;
           this.msj = rta.data;
         } else {
@@ -193,7 +205,7 @@ export class InmueblesAdminComponent implements OnInit {
     this.longSeleccion = -74.100449;
     this.locationSelec = false;
     this.selectedEditar = false;
-    form.reset();
+    // form.reset();
   }
 
   verUnInmuebleEnMap(e: InmuebleTemporal) {
@@ -210,20 +222,16 @@ export class InmueblesAdminComponent implements OnInit {
   ver(e: InmuebleTemporal) {
 
     this.selectedEditar = true;
-    for ( const i of this.inmuebles) {
-      if (e.id === i.id) {
-        this.busco = true;
-        this.locationSelec = true;
-        this.buscarCiudad(i);
-        this.llenarInmuebleBusqueda(i);
-        return;
-      }
-    }
+    this.busco = true;
+    this.locationSelec = true;
+    this.buscarCiudad(e);
+    this.llenarInmuebleBusqueda(e);
   }
 
-  eliminar(e: Inmueble) {
+  eliminar(id: number) {
 
-    this.generico.eliminar('inmueble', {'id': e.id}).subscribe(res => {
+    this.eliminado = true;
+    this.generico.eliminar('inmueble', {'id': id}).subscribe(res => {
       if (res.data === 'exito') {
         this.show = 2;
         this.msj = 'El inmueble fue eliminado';
@@ -241,6 +249,7 @@ export class InmueblesAdminComponent implements OnInit {
 
     const aux: AuxiliarObjeto = new AuxiliarObjeto();
     aux.objeto = this.inmueble;
+    this.editado = true;
     aux.replaceValue('promocion', this.promocionSelected.id);
 
     this.generico.editar('inmueble', aux.objeto, 'id').subscribe(res => {
@@ -266,6 +275,7 @@ export class InmueblesAdminComponent implements OnInit {
    * Lista todos los inmuebles
    */
   listar() {
+    this.lista = true;
     // Obtenemos la lista de inmuebles
     this.generico.listar('inmueble', {'estado': 1}).subscribe(rta => {
     if ( rta.data != null ) {
@@ -306,6 +316,7 @@ export class InmueblesAdminComponent implements OnInit {
    * lista los departamentos
    */
   listarDepartamentos() {
+    this.listaDepartamento = true;
     this.generico.listar('departamentos', null).subscribe(res => {
       this.departamentos = res.data;
     });
@@ -315,6 +326,7 @@ export class InmueblesAdminComponent implements OnInit {
    * lista ciudades dependiendo del departamento que elijan
    */
   listarCiudades() {
+    this.listarCiudad = true;
     this.generico.listar('ciudades', {'departamento': this.departamentoSeleccionado.id}).subscribe(res => {
       this.ciudades = res.data;
     });
@@ -324,6 +336,7 @@ export class InmueblesAdminComponent implements OnInit {
    * lista los tipos de inmuebles
    */
   listarTipoInmuebles() {
+    this.listaTipoInmueble = true;
     this.generico.listar('tipo_inmueble', null).subscribe(res => {
       this.tiposInmueble = res.data;
     });
@@ -522,106 +535,9 @@ export class InmueblesAdminComponent implements OnInit {
 
   }
 
-  onFileSelected(event) {
-    this.file = event.target.files;
-  }
-
-  buscarInmuebleArchivo(form: NgForm) {
-    this.generico.buscar('inmueble', {'numero_matricula': this.numMatriculaBuscar}).subscribe(res => {
-      if (res.data != null) {
-        this.inmuebleArchivo = res.data;
-        console.log('inmueble' + this.inmuebleArchivo.id);
-        this.crearArchivo(this.inmuebleArchivo, form);
-      } else {
-        this.show = 1;
-        this.msj = 'ERROR ' + res.data;
-      }
-    });
-  }
-
-  crearArchivo(inmueble: Inmueble, form: NgForm) {
-    for (const fileC of this.file) {
-      const ext = fileC.name.substr(fileC.name.lastIndexOf('.') + 1);
-      if (ext === 'jpg' || ext === 'png' || ext === 'jpeg') {
-        this.convertirArchivoBase64(fileC, true, inmueble, form);
-      } else if (ext === 'mp4') {
-
-      } else {
-        this.show = 404;
-        this.msj = 'El archivo ' + fileC.name + ' tiene una extensión no permitida';
-      }
-    }
-  }
-
-  convertirArchivoBase64(file: File, imgn: boolean, inmueble: Inmueble, form: NgForm) {
-    const myReader: FileReader = new FileReader();
-    myReader.onloadend = (e) => {
-      this.img = myReader.result;
-      // tslint:disable-next-line:prefer-const
-      const archivoIngresado: Archivo = new Archivo();
-      archivoIngresado.nombre = this.img;
-      archivoIngresado.inmueble = inmueble;
-      if (imgn) {
-        archivoIngresado.tipo = 0;
-      } else {
-        archivoIngresado.tipo = 1;
-      }
-      this.generico.registrar('archivo_inmueble', archivoIngresado)
-      .subscribe(res => {
-        if (res.data === 'exito') {
-          this.show = 2;
-          this.msj = 'El archivo se registro correctamente';
-          form.reset();
-        } else {
-          this.show = 1;
-          this.msj = 'ERROR, no se pudo registrar ' + res.data;
-        }
-      });
-    };
-    myReader.readAsDataURL(file);
-  }
-
-  onChoseLocation(event) {
-    this.latSeleccion = event.coords.lat;
-    this.longSeleccion = event.coords.lng;
+  onChoseLocation(lat, lng) {
+    this.latSeleccion = lat;
+    this.longSeleccion = lng;
     this.locationSelec = true;
   }
-
-  /**
-  imprimirInmueble() {
-    console.log('admin: ' + this.inmueble.administrador.username);
-    console.log('año construccion: ' + this.inmueble.anoconstruccion);
-    console.log('area: ' + this.inmueble.area);
-    console.log('ascensor: ' + this.inmueble.ascensor);
-    console.log('baños: ' + this.inmueble.banios);
-    console.log('Cancha depor: ' + this.inmueble.canchasDepor);
-    console.log('chimenea: ' + this.inmueble.chimenea);
-    console.log('ciudad: ' + this.inmueble.ciudad);
-    console.log('cocinaAC: ' + this.inmueble.cocinaAC);
-    console.log('comedor independiente: ' + this.inmueble.comedorIndependiente);
-    console.log('cuarto servicios: ' + this.inmueble.cuartoServicio);
-    console.log('deposito: ' + this.inmueble.deposito);
-    console.log('detalles: ' + this.inmueble.detalles);
-    console.log('direccion: ' + this.inmueble.direccion);
-    console.log('estado: ' + this.inmueble.estado);
-    console.log('estudio: ' + this.inmueble.estudio);
-    console.log('fecha aprobacion: ' + this.inmueble.fechaAprobacion);
-    console.log('garajes: ' + this.inmueble.garajes);
-    console.log('habitaciones: ' + this.inmueble.habitaciones);
-    console.log('chimenea: ' + this.inmueble.jardines);
-    console.log('numero matricula: ' + this.inmueble.numero_matricula);
-    console.log('parqueadero: ' + this.inmueble.parqueadero);
-    console.log('precio negociable: ' + this.inmueble.precioNegociable);
-    console.log('tipoAV: ' + this.inmueble.tipoAV);
-    console.log('tipo cortinas: ' + this.inmueble.tipoCortinas);
-    console.log('transporte cercano: ' + this.inmueble.transporteCercano);
-    console.log('usuario: ' + this.inmueble.usuario);
-    console.log('valor: ' + this.inmueble.valor);
-    console.log('vista exterios: ' + this.inmueble.vistaExterior);
-    console.log('zona: ' + this.inmueble.zona);
-    console.log('zona infantil: ' + this.inmueble.zonaInfantil);
-    console.log('zona ropas: ' + this.inmueble.zonaRopas);
-    console.log('zonas humedas: ' + this.inmueble.zonasHumedas);
-  }
-  */
 }
