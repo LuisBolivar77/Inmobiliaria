@@ -1,6 +1,14 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { GestionVentasArriendosComponent } from './gestion-ventas-arriendos.component';
+import { GenericoService } from '../../../Servicios/genericoServ.service';
+import { HttpClientModule } from '../../../../../node_modules/@angular/common/http';
+import { FormsModule } from '../../../../../node_modules/@angular/forms';
+import { RouterTestingModule } from '../../../../../node_modules/@angular/router/testing';
+import { Contrato } from '../../../Modelo/Contrato';
+import { Persona } from '../../../Modelo/Persona';
+import { ReservarVisita } from '../../../Modelo/ReservarVisita';
+import { Usuario } from '../../../Modelo/Usuario';
 
 describe('GestionVentasArriendosComponent', () => {
   let component: GestionVentasArriendosComponent;
@@ -8,9 +16,13 @@ describe('GestionVentasArriendosComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GestionVentasArriendosComponent ]
-    })
-    .compileComponents();
+      // el servicio a usar
+      providers: [GenericoService],
+      // Importamos el http para poder consumir los servicios
+      imports: [HttpClientModule, FormsModule, RouterTestingModule],
+      // Se declara el componente, para poder ver el reporte en el coverage
+      declarations: [GestionVentasArriendosComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +31,28 @@ describe('GestionVentasArriendosComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('editar contrato', () => {
+    
+
+    let persona= new Persona();
+    persona.id = 3;
+    
+    let empleado = new Usuario();
+
+    let cliente = new Usuario();
+    
+    let visita = new ReservarVisita();
+
+    component.usuarioSesion= component.usuarioSesion;
+
+    component.contrato.id =2;
+    component.contrato.descripcion='cualquier cosa';
+    component.contrato.visita = visita;
+
+    
+    const editar = component.editar(null);
+    expect(editar).toBeTruthy;
   });
+
+  
 });

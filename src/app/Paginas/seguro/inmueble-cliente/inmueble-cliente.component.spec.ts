@@ -9,7 +9,7 @@ import { AgmCoreModule } from '@agm/core';
 import { Usuario } from 'src/app/Modelo/Usuario';
 import { InmuebleTemporal } from 'src/app/Modelo/InmuebleTemporal';
 
-fdescribe('InmuebleClienteComponent', () => {
+describe('InmuebleClienteComponent', () => {
   let component: InmuebleClienteComponent;
   let fixture: ComponentFixture<InmuebleClienteComponent>;
 

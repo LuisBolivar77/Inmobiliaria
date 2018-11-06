@@ -148,6 +148,7 @@ export class AsignarVentasContratosComponent implements OnInit {
        } else {
          this.busco = true;
          this.contrato = rta.data;
+         return true;
        }
      });
  }

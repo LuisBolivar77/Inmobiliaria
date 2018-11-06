@@ -29,12 +29,12 @@ export class GestionarPromocionesComponent implements OnInit {
   constructor(private genericoServicio: GenericoService, private usuarioServicio: UsuarioService) { }
 
   ngOnInit() {
-    this.usuarioServicio.esAccesible('administrador/gestionar-promociones');
+   // this.usuarioServicio.esAccesible('administrador/gestionar-promociones');
     this.listar();
   }
 
   registrar(form: NgForm) {
-    // console.log("----------------------------entra registrar")
+    // console.log()
     this.genericoServicio.registrar('promocion', this.promocion).subscribe(rta => {
       if (rta.data === 'exito') {
 
@@ -46,10 +46,12 @@ export class GestionarPromocionesComponent implements OnInit {
         form.reset();
         // Actualizamos la lista de personas
         this.listar();
+        return true;
       } else {
         this.msj = rta.data;
         this.show = 1;
         window.alert(rta.data);
+        return false;
       }
     });
   }
@@ -62,15 +64,17 @@ export class GestionarPromocionesComponent implements OnInit {
       if (rta.data == null) {
         this.show = 1;
         this.msj = 'No existe una promocion: ' + this.promocion.descripcion;
+        return false;
       } else {
         this.show = 3;
         this.verSelected = true;
         this.promocionTemp = rta.data;
 
-        this.promocionTemp.fecha_fin = this.cambiarFecha(this.promocionTemp.fecha_fin);
-        this.promocionTemp.fecha_inicio = this.cambiarFecha(this.promocionTemp.fecha_inicio);
+      //  this.promocionTemp.fecha_fin = this.cambiarFecha(this.promocionTemp.fecha_fin);
+      //  this.promocionTemp.fecha_inicio = this.cambiarFecha(this.promocionTemp.fecha_inicio);
 
         this.promocion = this.promocionTemp;
+        return true;
       }
     });
   }
@@ -93,16 +97,19 @@ export class GestionarPromocionesComponent implements OnInit {
           form.reset();
           //  Actualizamos la lista de personas
           this.listar();
+          return true;
         } else {
           this.msj = rta.data;
           this.show = 1;
           window.alert(rta.data);
+          return false;
         }
       });
     } else {
       this.msj = 'Primero busque la persona que va a editar';
       this.show = 1;
       window.alert(this.msj);
+      return false;
     }
   }
 
@@ -121,6 +128,7 @@ export class GestionarPromocionesComponent implements OnInit {
     event.preventDefault();
     if (this.idSelected > 0) {
       this.buscar();
+      return true;
     }
   }
 

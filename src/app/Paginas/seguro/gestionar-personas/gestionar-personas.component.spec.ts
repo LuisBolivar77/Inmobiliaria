@@ -14,7 +14,6 @@ import { prepareProfile } from '../../../../../node_modules/@types/selenium-webd
 import { GestionarPersonasComponent } from './gestionar-personas.component';
 
 describe('GestionarAdministradoresComponent', () => {
-  console.log('ENTRO ADMIN PRUEBA');
   /**
    * Componente de Gestionar Administradores
    */
