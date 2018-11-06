@@ -1,12 +1,14 @@
 import { Contrato } from './../../../Modelo/Contrato';
-import { GenericoService } from './../../../Servicios/genericoServ.service';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { AsignarVentasContratosComponent } from './asignar-ventas-contratos.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Venta } from '../../../Modelo/Venta';
-import { Inmueble } from '../../../Modelo/Inmueble';
+import { Persona } from '../../../Modelo/Persona';
+import { BrowserAnimationsModule } from '../../../../../node_modules/@angular/platform-browser/animations';
+import { Usuario } from '../../../Modelo/Usuario';
+import { ReservarVisita } from '../../../Modelo/ReservarVisita';
 
 describe('AsignarVentasContratosComponent', () => {
   let component: AsignarVentasContratosComponent;
@@ -14,57 +16,57 @@ describe('AsignarVentasContratosComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      providers: [GenericoService],
-      // Importamos el http para poder consumir los servicios
-      imports: [HttpClientModule, FormsModule, RouterTestingModule],
-      declarations: [ AsignarVentasContratosComponent ]
+      imports: [RouterTestingModule, FormsModule, HttpClientModule, BrowserAnimationsModule,
+      ],
+      declarations: [AsignarVentasContratosComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AsignarVentasContratosComponent);
     component = fixture.componentInstance;
+
+    const per = new Persona();
+    per.id = 9;
+
+    component.usuarioSesion.persona = per;
+    component.usuarioSesion.username = 'pepe';
+    component.usuarioSesion.password = '123';
+
     fixture.detectChanges();
   });
 
   it('Crear una venta', () => {
 
     let venta: Venta = new Venta;
+    
+    const persona = new Persona();
+    persona.id = 5;
 
-    venta.id = 1;
-    venta.contrato.id = 4;
-    venta.empleado.usuario.persona.id = 9;
-    venta.fecha = '2018-11-05';
-    venta.descripcion = 'vendida';
+    const usuario = new Usuario();
+    usuario.persona = persona;
+
+    const visita = new ReservarVisita();
+    visita.id = 2;
+
+    component.contrato.cliente = usuario;
+    component.contrato.visita = visita;
+
+    component.contrato.id = 4;
+    component.descripcionSel = 'vendida';
 
     component.venta = venta;
 
-    const respuesta = component.registrar(null);
+    component.registrar(null);
 
-    expect(respuesta).toBeTruthy();
+    expect(component.registrado).toBeTruthy();
   });
 
-  it('buscar una venta', () => {
-    let venta: Venta = new Venta;
-    component.venta.id = 1;
-    const respuesta = component.buscarContrato();
-    // tslint:disable-next-line:no-unused-expression
-    expect(respuesta).toBeTruthy;
-  });
 
-  it('buscar una Noventa', () => {
-    let venta: Venta = new Venta;
-    component.venta.id = 2;
-    const respuesta = component.buscarContrato();
-    // tslint:disable-next-line:no-unused-expression
-    expect(respuesta).toBeFalsy;
-  });
-
-  it('ver info contrato', () => {
+   it('ver info contrato', () => {
     // tslint:disable-next-line:prefer-const
-    let venta: Venta = new Venta;
-    venta.id = 1;
+    component.ventas;
     const respuesta = component.listarVentas();
     // tslint:disable-next-line:no-unused-expression
     expect(respuesta).toBeTruthy;
@@ -72,22 +74,19 @@ describe('AsignarVentasContratosComponent', () => {
 
   it('ver info contratosFinales', () => {
     // tslint:disable-next-line:prefer-const
-    let contrato: Contrato = new Contrato;
-    contrato.id = 2;
+    component.contratos;
     const respuesta = component.listadoFinal();
-    // tslint:disable-next-line:no-unused-expression
+    // s tslint:disable-next-line:no-unused-expression
     expect(respuesta).toBeTruthy;
   });
 
-  it('Buscar desde el formulario html si existe', () => {
+  it('Ver la info de la tabla venta', () => {
     // tslint:disable-next-line:prefer-const
-    let venta: Venta = new Venta;
-    venta.id = 1;
-    component.venta = venta;
-
-    const respuesta = component.buscarContrato();
+    component.verSelec;
+    const respuesta = component.ver(null);
     // tslint:disable-next-line:no-unused-expression
     expect(respuesta).toBeTruthy;
   });
 
+  
 });
