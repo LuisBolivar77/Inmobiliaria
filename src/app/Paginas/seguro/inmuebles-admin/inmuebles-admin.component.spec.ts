@@ -8,7 +8,7 @@ import { InmueblesAdminComponent } from './inmuebles-admin.component';
 import { HttpClientModule } from '@angular/common/http';
 import { Persona } from '../../../Modelo/Persona';
 
-fdescribe('InmueblesAdminComponent', () => {
+describe('InmueblesAdminComponent', () => {
   let component: InmueblesAdminComponent;
   let fixture: ComponentFixture<InmueblesAdminComponent>;
 
