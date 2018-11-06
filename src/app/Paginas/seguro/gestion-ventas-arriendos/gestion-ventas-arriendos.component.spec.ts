@@ -9,6 +9,8 @@ import { Contrato } from '../../../Modelo/Contrato';
 import { Persona } from '../../../Modelo/Persona';
 import { ReservarVisita } from '../../../Modelo/ReservarVisita';
 import { Usuario } from '../../../Modelo/Usuario';
+import { Rol } from 'src/app/Modelo/Rol';
+import { Empleado } from 'src/app/Modelo/Empleado';
 
 describe('GestionVentasArriendosComponent', () => {
   let component: GestionVentasArriendosComponent;
@@ -28,31 +30,57 @@ describe('GestionVentasArriendosComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(GestionVentasArriendosComponent);
     component = fixture.componentInstance;
+
+    const per = new Persona();
+    per.id = 9;
+
+    component.usuarioSesion.persona = per;
+    component.usuarioSesion.username = 'pepe';
+    component.usuarioSesion.password = '123';
+
     fixture.detectChanges();
   });
 
+   /**
+   * probamos que liste los contratos
+   */
+  it('listar los contratos', () => {
+    console.log('listar los contratos');
+    component.listar();
+   // expect(component.lista).toBeTruthy();
+  });
+
   it('editar contrato', () => {
-    
 
-    let persona= new Persona();
-    persona.id = 3;
-    
-    let empleado = new Usuario();
+    console.log('Editar un contrato');
 
-    let cliente = new Usuario();
-    
-    let visita = new ReservarVisita();
+    const visita = new ReservarVisita();
+    visita.id = 7;
 
-    component.usuarioSesion= component.usuarioSesion;
+    const per = new Persona();
+    per.id = 11116;
 
-    component.contrato.id =2;
-    component.contrato.descripcion='cualquier cosa';
+    const usuario = new Usuario();
+    usuario.persona = per;
+    usuario.username = 'lucho';
+    usuario.password = '1234';
+
+    component.contrato.cliente = usuario;
     component.contrato.visita = visita;
 
+    component.contrato.id = 33333;
+    component.contrato.descripcion = 'cualquier cosa';
+
+    component.contrato.valorFinalInmueble= 1200000;
+
+
     
-    const editar = component.editar(null);
-    expect(editar).toBeTruthy;
+    component.editar(null);
+    expect(component.editado).toBeTruthy();
   });
 
   
 });
+
+
+

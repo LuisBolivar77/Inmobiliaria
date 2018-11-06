@@ -34,13 +34,14 @@ export class GestionVentasArriendosComponent implements OnInit {
   idContrato: number;
   busco: boolean;
   verSelec = false;
+  editado = false;
 
   constructor(private generico: GenericoService, private usuarioServicio: UsuarioService) { }
 
   ngOnInit() {
     // Validamos si el usuario tiene acceso a la pagina
    // this.usuarioServicio.esAccesible('administracion/gestion-ventas-arriendos');
-    this.usuarioSesion = this.usuarioServicio.getUsuario();
+    //this.usuarioSesion = this.usuarioServicio.getUsuario();
     this.listar();
   }
 
@@ -96,10 +97,11 @@ export class GestionVentasArriendosComponent implements OnInit {
    * @param form el formulario con datos del inmueble
    */
   editar(form: NgForm) {
-
+    
     const fecha = this.fechaActual();
     this.contrato.fecha_finalizacion = fecha;
-    this.contrato.estado = 1;
+    this.contrato.estado = 1;    
+    this.editado = true;
 
     this.generico.cargarArchivo(this.archivosContratos).subscribe(resC => {
       if (resC.data === 'exito') {
