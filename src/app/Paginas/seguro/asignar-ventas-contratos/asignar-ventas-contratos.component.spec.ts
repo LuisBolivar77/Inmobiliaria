@@ -33,7 +33,7 @@ describe('AsignarVentasContratosComponent', () => {
     let venta: Venta = new Venta;
 
     venta.id = 1;
-    venta.contrato.id =4;
+    venta.contrato.id = 4;
     venta.empleado.usuario.persona.id = 9;
     venta.fecha = '2018-11-05';
     venta.descripcion = 'vendida';

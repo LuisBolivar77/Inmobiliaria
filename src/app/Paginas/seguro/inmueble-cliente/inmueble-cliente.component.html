@@ -65,7 +65,7 @@
                                       <td>
                                         <button *ngIf="!selectedEditar" class="btn" (click)="verUnInmuebleEnMap(e)">localizar en mapa</button>
                                         <button *ngIf="!selectedEditar" class="btn" (click)="verAprobados(e)">ver</button>
-                                        <button *ngIf="!selectedEditar" class="btn" (click)="eliminarAprobados(e)" style="margin-left: 10px">Eliminar</button>
+                                        <button *ngIf="!selectedEditar" class="btn" (click)="eliminarAprobados(e.id)" style="margin-left: 10px">Eliminar</button>
                                       </td>
                                     </tr>
                                   </tbody>
@@ -90,7 +90,7 @@
                                           <td>
                                               <button *ngIf="!selectedEditar" class="btn" (click)="verUnInmuebleEnMap(e)">localizar en mapa</button>
                                               <button *ngIf="!selectedEditar" class="btn" (click)="verNoAprobados(e)">ver</button>
-                                              <button *ngIf="!selectedEditar" class="btn" (click)="eliminarNoAprobados(e)" style="margin-left: 10px">Eliminar</button>
+                                              <button *ngIf="!selectedEditar" class="btn" (click)="eliminarNoAprobados(e.id)" style="margin-left: 10px">Eliminar</button>
                                           </td>
                                         </tr>
                                       </tbody>
@@ -281,7 +281,7 @@
                                   </div>
                           </div>
                           <h4>Seleccione en el mapa la localizacion del inmueble</h4>
-                            <agm-map [zoom]="zoom" [latitude]="latSeleccion" [longitude]="longSeleccion" (mapClick)="onChoseLocation($event)">
+                            <agm-map [zoom]="zoom" [latitude]="latSeleccion" [longitude]="longSeleccion" (mapClick)="onChoseLocation($event.coords.lat, $event.coords.lng)">
                               <agm-marker *ngIf="locationSelec" [latitude]="latSeleccion" [longitude]="longSeleccion"></agm-marker>
                             </agm-map>
                           <div class="row">
