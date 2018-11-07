@@ -40,6 +40,9 @@ export class AsignarVisitasComponent implements OnInit {
   // arreglo de horas
   horas: Array<String> = [];
 
+  //variable booleana para la prueba
+  asignoVisita= false;
+
   constructor(private servicioGenerico: GenericoService, private usuarioServicio: UsuarioService) { }
 
   ngOnInit() {
@@ -62,7 +65,6 @@ export class AsignarVisitasComponent implements OnInit {
   }
 
   asignarVisita(): void {
-    console.log('*/////////-- ' + this.visitaSeleccionada);
     if (this.visitaSeleccionada.id == null || this.empleadoSeleccionado.usuario == null) {
       this.msj = 'Por favor seleccione una visita y un empleado';
       this.show = 1;
@@ -73,6 +75,7 @@ export class AsignarVisitasComponent implements OnInit {
     this.visitaSeleccionada.comentario = '';
     const aux: AuxiliarObjeto = new AuxiliarObjeto();
     aux.objeto = this.visitaSeleccionada;
+    this.asignoVisita=true;
     aux.replaceValue('inmueble', this.visitaSeleccionada.inmueble.id);
     aux.replaceValue('cliente', this.visitaSeleccionada.cliente.id);
     aux.replaceValue('empleado', this.visitaSeleccionada.empleado.id);
