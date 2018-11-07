@@ -11,8 +11,10 @@
             <br>
             <div class="contact_form_container">
               <form (submit)="login($event)" class="contact_form" id="contact_form">
-                <div><input [(ngModel)]="usuario.username" name="username" type="text" class="contact_input" placeholder="Nombre de usuario" required="required"></div>
-                <div><input [(ngModel)]="usuario.password" name="password" type="password" class="contact_input" placeholder="Contraseña" required="required"></div>
+                <div><input [(ngModel)]="usuario.username" name="username" type="text" class="contact_input" 
+                  placeholder="Nombre de usuario" required="required"></div>
+                <div><input [(ngModel)]="usuario.password" name="password" type="password" class="contact_input" 
+                  placeholder="Contraseña" required="required"></div>
                 <button class="contact_button button" style="width: 100%">Iniciar Sesion</button>
               </form>
             </div>

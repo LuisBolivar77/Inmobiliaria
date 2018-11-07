@@ -57,7 +57,7 @@ export class GenericoService {
      */
     registrar (table: string, object: object) {
         var data = {'tabla' : table, 'objeto' : object};
-        console.log(data);
+       // console.log(data);
         return this.http.post<any>(this.domain + 'generico/guardar', data)
         .pipe(
             map(res => {

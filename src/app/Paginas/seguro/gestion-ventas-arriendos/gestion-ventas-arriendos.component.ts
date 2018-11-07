@@ -34,13 +34,14 @@ export class GestionVentasArriendosComponent implements OnInit {
   idContrato: number;
   busco: boolean;
   verSelec = false;
+  editado = false;
 
   constructor(private generico: GenericoService, private usuarioServicio: UsuarioService) { }
 
   ngOnInit() {
     // Validamos si el usuario tiene acceso a la pagina
-    this.usuarioServicio.esAccesible('administracion/gestion-ventas-arriendos');
-    this.usuarioSesion = this.usuarioServicio.getUsuario();
+    // this.usuarioServicio.esAccesible('administracion/gestion-ventas-arriendos');
+    // this.usuarioSesion = this.usuarioServicio.getUsuario();
     this.listar();
   }
 
@@ -78,20 +79,7 @@ export class GestionVentasArriendosComponent implements OnInit {
     }
   }
 
-  /*
-  * Buscar  contrato
-  */
- buscarContrato() {
-     this.generico.buscar('contrato', {'id': this.idContrato}).subscribe(rta => {
-       if (rta.data == null) {
-         this.show = 1;
-         this.msj = 'No existe el contrato con ese numero de identificacion: ' + this.idContrato;
-       } else {
-         this.busco = true;
-         this.contrato = rta.data;
-       }
-     });
- }
+
 
   /**
    * Ver la inormacion del contrato
@@ -102,19 +90,6 @@ export class GestionVentasArriendosComponent implements OnInit {
   }
 
 
-  registrar(form: NgForm) {
-
-    this.generico.registrar('contrato', this.contrato).subscribe(res => {
-      if (res.data === 'exito') {
-        this.msj = 'El contrato se ha registrado correctamente';
-        this.show = 2;
-        form.reset();
-      } else {
-        this.msj = res.data;
-        this.show = 1;
-      }
-    });
-  }
 
 
   /**
@@ -126,6 +101,7 @@ export class GestionVentasArriendosComponent implements OnInit {
     const fecha = this.fechaActual();
     this.contrato.fecha_finalizacion = fecha;
     this.contrato.estado = 1;
+    this.editado = true;
 
     this.generico.cargarArchivo(this.archivosContratos).subscribe(resC => {
       if (resC.data === 'exito') {

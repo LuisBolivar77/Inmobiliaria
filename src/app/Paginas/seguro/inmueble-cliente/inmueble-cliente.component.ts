@@ -76,12 +76,18 @@ export class InmuebleClienteComponent implements OnInit {
   numMatriculaBuscar: string;
   busco: boolean;
   resul: string;
+  registrado = false;
+  editado = false;
+  editarFallido = false;
+  eliminadoAprobado = false;
+  eliminadoNoAprobado = false;
+  buscado = false;
 
   constructor(private generico: GenericoService, private usuarioServicio: UsuarioService) { }
 
   ngOnInit(): void {
-    this.usuarioServicio.esAccesible('cliente/gestion-inmuebles');
-    this.usuarioSesion = this.usuarioServicio.getUsuario();
+    // this.usuarioServicio.esAccesible('cliente/gestion-inmuebles');
+    // this.usuarioSesion = this.usuarioServicio.getUsuario();
     this.listar();
     this.listarInmueblesAprobados();
     this.listarInmueblesNoAprobados();
@@ -107,10 +113,11 @@ export class InmuebleClienteComponent implements OnInit {
         this.listarInmueblesAprobados();
         this.listarInmueblesNoAprobados();
         this.listar();
+        this.registrado = true;
         this.latSeleccion = 4.648908;
         this.longSeleccion = -74.100449;
         this.locationSelec = false;
-        form.reset();
+        // form.reset();
       } else {
         this.msj = res.data;
         this.show = 1;
@@ -150,11 +157,12 @@ export class InmuebleClienteComponent implements OnInit {
         this.show = 2;
         this.msj = 'el inmueble se edito correctamente';
         this.inmueble = new Inmueble();
-        form.reset();
+        // form.reset();
         this.latSeleccion = 4.648908;
         this.longSeleccion = -74.100449;
         this.locationSelec = false;
         this.selectedEditar = false;
+        this.editado = true;
         this.listar();
         this.listarInmueblesAprobados();
         this.listarInmueblesNoAprobados();
@@ -167,20 +175,15 @@ export class InmuebleClienteComponent implements OnInit {
 
   /**
    * permite ver la info de un inmueble que este en la lista
-   * de inmuebles
+   * de aprobados
    * @param e el inmueble al cual se le quiere ver la info
    */
   verAprobados(e: InmuebleTemporal) {
     this.selectedEditar = true;
-    for ( const i of this.inmueblesAprobados) {
-      if (e.id === i.id) {
-        this.busco = true;
-        this.locationSelec = true;
-        this.buscarCiudad(i);
-        this.llenarInmuebleBusqueda(i);
-        return;
-      }
-    }
+    this.busco = true;
+    this.locationSelec = true;
+    this.buscarCiudad(e);
+    this.llenarInmuebleBusqueda(e);
   }
 
   /**
@@ -190,27 +193,23 @@ export class InmuebleClienteComponent implements OnInit {
    */
   verNoAprobados(e: InmuebleTemporal) {
     this.selectedEditar = true;
-    for ( const i of this.inmueblesNoAprobados) {
-      if (e.id === i.id) {
-        this.busco = true;
-        this.locationSelec = true;
-        this.buscarCiudad(i);
-        this.llenarInmuebleBusqueda(i);
-        return;
-      }
-    }
+    this.busco = true;
+    this.locationSelec = true;
+    this.buscarCiudad(e);
+    this.llenarInmuebleBusqueda(e);
   }
 
   /**
    * permite eliminar un inmueble que este en la lista de inmuebles
    * @param e el inmueble el cual se quiere eliminar
    */
-  eliminarAprobados(e: Inmueble) {
+  eliminarAprobados(id: number) {
 
-    this.generico.eliminar('inmueble', {'id': e.id}).subscribe(res => {
+    this.generico.eliminar('inmueble', {'id': id}).subscribe(res => {
       if (res.data === 'exito') {
         this.show = 2;
         this.msj = 'El inmueble fue eliminado';
+        this.eliminadoAprobado = false;
         this.listarInmueblesAprobados();
         this.listarInmueblesNoAprobados();
       } else {
@@ -224,12 +223,13 @@ export class InmuebleClienteComponent implements OnInit {
    * permite eliminar un inmueble que este en la lista de inmuebles
    * @param e el inmueble el cual se quiere eliminar
    */
-  eliminarNoAprobados(e: Inmueble) {
+  eliminarNoAprobados(id: number) {
 
-    this.generico.eliminar('inmueble', {'id': e.id}).subscribe(res => {
+    this.generico.eliminar('inmueble', {'id': id}).subscribe(res => {
       if (res.data === 'exito') {
         this.show = 2;
         this.msj = 'El inmueble fue eliminado';
+        this.eliminadoNoAprobado = true;
         this.listarInmueblesAprobados();
         this.listarInmueblesNoAprobados();
       } else {
@@ -285,12 +285,9 @@ export class InmuebleClienteComponent implements OnInit {
     });
   }
 
-  onChoseLocation(event) {
-    this.latSeleccion = event.coords.lat;
-    this.longSeleccion = event.coords.lng;
-
-    console.log('lat: ' + this.latSeleccion);
-    console.log('long: ' + this.longSeleccion);
+  onChoseLocation(lat, lng) {
+    this.latSeleccion = lat;
+    this.longSeleccion = lng;
 
     this.locationSelec = true;
   }
@@ -503,7 +500,7 @@ export class InmuebleClienteComponent implements OnInit {
     this.longSeleccion = -74.100449;
     this.locationSelec = false;
     this.selectedEditar = false;
-    form.reset();
+    // form.reset();
   }
 
   /**
@@ -553,118 +550,5 @@ export class InmuebleClienteComponent implements OnInit {
     this.ventaArriendo.push(tipo1, tipo2);
 
   }
-
-  // ---------------------- de aqui en adelante metodos para crear archivos de un inmueble -------------- //
-
-  /**
-   * obtiene la url del archivo que se selecciono
-   */
-  onFileSelected(event) {
-    this.file = event.target.files;
-  }
-
-  /**
-   * busca el inmueble al que se le va a registrar el archivo
-   */
-  buscarInmuebleArchivo(form: NgForm) {
-    this.generico.buscar('inmueble', {'numero_matricula': this.numMatriculaBuscar}).subscribe(res => {
-      if (res.data != null) {
-        this.inmuebleArchivo = res.data;
-        console.log('inmueble' + this.inmuebleArchivo.id);
-        this.crearArchivo(this.inmuebleArchivo, form);
-      } else {
-        this.show = 1;
-        this.msj = 'ERROR ' + res.data;
-      }
-    });
-  }
-
-  /**
-   * crea el archivo del inmueble
-   * @param inmueble el inmueble al que se le va a registrar un archivo
-   * @param form el formulario con los campos que se estan utilizando
-   */
-  crearArchivo(inmueble: Inmueble, form: NgForm) {
-    for (const fileC of this.file) {
-      const ext = fileC.name.substr(fileC.name.lastIndexOf('.') + 1);
-      if (ext === 'jpg' || ext === 'png' || ext === 'jpeg') {
-        this.convertirArchivoBase64(fileC, true, inmueble, form);
-      } else if (ext === 'mp4') {
-
-      } else {
-        this.show = 404;
-        this.msj = 'El archivo ' + fileC.name + ' tiene una extensión no permitida';
-      }
-    }
-  }
-
-  /**
-   * conviente el archivo a base64 y lo registra en la BD
-   */
-  convertirArchivoBase64(file: File, imgn: boolean, inmueble: Inmueble, form: NgForm) {
-    const myReader: FileReader = new FileReader();
-    myReader.onloadend = (e) => {
-      this.img = myReader.result;
-      // tslint:disable-next-line:prefer-const
-      const archivoIngresado: Archivo = new Archivo();
-      archivoIngresado.nombre = this.img;
-      archivoIngresado.inmueble = inmueble;
-      if (imgn) {
-        archivoIngresado.tipo = 0;
-      } else {
-        archivoIngresado.tipo = 1;
-      }
-      this.generico.registrar('archivo_inmueble', archivoIngresado)
-      .subscribe(res => {
-        if (res.data === 'exito') {
-          this.show = 2;
-          this.msj = 'El archivo se registro correctamente';
-          form.reset();
-        } else {
-          this.show = 1;
-          this.msj = 'ERROR, no se pudo registrar ' + res.data;
-        }
-      });
-    };
-    myReader.readAsDataURL(file);
-  }
-
-  /**
-  imprimirInmueble() {
-    console.log('admin: ' + this.inmueble.administrador.username);
-    console.log('año construccion: ' + this.inmueble.anoconstruccion);
-    console.log('area: ' + this.inmueble.area);
-    console.log('ascensor: ' + this.inmueble.ascensor);
-    console.log('baños: ' + this.inmueble.banios);
-    console.log('Cancha depor: ' + this.inmueble.canchasDepor);
-    console.log('chimenea: ' + this.inmueble.chimenea);
-    console.log('ciudad: ' + this.inmueble.ciudad);
-    console.log('cocinaAC: ' + this.inmueble.cocinaAC);
-    console.log('comedor independiente: ' + this.inmueble.comedorIndependiente);
-    console.log('cuarto servicios: ' + this.inmueble.cuartoServicio);
-    console.log('deposito: ' + this.inmueble.deposito);
-    console.log('detalles: ' + this.inmueble.detalles);
-    console.log('direccion: ' + this.inmueble.direccion);
-    console.log('estado: ' + this.inmueble.estado);
-    console.log('estudio: ' + this.inmueble.estudio);
-    console.log('fecha aprobacion: ' + this.inmueble.fechaAprobacion);
-    console.log('garajes: ' + this.inmueble.garajes);
-    console.log('habitaciones: ' + this.inmueble.habitaciones);
-    console.log('chimenea: ' + this.inmueble.jardines);
-    console.log('numero matricula: ' + this.inmueble.numero_matricula);
-    console.log('parqueadero: ' + this.inmueble.parqueadero);
-    console.log('precio negociable: ' + this.inmueble.precioNegociable);
-    console.log('tipoAV: ' + this.inmueble.tipoAV);
-    console.log('tipo cortinas: ' + this.inmueble.tipoCortinas);
-    console.log('transporte cercano: ' + this.inmueble.transporteCercano);
-    console.log('usuario: ' + this.inmueble.usuario);
-    console.log('valor: ' + this.inmueble.valor);
-    console.log('vista exterios: ' + this.inmueble.vistaExterior);
-    console.log('zona: ' + this.inmueble.zona);
-    console.log('zona infantil: ' + this.inmueble.zonaInfantil);
-    console.log('zona ropas: ' + this.inmueble.zonaRopas);
-    console.log('zonas humedas: ' + this.inmueble.zonasHumedas);
-  }
-  */
 
 }

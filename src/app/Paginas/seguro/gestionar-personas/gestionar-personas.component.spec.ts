@@ -1,20 +1,15 @@
 import { async, TestBed, ComponentFixture } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
-import { GenericoService } from '../../../Servicios/genericoServ.service';
 import { HttpClientModule } from '@angular/common/http';
-import { RolService } from '../../../Servicios/rolServ.service';
 import { PersonaService } from '../../../Servicios/personaServ.service';
-import { UsuarioService } from '../../../Servicios/usuarioServ.service';
 import { Rol } from 'src/app/Modelo/Rol';
 import { Persona } from 'src/app/Modelo/Persona';
 import { Usuario } from 'src/app/Modelo/Usuario';
 import { FormsModule } from '../../../../../node_modules/@angular/forms';
-import { prepareProfile } from '../../../../../node_modules/@types/selenium-webdriver/firefox';
 import { GestionarPersonasComponent } from './gestionar-personas.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('GestionarAdministradoresComponent', () => {
-  console.log('ENTRO ADMIN PRUEBA');
   /**
    * Componente de Gestionar Administradores
    */
@@ -26,7 +21,7 @@ describe('GestionarAdministradoresComponent', () => {
       // el servicio a usar
       providers: [PersonaService],
       // Importamos el http para poder consumir los servicios
-      imports: [HttpClientModule, FormsModule, RouterTestingModule],
+      imports: [HttpClientModule, FormsModule, RouterTestingModule, BrowserAnimationsModule],
       // Se declara el componente, para poder ver el reporte en el coverage
       declarations: [GestionarPersonasComponent]
     }).compileComponents();
@@ -42,7 +37,6 @@ describe('GestionarAdministradoresComponent', () => {
     fixture.detectChanges();
   });
 
-  
   it('crear un administrador', () => {
     // Rol que tendra la persona
     // tslint:disable-next-line:prefer-const
