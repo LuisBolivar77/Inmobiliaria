@@ -1,10 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { PromocionesComponent } from './promociones.component';
 import { GenericoService } from 'src/app/Servicios/genericoServ.service';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Inmueble } from 'src/app/Modelo/Inmueble';
+import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('PromocionesComponent', () => {
   let component: PromocionesComponent;
@@ -13,7 +13,7 @@ describe('PromocionesComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       providers: [ GenericoService],
-      imports: [ HttpClientModule, RouterTestingModule],
+      imports: [ HttpClientModule, RouterTestingModule, FormsModule, BrowserAnimationsModule],
       declarations: [ PromocionesComponent ]
     })
     .compileComponents();

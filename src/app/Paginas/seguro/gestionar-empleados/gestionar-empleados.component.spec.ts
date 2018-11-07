@@ -1,17 +1,16 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { GenericoService } from '../../../Servicios/genericoServ.service';
 import { HttpClientModule } from '@angular/common/http';
 import { Persona } from '../../../Modelo/Persona';
 import { Rol } from '../../../Modelo/Rol';
-import { PersonaService } from '../../../Servicios/personaServ.service';
-import { NgForm, FormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Usuario } from '../../../Modelo/Usuario';
 import { Empleado } from '../../../Modelo/Empleado';
 import { Cargo } from '../../../Modelo/Cargo';
 import { GestionarEmpleadosComponent } from './gestionar-empleados.component';
 import { Formacion } from '../../../Modelo/Formacion';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('Gestionar un empeleado', () => {
 
@@ -23,7 +22,7 @@ describe('Gestionar un empeleado', () => {
       // el servicio a usar
       providers: [GenericoService],
       // Importamos el http para poder consumir los servicios
-      imports: [HttpClientModule, FormsModule, RouterTestingModule],
+      imports: [HttpClientModule, FormsModule, RouterTestingModule, BrowserAnimationsModule],
       // Se declara el componente, para poder ver el reporte en el coverage
       declarations: [GestionarEmpleadosComponent]
     })

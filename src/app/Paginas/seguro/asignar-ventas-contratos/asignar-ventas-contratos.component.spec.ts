@@ -39,8 +39,6 @@ describe('AsignarVentasContratosComponent', () => {
 
   it('Crear una venta', () => {
 
-    let venta: Venta = new Venta;
-    
     const persona = new Persona();
     persona.id = 5;
 
@@ -55,8 +53,6 @@ describe('AsignarVentasContratosComponent', () => {
 
     component.contrato.id = 4;
     component.descripcionSel = 'vendida';
-
-    component.venta = venta;
 
     component.registrar(null);
 
@@ -79,8 +75,6 @@ describe('AsignarVentasContratosComponent', () => {
     contrato.id = 2;
     const respuesta = component.listadoFinal();
     // s tslint:disable-next-line:no-unused-expression
-    expect(respuesta).toBeTruthy;
+    expect(respuesta).toBeTruthy();
   });
-
-  
 });

@@ -1,15 +1,14 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { GestionarClientesComponent } from './gestionar-clientes.component';
-import { GenericoService } from '../../../Servicios/genericoServ.service';
 import { HttpClientModule } from '@angular/common/http';
 import { Persona } from '../../../Modelo/Persona';
 import { Rol } from '../../../Modelo/Rol';
-import { PersonaService } from '../../../Servicios/personaServ.service';
-import { NgForm, FormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Usuario } from '../../../Modelo/Usuario';
 import { UsuarioService } from '../../../Servicios/usuarioServ.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AgmCoreModule } from '@agm/core';
 
 
 
@@ -23,7 +22,10 @@ describe('Gestionar cliente', () => {
       // el servicio a usar
       providers: [UsuarioService],
       // Importamos el http para poder consumir los servicios
-      imports: [HttpClientModule, FormsModule, RouterTestingModule],
+      imports: [HttpClientModule, FormsModule, RouterTestingModule, BrowserAnimationsModule,
+        AgmCoreModule.forRoot({
+          apiKey: 'AIzaSyB0WP4oGVaDXx-3HZDqzwNsbUi6yS6lEk8'
+        })],
       // Se declara el componente, para poder ver el reporte en el coverage
       declarations: [GestionarClientesComponent]
     })

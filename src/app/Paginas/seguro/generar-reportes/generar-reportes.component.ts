@@ -11,16 +11,16 @@ import { Inmueble } from 'src/app/Modelo/Inmueble';
 })
 export class GenerarReportesComponent implements OnInit {
 
-  //Lista de reservas de visitas
+  // Lista de reservas de visitas
   reservarVis: Array<ReservarVisita> = [];
-  //Lista de inmuebles
+  // Lista de inmuebles
   inmuebles: Array<Inmueble> = [];
-  //Lista de reservas de visitas final
+  // Lista de reservas de visitas final
   reservarVista: Array<ReservarVisita> = [];
-  //Lista de inmuebles final
+  // Lista de inmuebles final
   inmueblesFinal: Array<Inmueble> = [];
 
-  //constructor(private servicioGenerico: GenericoServiceService, private usuarioServicio: UsuarioServiceioService) { }
+  // constructor(private servicioGenerico: GenericoServiceService, private usuarioServicio: UsuarioServiceioService) { }
   constructor(private servicioGenerico: GenericoService, private usuarioServicio: UsuarioService) { }
 
   ngOnInit() {
@@ -47,9 +47,9 @@ export class GenerarReportesComponent implements OnInit {
   }
 
   siONo(valor: string) {
-    if (valor == '0') {
+    if (valor === '0') {
       return 'NO';
-    } else if (valor == '1') {
+    } else if (valor === '1') {
       return 'SI';
     }
   }
@@ -162,7 +162,7 @@ export class GenerarReportesComponent implements OnInit {
 
       // Obtenemos la promocion
       // if (i.promocion != '' || i.promocion!= null ) {
-      if (i.promocion.id != '' || i.promocion.id != null ) {
+      if (i.promocion.id !== '' || i.promocion.id != null ) {
         this.servicioGenerico.buscar('promocion', { 'id': i.promocion }).subscribe(r4 => {
           // Setteamos la promocion
           if (r4.data != null) {
@@ -170,7 +170,6 @@ export class GenerarReportesComponent implements OnInit {
           }
         });
       }
-       
       this.inmueblesFinal.push(i);
     }
   }

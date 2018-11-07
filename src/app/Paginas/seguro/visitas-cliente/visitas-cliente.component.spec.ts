@@ -1,5 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterTestingModule } from '@angular/router/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { VisitasClienteComponent } from './visitas-cliente.component';
 
 describe('VisitasClienteComponent', () => {
@@ -8,7 +11,8 @@ describe('VisitasClienteComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ VisitasClienteComponent ]
+      declarations: [ VisitasClienteComponent ],
+      imports: [FormsModule, HttpClientModule, RouterTestingModule, BrowserAnimationsModule]
     })
     .compileComponents();
   }));

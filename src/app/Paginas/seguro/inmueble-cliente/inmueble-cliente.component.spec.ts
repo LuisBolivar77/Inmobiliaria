@@ -6,7 +6,6 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InmuebleClienteComponent } from './inmueble-cliente.component';
 import { AgmCoreModule } from '@agm/core';
-import { Usuario } from 'src/app/Modelo/Usuario';
 import { InmuebleTemporal } from 'src/app/Modelo/InmuebleTemporal';
 
 describe('InmuebleClienteComponent', () => {

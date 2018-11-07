@@ -25,11 +25,11 @@ export class IndexComponent implements OnInit {
 
   ngOnInit() {
     // validamos si hay parametros para filtrar
-    var objeto = this.genericoServicio.getUrlParameter("objeto");
-    if(objeto != undefined && objeto != '' && objeto != null && objeto != "{}"){
+    const objeto = this.genericoServicio.getUrlParameter('objeto');
+    if (objeto !== undefined && objeto !== '' && objeto != null && objeto !== '{}') {
       // Cargamos el resultado de inmuebles teniendo en cuenta los parametros en el objeto
       this.listarByParametros(objeto);
-    }else{
+    } else {
       // Como no hay parametros de busqueda, cargamos todos los inmuebles
       // listamos los inmuebles
       this.listarInmuebles();
@@ -39,10 +39,10 @@ export class IndexComponent implements OnInit {
   /**
    * Carga la lista de inmuebles disponibles (estado 1 = publicado)
    */
-  listarInmuebles(){
+  listarInmuebles() {
     // Obtenemos la lista de inmuebles
-    this.genericoServicio.listar("inmueble",{"estado":1}).subscribe(r => {
-      if(r.data != null){
+    this.genericoServicio.listar('inmueble', {'estado': 1}).subscribe(r => {
+      if (r.data != null) {
         this.inmuebles = r.data;
         // Agregamos los datos (objetos) adicionales a cada inmueble
         this.agregarObjetos(this.inmuebles);
@@ -53,12 +53,12 @@ export class IndexComponent implements OnInit {
     /**
    * Carga la lista de inmuebles disponibles (estado 1 = publicado)
    */
-  listarByParametros(objeto){
+  listarByParametros(objeto) {
     // convertimos el texto a objeto json
-    var json = JSON.parse(objeto);
+    const json = JSON.parse(objeto);
     // Obtenemos la lista de inmuebles
-    this.genericoServicio.listar("inmueble",json).subscribe(r => {
-      if(r.data != null){
+    this.genericoServicio.listar('inmueble', json).subscribe(r => {
+      if (r.data != null) {
         this.inmuebles = r.data;
         // Agregamos los datos (objetos) adicionales a cada inmueble
         this.agregarObjetos(this.inmuebles);
@@ -68,24 +68,24 @@ export class IndexComponent implements OnInit {
 
   /**
    * Agrega objetos a los inmuebles
-   * @param lista 
+   * @param lista
    */
-  agregarObjetos(lista){
-    for(let i of lista){
+  agregarObjetos(lista) {
+    for (const i of lista) {
       // Obtenemos el tipo de inmueble
-      this.genericoServicio.buscar("tipo_inmueble",{"id":i.tipo}).subscribe(r2 => {
+      this.genericoServicio.buscar('tipo_inmueble', {'id': i.tipo}).subscribe(r2 => {
         // Setteamos el tipo inmueble
         i.tipo = r2.data;
         // Obtenemos la ciudad
-        this.genericoServicio.buscar("ciudades",{"id":i.ciudad}).subscribe(r3 => {
+        this.genericoServicio.buscar('ciudades', {'id': i.ciudad}).subscribe(r3 => {
           // Setteamos la ciudad
           i.ciudad = r3.data;
           // Obtenemos el departamento
-          this.genericoServicio.buscar("departamentos",{"id":i.ciudad.departamento}).subscribe(r4 => {
+          this.genericoServicio.buscar('departamentos', {'id': i.ciudad.departamento}).subscribe(r4 => {
             // Setteamos el departamento
             i.ciudad.departamento = r4.data;
             // Obtenemos una sola foto del inmueble
-            this.genericoServicio.buscar("archivo_inmueble",{"inmueble":i.id}).subscribe(r5 => {
+            this.genericoServicio.buscar('archivo_inmueble', {'inmueble': i.id}).subscribe(r5 => {
               // Guardamos el nombre de la foto en el array de fotos,
               // asignando como clave el id del inmueble
               this.fotos[i.id] = r5.data.nombre;
@@ -99,22 +99,22 @@ export class IndexComponent implements OnInit {
   /**
    * Obtiene la zona apartir del numero de zona asignado en el inmueble
    */
-  getZona(indice:number){
+  getZona(indice: number) {
     return this.inmueble.getZona(indice);
   }
 
   /**
    * Obtiene el tipo de inmueble (Arriendo o Venta)
    */
-  getTipoAV(indice:number){
+  getTipoAV(indice: number) {
     return this.inmueble.getTipoAV(indice);
   }
 
   /**
    * Agrega comas a un valor numerico
-   * @param valor 
+   * @param valor
    */
-  addComa(valor:number){
+  addComa (valor: number) {
     return this.inmueble.addComa(valor);
   }
 

@@ -1,12 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { LoginComponent } from './login.component';
-import { GenericoService } from '../../../Servicios/genericoServ.service';
 import { HttpClientModule } from '@angular/common/http';
 import { UsuarioService } from '../../../Servicios/usuarioServ.service';
-import { Usuario } from '../../../Modelo/Usuario';
 import { FormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 describe('Login', () => {
@@ -18,7 +16,7 @@ describe('Login', () => {
       // el servicio a usar
       providers: [UsuarioService],
       // Importamos el http para poder consumir los servicios
-      imports: [HttpClientModule, FormsModule, RouterTestingModule],
+      imports: [HttpClientModule, FormsModule, RouterTestingModule, BrowserAnimationsModule],
       // Se declara el componente, para poder ver el reporte en el coverage
       declarations: [LoginComponent]
     })

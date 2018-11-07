@@ -5,6 +5,7 @@ import { GenericoService } from '../../../Servicios/genericoServ.service';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Promocion } from 'src/app/Modelo/Promocion';
 
 describe('GestionarPromocionesComponent', () => {
@@ -16,7 +17,7 @@ describe('GestionarPromocionesComponent', () => {
       // el servicio a usar
       providers: [GenericoService],
       // Importamos el http para poder consumir los servicios
-      imports: [HttpClientModule, FormsModule, RouterTestingModule],
+      imports: [HttpClientModule, FormsModule, RouterTestingModule, BrowserAnimationsModule],
       // Se declara el componente, para poder ver el reporte en el coverage
       declarations: [GestionarPromocionesComponent]
     })
@@ -34,6 +35,7 @@ describe('GestionarPromocionesComponent', () => {
    */
   it('Crear una promocion', () => {
 
+    // tslint:disable-next-line:prefer-const
     let promocion: Promocion = new Promocion;
 
     promocion.id = 99999;
@@ -53,9 +55,6 @@ describe('GestionarPromocionesComponent', () => {
    * Promocion cuanod hay registro en bd
    */
   it('buscar una promocion', () => {
-
-    let promocion: Promocion = new Promocion;
-  
     component.promocion.id = 1;
 
     const respuesta = component.buscar();
@@ -68,9 +67,6 @@ describe('GestionarPromocionesComponent', () => {
    * Promocion cunaod no existe
    */
   it('buscar una promocion que no existe', () => {
-
-    let promocion: Promocion = new Promocion;
-  
     component.promocion.id = 0;
 
     const respuesta = component.buscar();
@@ -104,7 +100,7 @@ describe('GestionarPromocionesComponent', () => {
    */
   it('editar promocion', () => {
     const respuesta = component.editar(null);
-    expect(respuesta).toBeFalsy;
+    expect(respuesta).toBeFalsy();
   });
 
 
