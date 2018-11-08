@@ -5,6 +5,14 @@ import { VerInmuebleComponent } from './ver-inmueble.component';
 import { GenericoService } from '../../../Servicios/genericoServ.service';
 import { HttpClientModule } from '@angular/common/http';
 import { UsuarioService } from '../../../Servicios/usuarioServ.service';
+import { Persona } from 'src/app/Modelo/Persona';
+import { ReservarVisita } from 'src/app/Modelo/ReservarVisita';
+import { Usuario } from 'src/app/Modelo/Usuario';
+import { Inmueble } from 'src/app/Modelo/Inmueble';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
+
+
 
 describe('VerInmuebleComponent', () => {
   /**
@@ -22,7 +30,7 @@ describe('VerInmuebleComponent', () => {
       // el servicio a usar
       providers: [ GenericoService, UsuarioService],
       // Importamos el http para poder consumir los servicios
-      imports: [ HttpClientModule, RouterTestingModule],
+      imports: [ HttpClientModule, RouterTestingModule , BrowserAnimationsModule, FormsModule],
       // Se declara el componente, para poder ver el reporte en el coverage
       declarations: [ VerInmuebleComponent ]
     }).compileComponents();
@@ -35,6 +43,11 @@ describe('VerInmuebleComponent', () => {
     fixture = TestBed.createComponent( VerInmuebleComponent);
     // Inicializamos el componente, para poder acceder a sus metodos
     componente = fixture.componentInstance;
+    const usuarioSesion = new Persona();
+    usuarioSesion.id=12;
+    componente.usuarioSesion.persona=usuarioSesion;
+    componente.usuarioSesion.username="kevin";
+    componente.usuarioSesion.password="123";
     fixture.detectChanges();
   });
 // ----------------------------------------------------------------------------------
@@ -141,4 +154,22 @@ describe('VerInmuebleComponent', () => {
     expect(valor).toContain('No');
   });
 // ---------------------------------------------------------------------------------
+
+  it('Crear una visita', () => {
+
+    //creamos los objetos
+    const inmueble = new Inmueble();
+    inmueble.id=16;
+
+   componente.reservaVisita.mensaje = "prueba prueba prueba";
+   componente.reservaVisita.fecha = "2018-04-05"
+   componente.reservaVisita.hora_visita=10;
+   componente.reservaVisita.inmueble=inmueble;
+    
+   componente.reservarVisita(null);
+
+   // tslint:disable-next-line:no-unused-expression
+   expect(componente.reservoVisita).toBeTruthy;
+  });
+
 });

@@ -65,6 +65,9 @@ export class VerInmuebleComponent implements OnInit {
   // hora de la visita
   horaVisita: number;
 
+  //variable booleana
+  reservoVisita= false;
+
   constructor(private genericoServicio: GenericoService, private usuarioServicio: UsuarioService) { }
 
   ngOnInit() {
@@ -85,6 +88,8 @@ export class VerInmuebleComponent implements OnInit {
       this.cargarInmueble();
        // Listamos para validar las visitas
       this.listar();
+       // Validamos si ha iniciado sesion para que se pueda hacer la reserva del inmueble
+      // this.usuarioSesion = this.usuarioServicio.getUsuario();
       return true;
     }
   }
@@ -130,8 +135,7 @@ export class VerInmuebleComponent implements OnInit {
    * Metodo que permite reservar una visita al inmueble seleccionado
    */
   reservarVisita(form: NgForm) {
-    // Validamos si ha iniciado sesion para que se pueda hacer la reserva del inmueble
-    this.usuarioSesion = this.usuarioServicio.getUsuario();
+   
     if (this.usuarioSesion == null) {
       this.msj = 'Se requiere inicio de sesion para reservar visita';
       window.alert(this.msj);
@@ -167,16 +171,17 @@ export class VerInmuebleComponent implements OnInit {
        // el comentario despues de la visita (null ya que no se ha realizado la visita)
        this.reservaVisita.comentario = null;
 
-        // Validamos que que no tenga fecha ni hora ya asignada
+       /*// Validamos que que no tenga fecha ni hora ya asignada
         if (this.validacionFechaHora(this.reservaVisita.fecha, this.reservaVisita.hora_visita) === true) {
           this.msj = 'Usted ya tiene una visita agragada a este inmueble';
           this.show = 1;
           window.alert(this.msj);
           return;
-         }
+         }*/
 
        const aux: AuxiliarObjeto = new AuxiliarObjeto();
        aux.objeto = this.reservaVisita;
+       this.reservoVisita = true;
        aux.replaceValue('inmueble', this.reservaVisita.inmueble.id);
        aux.replaceValue('cliente', this.reservaVisita.cliente.id);
        aux.replaceValue('empleado', null);
