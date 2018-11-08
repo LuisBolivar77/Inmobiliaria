@@ -10,7 +10,7 @@ import { BrowserAnimationsModule } from '../../../../../node_modules/@angular/pl
 import { Usuario } from '../../../Modelo/Usuario';
 import { ReservarVisita } from '../../../Modelo/ReservarVisita';
 
-fdescribe('AsignarVentasContratosComponent', () => {
+describe('AsignarVentasContratosComponent', () => {
   let component: AsignarVentasContratosComponent;
   let fixture: ComponentFixture<AsignarVentasContratosComponent>;
 

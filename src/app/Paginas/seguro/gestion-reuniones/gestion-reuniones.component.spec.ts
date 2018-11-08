@@ -33,6 +33,7 @@ describe('GestionReunionesComponent', () => {
 
     component.editarSelected = false;
 
+    component.resNumHora = '0,';
     component.reunion.id = 100;
     component.reunion.descripcion = 'prueba Test';
     component.reunion.fecha = '2018-11-30';
@@ -71,8 +72,41 @@ describe('GestionReunionesComponent', () => {
     expect(component.registrado).toBeTruthy();
   });
 
+  it('no registra por fecha', () => {
+
+    component.reunion.fecha = '2018-11-07';
+    component.registrar();
+    expect(component.banderaElseFechaRegistro).toBeTruthy();
+
+  });
+
+  it('no registra por numero maximo de reuniones para ese empleado', () => {
+
+    component.listarReuniones();
+
+    component.reunion.fecha = '2018-11-30';
+    component.resNumHora = '3,horaOcupada';
+
+    component.registrar();
+    expect(component.banderaElseNumMaximoReu).toBeTruthy();
+
+  });
+
+  it('no registra por hora de reunion ocupada', () => {
+
+    component.listarReuniones();
+
+    component.reunion.fecha = '2018-11-30';
+    component.resNumHora = '2,horaOcupada';
+
+    component.registrar();
+    expect(component.banderaElseHoraOcupada).toBeTruthy();
+
+  });
+
   it('Editar una reunion', () => {
 
+    component.resNumHora = '0,';
     component.editarSelected = false;
     component.fechaAEditar = '2018-11-22';
 
@@ -115,6 +149,7 @@ describe('GestionReunionesComponent', () => {
 
   it('Editar una reunion 2.0', () => {
 
+    component.resNumHora = '0,';
     component.editarSelected = false;
     component.fechaAEditar = '2018-11-22';
 
@@ -153,6 +188,47 @@ describe('GestionReunionesComponent', () => {
 
     component.editar(null);
     expect(component.editado).toBeTruthy();
+  });
+
+  it('no edita por fecha', () => {
+
+    component.reunion.fecha = '2018-11-07';
+    component.editar(null);
+    expect(component.banderaElseFechaRegistroEditar).toBeTruthy();
+
+  });
+
+  it('no edita por numero maximo de reuniones de un empleado', () => {
+
+    component.resNumHora = '3,';
+    component.fechaSeleccionada = '2018-11-30';
+    component.fechaAEditar = '2018-11-29';
+
+    component.editar(null);
+    expect(component.banderaElseNumMaximoReuEditar).toBeTruthy();
+
+  });
+
+  it('no edita por hora ocupada', () => {
+
+    component.resNumHora = '2,horaOcupada';
+    component.fechaSeleccionada = '2018-11-30';
+    component.fechaAEditar = '2018-11-29';
+
+    component.editar(null);
+    expect(component.banderaElseHoraOcupadaEditar).toBeTruthy();
+
+  });
+
+  it('no edita por numero maximo de reuniones de un empleado', () => {
+
+    component.resNumHora = '2,horaOcupada';
+    component.fechaSeleccionada = '2018-11-30';
+    component.fechaAEditar = '2018-11-30';
+
+    component.editar(null);
+    expect(component.banderaElseHoraOcupadaEditar1).toBeTruthy();
+
   });
 
   it('Elimina una reunion', () => {

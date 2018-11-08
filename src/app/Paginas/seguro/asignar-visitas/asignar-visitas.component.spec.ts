@@ -7,7 +7,7 @@ import { AsignarVisitasComponent } from './asignar-visitas.component';
 import { Persona } from 'src/app/Modelo/Persona';
 import { Inmueble } from 'src/app/Modelo/Inmueble';
 
-fdescribe('AsignarVisitasComponent', () => {
+describe('AsignarVisitasComponent', () => {
   let component: AsignarVisitasComponent;
   let fixture: ComponentFixture<AsignarVisitasComponent>;
 

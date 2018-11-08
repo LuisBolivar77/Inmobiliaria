@@ -29,11 +29,21 @@ export class GestionReunionesComponent implements OnInit {
   fechaAEditar: string;
 
   editarSelected: boolean;
+
+  // variables para pruebas
   registrado = false;
   editado = false;
   eliminado = false;
   listarPer = false;
   listarReu = false;
+  banderaElseFechaRegistro = false;
+  banderaElseNumMaximoReu = false;
+  resNumHora: string;
+  banderaElseHoraOcupada = false;
+  banderaElseFechaRegistroEditar = false;
+  banderaElseNumMaximoReuEditar = false;
+  banderaElseHoraOcupadaEditar = false;
+  banderaElseHoraOcupadaEditar1 = false;
 
   step: number;
 
@@ -70,12 +80,13 @@ export class GestionReunionesComponent implements OnInit {
 
     if (fechaActual < fechaReunion) {
 
-      const resNumHora = this.numeroReunionesEmpleado(this.empleadoSeleccionado.id + '', this.reunion.fecha,
-      this.reunion.hora);
-      const data = resNumHora.split(',');
+      // this.resNumHora = this.numeroReunionesEmpleado(this.empleadoSeleccionado.id + '', this.reunion.fecha,
+      // this.reunion.hora);
+      const data = this.resNumHora.split(',');
       const numeroCitas = Number(data[0]);
       const resHora = data[1];
-
+      console.log(numeroCitas);
+      console.log(resHora);
       if (numeroCitas < 3) {
         if (resHora !== 'horaOcupada') {
 
@@ -104,12 +115,15 @@ export class GestionReunionesComponent implements OnInit {
           });
 
         } else {
+          this.banderaElseHoraOcupada = true;
           window.alert('la hora seleccionada ya esta ocupada para el ' + this.reunion.fecha);
         }
       } else {
+        this.banderaElseNumMaximoReu = true;
         window.alert('el empleado ya tiene el numero maximo de reuniones en la fecha seleccionada');
       }
     } else {
+      this.banderaElseFechaRegistro = true;
       window.alert('debe seleccionar una fecha posterio a ' + this.reunion.fecha);
     }
   }
@@ -121,14 +135,16 @@ export class GestionReunionesComponent implements OnInit {
 
     if (fechaActual < fechaReunion) {
 
-      const resNumHora = this.numeroReunionesEmpleado(this.empleadoSeleccionado.id + '', this.fechaSeleccionada,
-      this.horaSeleccionada);
-      const data = resNumHora.split(',');
+      // const resNumHora = this.numeroReunionesEmpleado(this.empleadoSeleccionado.id + '', this.fechaSeleccionada,
+      // this.horaSeleccionada);
+      const data = this.resNumHora.split(',');
       const numeroCitas = Number(data[0]);
       const resHora = data[1];
-      if (this.fechaAEditar === this.reunion.fecha) {
+      console.log(this.fechaAEditar + '' + this.fechaSeleccionada);
+      if (this.fechaAEditar === this.fechaSeleccionada) {
+        console.log(resHora);
           if (resHora !== 'horaOcupada') {
-
+            console.log('entro if indevido');
             this.reunion.hora = this.horaSeleccionada;
 
             const aux: AuxiliarObjeto = new AuxiliarObjeto();
@@ -149,7 +165,8 @@ export class GestionReunionesComponent implements OnInit {
               }
             });
           } else {
-            window.alert('la hora seleccionada ya esta ocupada para el ' + this.reunion.fecha);
+            this.banderaElseHoraOcupadaEditar1 = true;
+            window.alert('la hora seleccionada ya esta ocupada para el ' + this.fechaSeleccionada);
           }
       } else {
         if (numeroCitas < 3) {
@@ -178,13 +195,16 @@ export class GestionReunionesComponent implements OnInit {
             });
 
           } else {
-            window.alert('la hora seleccionada ya esta ocupada para el ' + this.reunion.fecha);
+            this.banderaElseHoraOcupadaEditar = true;
+            window.alert('la hora seleccionada ya esta ocupada para el ' + this.fechaSeleccionada);
           }
         } else {
+          this.banderaElseNumMaximoReuEditar = true;
           window.alert('el empleado ya tiene el numero maximo de reuniones en la fecha seleccionada');
         }
       }
     } else {
+      this.banderaElseFechaRegistroEditar = true;
       window.alert('debe seleccionar una fecha posterio a ' + fechaActual);
     }
 
@@ -291,6 +311,7 @@ export class GestionReunionesComponent implements OnInit {
     for (const r of this.reuniones) {
 
       if (r.empleado.usuario.persona.id === idEmpleado && fecha === r.fecha) {
+        console.log('entro al if necesario para la prueba');
         cont = cont + 1;
       }
       if (r.empleado.usuario.persona.id === idEmpleado && r.hora === hora && fecha === r.fecha) {

@@ -10,6 +10,7 @@ import { Promocion } from 'src/app/Modelo/Promocion';
 })
 export class PromocionesComponent implements OnInit {
 
+  agregoObjeto = false;
   /**
   * Listado de inmuebles
   */
@@ -53,9 +54,9 @@ export class PromocionesComponent implements OnInit {
         // inmuebles
         this.inmuebleFiltro = r.data;
 
-        this.genericoServicio.listar('promocion', null).subscribe(r => {
-          if (r.data != null) {
-            this.promociones = r.data;
+        this.genericoServicio.listar('promocion', null).subscribe(res => {
+          if (res.data != null) {
+            this.promociones = res.data;
             for (const i of this.inmuebleFiltro) {
               for (const j of this.promociones) {
                 const inmu = i.promocion.id;
@@ -86,26 +87,12 @@ export class PromocionesComponent implements OnInit {
   }
 
   /**
- * Carga la lista de inmuebles disponibles (estado 1 = publicado)
- */
-  listarByParametros(objeto) {
-    // convertimos el texto a objeto json
-    const json = JSON.parse(objeto);
-    // Obtenemos la lista de inmuebles
-    this.genericoServicio.listar('inmueble', json).subscribe(r => {
-      if (r.data != null) {
-        this.inmuebles = r.data;
-        // Agregamos los datos (objetos) adicionales a cada inmueble
-        this.agregarObjetos(this.inmuebles);
-      }
-    });
-  }
-
-  /**
    * Agrega objetos a los inmuebles
    * @param lista
    */
   agregarObjetos(lista) {
+
+    this.agregoObjeto = true;
     for (const i of lista) {
       // Obtenemos el tipo de inmueble
       this.genericoServicio.buscar('tipo_inmueble', { 'id': i.tipo }).subscribe(r2 => {
