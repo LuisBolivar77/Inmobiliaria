@@ -10,7 +10,7 @@ import { BrowserAnimationsModule } from '../../../../../node_modules/@angular/pl
 import { Usuario } from '../../../Modelo/Usuario';
 import { ReservarVisita } from '../../../Modelo/ReservarVisita';
 
-describe('AsignarVentasContratosComponent', () => {
+fdescribe('AsignarVentasContratosComponent', () => {
   let component: AsignarVentasContratosComponent;
   let fixture: ComponentFixture<AsignarVentasContratosComponent>;
 
@@ -39,6 +39,7 @@ describe('AsignarVentasContratosComponent', () => {
 
   it('Crear una venta', () => {
 
+    console.log('Crear una venta');
     const persona = new Persona();
     persona.id = 5;
 
@@ -51,7 +52,7 @@ describe('AsignarVentasContratosComponent', () => {
     component.contrato.cliente = usuario;
     component.contrato.visita = visita;
 
-    component.contrato.id = 4;
+    component.contrato.id = 7;
     component.descripcionSel = 'vendida';
 
     component.registrar(null);
@@ -62,27 +63,32 @@ describe('AsignarVentasContratosComponent', () => {
 
    it('ver info contrato', () => {
     // tslint:disable-next-line:prefer-const
-    component.ventas;
-    const respuesta = component.listarVentas();
+    component.listarVentas();
     // tslint:disable-next-line:no-unused-expression
-    expect(respuesta).toBeTruthy;
+    expect(component.ventas).not.toBeNull();
   });
 
   it('ver info contratosFinales', () => {
     // tslint:disable-next-line:prefer-const
-    component.contratos;
-    const respuesta = component.listadoFinal();
+    component.listar();
+    component.listadoFinal();
     // s tslint:disable-next-line:no-unused-expression
-    expect(respuesta).toBeTruthy();
+    expect(component.constratosFinales).not.toBeNull();
   });
 
   it('Ver la info de la tabla venta', () => {
     // tslint:disable-next-line:prefer-const
-    component.verSelec;
-    const respuesta = component.ver(null);
+    component.ver(null);
     // tslint:disable-next-line:no-unused-expression
-    expect(respuesta).toBeTruthy;
+    expect(component.verSelec).toBeTruthy();
   });
 
-  
+  it('agrega objetos', () => {
+
+    component.listar();
+    component.agregarObjetos();
+
+    expect(component.agregoObjeto).toBeTruthy();
+
+  });
 });

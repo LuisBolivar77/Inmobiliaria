@@ -233,7 +233,8 @@ CREATE TABLE reunion (
     descripcion   VARCHAR(1000) NOT NULL,
     estado        INTEGER NOT NULL,
     cliente       INTEGER NOT NULL,
-    empleado      INTEGER NOT NULL
+    empleado      INTEGER NOT NULL,
+    hora          VARCHAR NOT NULL
 );
 
 ALTER TABLE reunion ADD CONSTRAINT reunion_pk PRIMARY KEY ( id );

@@ -19,15 +19,21 @@ export class GestionReunionesComponent implements OnInit {
   personas: Array<Persona> = [];
   clientes: Array<Persona> = [];
   empleados: Array<Persona> = [];
+  horas: Array<any> = [ {valor: '7 AM'}, {valor: '10 AM'}, {valor: '2 PM'}, {valor: '5 PM'} ];
 
   empleadoSeleccionado: Persona = new Persona();
   clienteSeleccionado: Persona = new Persona();
   reunion: Reunion = new Reunion();
+  horaSeleccionada: string;
+  fechaSeleccionada: string;
+  fechaAEditar: string;
 
   editarSelected: boolean;
   registrado = false;
   editado = false;
   eliminado = false;
+  listarPer = false;
+  listarReu = false;
 
   step: number;
 
@@ -42,6 +48,7 @@ export class GestionReunionesComponent implements OnInit {
   }
 
   listarReuniones() {
+    this.listarReu = true;
     this.generico.listar('reunion', null).subscribe(res => {
       this.reuniones = res.data;
       this.agregarObjetos();
@@ -49,6 +56,7 @@ export class GestionReunionesComponent implements OnInit {
   }
 
   listarPersonas() {
+    this.listarPer = true;
     this.generico.listar('personas', null).subscribe(res => {
       this.personas = res.data;
       this.agregarObjetosPer();
@@ -62,63 +70,128 @@ export class GestionReunionesComponent implements OnInit {
 
     if (fechaActual < fechaReunion) {
 
-      const empleadoTemp = new Empleado();
-      const personaTemp = new Usuario();
+      const resNumHora = this.numeroReunionesEmpleado(this.empleadoSeleccionado.id + '', this.reunion.fecha,
+      this.reunion.hora);
+      const data = resNumHora.split(',');
+      const numeroCitas = Number(data[0]);
+      const resHora = data[1];
 
-      this.reunion.estado = 0;
-      this.reunion.empleado = empleadoTemp;
-      this.reunion.cliente = personaTemp;
+      if (numeroCitas < 3) {
+        if (resHora !== 'horaOcupada') {
 
-      const aux: AuxiliarObjeto = new AuxiliarObjeto();
-      aux.objeto = this.reunion;
-      aux.replaceValue('empleado', this.empleadoSeleccionado.id);
-      aux.replaceValue('cliente', this.clienteSeleccionado.id);
+          const empleadoTemp = new Empleado();
+          const personaTemp = new Usuario();
 
-      this.generico.registrar('reunion', aux.objeto).subscribe(res => {
-        if (res.data === 'exito') {
-          this.limpiarCampos();
-          this.listarReuniones();
+          this.reunion.estado = 0;
+          this.reunion.empleado = empleadoTemp;
+          this.reunion.cliente = personaTemp;
+
+          const aux: AuxiliarObjeto = new AuxiliarObjeto();
+          aux.objeto = this.reunion;
           this.registrado = true;
-          window.alert('la reunion fue registrada exitosamente');
+          aux.replaceValue('empleado', this.empleadoSeleccionado.id);
+          aux.replaceValue('cliente', this.clienteSeleccionado.id);
+
+          this.generico.registrar('reunion', aux.objeto).subscribe(res => {
+            if (res.data === 'exito') {
+              this.limpiarCampos();
+              this.listarReuniones();
+              this.registrado = true;
+              window.alert('la reunion fue registrada exitosamente');
+            } else {
+              window.alert('ERROR, ' + res.data);
+            }
+          });
+
         } else {
-          window.alert('ERROR, ' + res.data);
+          window.alert('la hora seleccionada ya esta ocupada para el ' + this.reunion.fecha);
         }
-      });
+      } else {
+        window.alert('el empleado ya tiene el numero maximo de reuniones en la fecha seleccionada');
+      }
     } else {
-      window.alert('debe seleccionar una fecha posterio a ' + fechaActual);
+      window.alert('debe seleccionar una fecha posterio a ' + this.reunion.fecha);
     }
   }
 
   editar(form: NgForm) {
 
-    const fechaReunion = new Date(this.reunion.fecha);
+    const fechaReunion = new Date(this.fechaSeleccionada);
     const fechaActual = new Date;
 
     if (fechaActual < fechaReunion) {
 
-      const aux: AuxiliarObjeto = new AuxiliarObjeto();
-      aux.objeto = this.reunion;
-      aux.replaceValue('empleado', this.empleadoSeleccionado.id);
-      aux.replaceValue('cliente', this.clienteSeleccionado.id);
+      const resNumHora = this.numeroReunionesEmpleado(this.empleadoSeleccionado.id + '', this.fechaSeleccionada,
+      this.horaSeleccionada);
+      const data = resNumHora.split(',');
+      const numeroCitas = Number(data[0]);
+      const resHora = data[1];
+      if (this.fechaAEditar === this.reunion.fecha) {
+          if (resHora !== 'horaOcupada') {
 
-      this.generico.editar('reunion', aux.objeto, 'id').subscribe(res => {
-        if (res.data === 'exito') {
-          // form.reset();
-          this.step = 0;
-          this.listarReuniones();
-          this.editado = true;
-          window.alert('la reunion se edito exitosamente');
+            this.reunion.hora = this.horaSeleccionada;
+
+            const aux: AuxiliarObjeto = new AuxiliarObjeto();
+            aux.objeto = this.reunion;
+            this.editado = true;
+            aux.replaceValue('empleado', this.empleadoSeleccionado.id);
+            aux.replaceValue('cliente', this.clienteSeleccionado.id);
+
+            this.generico.editar('reunion', aux.objeto, 'id').subscribe(res => {
+              if (res.data === 'exito') {
+                // form.reset();
+                this.step = 0;
+                this.listarReuniones();
+                this.editado = true;
+                window.alert('la reunion se edito exitosamente');
+              } else {
+                window.alert('ERROR, ' + res.data);
+              }
+            });
+          } else {
+            window.alert('la hora seleccionada ya esta ocupada para el ' + this.reunion.fecha);
+          }
+      } else {
+        if (numeroCitas < 3) {
+          if (resHora !== 'horaOcupada') {
+
+            this.reunion.hora = this.horaSeleccionada;
+            this.reunion.fecha = this.fechaSeleccionada;
+
+            const aux: AuxiliarObjeto = new AuxiliarObjeto();
+            aux.objeto = this.reunion;
+            this.registrado = true;
+            this.editado = true;
+            aux.replaceValue('empleado', this.empleadoSeleccionado.id);
+            aux.replaceValue('cliente', this.clienteSeleccionado.id);
+
+            this.generico.editar('reunion', aux.objeto, 'id').subscribe(res => {
+              if (res.data === 'exito') {
+                // form.reset();
+                this.step = 0;
+                this.listarReuniones();
+                this.editado = true;
+                window.alert('la reunion se edito exitosamente');
+              } else {
+                window.alert('ERROR, ' + res.data);
+              }
+            });
+
+          } else {
+            window.alert('la hora seleccionada ya esta ocupada para el ' + this.reunion.fecha);
+          }
         } else {
-          window.alert('ERROR, ' + res.data);
+          window.alert('el empleado ya tiene el numero maximo de reuniones en la fecha seleccionada');
         }
-      });
+      }
     } else {
       window.alert('debe seleccionar una fecha posterio a ' + fechaActual);
     }
 
   }
 
-  eliminar(id: string) {
+  eliminar(id: number) {
+    this.eliminado = true;
     this.generico.eliminar('reunion', {'id': id}).subscribe(res => {
       if (res.data === 'exito') {
         window.alert('La reunion fue eliminada');
@@ -135,6 +208,9 @@ export class GestionReunionesComponent implements OnInit {
     this.reunion = r;
     this.empleadoSeleccionado.id = r.empleado.usuario.persona.id;
     this.clienteSeleccionado.id = r.cliente.persona.id;
+    this.fechaSeleccionada = r.fecha;
+    this.horaSeleccionada = r.hora;
+    this.fechaAEditar = r.fecha;
 
     this.editarSelected = true;
     this.step = 1;
@@ -147,6 +223,7 @@ export class GestionReunionesComponent implements OnInit {
     this.reunion.descripcion = '';
     this.reunion.fecha = '';
     this.reunion.id = null;
+    this.reunion.hora = '';
     this.editarSelected = false;
     this.listarReuniones();
     this.step = 0;
@@ -154,9 +231,6 @@ export class GestionReunionesComponent implements OnInit {
 
   agregarObjetos() {
     for (const r of this.reuniones) {
-
-      console.log(r);
-
       const data = r.fecha.split('T');
       const fecha = data[0];
       r.fecha = fecha;
@@ -207,17 +281,22 @@ export class GestionReunionesComponent implements OnInit {
     return false;
   }
 
-  validarRegistro(): boolean {
-    return this.registrado;
+  numeroReunionesEmpleado(id: string, fecha: string, hora: string): string {
+
+    let cont = 0;
+    let resHora = '';
+    const data = id.split('"');
+    const idEmpleado = Number(data[0]);
+
+    for (const r of this.reuniones) {
+
+      if (r.empleado.usuario.persona.id === idEmpleado && fecha === r.fecha) {
+        cont = cont + 1;
+      }
+      if (r.empleado.usuario.persona.id === idEmpleado && r.hora === hora && fecha === r.fecha) {
+        resHora = 'horaOcupada';
+      }
+    }
+    return cont + ',' + resHora;
   }
-
-  validarEdicion(): boolean {
-    return this.editado;
-  }
-
-  validarEliminacion(): boolean {
-    return this.eliminado;
-  }
-
-
 }
