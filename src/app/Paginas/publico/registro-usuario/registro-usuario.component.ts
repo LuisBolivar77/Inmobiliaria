@@ -21,6 +21,8 @@ export class RegistroUsuarioComponent implements OnInit {
   persona: Persona = new Persona();
   // Rol del cliente (2)
   rol: Rol = new Rol();
+  registrado = false;
+  noRegistrado = false;
 
   foto: Archivo;
 
@@ -40,10 +42,12 @@ export class RegistroUsuarioComponent implements OnInit {
     // Asignamos el rol Cliente con id 2
     this.rol.id = 2;
     // Validamos si el usuario ya inicio sesion
+    /*
     if (this.servicios.getUsuario() != null) {
       // como ya inicio sesion, lo redireccionamos al inicio
       this.servicios.redireccionar('/');
     }
+    */
   }
 
 
@@ -57,9 +61,10 @@ export class RegistroUsuarioComponent implements OnInit {
       this.persona.rol = this.rol;
       this.persona.latitud = this.latSelected;
       this.persona.longitud = this.longSelected;
-      console.log('localizacion -- ' + this.persona);
       // Asignamos la persona al usuario
       this.usuario.persona = this.persona;
+      this.registrado = true;
+      this.noRegistrado = true;
       this.personaServicio.registrar(this.usuario).subscribe(rta => {
         if (rta.data === 'exito') {
           this.msj = 'Se ha registrado correctamente';
@@ -88,9 +93,9 @@ export class RegistroUsuarioComponent implements OnInit {
     this.locationSelec = false;
   }
 
-  onChoseLocation(event) {
-    this.latSelected = event.coords.lat;
-    this.longSelected = event.coords.lng;
+  onChoseLocation(lat, lng) {
+    this.latSelected = lat;
+    this.longSelected = lng;
     this.locationSelec = true;
   }
 

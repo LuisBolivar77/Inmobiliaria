@@ -54,9 +54,9 @@ export class PromocionesComponent implements OnInit {
         // inmuebles
         this.inmuebleFiltro = r.data;
 
-        this.genericoServicio.listar('promocion', null).subscribe(res => {
-          if (res.data != null) {
-            this.promociones = res.data;
+        this.genericoServicio.listar('promocion', null).subscribe(r => {
+          if (r.data != null) {
+            this.promociones = r.data;
             for (const i of this.inmuebleFiltro) {
               for (const j of this.promociones) {
                 const inmu = i.promocion.id;
