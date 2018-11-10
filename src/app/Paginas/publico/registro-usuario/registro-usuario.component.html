@@ -20,7 +20,7 @@
             <div><input type="tel"  [(ngModel)]="usuario.username" name="username" class="contact_input" placeholder="Nombre de usuario" required="required"></div>
             <div><input type="text" [(ngModel)]="usuario.password" name="password" class="contact_input" placeholder="Contraseña" required="required"></div>
             <div class="section_subtitle"> Seleccion Localizacion </div>
-            <agm-map [zoom]="zoom" [latitude]="latSelected" [longitude]="longSelected" (mapClick)="onChoseLocation($event)">
+            <agm-map [zoom]="zoom" [latitude]="latSelected" [longitude]="longSelected" (mapClick)="onChoseLocation($event.coords.lat, $event.coords.lng)">
               <agm-marker *ngIf="locationSelec" [latitude]="latSelected" [longitude]="longSelected"></agm-marker>
             </agm-map>
             <button (click)="registrar(datosForm)" style="width: 100%" class="contact_button button">Registrarme</button>

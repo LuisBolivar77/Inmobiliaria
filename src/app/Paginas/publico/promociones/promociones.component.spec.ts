@@ -24,10 +24,34 @@ describe('PromocionesComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
-/**
-  it('zona inmuebles', () => {
-    const respuesta = component.getZona;
-    expect(respuesta).toBeTruthy();
+
+
+  it('obtiene el tipoAV', () => {
+
+    const res = component.getTipoAV(0);
+    expect(res).toBe('Arriendo');
+
   });
-*/
+
+  it('obtiene la zona', () => {
+
+    const res = component.getZona(0);
+    expect(res).toBe('Norte');
+
+  });
+
+  it('agrega una coma al valor', () => {
+
+    const res = component.addComa(200000);
+    expect(res).toBe('200.000');
+
+  });
+
+  it('agrega objetos', () => {
+
+    component.listarInmuebles();
+    component.agregarObjetos(component.inmuebles);
+    expect(component.agregoObjeto).toBeTruthy();
+
+  });
 });

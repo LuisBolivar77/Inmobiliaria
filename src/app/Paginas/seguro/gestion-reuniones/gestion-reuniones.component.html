@@ -17,6 +17,7 @@
                       <tr>
                         <th scope="col">Id de la reunion</th>
                         <th scope="col">fecha de la reunion</th>
+                        <th scope="col">Hora de la reunion</th>
                         <th scope="col">descripcion</th>
                         <th scope="col">estado de la reunion</th>
                         <th scope="col">cedula del cliente</th>
@@ -28,6 +29,7 @@
                       <tr *ngFor="let r of reuniones">
                         <td>{{r.id}}</td>
                         <td>{{r.fecha}}</td>
+                        <td>{{r.hora}}</td>
                         <td>{{r.descripcion}}</td>
                         <td>{{estadoReunion(r.estado)}}</td>
                         <td>{{r.cliente.persona.cedula}}</td>
@@ -55,9 +57,23 @@
                             <label>Decripcion de la reunion:</label>
                             <input type="text" min="1" [(ngModel)]="reunion.descripcion" name="descripcion" class="contact_input" placeholder="Descripcion de la reunion" required="required" >
                           </div>
-                          <div class="col-lg-6">
+                          <div *ngIf="!editarSelected" class="col-lg-6">
                               <label>fecha de la reunion:</label>
                               <input type="date" [(ngModel)]="reunion.fecha" name="fechaReunion" class="contact_input" placeholder="Fecha de la reunion" required="required" min="fechaActual" >
+                          </div>
+                          <div *ngIf="editarSelected" class="col-lg-6">
+                            <label>fecha de la reunion:</label>
+                            <input type="date" [(ngModel)]="fechaSeleccionada" name="fechaReunion" class="contact_input" placeholder="Fecha de la reunion" required="required" min="fechaActual" >
+                        </div>
+                        </div>
+                        <div class="row">
+                          <div *ngIf="!editarSelected" class="col-lg-6">
+                            <label>Hora de la reunion:</label>
+                            <select [(ngModel)]="reunion.hora" name="hora"><option *ngFor="let h of horas" value="{{h.valor}}">{{h.valor}}</option></select>
+                          </div>
+                          <div *ngIf="editarSelected" class="col-lg-6">
+                            <label>Hora de la reunion:</label>
+                            <select [(ngModel)]="horaSeleccionada" name="hora"><option *ngFor="let h of horas" value="{{h.valor}}">{{h.valor}}</option></select>
                           </div>
                         </div>
                         <div class="row">
@@ -73,7 +89,7 @@
                         <div class="col-lg-6">
                             <button *ngIf="!editarSelected" type="submit" (click)="registrar(datosForm)"  style="width: 100%" class="contact_button button">Registrar Reunion</button>
                             <button *ngIf="editarSelected" type="submit" (click)="editar(datosForm)"  style="width: 100%" class="contact_button button">Editar Reunion</button>
-                            <button *ngIf="editarSelected" type="submit" (click)="limpiarCampos(datosForm)"  style="width: 100%" class="contact_button button">Limpiar Campos</button>
+                            <button type="submit" (click)="limpiarCampos(datosForm)"  style="width: 100%" class="contact_button button">Limpiar Campos</button>
                         </div>
                     </form>
                   </div>            

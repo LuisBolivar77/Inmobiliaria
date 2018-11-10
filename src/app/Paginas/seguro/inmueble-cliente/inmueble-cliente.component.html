@@ -313,8 +313,8 @@
                     <div class="contact_form_container">
                         <form #formacionesForm="ngForm" class="contact_form">
                           <div *ngIf="busco" class="section_subtitle">Datos Archivos</div>
-                            <input *ngIf="busco" type="file" multiple name="myfile" (change)="onFileSelected($event)" />
-                            <button *ngIf="busco" type="submit" (click)="buscarInmuebleArchivo(datosForm)" style="width: 100%" class="contact_button button">Registrar Archivo</button>
+                            <input *ngIf="busco" type="file" multiple name="myfile" />
+                            <button *ngIf="busco" type="submit"  style="width: 100%" class="contact_button button">Registrar Archivo</button>
                             <p *ngIf="!busco"> Debe buscar el inmueble primero para porder registrar un archivo</p>
                         </form>
                       </div>

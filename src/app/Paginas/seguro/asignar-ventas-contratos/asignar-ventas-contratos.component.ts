@@ -33,6 +33,7 @@ export class AsignarVentasContratosComponent implements OnInit {
    verSelec = false;
    descripcionSel: string;
    registrado = false;
+   agregoObjeto = false;
 
   constructor(private generico: GenericoService, private usuarioServicio: UsuarioService) { }
 
@@ -97,6 +98,7 @@ export class AsignarVentasContratosComponent implements OnInit {
   }
 
   agregarObjetos() {
+    this.agregoObjeto = true;
     for (const c of this.contratos) {
       const fields = c.fecha_solicitud.split('T');
       const fechaSoli = fields[0];
@@ -159,11 +161,12 @@ export class AsignarVentasContratosComponent implements OnInit {
     this.registrado = true;
     aux.replaceValue('contrato', this.contrato.id);
     aux.replaceValue('empleado', this.usuarioSesion.persona.id);
-
-    console.log(this.usuarioSesion.persona.id);
+    console.log(aux.objeto);
 
     this.generico.registrar('venta', aux.objeto).subscribe(res => {
+      console.log('entro1');
       if (res.data === 'exito') {
+        console.log('entro2');
         this.contrato.estado = 2;
         const aux2: AuxiliarObjeto = new AuxiliarObjeto();
         aux2.objeto = this.contrato;
@@ -172,7 +175,9 @@ export class AsignarVentasContratosComponent implements OnInit {
         aux2.replaceValue('visita', this.contrato.visita.id);
 
         this.generico.editar('contrato', aux2.objeto, 'id').subscribe(res2 => {
+          console.log('entro3');
           if (res2.data === 'exito') {
+            console.log('entro4');
             this.msj = 'la venta se ha registrado correctamente';
             this.show = 2;
             this.descripcionSel = '';

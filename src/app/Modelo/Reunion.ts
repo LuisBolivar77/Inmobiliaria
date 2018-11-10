@@ -8,5 +8,6 @@ export class Reunion {
     estado: number;
     cliente: Usuario;
     empleado: Empleado;
+    hora: string;
 
 }
