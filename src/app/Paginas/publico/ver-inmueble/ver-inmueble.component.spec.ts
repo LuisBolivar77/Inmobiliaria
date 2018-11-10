@@ -14,7 +14,7 @@ import { FormsModule } from '@angular/forms';
 
 
 
-describe('VerInmuebleComponent', () => {
+fdescribe('VerInmuebleComponent', () => {
   /**
    * Componente de ver inmueble
    */

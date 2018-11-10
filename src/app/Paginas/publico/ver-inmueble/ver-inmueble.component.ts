@@ -208,24 +208,6 @@ export class VerInmuebleComponent implements OnInit {
     this.horaVisita = 0;
   }
 
-  validacionFechaHora(fecha: String, hora: number): boolean {
-    let value = false;
-    console.log(fecha + 'hora: ' + hora);
-    console.log(this.visitas);
-    console.log('TRUE?? ' + value);
-    for (let i = 0; i < this.visitas.length; i++) {
-      console.log(i);
-      console.log(this.visitas[i].fecha + '=== fecha');
-      console.log(this.visitas[i].hora_visita + '//// hora');
-      if (fecha === this.visitas[i].fecha && hora === this.visitas[i].hora_visita) {
-       value = true;
-       console.log(fecha + ' hora:' + hora);
-       console.log(i);
-       console.log('TRUE?? ' + value);
-      }
-    }
-   return value;
-  }
 
   listar() {
     this.genericoServicio.listar('reservar_visita', {'cliente': this.usuarioSesion.persona.id}).subscribe(rta => {
