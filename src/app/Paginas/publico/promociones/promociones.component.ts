@@ -58,18 +58,16 @@ export class PromocionesComponent implements OnInit {
           if (r.data != null) {
             this.promociones = r.data;
             for (const i of this.inmuebleFiltro) {
+              
               for (const j of this.promociones) {
-                const inmu = i.promocion.id;
+                var inmu = i.promocion;
                 const promo = j.id;
                 const fechaIni = new Date(j.fecha_inicio);
                 const fechaFin = new Date(j.fecha_fin);
                 const fechaActual = new Date;
-               // alert(inmu +" = " +promo);
-               if ((inmu === promo) && // Sale error por el objeto que compara con el number (FUNCIONA)
-               (fechaIni <= fechaActual) &&  (fechaFin >= fechaActual)) {
-                // alert('Entro al final del for');
+                //console.log(inmu  +" = " +promo);
+               if ((Number(inmu) === promo ) && (fechaIni <= fechaActual) &&  (fechaFin >= fechaActual)) {
                  this.inmuebles.push(i);
-                 return true;
                }
               }
             }
@@ -113,8 +111,7 @@ export class PromocionesComponent implements OnInit {
               this.fotos[i.id] = r5.data.nombre;
               // obtenemos las promosiones
               this.genericoServicio.buscar('promocion', { 'id': i.promocion }).subscribe(r6 => {
-                i.promocion = r6.data;
-                return true;
+                i.promocion = r6.data;                
               });
             });
           });
