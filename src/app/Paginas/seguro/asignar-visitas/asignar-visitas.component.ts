@@ -42,13 +42,16 @@ export class AsignarVisitasComponent implements OnInit {
 
   //variable booleana para la prueba
   asignoVisita= false;
+  seleccionoVisita = false;
+  seleccionoEmpleado=false;
+  limpioCampos=false;
 
   constructor(private servicioGenerico: GenericoService, private usuarioServicio: UsuarioService) { }
 
   ngOnInit() {
 
-    this.usuarioServicio.esAccesible('administracion/asignar-visitas');
-    this.usuarioSesion = this.usuarioServicio.getUsuario();
+   // this.usuarioServicio.esAccesible('administracion/asignar-visitas');
+  //this.usuarioSesion = this.usuarioServicio.getUsuario();
     this.listarVisitas();
     this.listarEmpleados();
   }
@@ -57,11 +60,13 @@ export class AsignarVisitasComponent implements OnInit {
     this.visitaSeleccionada = visita;
     this.numeroVisita = visita.id;
     this.nombreCliente = visita.cliente.nombre;
+    this.seleccionoVisita =true;
   }
 
   seleccionEmpleado(empleado: Empleado) {
     this.empleadoSeleccionado = empleado;
     this.nombreEmpleado = empleado.usuario.persona.nombre;
+    this.seleccionoEmpleado = true;
   }
 
   asignarVisita(): void {
@@ -80,12 +85,13 @@ export class AsignarVisitasComponent implements OnInit {
     aux.replaceValue('cliente', this.visitaSeleccionada.cliente.id);
     aux.replaceValue('empleado', this.visitaSeleccionada.empleado.id);
 
-    console.log(this.visitaSeleccionada);
+    console.log(aux.objeto);
     this.servicioGenerico.editar('reservar_visita', aux.objeto, 'id').subscribe(rta => {
+    console.log("ENTRO ESTA VAINA");
     if (rta.data === 'exito') {
       this.msj = 'Se ha asignado el empleado exitosamente !';
       this.show = 2;
-      this.visitasFinales = Array<ReservarVisita>();
+      this.visitasFinales = new Array<ReservarVisita>();
       this.listarVisitas();
       this.limpiarCampos();
     } else {
@@ -101,6 +107,7 @@ export class AsignarVisitasComponent implements OnInit {
     this.nombreCliente = '';
     this.nombreEmpleado = '';
     this.visitaSeleccionada.mensaje = '';
+    this.limpioCampos=true;
   }
 
 

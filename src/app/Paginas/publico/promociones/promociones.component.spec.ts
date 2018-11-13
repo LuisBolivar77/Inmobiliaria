@@ -25,7 +25,6 @@ describe('PromocionesComponent', () => {
     fixture.detectChanges();
   });
 
-
   it('obtiene el tipoAV', () => {
 
     const res = component.getTipoAV(0);
@@ -54,5 +53,4 @@ describe('PromocionesComponent', () => {
     expect(component.agregoObjeto).toBeTruthy();
 
   });
-
 });
