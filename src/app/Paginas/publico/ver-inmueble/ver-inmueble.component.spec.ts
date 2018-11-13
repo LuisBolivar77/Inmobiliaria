@@ -21,7 +21,6 @@ describe('VerInmuebleComponent', () => {
   let componente: VerInmuebleComponent;
   let fixture: ComponentFixture<VerInmuebleComponent>;
 
-// ----------------------------------------------------------------------------------
   /**
    * Se ejecuta en cada it de manera asincrona
    */
@@ -35,7 +34,7 @@ describe('VerInmuebleComponent', () => {
       declarations: [ VerInmuebleComponent ]
     }).compileComponents();
   }));
-// ----------------------------------------------------------------------------------
+
   /**
    * Se ejecuta antes de cada it
    */
@@ -43,133 +42,146 @@ describe('VerInmuebleComponent', () => {
     fixture = TestBed.createComponent( VerInmuebleComponent);
     // Inicializamos el componente, para poder acceder a sus metodos
     componente = fixture.componentInstance;
+
     const usuarioSesion = new Persona();
-    usuarioSesion.id=12;
-    componente.usuarioSesion.persona=usuarioSesion;
-    componente.usuarioSesion.username="kevin";
-    componente.usuarioSesion.password="123";
+    usuarioSesion.id = 1;
+
+    componente.usuarioSesion.persona = usuarioSesion;
+    componente.usuarioSesion.username = 'admin';
+    componente.usuarioSesion.password = '123';
+
     fixture.detectChanges();
   });
-// ----------------------------------------------------------------------------------
-  it('Crear componente', () => {
-    expect(componente).toBeTruthy();
-  });
-// ----------------------------------------------------------------------------------
-  /**
-   *  probando el ngOnInit cuando existe el parametro GET
-   */
-  it('ngOnInit Existe parametro GET', () => {
-    // tslint:disable-next-line:prefer-const
-    let ver = componente.ngOnInit();
-    // toBeTruthy cuando es verdadero
-    // tslint:disable-next-line:no-unused-expression
-    expect(ver).toBeTruthy;
-  });
-// ----------------------------------------------------------------------------------
-  /**
-   *  probando el ngOnInit cuando no existe el parametro GET
-   */
-  it('ngOnInit No existe parametro GET', () => {
-    // tslint:disable-next-line:prefer-const
-    let ver = componente.ngOnInit();
-    // toBeFalsy cuando es Falso
-    // tslint:disable-next-line:no-unused-expression
-    expect(ver).toBeFalsy;
-  });
-// ----------------------------------------------------------------------------------
-  /**
-   *  Busca el inmueble y carga la informacion
-   */
-  it('Cargar Inmueble', () => {
-    // id del inmueble a buscar y cargar
-    componente.inmueble.id = 2;
-    // tslint:disable-next-line:prefer-const
-    let ver = componente.cargarInmueble();
-    // toBeTruthy cuando es verdadero
-    // tslint:disable-next-line:no-unused-expression
-    expect(ver).toBeTruthy;
-    console.log(componente.inmueble);
-  });
-// ----------------------------------------------------------------------------------
-  /**
-   *  probando el flujo alterno, cuando no se encuentra un inmueble
-   */
-  it('No Cargar Inmueble', () => {
-    // id del inmueble a buscar y a no cargar, este inmueble no debe existir en la bd
-    componente.inmueble.id = 200;
-    // tslint:disable-next-line:prefer-const
-    let ver = componente.cargarInmueble();
-    // toBeFalsy cuando es Falso
-    // tslint:disable-next-line:no-unused-expression
-    expect(ver).toBeFalsy;
-  });
-// ----------------------------------------------------------------------------------
-  /**
-   * obtener zona
-   */
-  it('Obtener Zona', () => {
-    // tslint:disable-next-line:prefer-const
-    let zona = componente.getZona(0);
-    // validamos si la respuesta concuerda con la esparada
-    expect(zona).toContain('Norte');
-  });
-// ----------------------------------------------------------------------------------
-  /**
-   * obtener tipo AV
-   */
-  it('Obtener TipoAV', () => {
-    // tslint:disable-next-line:prefer-const
-    let tipoav = componente.getTipoAV(0);
-    // validamos si la respuesta concuerda con la esparada
-    expect(tipoav).toContain('Arriendo');
-  });
-// ----------------------------------------------------------------------------------
-  /**
-   * Agregar punto a un numero
-   */
-  it('addComa', () => {
-    // tslint:disable-next-line:prefer-const
-    let valor = componente.addComa(100000);
-    // validamos si la respuesta concuerda con la esparada
-    expect(valor).toContain('100.000');
-  });
-// ----------------------------------------------------------------------------------
-  /**
-   * probar si un boolean nos devuelve si o no
-   */
-  it('siNo cuando devuelve Si', () => {
-    // tslint:disable-next-line:prefer-const
-    let valor = componente.siNo(1);
-    // validamos si la respuesta concuerda con la esparada
-    expect(valor).toContain('Si');
-  });
-// ----------------------------------------------------------------------------------
-  /**
-   * probar si un boolean nos devuelve si o no
-   */
-  it('siNo cuando devuelve NO', () => {
-    // tslint:disable-next-line:prefer-const
-    let valor = componente.siNo(0);
-    // validamos si la respuesta concuerda con la esparada
-    expect(valor).toContain('No');
-  });
-// ---------------------------------------------------------------------------------
 
   it('Crear una visita', () => {
 
-    //creamos los objetos
+    // creamos los objetos
     const inmueble = new Inmueble();
-    inmueble.id=16;
+    inmueble.id = 16;
 
-   componente.reservaVisita.mensaje = "prueba prueba prueba";
-   componente.reservaVisita.fecha = "2018-04-05"
-   componente.reservaVisita.hora_visita=10;
-   componente.reservaVisita.inmueble=inmueble;
-    
-   componente.reservarVisita(null);
+    componente.horaVisita = 10;
+    componente.reservaVisita.mensaje = 'prueba prueba prueba';
+    componente.reservaVisita.fecha = '2018-11-30';
+    componente.reservaVisita.hora_visita = 10;
+    componente.inmueble = inmueble;
 
-   // tslint:disable-next-line:no-unused-expression
-   expect(componente.reservoVisita).toBeTruthy;
+    componente.reservarVisita(null);
+
+    expect(componente.reservoVisita).toBeTruthy();
   });
 
+  it('no Crear una visita (error inmueble indefinido)', () => {
+
+    // creamos los objetos
+    const inmueble = new Inmueble();
+    inmueble.id = 16;
+
+    componente.horaVisita = 10;
+    componente.reservaVisita.mensaje = 'prueba prueba prueba';
+    componente.reservaVisita.fecha = '2018-11-30';
+    componente.reservaVisita.hora_visita = 10;
+    componente.reservaVisita.inmueble = inmueble;
+
+    componente.reservarVisita(null);
+
+    expect(componente.reservoVisita).toBeTruthy();
+  });
+
+  it('no Crear una visita (error faltan campos)', () => {
+
+    // creamos los objetos
+    const inmueble = new Inmueble();
+    inmueble.id = 16;
+
+    componente.reservaVisita.mensaje = 'prueba prueba prueba';
+    componente.reservaVisita.fecha = '2018-11-30';
+    componente.reservaVisita.hora_visita = 10;
+    componente.reservaVisita.inmueble = inmueble;
+
+    componente.reservarVisita(null);
+
+    expect(componente.show).toBe(1);
+  });
+
+  it('no Crear una visita (error faltan campos)', () => {
+
+    // creamos los objetos
+    const inmueble = new Inmueble();
+    inmueble.id = 16;
+
+    componente.horaVisita = 10;
+    componente.reservaVisita.mensaje = 'prueba prueba prueba';
+    componente.reservaVisita.fecha = '2018-04-05';
+    componente.reservaVisita.hora_visita = 10;
+    componente.reservaVisita.inmueble = inmueble;
+
+    componente.reservarVisita(null);
+
+    expect(componente.show).toBe(1);
+  });
+
+  it('no crea reserva usuarioSesion null', () => {
+
+    componente.usuarioSesion = null;
+
+    componente.reservarVisita(null);
+    expect(componente.show).toBe(1);
+
+  });
+
+  it('limpiar campos', () => {
+
+    componente.limpiarCampos();
+    expect(componente.horaVisita).toBe(0);
+
+  });
+
+  it('listar', () => {
+
+    componente.listar();
+    expect(componente.visitas).not.toBeNull();
+
+  });
+
+  it('agregarObjetos', () => {
+
+    componente.listar();
+    componente.agregarObjetos(componente.visitas);
+    expect(componente.agregObjeto).toBeTruthy();
+
+  });
+
+  it('obtiene el tipoAV', () => {
+
+    const res = componente.getTipoAV(0);
+    expect(res).toBe('Arriendo');
+
+  });
+
+  it('obtiene la zona', () => {
+
+    const res = componente.getZona(0);
+    expect(res).toBe('Norte');
+
+  });
+
+  it('agrega una coma al valor', () => {
+
+    const res = componente.addComa(200000);
+    expect(res).toBe('200.000');
+
+  });
+
+  it('booleano', () => {
+
+    const res = componente.siNo('1');
+    expect(res).toBe('Si');
+
+  });
+
+  it('carga el inmueble', () => {
+
+
+
+  });
 });

@@ -25,20 +25,26 @@ export class AsignarArriendoContratoComponent implements OnInit {
   // usuario en sesion
   usuarioSesion: Usuario = new Usuario();
 
-   // Variables para los mensajes en la pagina
-   show: number;
-   msj: string;
-   idContrato: number;
-   busco: boolean;
-   verSelec = false;
-   descripcionSel: string;
+  // Variables para los mensajes en la pagina
+  show: number;
+  msj: string;
+  idContrato: number;
+  busco: boolean;
+  verSelec = false;
+  descripcionSel: string;
+
+  // variables pruebas
+  agregoObjetoContrato = false;
+  agregoObjetoArriendo = false;
+  registrado = false;
+  noRegistro = false;
 
   constructor(private generico: GenericoService, private usuarioServicio: UsuarioService) { }
 
   ngOnInit() {
     // Validamos si el usuario tiene acceso a la pagina
-    this.usuarioServicio.esAccesible('administracion/asignar-arriendo-contrato');
-    this.usuarioSesion = this.usuarioServicio.getUsuario();
+    // this.usuarioServicio.esAccesible('administracion/asignar-arriendo-contrato');
+    // this.usuarioSesion = this.usuarioServicio.getUsuario();
     this.listar();
   }
 
@@ -50,6 +56,7 @@ export class AsignarArriendoContratoComponent implements OnInit {
   }
 
   agregarObjetosArriendos() {
+    this.agregoObjetoArriendo = true;
     for (const v of this.arriendos) {
 
       const data = v.fecha.split('T');
@@ -96,6 +103,7 @@ export class AsignarArriendoContratoComponent implements OnInit {
   }
 
   agregarObjetos() {
+    this.agregoObjetoContrato = true;
     for (const c of this.contratos) {
       const fields = c.fecha_solicitud.split('T');
       const fechaSoli = fields[0];
@@ -134,34 +142,19 @@ export class AsignarArriendoContratoComponent implements OnInit {
     }
   }
 
-  /*
-  * Buscar contrato
-  */
- buscarContrato() {
-     this.generico.buscar('contrato', {'id': this.idContrato}).subscribe(rta => {
-       if (rta.data == null) {
-         this.show = 1;
-         this.msj = 'No existe el contrato con ese numero de identificacion: ' + this.idContrato;
-       } else {
-         this.busco = true;
-         this.contrato = rta.data;
-       }
-     });
- }
-
   /**
    * Ver la inormacion del contrato
    */
   ver(i: Contrato) {
     this.verSelec = true;
     this.contrato = i;
-    console.log(this.contrato.id);
   }
 
   registrar(form: NgForm) {
     const empleado: Empleado = new Empleado();
 
     const fecha = this.fechaActual();
+    console.log(fecha);
     this.arr.fecha = fecha;
     this.arr.empleado = empleado;
     this.arr.contrato = this.contrato;
@@ -170,6 +163,8 @@ export class AsignarArriendoContratoComponent implements OnInit {
     aux.objeto = this.arr;
     aux.replaceValue('contrato', this.contrato.id);
     aux.replaceValue('empleado', this.usuarioSesion.persona.id);
+    this.registrado = true;
+    this.noRegistro = true;
     console.log(aux.objeto);
 
 

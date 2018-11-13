@@ -48,12 +48,23 @@ export class GestionarEmpleadosComponent implements OnInit {
   show: number;
   msj: string;
 
+  /* variables de pruebas */
+  registro = false;
+  noRegistroUsername = false;
+  noRegistroCedula = false;
+  noRegistroSinDatos = false;
+  edito = false;
+  noEditoSinDatos = false;
+  buscado = false;
+  eliminoEmpleado = false;
+  editoFormacion = false;
+
   constructor(private genericoServicio: GenericoService, private personaServicio: PersonaService,
     private usuarioServicio: UsuarioService) { }
 
   ngOnInit() {
     // Validamos si el usuario tiene acceso a la pagina
-    this.usuarioServicio.esAccesible('administracion/gestionar-empleados');
+    // this.usuarioServicio.esAccesible('administracion/gestionar-empleados');
     // Construimos el objeto Empleado, inicialmente vacio
     this.empleado.cargo = this.cargo;
     this.empleado.usuario = this.usuario;
@@ -70,11 +81,9 @@ export class GestionarEmpleadosComponent implements OnInit {
    * Registra un empleado con su usuario
    */
   registrar(form: NgForm) {
-    // this.rol.id = this.persona.rol.id;
-    // this.persona.rol = this.rol;
-    // this.usuario.persona.cedula = this.persona.cedula;
     if (this.empleado.usuario.username != null && this.empleado.usuario.persona.apellido != null) {
       // Validamos si ya hay una persona con esta cedula
+      this.registro = true;
       this.genericoServicio.buscar('personas', {'cedula': this.empleado.usuario.persona.cedula}).subscribe(valida => {
         if (valida.data == null) {
           // Validamos si ya hay un usuario con el username
@@ -127,6 +136,7 @@ export class GestionarEmpleadosComponent implements OnInit {
         }
       });
     } else {
+      this.noRegistroSinDatos = true;
       this.msj = 'Ingrese toda los datos';
       this.show = 1;
       window.alert(this.msj);
@@ -139,6 +149,7 @@ export class GestionarEmpleadosComponent implements OnInit {
   editar(form: NgForm) {
     if (this.empleado.usuario.persona != null && this.empleado.usuario.username != null) {
     // Editamos el usuario y la persona
+    this.edito = true;
     this.personaServicio.editar(this.empleado.usuario).subscribe(rta => {
       if (rta.data === 'exito') {
         // Editamos el empleado
@@ -148,7 +159,7 @@ export class GestionarEmpleadosComponent implements OnInit {
             this.show = 2;
             window.alert(this.msj);
             // limpiamos los campos
-            form.reset();
+            // form.reset();
             // Actualizamos la lista de empleados
             this.listar();
           }
@@ -160,6 +171,7 @@ export class GestionarEmpleadosComponent implements OnInit {
       }
     });
     } else {
+      this.noEditoSinDatos = true;
       this.msj = 'Primero busque el empleado que va a editar';
       this.show = 1;
       window.alert(this.msj);
@@ -171,10 +183,12 @@ export class GestionarEmpleadosComponent implements OnInit {
    */
   buscar() {
     // Buscamos la persona por cedula y rol 3 (empleado)
+    this.buscado = true;
     this.genericoServicio.buscar('personas', {'cedula': this.empleado.usuario.persona.cedula, 'rol': 3}).subscribe(rta => {
       if (rta.data == null) {
         this.show = 1;
         this.msj = 'No existe un empleado con cedula ' + this.empleado.usuario.persona.cedula;
+        window.alert(this.msj);
         this.limpiar();
       } else {
         this.show = 3;
@@ -199,6 +213,7 @@ export class GestionarEmpleadosComponent implements OnInit {
               this.empleado.usuario.persona = this.persona;
               this.show = 2;
               this.msj = 'Despliegue para ver la informacion del empleado ' + this.persona.nombre + ' ' + this.persona.apellido + '.';
+              window.alert(this.msj);
               this.listarFormaciones();
               this.listarExperiencias();
             });
@@ -283,6 +298,7 @@ export class GestionarEmpleadosComponent implements OnInit {
    * Eliminar empleado con su usuario de la base de datos
    */
   eliminar(e: Empleado) {
+    this.eliminoEmpleado = true;
     this.genericoServicio.eliminar('personas', {'id': e.usuario.persona.id}).subscribe(rta => {
       if (rta.data === 'exito') {
         this.msj = 'Se ha eliminado la persona correctamente';
@@ -396,6 +412,7 @@ export class GestionarEmpleadosComponent implements OnInit {
         // tslint:disable-next-line:prefer-const
         let auxiliar: AuxiliarObjeto = new AuxiliarObjeto();
         auxiliar.objeto = this.formacion;
+        this.editoFormacion = true;
         auxiliar.replaceValue('empleado', this.empleado.usuario.persona.id);
         // Guardamos la formacion del empleado
         this.genericoServicio.editar('formaciones', auxiliar.objeto, 'id').subscribe(rta => {
@@ -403,12 +420,13 @@ export class GestionarEmpleadosComponent implements OnInit {
             this.msj = 'Se ha editado la formacion academica';
             this.show = 2;
             this.listarFormaciones();
-            form.reset();
+            window.alert(this.msj);
+            // form.reset();
           } else {
             this.msj = rta.data;
             this.show = 1;
+            window.alert(this.msj);
           }
-          window.alert(this.msj);
         });
       } else {
         this.msj = 'Ingrese los datos para editar la Formacion Academica';

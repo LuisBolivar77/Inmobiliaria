@@ -1,10 +1,10 @@
-import { Empleado } from "./Empleado";
+import { Empleado } from './Empleado';
 
 /**
  * La experiencia de un empleado
  */
 export class Experiencia {
-    
+
     id: number;
     empresa: string;
     empresa_direccion: string;

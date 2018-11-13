@@ -7,10 +7,8 @@ import { Ciudad } from '../../../Modelo/Ciudad';
 import { Departamento } from '../../../Modelo/Departamento';
 import { TipoInmueble } from '../../../Modelo/TipoInmueble';
 import { Usuario } from 'src/app/Modelo/Usuario';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatFormField} from '@angular/material';
 import { ReservarVisita } from 'src/app/Modelo/ReservarVisita';
 import { NgForm } from '@angular/forms';
-import { Persona } from 'src/app/Modelo/Persona';
 import { AuxiliarObjeto } from 'src/app/Modelo/AuxiliarObjeto';
 
 export interface Horas {
@@ -65,8 +63,10 @@ export class VerInmuebleComponent implements OnInit {
   // hora de la visita
   horaVisita: number;
 
-  //variable booleana
-  reservoVisita= false;
+  // variable booleana
+  reservoVisita = false;
+  agregObjeto = false;
+  cargoInmuble = false;
 
   constructor(private genericoServicio: GenericoService, private usuarioServicio: UsuarioService) { }
 
@@ -98,6 +98,7 @@ export class VerInmuebleComponent implements OnInit {
    * Busca el inmueble y carga la informacion
    */
   cargarInmueble() {
+    this.cargoInmuble = true;
     this.genericoServicio.buscar('inmueble', {'id': this.inmueble.id, 'estado': 1}).subscribe(rta => {
       if (rta.data != null) {
         this.inmueble = rta.data;
@@ -135,68 +136,61 @@ export class VerInmuebleComponent implements OnInit {
    * Metodo que permite reservar una visita al inmueble seleccionado
    */
   reservarVisita(form: NgForm) {
-   
+
     if (this.usuarioSesion == null) {
       this.msj = 'Se requiere inicio de sesion para reservar visita';
       window.alert(this.msj);
       this.show = 1;
       return;
-     } else {
+    } else {
 
       if (this.reservaVisita.mensaje == null || this.reservaVisita.fecha == null || this.horaVisita == null) {
         this.msj = 'Por favor llene los campos';
         this.show = 1;
         window.alert(this.msj);
         return;
-       }
+      }
 
-       const fechaAct = new Date;
-       const fechaSel = new Date(this.reservaVisita.fecha);
-       if (fechaSel <= fechaAct) {
+      const fechaAct = new Date;
+      const fechaSel = new Date(this.reservaVisita.fecha);
+      if (fechaSel <= fechaAct) {
         this.msj = 'Por favor seleccione un fecha despues de ' + fechaAct;
         this.show = 1;
         window.alert(this.msj);
         return;
-       }
+      }
 
-       // asignamos la hora de la visita
+      // asignamos la hora de la visita
       this.reservaVisita.hora_visita = this.horaVisita;
-       // Asignamos el inmueble
-       this.reservaVisita.inmueble = this.inmueble;
+      // Asignamos el inmueble
+      this.reservaVisita.inmueble = this.inmueble;
        // Asignamos el usuario a la persona tipo cliente
       this.reservaVisita.cliente = this.usuarioSesion.persona;
       // Seteamos los valores por defecto
       // Valor por defecto del estado (Por atender = 'PENDIENTE')
       this.reservaVisita.estado = 'PENDIENTE';
-       // el comentario despues de la visita (null ya que no se ha realizado la visita)
-       this.reservaVisita.comentario = null;
+      // el comentario despues de la visita (null ya que no se ha realizado la visita)
+      this.reservaVisita.comentario = null;
 
-       /*// Validamos que que no tenga fecha ni hora ya asignada
-        if (this.validacionFechaHora(this.reservaVisita.fecha, this.reservaVisita.hora_visita) === true) {
-          this.msj = 'Usted ya tiene una visita agragada a este inmueble';
-          this.show = 1;
-          window.alert(this.msj);
-          return;
-         }*/
-
-       const aux: AuxiliarObjeto = new AuxiliarObjeto();
-       aux.objeto = this.reservaVisita;
-       this.reservoVisita = true;
-       aux.replaceValue('inmueble', this.reservaVisita.inmueble.id);
-       aux.replaceValue('cliente', this.reservaVisita.cliente.id);
-       aux.replaceValue('empleado', null);
+      const aux: AuxiliarObjeto = new AuxiliarObjeto();
+      aux.objeto = this.reservaVisita;
+      this.reservoVisita = true;
+      aux.replaceValue('inmueble', this.reservaVisita.inmueble.id);
+      aux.replaceValue('cliente', this.reservaVisita.cliente.id);
+      aux.replaceValue('empleado', null);
 
       this.genericoServicio.registrar('reservar_visita', aux.objeto).subscribe(res => {
         if (res.data === 'exito') {
           this.msj = 'Se registrado su solicitud con exito';
           this.show = 2;
           this.limpiarCampos();
-          form.reset();
+          // form.reset();
           window.alert('Se ha registrado la peticion correctamente');
 
         } else {
           this.msj = 'Error en la solicitud : ' + res.data;
           this.show = 1;
+          window.alert('ERROR' + res.data);
         }
       });
      }
@@ -206,25 +200,6 @@ export class VerInmuebleComponent implements OnInit {
     this.reservaVisita.mensaje = '';
     this.reservaVisita.fecha = '';
     this.horaVisita = 0;
-  }
-
-  validacionFechaHora(fecha: String, hora: number): boolean {
-    let value = false;
-    console.log(fecha + 'hora: ' + hora);
-    console.log(this.visitas);
-    console.log('TRUE?? ' + value);
-    for (let i = 0; i < this.visitas.length; i++) {
-      console.log(i);
-      console.log(this.visitas[i].fecha + '=== fecha');
-      console.log(this.visitas[i].hora_visita + '//// hora');
-      if (fecha === this.visitas[i].fecha && hora === this.visitas[i].hora_visita) {
-       value = true;
-       console.log(fecha + ' hora:' + hora);
-       console.log(i);
-       console.log('TRUE?? ' + value);
-      }
-    }
-   return value;
   }
 
   listar() {
@@ -237,6 +212,7 @@ export class VerInmuebleComponent implements OnInit {
   }
 
   agregarObjetos(lista) {
+    this.agregObjeto = true;
     for (const i of lista) {
       this.genericoServicio.buscar('inmueble', {'id': i.inmueble}).subscribe(r2 => {
         i.inmueble = r2.data;

@@ -37,244 +37,561 @@ describe('Gestionar un empeleado', () => {
 
   });
 
-  it('crear un empleado', () => {
+  it('No registra un empleado (Cedula)', () => {
 
-    // tslint:disable-next-line:prefer-const
-    let rol: Rol = new Rol();
-    rol.id = 3;
-    component.rol.id = 3;
-
-    // tslint:disable-next-line:prefer-const
-    let persona: Persona = new Persona();
-    persona.id = 11111;
-    persona.cedula = '109129';
-    persona.nombre = 'Valentina';
-    persona.apellido = 'Rua';
-    persona.fecha_nacimiento = '1999-29-11';
-    persona.telefono = '3128762521';
-    persona.direccion = 'montenegro';
-    persona.rol = rol;
-    component.persona.cedula = '109129';
-
-    // tslint:disable-next-line:prefer-const
-    let usuario: Usuario = new Usuario();
-    usuario.password = 'valen';
-    usuario.username = 'valen123';
-    usuario.persona = persona;
-    component.usuario = usuario;
-
-    // tslint:disable-next-line:prefer-const
-    let cargo: Cargo = new Cargo();
+    const cargo = new Cargo();
     cargo.id = 2;
-    component.cargo.id = 2;
+    cargo.nombre = 'Administrador Ventas';
+    cargo.descripcion = 'es el que administra las ventas';
 
-    // tslint:disable-next-line:prefer-const
-    let empleado: Empleado = new Empleado();
-    empleado.usuario = usuario;
-    empleado.salario = 12345;
-    empleado.cargo = cargo;
-    component.empleado = empleado;
+    const rol = new Rol();
+    rol.id = 3;
 
-    const respuesta = component.registrar(null);
+    const per = new Persona();
+    per.cedula = '1234321';
+    per.nombre = 'Matias PRUEBA';
+    per.apellido = 'Fernandes PRUEBA';
+    per.direccion = 'DIRECCION PRUEBA';
+    per.telefono = '10923881923 PRUEBA';
+    per.telefono = '213812739 PRUEBA';
+    per.fecha_nacimiento = '1989-02-02';
+    per.rol = rol;
+    per.latitud = 4.3332699;
+    per.longitud = -74.3715004;
 
-    // tslint:disable-next-line:no-unused-expression
-    expect(respuesta).toBeTruthy;
+    const usuario = new Usuario();
+    usuario.persona = per;
+    usuario.password = '123';
+    usuario.username = 'matiPRUEBA';
+
+    component.empleado.usuario = usuario;
+    component.empleado.salario = 2019831;
+    component.empleado.cargo = cargo;
+
+    component.registrar(null);
+    expect(component.registro).toBeTruthy();
 
   });
 
+  it('no registra un empleado (NomUsuario)', () => {
 
-  it('buscar empleado GESTIONAR EMPLEADO', () => {
-
-    // tslint:disable-next-line:prefer-const
-    let rol: Rol = new Rol();
-    rol.id = 3;
-    component.rol.id = 3;
-
-    // tslint:disable-next-line:prefer-const
-    let persona: Persona = new Persona();
-    persona.id = 16;
-    persona.cedula = '4194';
-    persona.nombre = 'Valentina';
-    persona.apellido = 'Rua';
-    persona.fecha_nacimiento = '1999-29-11';
-    persona.telefono = '3128762521';
-    persona.direccion = 'montenegro';
-    persona.rol = rol;
-    component.persona.cedula = '4194';
-
-    // tslint:disable-next-line:prefer-const
-    let usuario: Usuario = new Usuario();
-    usuario.username = 'Rosa';
-    usuario.password = '1234';
-    usuario.persona = persona;
-    component.usuario = usuario;
-
-    // tslint:disable-next-line:prefer-const
-    let cargo: Cargo = new Cargo();
-    cargo.id = 1;
-    component.cargo.id = 1;
-
-    // tslint:disable-next-line:prefer-const
-    let empleado: Empleado = new Empleado();
-    empleado.usuario = usuario;
-    empleado.salario = 12345;
-    empleado.cargo = cargo;
-    component.empleado = empleado;
-
-    const respuesta = component.buscar();
-    // tslint:disable-next-line:no-unused-expression
-    expect(respuesta).toBeTruthy;
-  });
-
-  it('editar empleado', () => {
-
-    // tslint:disable-next-line:prefer-const
-    let rol: Rol = new Rol();
-    rol.id = 3;
-    component.rol.id = 3;
-
-    // tslint:disable-next-line:prefer-const
-    let persona: Persona = new Persona();
-    persona.id = 2;
-    persona.cedula = '1090';
-    persona.nombre = 'Valentina';
-    persona.apellido = 'Rua';
-    persona.fecha_nacimiento = '1999-29-11';
-    persona.telefono = '3128762521';
-    persona.direccion = 'montenegro';
-    persona.rol = rol;
-    component.persona.cedula = '1090';
-
-    // tslint:disable-next-line:prefer-const
-    let usuario: Usuario = new Usuario();
-    usuario.password = 'valen';
-    usuario.username = 'valen123';
-    usuario.persona = persona;
-    component.usuario = usuario;
-
-    // tslint:disable-next-line:prefer-const
-    let cargo: Cargo = new Cargo();
+    const cargo = new Cargo();
     cargo.id = 2;
-    component.cargo.id = 2;
+    cargo.nombre = 'Administrador Ventas';
+    cargo.descripcion = 'es el que administra las ventas';
 
-    // tslint:disable-next-line:prefer-const
-    let empleado: Empleado = new Empleado();
-    empleado.usuario = usuario;
-    empleado.salario = 12345;
-    empleado.cargo = cargo;
-    component.empleado = empleado;
-
-    const respuesta = component.editar(null);
-
-    // tslint:disable-next-line:no-unused-expression
-    expect(respuesta).toBeTruthy;
-
-  });
-
-
-  it('Ver la inormacion de un empleado de la tabla', () => {
-
-    console.log('verrrrrrrrrr');
-    // tslint:disable-next-line:prefer-const
-    let rol: Rol = new Rol();
+    const rol = new Rol();
     rol.id = 3;
-    component.rol.id = 3;
 
-    // tslint:disable-next-line:prefer-const
-    let persona: Persona = new Persona();
-    persona.id = 27;
-    persona.cedula = '1096';
-    persona.nombre = 'Valentina';
-    persona.apellido = 'Rua';
-    persona.fecha_nacimiento = '1999-29-11';
-    persona.telefono = '3128762521';
-    persona.direccion = 'montenegro';
-    persona.rol = rol;
-    component.persona.cedula = '1090';
+    const per = new Persona();
+    per.cedula = '1234321222';
+    per.nombre = 'Matias PRUEBA';
+    per.apellido = 'Fernandes PRUEBA';
+    per.direccion = 'DIRECCION PRUEBA';
+    per.telefono = '10923881923 PRUEBA';
+    per.telefono = '213812739 PRUEBA';
+    per.fecha_nacimiento = '1989-02-02';
+    per.rol = rol;
+    per.latitud = 4.3332699;
+    per.longitud = -74.3715004;
 
-    // tslint:disable-next-line:prefer-const
-    let usuario: Usuario = new Usuario();
-    usuario.password = 'valen';
-    usuario.username = 'valen123';
-    usuario.persona = persona;
-    component.usuario = usuario;
+    const usuario = new Usuario();
+    usuario.persona = per;
+    usuario.password = '123';
+    usuario.username = 'matiPRUEBA';
 
-    // tslint:disable-next-line:prefer-const
-    let cargo: Cargo = new Cargo();
-    cargo.id = 3;
-    component.cargo.id = 3;
+    component.empleado.usuario = usuario;
+    component.empleado.salario = 2019831;
+    component.empleado.cargo = cargo;
 
-    // tslint:disable-next-line:prefer-const
-    let empleado: Empleado = new Empleado();
-    empleado.usuario = usuario;
-    component.empleado.usuario.persona.nombre = 'Valentina';
+    component.registrar(null);
+    expect(component.registro).toBeTruthy();
 
-    const respuesta = component.ver(empleado);
-    // tslint:disable-next-line:no-unused-expression
-    expect(respuesta).toBeTruthy;
   });
 
-  /**
-  it('eliminar persona', () => {
-    let empleado: Empleado = new Empleado();
-    empleado.usuario.persona.id = 2;
-    let respuesta = component.eliminar(empleado);
-    expect(respuesta).toBeTruthy;
+  it('no registra un empleado (Falta de datos)', () => {
+
+    const cargo = new Cargo();
+    cargo.id = 2;
+    cargo.nombre = 'Administrador Ventas';
+    cargo.descripcion = 'es el que administra las ventas';
+
+    const rol = new Rol();
+    rol.id = 3;
+
+    const per = new Persona();
+    per.cedula = '1234321222';
+    per.nombre = 'Matias PRUEBA';
+    per.apellido = null;
+    per.direccion = 'DIRECCION PRUEBA';
+    per.telefono = '10923881923 PRUEBA';
+    per.telefono = '213812739 PRUEBA';
+    per.fecha_nacimiento = '1989-02-02';
+    per.rol = rol;
+    per.latitud = 4.3332699;
+    per.longitud = -74.3715004;
+
+    const usuario = new Usuario();
+    usuario.persona = per;
+    usuario.password = '123';
+    usuario.username = null;
+
+    component.empleado.usuario = usuario;
+    component.empleado.salario = 2019831;
+    component.empleado.cargo = cargo;
+
+    component.registrar(null);
+    expect(component.noRegistroSinDatos).toBeTruthy();
+
   });
-   */
 
-  it('crear una informacion del empleado', () => {
+  /*
+  it('registra un empleado', () => {
 
-    console.log('formacionnnn');
+    const cargo = new Cargo();
+    cargo.id = 2;
+    cargo.nombre = 'Administrador Ventas';
+    cargo.descripcion = 'es el que administra las ventas';
 
-    // tslint:disable-next-line:prefer-const
-    let rol: Rol = new Rol();
-    rol.id = 1;
-    component.rol.id = 1;
+    const rol = new Rol();
+    rol.id = 3;
 
-    // tslint:disable-next-line:prefer-const
-    let persona: Persona = new Persona();
-    persona.id = 12;
-    persona.cedula = '10901';
-    persona.nombre = 'Camila';
-    persona.apellido = 'Torres';
-    persona.fecha_nacimiento = '1989-02-02';
-    persona.telefono = '3214567890';
-    persona.direccion = 'calle 2 Norte';
-    persona.rol = rol;
-    component.persona.cedula = '10901';
+    const per = new Persona();
+    per.cedula = '1234321222';
+    per.nombre = 'Matias PRUEBA';
+    per.apellido = 'Fernandez PRUEBA';
+    per.direccion = 'DIRECCION PRUEBA';
+    per.telefono = '10923881923 PRUEBA';
+    per.telefono = '213812739 PRUEBA';
+    per.fecha_nacimiento = '1989-02-02';
+    per.rol = rol;
+    per.latitud = 4.3332699;
+    per.longitud = -74.3715004;
 
-    // tslint:disable-next-line:prefer-const
-    let usuario: Usuario = new Usuario();
-    usuario.password = 'camila';
-    usuario.username = 'torres123';
-    usuario.persona = persona;
-    component.usuario = usuario;
+    const usuario = new Usuario();
+    usuario.persona = per;
+    usuario.password = '123';
+    usuario.username = 'MatiPReuba2';
 
-    // tslint:disable-next-line:prefer-const
-    let cargo: Cargo = new Cargo();
-    cargo.id = 3;
-    component.cargo.id = 3;
+    component.empleado.usuario = usuario;
+    component.empleado.salario = 2019831;
+    component.empleado.cargo = cargo;
 
-    // tslint:disable-next-line:prefer-const
-    let empleado: Empleado = new Empleado();
-    empleado.usuario = usuario;
-    empleado.salario = 1200000;
-    empleado.cargo = cargo;
-    component.empleado = empleado;
+    component.registrar(null);
+    expect(component.registro).toBeTruthy();
 
-    // tslint:disable-next-line:prefer-const
-    let formacion: Formacion = new Formacion();
-   // formacion.id= ;
-    formacion.institucion = 'Uniquindio';
-    formacion.titulo = 'universitario';
-    formacion.file_certificacion = 'ninguno';
-    formacion.empleado = empleado;
-    component.formacion.institucion = 'Uniquindio';
+  });
+  */
 
-    const respuesta = component.registrarFormacion(null);
+  it('Edita un Empleado', () => {
 
-    // tslint:disable-next-line:no-unused-expression
-    expect(respuesta).toBeTruthy;
+    const cargo = new Cargo();
+    cargo.id = 2;
+    cargo.nombre = 'Administrador Ventas';
+    cargo.descripcion = 'es el que administra las ventas';
+
+    const rol = new Rol();
+    rol.id = 3;
+
+    const per = new Persona();
+    per.cedula = '1234321222';
+    per.nombre = 'Matias PRUEBAE DICION';
+    per.apellido = 'Fernandez PRUEBA EDICION';
+    per.direccion = 'DIRECCION PRUEBA EDICION';
+    per.telefono = '10923881923 PRUEBA EDICION';
+    per.telefono = '213812739 PRUEBA EDICION';
+    per.fecha_nacimiento = '1989-02-02';
+    per.rol = rol;
+    per.latitud = 4.3332699;
+    per.longitud = -74.3715004;
+
+    const usuario = new Usuario();
+    usuario.persona = per;
+    usuario.password = '123';
+    usuario.username = 'MatiPReuba2';
+
+    component.empleado.usuario = usuario;
+    component.empleado.salario = 2019831;
+    component.empleado.cargo = cargo;
+
+    component.editar(null);
+    expect(component.edito).toBeTruthy();
+
+  });
+
+  it('no Edita un Empleado (sin datos)', () => {
+
+    const cargo = new Cargo();
+    cargo.id = 2;
+    cargo.nombre = 'Administrador Ventas';
+    cargo.descripcion = 'es el que administra las ventas';
+
+    const rol = new Rol();
+    rol.id = 3;
+
+    const per = new Persona();
+    per.cedula = '1234321222';
+    per.nombre = 'Matias PRUEBAE DICION';
+    per.apellido = 'Fernandez PRUEBA EDICION';
+    per.direccion = 'DIRECCION PRUEBA EDICION';
+    per.telefono = '10923881923 PRUEBA EDICION';
+    per.telefono = '213812739 PRUEBA EDICION';
+    per.fecha_nacimiento = '1989-02-02';
+    per.rol = rol;
+    per.latitud = 4.3332699;
+    per.longitud = -74.3715004;
+
+    const usuario = new Usuario();
+    usuario.persona = null;
+    usuario.password = '123';
+    usuario.username = null;
+
+    component.empleado.usuario = usuario;
+    component.empleado.salario = 2019831;
+    component.empleado.cargo = cargo;
+
+    component.editar(null);
+    expect(component.noEditoSinDatos).toBeTruthy();
+
+  });
+
+  it('Busca un Empleado', () => {
+
+    const cargo = new Cargo();
+    cargo.id = 2;
+    cargo.nombre = 'Administrador Ventas';
+    cargo.descripcion = 'es el que administra las ventas';
+
+    const rol = new Rol();
+    rol.id = 3;
+
+    const per = new Persona();
+    per.cedula = '1234321222';
+    per.nombre = 'Matias PRUEBAE DICION';
+    per.apellido = 'Fernandez PRUEBA EDICION';
+    per.direccion = 'DIRECCION PRUEBA EDICION';
+    per.telefono = '10923881923 PRUEBA EDICION';
+    per.telefono = '213812739 PRUEBA EDICION';
+    per.fecha_nacimiento = '1989-02-02';
+    per.rol = rol;
+    per.latitud = 4.3332699;
+    per.longitud = -74.3715004;
+
+    const usuario = new Usuario();
+    usuario.persona = per;
+    usuario.password = '123';
+    usuario.username = 'MatiPReuba2';
+
+    component.empleado.usuario = usuario;
+    component.empleado.salario = 2019831;
+    component.empleado.cargo = cargo;
+
+    component.buscar();
+    expect(component.buscado).toBeTruthy();
+
+  });
+
+  it('no Busca un Empleado (cedula erronea)', () => {
+
+    const cargo = new Cargo();
+    cargo.id = 2;
+    cargo.nombre = 'Administrador Ventas';
+    cargo.descripcion = 'es el que administra las ventas';
+
+    const rol = new Rol();
+    rol.id = 3;
+
+    const per = new Persona();
+    per.cedula = '123432122222222';
+    per.nombre = 'Matias PRUEBAE DICION';
+    per.apellido = 'Fernandez PRUEBA EDICION';
+    per.direccion = 'DIRECCION PRUEBA EDICION';
+    per.telefono = '10923881923 PRUEBA EDICION';
+    per.telefono = '213812739 PRUEBA EDICION';
+    per.fecha_nacimiento = '1989-02-02';
+    per.rol = rol;
+    per.latitud = 4.3332699;
+    per.longitud = -74.3715004;
+
+    const usuario = new Usuario();
+    usuario.persona = per;
+    usuario.password = '123';
+    usuario.username = 'MatiPReuba2';
+
+    component.empleado.usuario = usuario;
+    component.empleado.salario = 2019831;
+    component.empleado.cargo = cargo;
+
+    component.buscar();
+    expect(component.buscado).toBeTruthy();
+
+  });
+
+  it('limpia campos', () => {
+
+    component.limpiar();
+    expect(component.experiencias.length).toBe(0);
+
+  });
+
+  it('muestra un empleado', () => {
+
+    const cargo = new Cargo();
+    cargo.id = 2;
+    cargo.nombre = 'Administrador Ventas';
+    cargo.descripcion = 'es el que administra las ventas';
+
+    const rol = new Rol();
+    rol.id = 3;
+
+    const per = new Persona();
+    per.cedula = '1234321222';
+    per.nombre = 'Matias PRUEBAE DICION';
+    per.apellido = 'Fernandez PRUEBA EDICION';
+    per.direccion = 'DIRECCION PRUEBA EDICION';
+    per.telefono = '10923881923 PRUEBA EDICION';
+    per.telefono = '213812739 PRUEBA EDICION';
+    per.fecha_nacimiento = '1989-02-02';
+    per.rol = rol;
+    per.latitud = 4.3332699;
+    per.longitud = -74.3715004;
+
+    const usuario = new Usuario();
+    usuario.persona = per;
+    usuario.password = '123';
+    usuario.username = 'MatiPReuba2';
+
+    component.empleado.usuario = usuario;
+    component.empleado.salario = 2019831;
+    component.empleado.cargo = cargo;
+
+    const res = component.ver(component.empleado);
+    expect(res).toBeTruthy();
+
+  });
+
+  it('lista empleados', () => {
+
+    component.listar();
+    expect(component.empleados).not.toBeNull();
+
+  });
+
+  it('lista cargos', () => {
+
+    component.listarCargos();
+    expect(component.cargos).not.toBeNull();
+
+  });
+
+  /*
+  it('elimina un empleado', () => {
+
+    const cargo = new Cargo();
+    cargo.id = 2;
+    cargo.nombre = 'Administrador Ventas';
+    cargo.descripcion = 'es el que administra las ventas';
+
+    const rol = new Rol();
+    rol.id = 3;
+
+    const per = new Persona();
+    per.id = 11123;
+    per.cedula = '1234321222';
+    per.nombre = 'Matias PRUEBAE DICION';
+    per.apellido = 'Fernandez PRUEBA EDICION';
+    per.direccion = 'DIRECCION PRUEBA EDICION';
+    per.telefono = '10923881923 PRUEBA EDICION';
+    per.telefono = '213812739 PRUEBA EDICION';
+    per.fecha_nacimiento = '1989-02-02';
+    per.rol = rol;
+    per.latitud = 4.3332699;
+    per.longitud = -74.3715004;
+
+    const usuario = new Usuario();
+    usuario.persona = per;
+    usuario.password = '123';
+    usuario.username = 'MatiPReuba2';
+
+    component.empleado.usuario = usuario;
+    component.empleado.salario = 2019831;
+    component.empleado.cargo = cargo;
+
+    component.eliminar(component.empleado);
+    expect(component.eliminoEmpleado).toBeTruthy();
+
+  });
+  */
+
+  it('no elimina un empleado (cedula erronea)', () => {
+
+    const cargo = new Cargo();
+    cargo.id = 2;
+    cargo.nombre = 'Administrador Ventas';
+    cargo.descripcion = 'es el que administra las ventas';
+
+    const rol = new Rol();
+    rol.id = 3;
+
+    const per = new Persona();
+    per.id = 1112333333333333;
+    per.cedula = '1234321222';
+    per.nombre = 'Matias PRUEBAE DICION';
+    per.apellido = 'Fernandez PRUEBA EDICION';
+    per.direccion = 'DIRECCION PRUEBA EDICION';
+    per.telefono = '10923881923 PRUEBA EDICION';
+    per.telefono = '213812739 PRUEBA EDICION';
+    per.fecha_nacimiento = '1989-02-02';
+    per.rol = rol;
+    per.latitud = 4.3332699;
+    per.longitud = -74.3715004;
+
+    const usuario = new Usuario();
+    usuario.persona = per;
+    usuario.password = '123';
+    usuario.username = 'MatiPReuba2';
+
+    component.empleado.usuario = usuario;
+    component.empleado.salario = 2019831;
+    component.empleado.cargo = cargo;
+
+    component.eliminar(component.empleado);
+    expect(component.eliminoEmpleado).toBeTruthy();
+
+  });
+
+  it('no registra formacion del empleado (id persona null)', () => {
+
+    const file: File = null;
+
+    const cargo = new Cargo();
+    cargo.id = 2;
+    cargo.nombre = 'Administrador Ventas';
+    cargo.descripcion = 'es el que administra las ventas';
+
+    const rol = new Rol();
+    rol.id = 3;
+
+    const per = new Persona();
+    per.cedula = '1234321222';
+    per.nombre = 'Matias PRUEBAE DICION';
+    per.apellido = 'Fernandez PRUEBA EDICION';
+    per.direccion = 'DIRECCION PRUEBA EDICION';
+    per.telefono = '10923881923 PRUEBA EDICION';
+    per.telefono = '213812739 PRUEBA EDICION';
+    per.fecha_nacimiento = '1989-02-02';
+    per.rol = rol;
+    per.latitud = 4.3332699;
+    per.longitud = -74.3715004;
+
+    const usuario = new Usuario();
+    usuario.persona = per;
+    usuario.password = '123';
+    usuario.username = 'MatiPReuba2';
+
+    component.archivoFormacion = file;
+
+    component.empleado.usuario = usuario;
+    component.empleado.salario = 2019831;
+    component.empleado.cargo = cargo;
+
+    component.formacion.titulo = 'TITULO PRUEBA';
+    component.formacion.institucion = 'INSTITUCION PRUEBA';
+
+    component.registrarFormacion(null);
+    expect(component.show).toBe(1);
+
+  });
+
+  it('no registra formacion (file null)', () => {
+
+    const file: File = null;
+
+    const cargo = new Cargo();
+    cargo.id = 2;
+    cargo.nombre = 'Administrador Ventas';
+    cargo.descripcion = 'es el que administra las ventas';
+
+    const rol = new Rol();
+    rol.id = 3;
+
+    const per = new Persona();
+    per.id = 11130;
+    per.cedula = '1234321222';
+    per.nombre = 'Matias PRUEBAE DICION';
+    per.apellido = 'Fernandez PRUEBA EDICION';
+    per.direccion = 'DIRECCION PRUEBA EDICION';
+    per.telefono = '10923881923 PRUEBA EDICION';
+    per.telefono = '213812739 PRUEBA EDICION';
+    per.fecha_nacimiento = '1989-02-02';
+    per.rol = rol;
+    per.latitud = 4.3332699;
+    per.longitud = -74.3715004;
+
+    const usuario = new Usuario();
+    usuario.persona = per;
+    usuario.password = '123';
+    usuario.username = 'MatiPReuba2';
+
+    component.archivoFormacion = file;
+
+    component.empleado.usuario = usuario;
+    component.empleado.salario = 2019831;
+    component.empleado.cargo = cargo;
+
+    component.formacion.titulo = 'TITULO PRUEBA';
+    component.formacion.institucion = 'INSTITUCION PRUEBA';
+
+    component.registrarFormacion(null);
+    expect(component.show).toBe(1);
+
+  });
+
+  it('no edita una formacion (id null)', () => {
+
+    component.formacion.id = null;
+    component.formacion.institucion = 'edicion de PRUEBA';
+
+    component.editarFormacion(null);
+    expect(component.show).toBe(1);
+
+  });
+
+  it('no edita una formacion (inetitucion null)', () => {
+
+    const per = new Persona();
+    per.id = 11130;
+
+    const usuario = new Usuario();
+    usuario.persona = per;
+
+    component.empleado.usuario = usuario;
+
+    component.formacion.id = 2;
+    component.formacion.institucion = 'Intitucion DE PRUEBA';
+    component.formacion.titulo = 'Titulo DE PRUEBA';
+
+    component.editarFormacion(null);
+    expect(component.editoFormacion).toBeTruthy();
+
+  });
+
+  it('no edita una formacion (inetitucion null)', () => {
+
+    const per = new Persona();
+    per.id = 11130;
+
+    const usuario = new Usuario();
+    usuario.persona = per;
+
+    component.empleado.usuario = usuario;
+
+    component.formacion.id = 2222;
+    component.formacion.institucion = 'Intitucion DE PRUEBA';
+    component.formacion.titulo = 'Titulo DE PRUEBA';
+
+    component.editarFormacion(null);
+    expect(component.editoFormacion).toBeTruthy();
+
   });
 });

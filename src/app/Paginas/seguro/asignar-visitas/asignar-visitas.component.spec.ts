@@ -25,23 +25,19 @@ describe('AsignarVisitasComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-
   it('Asignar visita', () => {
-   
-    //creamos los objetos
-    const inmueble = new Inmueble();
-    inmueble.id=16;
-    const cliente = new Persona();
-    cliente.id=12;
-    const empleado = new Persona();
-    empleado.id=9;
 
-    component.visitaSeleccionada.inmueble=inmueble;
-    component.visitaSeleccionada.cliente=cliente;
-    component.visitaSeleccionada.empleado=empleado;
+    // creamos los objetos
+    const inmueble = new Inmueble();
+    inmueble.id = 16;
+    const cliente = new Persona();
+    cliente.id = 12;
+    const empleado = new Persona();
+    empleado.id = 9;
+
+    component.visitaSeleccionada.inmueble = inmueble;
+    component.visitaSeleccionada.cliente = cliente;
+    component.visitaSeleccionada.empleado = empleado;
 
     component.asignarVisita();
 

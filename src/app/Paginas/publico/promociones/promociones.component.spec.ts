@@ -54,4 +54,5 @@ describe('PromocionesComponent', () => {
     expect(component.agregoObjeto).toBeTruthy();
 
   });
+
 });
