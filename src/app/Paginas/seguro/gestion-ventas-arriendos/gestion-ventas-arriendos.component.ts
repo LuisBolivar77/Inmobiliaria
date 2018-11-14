@@ -40,8 +40,8 @@ export class GestionVentasArriendosComponent implements OnInit {
 
   ngOnInit() {
     // Validamos si el usuario tiene acceso a la pagina
-    // this.usuarioServicio.esAccesible('administracion/gestion-ventas-arriendos');
-    // this.usuarioSesion = this.usuarioServicio.getUsuario();
+    this.usuarioServicio.esAccesible('administracion/gestion-ventas-arriendos');
+    this.usuarioSesion = this.usuarioServicio.getUsuario();
     this.listar();
   }
 

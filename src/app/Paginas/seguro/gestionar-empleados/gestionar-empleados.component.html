@@ -12,7 +12,7 @@
                   <form (ngSubmit)="fbuscar($event)" class="contact_form" id="contact_form">
                     <div class="row">
                       <div class="col-lg-8">
-                          <div><input [(ngModel)]="empleado.usuario.persona.cedula" name="cedula" type="text" class="contact_input" placeholder="Cedula" required></div>
+                          <div><input [(ngModel)]="cedulaSelected" name="cedula" type="text" class="contact_input" placeholder="Cedula" required></div>
                       </div>
                       <div class="col-lg-4" style="padding-left: 0">
                           <button style="height: 48px;margin: 0;width: 100%" class="contact_button button">Buscar</button>
@@ -102,10 +102,11 @@
                           </div>
                           <div class="row">
                             <div class="col-lg-6">
-                              <button type="submit" (click)="registrar(datosForm)" style="width: 100%" class="contact_button button">Registrar Empleado</button>
+                              <button *ngIf="!verSelected" type="submit" (click)="registrar(datosForm)" style="width: 100%" class="contact_button button">Registrar Empleado</button>
+                              <button *ngIf="verSelected" (click)="editar(datosForm)" style="width: 100%" class="contact_button button">Editar Empleado</button>
                             </div>
                             <div class="col-lg-6">
-                                <button *ngIf="empleado.cargo.id != null" (click)="editar(datosForm)" style="width: 100%" class="contact_button button">Editar Empleado</button>
+                                <button (click)="limpiarCampos(datosForm)" style="width: 100%" class="contact_button button">Limpiar campos</button>
                             </div>
                           </div>
                         </form>

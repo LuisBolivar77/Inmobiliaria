@@ -27,8 +27,8 @@ export class AprobacionInmueblesComponent implements OnInit {
   constructor(private servicioGenerico: GenericoService, private usuarioServicio: UsuarioService) { }
 
   ngOnInit() {
-    // this.usuarioServicio.esAccesible('administracion/aprobar-inmueble');
-    // this.usuarioSesion = this.usuarioServicio.getUsuario();
+    this.usuarioServicio.esAccesible('administracion/aprobar-inmueble');
+    this.usuarioSesion = this.usuarioServicio.getUsuario();
     this.listar();
   }
 
@@ -49,7 +49,7 @@ export class AprobacionInmueblesComponent implements OnInit {
    * Metodo que permite agregar los objetos a el inmueble
    * @param lista la lista a la que le le van a llenar objetos
    */
-  agregarObjetos(lista) {
+  agregarObjetos(lista: Array<Inmueble>) {
     this.objetoAgregado = true;
     for (const i of lista) {
       // Obtenemos el tipo de inmueble
@@ -65,10 +65,12 @@ export class AprobacionInmueblesComponent implements OnInit {
             // Setteamos el departamento
             i.ciudad.departamento = r4.data;
             // Obtenemos la persona que quiere la aprovacion
-            this.servicioGenerico.buscar('personas', {'id': i.usuario}).subscribe(r5 => {
-            // Seteamos la persona
-            i.usuario = this.usuario; // creamos un objeto usuario y lo seteamos
-            i.usuario.persona = r5.data;
+            this.servicioGenerico.buscar('usuarios', {'persona': i.usuario}).subscribe(r5 => {
+              // Seteamos la persona
+              i.usuario = r5.data;
+              this.servicioGenerico.buscar('personas', {'id': i.usuario.persona}).subscribe(res2 => {
+                i.usuario.persona = res2.data;
+              });
             });
           });
         });

@@ -86,8 +86,8 @@ export class InmuebleClienteComponent implements OnInit {
   constructor(private generico: GenericoService, private usuarioServicio: UsuarioService) { }
 
   ngOnInit(): void {
-    // this.usuarioServicio.esAccesible('cliente/gestion-inmuebles');
-    // this.usuarioSesion = this.usuarioServicio.getUsuario();
+    this.usuarioServicio.esAccesible('cliente/gestion-inmuebles');
+    this.usuarioSesion = this.usuarioServicio.getUsuario();
     this.listar();
     this.listarInmueblesAprobados();
     this.listarInmueblesNoAprobados();
@@ -117,7 +117,7 @@ export class InmuebleClienteComponent implements OnInit {
         this.latSeleccion = 4.648908;
         this.longSeleccion = -74.100449;
         this.locationSelec = false;
-        // form.reset();
+        form.reset();
       } else {
         this.msj = res.data;
         this.show = 1;
@@ -157,7 +157,7 @@ export class InmuebleClienteComponent implements OnInit {
         this.show = 2;
         this.msj = 'el inmueble se edito correctamente';
         this.inmueble = new Inmueble();
-        // form.reset();
+        form.reset();
         this.latSeleccion = 4.648908;
         this.longSeleccion = -74.100449;
         this.locationSelec = false;
@@ -500,7 +500,7 @@ export class InmuebleClienteComponent implements OnInit {
     this.longSeleccion = -74.100449;
     this.locationSelec = false;
     this.selectedEditar = false;
-    // form.reset();
+    form.reset();
   }
 
   /**

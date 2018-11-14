@@ -36,6 +36,12 @@ export class VisitasClienteComponent implements OnInit {
   estadoVerificar = 'ATENDIDA';
   habilitarEditar = false;
 
+  // variables de preubas
+  agregoObjetos = false;
+  edito = false;
+  elimino = false;
+  creoContrato = false;
+
   constructor(private servicioGenerico: GenericoService, private usuarioServicio: UsuarioService) { }
 
   ngOnInit() {
@@ -62,6 +68,7 @@ export class VisitasClienteComponent implements OnInit {
   }
 
   agregarObjetos(lista) {
+    this.agregoObjetos = true;
     for (const i of lista) {
       if (i.estado === 'ATENDIDA' || i.estado === 'PENDIENTE') {
         const fields = i.fecha.split('T');
@@ -79,6 +86,7 @@ export class VisitasClienteComponent implements OnInit {
   }
 
   verVisita(visita: ReservarVisita) {
+
     const estado = this.validarEstado(visita.estado);
     if (estado === false) {
       this.habilitarEditar = true;
@@ -116,13 +124,14 @@ export class VisitasClienteComponent implements OnInit {
       return;
     }
     const aux: AuxiliarObjeto = new AuxiliarObjeto();
-       aux.objeto = this.visitaSeleccionada;
-       aux.replaceValue('inmueble', this.visitaSeleccionada.inmueble.id);
-       aux.replaceValue('cliente', this.visitaSeleccionada.cliente.id);
-       if (this.visitaSeleccionada.empleado != null) {
-        aux.replaceValue('empleado', this.visitaSeleccionada.empleado.id);
-       }
-       console.log('antes del insertar');
+    aux.objeto = this.visitaSeleccionada;
+    aux.replaceValue('inmueble', this.visitaSeleccionada.inmueble.id);
+    aux.replaceValue('cliente', this.visitaSeleccionada.cliente.id);
+    this.edito = true;
+    if (this.visitaSeleccionada.empleado != null) {
+      aux.replaceValue('empleado', this.visitaSeleccionada.empleado.id);
+    }
+    console.log('antes del insertar');
 
     this.servicioGenerico.editar('reservar_visita', aux.objeto, 'id').subscribe(rta => {
       console.log('despues del insertar antess del if');
@@ -150,6 +159,7 @@ export class VisitasClienteComponent implements OnInit {
       window.alert(this.msj);
       return;
     }
+    this.elimino = true;
     this.servicioGenerico.eliminar('reservar_visita', {'id': visita.id}).subscribe(rta => {
       if (rta.data === 'exito') {
         this.msj = 'Se ha eliminado la visita correctamente';
@@ -196,6 +206,7 @@ export class VisitasClienteComponent implements OnInit {
 
     const aux: AuxiliarObjeto = new AuxiliarObjeto();
     aux.objeto = contrato;
+    this.creoContrato = true;
     aux.replaceValue('cliente', this.usuarioSesion.persona.id);
     aux.replaceValue('visita', v.id);
     console.log(aux.objeto);

@@ -28,6 +28,8 @@ export class GestionarAdministradoresComponent implements OnInit {
   // Variables para los mensajes en la pagina
   show: number;
   msj: string;
+  verSelected = false;
+  cedulaSelected: string;
 
   constructor(private genericoServicio: GenericoService, private personaServicio: PersonaService,
     private usuarioServicio: UsuarioService) { }
@@ -49,7 +51,10 @@ export class GestionarAdministradoresComponent implements OnInit {
   registrar(form: NgForm) {
     this.rol.id = this.persona.rol.id;
     this.persona.rol = this.rol;
+    this.persona.latitud = 0;
+    this.persona.longitud = 0;
     this.usuario.persona = this.persona;
+    console.log(this.usuario);
     this.personaServicio.registrar(this.usuario).subscribe(rta => {
       if (rta.data === 'exito') {
         this.msj = 'Se ha registrado correctamente';
@@ -82,6 +87,7 @@ export class GestionarAdministradoresComponent implements OnInit {
         if (rta.data === 'exito') {
           this.msj = 'Se ha editado correctamente';
           this.show = 2;
+          this.verSelected = false;
           window.alert(this.msj);
           // limpiamos los campos
           form.reset();
@@ -106,22 +112,8 @@ export class GestionarAdministradoresComponent implements OnInit {
    * Buscar empleado
    */
   buscar() {
-    this.personaServicio.personaByCedulaRol(this.persona).subscribe(rta => {
-      if (rta.data == null) {
-        this.show = 1;
-        this.msj = 'No existe un administrador con cedula ' + this.persona.cedula;
-        return false;
-      } else {
-        this.show = 3;
-        this.persona = rta.data;
-        this.persona.rol = this.rol;
-        this.persona.fecha_nacimiento = this.genericoServicio.formatoFecha(this.persona.fecha_nacimiento);
-        // Buscamos el usuario asociado con el administrador
-        this.personaServicio.usuarioByPersona(this.persona).subscribe(rta2 => {
-          this.usuario = rta2.data;
-          return true;
-        });
-      }
+    this.personaServicio.usuarioByPersona(this.persona).subscribe(rta2 => {
+      this.usuario = rta2.data;
     });
   }
 
@@ -129,16 +121,24 @@ export class GestionarAdministradoresComponent implements OnInit {
    * Ver la inormacion de un administrador de la tabla
    */
   ver(p: Persona) {
-    this.persona.cedula = p.cedula;
+    this.verSelected = true;
+    this.persona = p;
     this.buscar();
   }
   /**
    * Buscar desde el formulario html
    */
   fbuscar(event) {
+    this.verSelected = true;
     event.preventDefault();
-    if (this.persona.cedula != null) {
-      this.buscar();
+    if (this.cedulaSelected != null) {
+      for (const p of this.personas) {
+        if (p.cedula === this.cedulaSelected) {
+          this.persona = p;
+          this.buscar();
+          return;
+        }
+      }
     }
   }
 
@@ -149,6 +149,11 @@ export class GestionarAdministradoresComponent implements OnInit {
     // Obtenemos la lista de administradores
     this.personaServicio.listarPersonasByRol(this.rol).subscribe(rta => {
       this.personas = rta.data;
+      for (const p of this.personas) {
+        const data  = p.fecha_nacimiento.split('T');
+        const fecha = data[0];
+        p.fecha_nacimiento = fecha;
+      }
     });
   }
 
@@ -168,5 +173,12 @@ export class GestionarAdministradoresComponent implements OnInit {
       }
       window.alert(this.msj);
     });
+  }
+
+  limpiarCampos (form: NgForm ) {
+    this.listar();
+    this.cedulaSelected = '';
+    this.verSelected = false;
+    form.reset();
   }
 }

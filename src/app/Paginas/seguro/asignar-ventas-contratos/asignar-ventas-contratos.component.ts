@@ -39,8 +39,8 @@ export class AsignarVentasContratosComponent implements OnInit {
 
   ngOnInit() {
     // Validamos  si el usuario tiene acceso a la pagina
-    // this.usuarioServicio.esAccesible('administracion/asignar-ventas-contratos');
-    // this.usuarioSesion = this.usuarioServicio.getUsuario();
+    this.usuarioServicio.esAccesible('administracion/asignar-ventas-contratos');
+    this.usuarioSesion = this.usuarioServicio.getUsuario();
     this.listar();
     console.log(this.usuarioSesion);
   }
@@ -130,6 +130,7 @@ export class AsignarVentasContratosComponent implements OnInit {
   }
 
   listadoFinal() {
+    this.constratosFinales = [];
     for (const c of this.contratos) {
       if (c.visita.inmueble.tipoAV === 1) {
         const dato = c.fecha_finalizacion.split('T');
@@ -183,7 +184,7 @@ export class AsignarVentasContratosComponent implements OnInit {
             this.descripcionSel = '';
             this.constratosFinales = new Array<Contrato>();
             this.listar();
-           // form.reset();
+            form.reset();
           } else {
             this.msj = res2.data;
             this.show = 1;

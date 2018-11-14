@@ -14,7 +14,7 @@
             <form (ngSubmit)="fbuscar($event)" class="contact_form" id="contact_form">
               <div class="row">
                 <div class="col-lg-8">
-                    <div><input [(ngModel)]="persona.cedula" name="cedula" type="text" class="contact_input" placeholder="Cedula" required></div>
+                    <div><input [(ngModel)]="cedulaSelected" name="cedula" type="text" class="contact_input" placeholder="Cedula" required></div>
                 </div>
                 <div class="col-lg-4" style="padding-left: 0">
                     <button style="height: 48px;margin: 0;width: 100%" class="contact_button button">Buscar</button>
@@ -34,8 +34,9 @@
             <div class="section_subtitle"> Datos usurio </div>
             <div><input type="tel"  [(ngModel)]="usuario.username" name="username" class="contact_input" placeholder="Nombre de usuario" required="required"></div>
             <div><input type="text" [(ngModel)]="usuario.password" name="password" class="contact_input" placeholder="Contraseña" required="required"></div>
-            <button (click)="registrar(datosForm)" style="width: 100%" class="contact_button button">Registrar Administrador</button>
-            <button (click)="editar(datosForm)" style="width: 100%" class="contact_button button">Editar Administrador</button>
+            <button *ngIf="!verSelected" (click)="registrar(datosForm)" style="width: 100%" class="contact_button button">Registrar Administrador</button>
+            <button *ngIf="verSelected" (click)="editar(datosForm)" style="width: 100%" class="contact_button button">Editar Administrador</button>
+            <button (click)="limpiarCampos(datosForm)" style="width: 100%" class="contact_button button">Limpiar Campos</button>
           </form>
         </div>
       </div>

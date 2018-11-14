@@ -28,10 +28,14 @@ export class GestionarPersonasComponent implements OnInit {
   rol: Rol = new Rol();
 
   // Variables para los mensajes en la pagina
+  cedulaSelected: string;
   show: number;
   msj: string;
 
-  constructor(private rolServicio: RolService, private personaServicio: PersonaService, private usuarioServicio: UsuarioService, private genericoServicio: GenericoService) { }
+  verSelected = false;
+
+  constructor(private rolServicio: RolService, private personaServicio: PersonaService,
+    private usuarioServicio: UsuarioService, private genericoServicio: GenericoService) { }
 
   ngOnInit() {
     // Validamos si el usuario tiene acceso a la pagina
@@ -73,14 +77,15 @@ export class GestionarPersonasComponent implements OnInit {
    * Registra una persona con su usuario
    */
   editar(form: NgForm) {
-    if (this.usuario.persona.cedula != null && this.persona.cedula != null) {
+    if (this.verSelected) {
       this.rol.id = this.persona.rol.id;
       this.persona.rol = this.rol;
-      this.usuario.persona.cedula = this.persona.cedula;
+      this.usuario.persona = this.persona;
       this.personaServicio.editar(this.usuario).subscribe(rta => {
         if (rta.data === 'exito') {
           this.msj = 'Se ha editado correctamente';
           this.show = 2;
+          this.verSelected = false;
           window.alert(this.msj);
           // limpiamos los campos
           form.reset();
@@ -103,21 +108,8 @@ export class GestionarPersonasComponent implements OnInit {
    * Buscar persona
    */
   buscar() {
-    this.personaServicio.personaByCedula(this.persona).subscribe(rta => {
-      if (rta.data == null) {
-        this.show = 1;
-        this.msj = 'No existe una persona con cedula ' + this.persona.cedula;
-      } else {
-        this.show = 3;
-        this.persona = rta.data;
-        this.rol.id = rta.data.rol;
-        this.persona.rol = this.rol;
-        this.persona.fecha_nacimiento = this.genericoServicio.formatoFecha(this.persona.fecha_nacimiento);
-        // Buscamos el usuario asociado con la persona
-        this.personaServicio.usuarioByPersona(this.persona).subscribe(rta2 => {
-          this.usuario = rta2.data;
-        });
-      }
+    this.personaServicio.usuarioByPersona(this.persona).subscribe(rta2 => {
+      this.usuario = rta2.data;
     });
   }
 
@@ -125,16 +117,24 @@ export class GestionarPersonasComponent implements OnInit {
    * Ver la informacion de una persona de la tabla
    */
   ver(p: Persona) {
-    this.persona.cedula = p.cedula;
+    this.verSelected = true;
+    this.persona = p;
     this.buscar();
   }
   /**
    * Buscar desde el formulario html
    */
   fbuscar(event) {
+    this.verSelected = true;
     event.preventDefault();
-    if (this.persona.cedula != null) {
-      this.buscar();
+    if (this.cedulaSelected != null) {
+      for (const p of this.personas) {
+        if (p.cedula === this.cedulaSelected) {
+          this.persona = p;
+          this.buscar();
+          return;
+        }
+      }
     }
   }
   /**
@@ -145,7 +145,10 @@ export class GestionarPersonasComponent implements OnInit {
     this.personaServicio.listar().subscribe(rta => {
       this.personas = rta.data;
       // obtenemos la informacion del rol de cada persona
-      for (let p of this.personas) {
+      for (const p of this.personas) {
+        const data = p.fecha_nacimiento.split('T');
+        const fechaReturn = data[0];
+        p.fecha_nacimiento = fechaReturn;
         this.rolServicio.buscarRolPersona(p).subscribe(rta2 => {
           p.rol = rta2.data;
         });
@@ -157,7 +160,7 @@ export class GestionarPersonasComponent implements OnInit {
    * Eliminar persona con su usuario de la base de datos
    */
   eliminar(p: Persona) {
-    this.genericoServicio.eliminar("personas", { "id": p.id }).subscribe(rta => {
+    this.genericoServicio.eliminar('personas', { 'id': p.id }).subscribe(rta => {
       if (rta.data === 'exito') {
         this.msj = 'Se ha eliminado la persona correctamente';
         this.show = 2;
@@ -168,5 +171,11 @@ export class GestionarPersonasComponent implements OnInit {
       }
       window.alert(this.msj);
     });
+  }
+
+  limpiarCampos (form: NgForm ) {
+    this.cedulaSelected = '';
+    this.verSelected = false;
+    form.reset();
   }
 }

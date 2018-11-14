@@ -30,6 +30,11 @@ msj: string;
 matriculaInmueble: String;
 detalleInmueble: String;
 
+// variables de pruebas
+agregoObjetos = false;
+verInmueble = false;
+visitaComentada = false;
+
   constructor(private servicioGenerico: GenericoService, private usuarioServicio: UsuarioService) { }
 
   ngOnInit() {
@@ -51,6 +56,7 @@ detalleInmueble: String;
   }
 
   agregarObjetos(lista: Array<ReservarVisita>) {
+    this.agregoObjetos = true;
     for (const i of lista) {
       const data = i.fecha.split('T');
       const fecha = data[0];
@@ -64,15 +70,12 @@ detalleInmueble: String;
 
         });
       });
-      console.log(i);
     }
   }
 
   verVisita(visita: ReservarVisita) {
-    const fields = visita.fecha.split('T');
-    const fechaVisi = fields[0];
-     visita.fecha = fechaVisi;
     this.visitaSeleccionada = visita;
+    this.verInmueble = true;
     this.matriculaInmueble = this.visitaSeleccionada.inmueble.numero_matricula;
     this.detalleInmueble = this.visitaSeleccionada.inmueble.detalles;
 
@@ -90,6 +93,7 @@ detalleInmueble: String;
       this.show = 1;
       return;
     }
+    this.visitaComentada = true;
     this.visitaSeleccionada.estado = 'ATENDIDA';
     const aux: AuxiliarObjeto = new AuxiliarObjeto();
        aux.objeto = this.visitaSeleccionada;

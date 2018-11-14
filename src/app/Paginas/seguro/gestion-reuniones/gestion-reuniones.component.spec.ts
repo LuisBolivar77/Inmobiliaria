@@ -33,7 +33,7 @@ describe('GestionReunionesComponent', () => {
 
     component.editarSelected = false;
 
-    component.resNumHora = '0,';
+    component.resNumHoraP = '0,';
     component.reunion.id = 100;
     component.reunion.descripcion = 'prueba Test';
     component.reunion.fecha = '2018-11-30';
@@ -85,7 +85,7 @@ describe('GestionReunionesComponent', () => {
     component.listarReuniones();
 
     component.reunion.fecha = '2018-11-30';
-    component.resNumHora = '3,horaOcupada';
+    component.resNumHoraP = '3,horaOcupada';
 
     component.registrar();
     expect(component.banderaElseNumMaximoReu).toBeTruthy();
@@ -97,7 +97,7 @@ describe('GestionReunionesComponent', () => {
     component.listarReuniones();
 
     component.reunion.fecha = '2018-11-30';
-    component.resNumHora = '2,horaOcupada';
+    component.resNumHoraP = '2,horaOcupada';
 
     component.registrar();
     expect(component.banderaElseHoraOcupada).toBeTruthy();
@@ -106,7 +106,7 @@ describe('GestionReunionesComponent', () => {
 
   it('Editar una reunion', () => {
 
-    component.resNumHora = '0,';
+    component.resNumHoraP = '0,';
     component.editarSelected = false;
     component.fechaAEditar = '2018-11-22';
 
@@ -149,7 +149,7 @@ describe('GestionReunionesComponent', () => {
 
   it('Editar una reunion 2.0', () => {
 
-    component.resNumHora = '0,';
+    component.resNumHoraP = '0,';
     component.editarSelected = false;
     component.fechaAEditar = '2018-11-22';
 
@@ -200,7 +200,7 @@ describe('GestionReunionesComponent', () => {
 
   it('no edita por numero maximo de reuniones de un empleado', () => {
 
-    component.resNumHora = '3,';
+    component.resNumHoraP = '3,';
     component.fechaSeleccionada = '2018-11-30';
     component.fechaAEditar = '2018-11-29';
 
@@ -211,7 +211,7 @@ describe('GestionReunionesComponent', () => {
 
   it('no edita por hora ocupada', () => {
 
-    component.resNumHora = '2,horaOcupada';
+    component.resNumHoraP = '2,horaOcupada';
     component.fechaSeleccionada = '2018-11-30';
     component.fechaAEditar = '2018-11-29';
 
@@ -222,7 +222,7 @@ describe('GestionReunionesComponent', () => {
 
   it('no edita por numero maximo de reuniones de un empleado', () => {
 
-    component.resNumHora = '2,horaOcupada';
+    component.resNumHoraP = '2,horaOcupada';
     component.fechaSeleccionada = '2018-11-30';
     component.fechaAEditar = '2018-11-30';
 

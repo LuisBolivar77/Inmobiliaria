@@ -75,7 +75,7 @@
 				<!-- Menu usuario logeado -->
 				<ul *ngIf="usuario">	
 					<li *ngFor="let acceso of accesos" class="menu_item"><a href="{{acceso.url}}">{{acceso.nombre}}</a></li>	
-					<li class="menu_item"><a (click)="cerrarSesion($event)" href="">Salir</a></li>						
+					<li class="menu_item"><a (click)="logout($event)" href="">Salir</a></li>						
 				</ul>
 		</div>
 		<div *ngIf="usuario" class="menu_phone"><span>{{usuario.persona.nombre}} {{usuario.persona.apellido}}</span></div>
@@ -142,9 +142,13 @@
 									</div>
 								</div>
 								<button (click)="buscar()" class="search_form_button ml-auto">search</button>
+								<button class="search_form_button ml-auto"><a href="/busqueda/mapa">busqueda con mapa</a></button>
 							</form>
-						</div>
+							<br>						
+						</div>			
+							
 					</div>
+					
 				</div>
 			</div>
 		</div>

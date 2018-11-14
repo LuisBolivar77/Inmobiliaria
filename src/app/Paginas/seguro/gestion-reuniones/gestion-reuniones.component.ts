@@ -38,7 +38,7 @@ export class GestionReunionesComponent implements OnInit {
   listarReu = false;
   banderaElseFechaRegistro = false;
   banderaElseNumMaximoReu = false;
-  resNumHora: string;
+  resNumHoraP: string;
   banderaElseHoraOcupada = false;
   banderaElseFechaRegistroEditar = false;
   banderaElseNumMaximoReuEditar = false;
@@ -50,7 +50,7 @@ export class GestionReunionesComponent implements OnInit {
   constructor(private generico: GenericoService, private usuarioServicio: UsuarioService) { }
 
   ngOnInit() {
-    // this.usuarioServicio.esAccesible('administrador/reuniones');
+    this.usuarioServicio.esAccesible('administrador/reuniones');
     this.listarReuniones();
     this.listarPersonas();
     this.step = 0;
@@ -80,9 +80,9 @@ export class GestionReunionesComponent implements OnInit {
 
     if (fechaActual < fechaReunion) {
 
-      // this.resNumHora = this.numeroReunionesEmpleado(this.empleadoSeleccionado.id + '', this.reunion.fecha,
-      // this.reunion.hora);
-      const data = this.resNumHora.split(',');
+      const resNumHora = this.numeroReunionesEmpleado(this.empleadoSeleccionado.id + '', this.reunion.fecha,
+      this.reunion.hora);
+      const data = resNumHora.split(',');
       const numeroCitas = Number(data[0]);
       const resHora = data[1];
       console.log(numeroCitas);
@@ -103,6 +103,7 @@ export class GestionReunionesComponent implements OnInit {
           aux.replaceValue('empleado', this.empleadoSeleccionado.id);
           aux.replaceValue('cliente', this.clienteSeleccionado.id);
 
+          console.log(aux.objeto);
           this.generico.registrar('reunion', aux.objeto).subscribe(res => {
             if (res.data === 'exito') {
               this.limpiarCampos();
@@ -135,9 +136,9 @@ export class GestionReunionesComponent implements OnInit {
 
     if (fechaActual < fechaReunion) {
 
-      // const resNumHora = this.numeroReunionesEmpleado(this.empleadoSeleccionado.id + '', this.fechaSeleccionada,
-      // this.horaSeleccionada);
-      const data = this.resNumHora.split(',');
+      const resNumHora = this.numeroReunionesEmpleado(this.empleadoSeleccionado.id + '', this.fechaSeleccionada,
+      this.horaSeleccionada);
+      const data = resNumHora.split(',');
       const numeroCitas = Number(data[0]);
       const resHora = data[1];
       console.log(this.fechaAEditar + '' + this.fechaSeleccionada);
@@ -155,7 +156,7 @@ export class GestionReunionesComponent implements OnInit {
 
             this.generico.editar('reunion', aux.objeto, 'id').subscribe(res => {
               if (res.data === 'exito') {
-                // form.reset();
+                form.reset();
                 this.step = 0;
                 this.listarReuniones();
                 this.editado = true;
@@ -184,7 +185,7 @@ export class GestionReunionesComponent implements OnInit {
 
             this.generico.editar('reunion', aux.objeto, 'id').subscribe(res => {
               if (res.data === 'exito') {
-                // form.reset();
+                form.reset();
                 this.step = 0;
                 this.listarReuniones();
                 this.editado = true;

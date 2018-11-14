@@ -85,6 +85,8 @@ export class InmueblesAdminComponent implements OnInit {
   numMatriculaBuscar: string;
   busco: boolean;
   resul: string;
+
+  // atributos pruebas
   registrado = false;
   listarCiudad = false;
   lista = false;
@@ -282,11 +284,15 @@ export class InmueblesAdminComponent implements OnInit {
       this.inmuebles = rta.data;
       // tslint:disable-next-line:prefer-const
       for (let e of this.inmuebles) {
+        console.log(e);
         // obtenemos el cargo del empleado
         this.generico.buscar('usuarios', {'persona': e.usuario}).subscribe(rta2 => {
           e.usuario = rta2.data;
           this.generico.buscar('personas', {'id': e.usuario.persona}).subscribe(res => {
             e.usuario.persona = res.data;
+            this.generico.buscar('promocion', {'id': e.promocion}).subscribe(res2 => {
+              e.promocion = res2.data;
+            });
           });
         });
       }
@@ -432,6 +438,7 @@ export class InmueblesAdminComponent implements OnInit {
   llenarInmuebleBusqueda(inmuebleTemporal: InmuebleTemporal) {
 
     this.usuarioCliente = inmuebleTemporal.usuario;
+    this.inmueble.promocion = inmuebleTemporal.promocion;
     this.latSeleccion = inmuebleTemporal.latitud;
     this.longSeleccion = inmuebleTemporal.longitud;
     this.getTipoInmueble(inmuebleTemporal);

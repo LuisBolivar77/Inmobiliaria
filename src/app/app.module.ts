@@ -33,6 +33,7 @@ import { VisitasEmpleadoComponent } from './Paginas/seguro/visitas-empleado/visi
 import { GestionReunionesComponent } from './Paginas/seguro/gestion-reuniones/gestion-reuniones.component';
 import { GenerarReportesComponent } from './Paginas/seguro/generar-reportes/generar-reportes.component';
 import { MatExpansionModule } from '@angular/material';
+import { FiltroMapaComponent } from './Paginas/publico/filtro-mapa/filtro-mapa.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { MatExpansionModule } from '@angular/material';
     VisitasEmpleadoComponent,
     AsignarArriendoContratoComponent,
     GestionReunionesComponent,
-    GenerarReportesComponent
+    GenerarReportesComponent,
+    FiltroMapaComponent
   ],
   imports: [
     BrowserModule,
@@ -78,6 +80,10 @@ import { MatExpansionModule } from '@angular/material';
       apiKey: 'AIzaSyB0WP4oGVaDXx-3HZDqzwNsbUi6yS6lEk8'
     }),
     RouterModule.forRoot([
+      {
+        path: 'busqueda/mapa',
+        component: FiltroMapaComponent
+      },
       {
         path: 'administrador/reuniones',
         component: GestionReunionesComponent

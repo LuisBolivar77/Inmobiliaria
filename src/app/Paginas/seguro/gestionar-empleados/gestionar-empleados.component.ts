@@ -47,6 +47,8 @@ export class GestionarEmpleadosComponent implements OnInit {
   // Variables para los mensajes en la pagina
   show: number;
   msj: string;
+  cedulaSelected: string;
+  verSelected = false;
 
   /* variables de pruebas */
   registro = false;
@@ -82,6 +84,13 @@ export class GestionarEmpleadosComponent implements OnInit {
    */
   registrar(form: NgForm) {
     if (this.empleado.usuario.username != null && this.empleado.usuario.persona.apellido != null) {
+      console.log(this.empleado);
+      console.log(this.empleado.usuario);
+      console.log(this.empleado.usuario.persona);
+      this.empleado.usuario.persona.id = null;
+      console.log(this.empleado);
+      console.log(this.empleado.usuario);
+      console.log(this.empleado.usuario.persona);
       // Validamos si ya hay una persona con esta cedula
       this.registro = true;
       this.genericoServicio.buscar('personas', {'cedula': this.empleado.usuario.persona.cedula}).subscribe(valida => {
@@ -90,6 +99,7 @@ export class GestionarEmpleadosComponent implements OnInit {
           this.genericoServicio.buscar('usuarios', {'username': "'" + this.empleado.usuario.username + "'"}).subscribe(valida2 => {
             if (valida2.data == null) {
               // Guardamos la persona asociada al empleado
+              this.empleado.usuario.persona.id = null;
               this.genericoServicio.registrar('personas', this.empleado.usuario.persona).subscribe(rta => {
                 if (rta.data === 'exito') {
                   // Agregamos el id de la persona empleado que se acabo de registrar
@@ -130,7 +140,7 @@ export class GestionarEmpleadosComponent implements OnInit {
             }
           });
         } else {
-          this.msj = 'Ya hay una persona registrada con la cedula: ' + this.empleado.usuario.persona.cedula;
+          this.msj = 'Ya hay una persona registrada con la cedula: ' + this.cedulaSelected;
           this.show = 1;
           window.alert(this.msj);
         }
@@ -158,6 +168,7 @@ export class GestionarEmpleadosComponent implements OnInit {
             this.msj = 'Se ha editado correctamente';
             this.show = 2;
             window.alert(this.msj);
+            this.verSelected = false;
             // limpiamos los campos
             // form.reset();
             // Actualizamos la lista de empleados
@@ -184,10 +195,10 @@ export class GestionarEmpleadosComponent implements OnInit {
   buscar() {
     // Buscamos la persona por cedula y rol 3 (empleado)
     this.buscado = true;
-    this.genericoServicio.buscar('personas', {'cedula': this.empleado.usuario.persona.cedula, 'rol': 3}).subscribe(rta => {
+    this.genericoServicio.buscar('personas', {'cedula': this.cedulaSelected, 'rol': 3}).subscribe(rta => {
       if (rta.data == null) {
         this.show = 1;
-        this.msj = 'No existe un empleado con cedula ' + this.empleado.usuario.persona.cedula;
+        this.msj = 'No existe un empleado con cedula ' + this.cedulaSelected;
         window.alert(this.msj);
         this.limpiar();
       } else {
@@ -241,8 +252,11 @@ export class GestionarEmpleadosComponent implements OnInit {
    * Ver la inormacion de un empleado de la tabla
    */
   ver(e: Empleado) {
+    console.log(e);
+    this.verSelected = true;
     this.empleado = e;
-    this.buscar();
+    this.listarFormaciones();
+    this.listarExperiencias();
     return true;
   }
 
@@ -250,9 +264,17 @@ export class GestionarEmpleadosComponent implements OnInit {
    * Buscar desde el formulario html
    */
   fbuscar(event) {
+    this.verSelected = true;
     event.preventDefault();
-    if (this.empleado.usuario.persona.cedula != null) {
-      this.buscar();
+    if (this.cedulaSelected != null) {
+      for (const p of this.empleados) {
+        if ( p.usuario.persona.cedula === this.cedulaSelected ) {
+          this.empleado = p;
+          this.listarFormaciones();
+          this.listarExperiencias();
+          return;
+        }
+      }
     }
   }
 
@@ -276,6 +298,9 @@ export class GestionarEmpleadosComponent implements OnInit {
             // Obtenemos la persona
             this.genericoServicio.buscar('personas', {'id': e.usuario.persona}).subscribe(rta4 => {
               e.usuario.persona = rta4.data;
+              const data = e.usuario.persona.fecha_nacimiento.split('T');
+              const fecha = data[0];
+              e.usuario.persona.fecha_nacimiento = fecha;
             });
           });
         });
@@ -575,6 +600,12 @@ export class GestionarEmpleadosComponent implements OnInit {
       }
       window.alert(this.msj);
     });
+  }
+
+  limpiarCampos (form: NgForm ) {
+    this.listar();
+    this.verSelected = false;
+    form.reset();
   }
 
 }
