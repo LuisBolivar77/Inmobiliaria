@@ -57,7 +57,7 @@ export class GestionarClientesComponent implements OnInit {
     // Asignamos el rol a la persona
     this.persona.rol = this.rol;
     // Validamos si el usuario tiene acceso a la pagina
-    // this.usuarioServicio.esAccesible('administracion/gestionar-clientes');
+    this.usuarioServicio.esAccesible('administracion/gestionar-clientes');
     // Actualizamos la tabla de personas
     this.listar();
   }
@@ -112,7 +112,7 @@ export class GestionarClientesComponent implements OnInit {
         window.alert(this.msj);
         this.limpiarCampos();
         // limpiamos los campos
-        // form.reset();
+        form.reset();
         // Actualizamos la lista de clientes
         this.listar();
         return true;
@@ -143,7 +143,7 @@ export class GestionarClientesComponent implements OnInit {
           this.limpiarCampos();
           window.alert(this.msj);
           // limpiamos los campos
-          // form.reset();
+          form.reset();
           // Actualizamos la lista de clientes
           this.listar();
           return true;

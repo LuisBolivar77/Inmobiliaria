@@ -102,12 +102,12 @@ export class InmueblesAdminComponent implements OnInit {
   ngOnInit() {
 
     //  Validamos si el usuario tiene acceso a la pagina
-    // this.usuarioServicio.esAccesible('administracion/gestion-inmuebles');
+    this.usuarioServicio.esAccesible('administracion/gestion-inmuebles');
 
     this.inmueble = new Inmueble();
     this.inmuebleTemporal = new InmuebleTemporal();
 
-    // this.usuarioSesion = this.usuarioServicio.getUsuario();
+    this.usuarioSesion = this.usuarioServicio.getUsuario();
     this.listar();
     this.listarDepartamentos();
     this.listarTipoInmuebles();

@@ -40,7 +40,7 @@ export class PromocionesComponent implements OnInit {
 
   ngOnInit() {
 
-    // this.listarInmuebles();
+    this.listarInmuebles();
 
   }
 

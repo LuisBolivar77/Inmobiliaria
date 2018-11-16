@@ -42,12 +42,10 @@ export class RegistroUsuarioComponent implements OnInit {
     // Asignamos el rol Cliente con id 2
     this.rol.id = 2;
     // Validamos si el usuario ya inicio sesion
-    /*
     if (this.servicios.getUsuario() != null) {
       // como ya inicio sesion, lo redireccionamos al inicio
       this.servicios.redireccionar('/');
     }
-    */
   }
 
 

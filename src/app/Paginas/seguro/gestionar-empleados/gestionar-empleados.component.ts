@@ -66,7 +66,7 @@ export class GestionarEmpleadosComponent implements OnInit {
 
   ngOnInit() {
     // Validamos si el usuario tiene acceso a la pagina
-    // this.usuarioServicio.esAccesible('administracion/gestionar-empleados');
+    this.usuarioServicio.esAccesible('administracion/gestionar-empleados');
     // Construimos el objeto Empleado, inicialmente vacio
     this.empleado.cargo = this.cargo;
     this.empleado.usuario = this.usuario;

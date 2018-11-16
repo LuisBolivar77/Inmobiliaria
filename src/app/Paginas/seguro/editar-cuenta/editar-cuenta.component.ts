@@ -25,7 +25,6 @@ export class EditarCuentaComponent implements OnInit {
 
   ngOnInit() {
       // Validamos si el usuario ya inicio sesion
-      /*
       if (this.usuarioServicio.getUsuario() == null) {
         // como no inicio sesion, lo redireccionamos al login
         this.usuarioServicio.redireccionar('/login');
@@ -33,7 +32,6 @@ export class EditarCuentaComponent implements OnInit {
         // Asignamos el usuario
         this.usuario = this.usuarioServicio.getUsuario();
       }
-      */
   }
 
 

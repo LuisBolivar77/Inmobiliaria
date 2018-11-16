@@ -89,7 +89,7 @@ export class VerInmuebleComponent implements OnInit {
        // Listamos para validar las visitas
       this.listar();
        // Validamos si ha iniciado sesion para que se pueda hacer la reserva del inmueble
-      // this.usuarioSesion = this.usuarioServicio.getUsuario();
+      this.usuarioSesion = this.usuarioServicio.getUsuario();
       return true;
     }
   }

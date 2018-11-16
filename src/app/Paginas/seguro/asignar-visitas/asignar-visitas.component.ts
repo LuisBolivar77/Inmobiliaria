@@ -40,18 +40,18 @@ export class AsignarVisitasComponent implements OnInit {
   // arreglo de horas
   horas: Array<String> = [];
 
-  //variable booleana para la prueba
-  asignoVisita= false;
+  // variable booleana para la prueba
+  asignoVisita = false;
   seleccionoVisita = false;
-  seleccionoEmpleado=false;
-  limpioCampos=false;
+  seleccionoEmpleado = false;
+  limpioCampos = false;
 
   constructor(private servicioGenerico: GenericoService, private usuarioServicio: UsuarioService) { }
 
   ngOnInit() {
 
-   // this.usuarioServicio.esAccesible('administracion/asignar-visitas');
-  //this.usuarioSesion = this.usuarioServicio.getUsuario();
+    this.usuarioServicio.esAccesible('administracion/asignar-visitas');
+    this.usuarioSesion = this.usuarioServicio.getUsuario();
     this.listarVisitas();
     this.listarEmpleados();
   }
@@ -60,7 +60,7 @@ export class AsignarVisitasComponent implements OnInit {
     this.visitaSeleccionada = visita;
     this.numeroVisita = visita.id;
     this.nombreCliente = visita.cliente.nombre;
-    this.seleccionoVisita =true;
+    this.seleccionoVisita = true;
   }
 
   seleccionEmpleado(empleado: Empleado) {
@@ -80,14 +80,13 @@ export class AsignarVisitasComponent implements OnInit {
     this.visitaSeleccionada.comentario = '';
     const aux: AuxiliarObjeto = new AuxiliarObjeto();
     aux.objeto = this.visitaSeleccionada;
-    this.asignoVisita=true;
+    this.asignoVisita = true;
     aux.replaceValue('inmueble', this.visitaSeleccionada.inmueble.id);
     aux.replaceValue('cliente', this.visitaSeleccionada.cliente.id);
     aux.replaceValue('empleado', this.visitaSeleccionada.empleado.id);
 
     console.log(aux.objeto);
     this.servicioGenerico.editar('reservar_visita', aux.objeto, 'id').subscribe(rta => {
-    console.log("ENTRO ESTA VAINA");
     if (rta.data === 'exito') {
       this.msj = 'Se ha asignado el empleado exitosamente !';
       this.show = 2;
@@ -107,7 +106,7 @@ export class AsignarVisitasComponent implements OnInit {
     this.nombreCliente = '';
     this.nombreEmpleado = '';
     this.visitaSeleccionada.mensaje = '';
-    this.limpioCampos=true;
+    this.limpioCampos = true;
   }
 
 

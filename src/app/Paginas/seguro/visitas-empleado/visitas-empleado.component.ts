@@ -44,7 +44,7 @@ visitaComentada = false;
   }
 
   /**
-   * Lisat las viitas del empleado que inicio sesion
+   * Lista las viitas del empleado que inicio sesion
    */
   listar() {
     this.servicioGenerico.listar('reservar_visita', {'empleado': this.usuarioSesion.persona.id, 'estado': "'PENDIENTE'"}).subscribe(rta=>{

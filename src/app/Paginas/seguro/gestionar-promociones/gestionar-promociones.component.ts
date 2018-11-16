@@ -29,7 +29,7 @@ export class GestionarPromocionesComponent implements OnInit {
   constructor(private genericoServicio: GenericoService, private usuarioServicio: UsuarioService) { }
 
   ngOnInit() {
-   // this.usuarioServicio.esAccesible('administrador/gestionar-promociones');
+    this.usuarioServicio.esAccesible('administrador/gestionar-promociones');
     this.listar();
   }
 
